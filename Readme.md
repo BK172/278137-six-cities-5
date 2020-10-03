@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Кирилл Басов](https://up.htmlacademy.ru/react/5/user/278137).
-* Наставник: `Неизвестно`.
+* Наставник: [Jura Zubach](https://htmlacademy.ru/profile/id95078).
 
 ---
 
