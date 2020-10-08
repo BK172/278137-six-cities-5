@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+const FavoritesPage = () => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -161,3 +161,5 @@ export default () => {
     </React.Fragment>
   );
 };
+
+export default FavoritesPage;

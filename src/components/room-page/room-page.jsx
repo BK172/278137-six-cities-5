@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+const RoomPage = () => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -322,3 +322,5 @@ export default () => {
     </React.Fragment>
   );
 };
+
+export default RoomPage;
