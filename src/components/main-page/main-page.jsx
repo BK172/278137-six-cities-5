@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MainPage = ({offersCount}) => {
+export default function MainPage({offersCount}) {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -268,10 +268,8 @@ const MainPage = ({offersCount}) => {
       </div>
     </React.Fragment>
   );
-};
+}
 
 MainPage.propTypes = {
   offersCount: PropTypes.number.isRequired,
 };
-
-export default MainPage;

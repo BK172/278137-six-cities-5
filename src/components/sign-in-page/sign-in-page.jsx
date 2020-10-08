@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignInPage = () => {
+export default function SignInPage() {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -57,6 +57,4 @@ const SignInPage = () => {
       </div>
     </React.Fragment>
   );
-};
-
-export default SignInPage;
+}
