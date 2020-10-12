@@ -15,3 +15,18 @@ export const cardClasses = {
     'place-card__info': `favorites__card-info`
   }
 };
+
+export const cardImgShapes = {
+  main: {
+    width: 260,
+    height: 200
+  },
+  room: {
+    width: 260,
+    height: 200
+  },
+  favorite: {
+    width: 150,
+    height: 110
+  }
+};

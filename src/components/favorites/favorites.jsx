@@ -45,16 +45,13 @@ export default function Favorites() {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <OfferCard
-                      key={offers[0].offerId}
-                      offer={offers[0]}
-                      offerType={`favorite`}
-                    />
-                    <OfferCard
-                      key={offers[1].offerId}
-                      offer={offers[1]}
-                      offerType={`favorite`}
-                    />
+                    {offers.slice(0, 2).map((item) => (
+                      <OfferCard
+                        key={item.offerId}
+                        offer={item}
+                        offerType={`favorite`}
+                      />
+                    ))}
                   </div>
                 </li>
                 <li className="favorites__locations-items">
@@ -66,11 +63,13 @@ export default function Favorites() {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    <OfferCard
-                      key={offers[2].offerId}
-                      offer={offers[2]}
-                      offerType={`favorite`}
-                    />
+                    {offers.slice(2, 3).map((item) => (
+                      <OfferCard
+                        key={item.offerId}
+                        offer={item}
+                        offerType={`favorite`}
+                      />
+                    ))}
                   </div>
                 </li>
               </ul>

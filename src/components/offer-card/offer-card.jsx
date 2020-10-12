@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {ratingToInteger, cardClasses} from "../../utils";
+import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
 
 export default function OfferCard(props) {
   const {offer, offerType, onOfferCardMouseOver = () => false} = props;
@@ -18,7 +18,7 @@ export default function OfferCard(props) {
       )}
       <div className={`${cardClasses[offerType][`place-card__image-wrapper`]} place-card__image-wrapper`}>
         <Link to={`/offer/${offer.offerId}`}>
-          <img className="place-card__image" src={offer.image} width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={offer.image} width={cardImgShapes[offerType].width} height={cardImgShapes[offerType].height} alt="Place image" />
         </Link>
       </div>
       <div className= {`${cardClasses[offerType][`place-card__info`]} place-card__info`}>
