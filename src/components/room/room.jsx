@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import moment from "moment";
 import OfferCard from "../offer-card/offer-card";
-import offers from "../../mocks/offers";
-import reviews from "../../mocks/reviews";
 import {ratingToInteger} from "../../utils";
 
 export default function Room(props) {
-  const {offer} = props;
+  const {offer, offers, reviews} = props;
 
   return (
     <React.Fragment>
@@ -42,7 +40,7 @@ export default function Room(props) {
             <div className="property__gallery-container container">
               <div className="property__gallery">
                 {offer.photos.slice(0, 6).map((item) => (
-                  <div key="item" className="property__image-wrapper">
+                  <div key={item} className="property__image-wrapper">
                     <img className="property__image" src={item} alt="Photo studio" />
                   </div>
                 ))}
@@ -142,48 +140,7 @@ export default function Room(props) {
                       </li>
                     ))}
                   </ul>
-                  <form className="reviews__form form" action="#" method="post">
-                    <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                    <div className="reviews__rating-form form__rating">
-                      <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} id="5-stars" type="radio" />
-                      <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                        <svg className="form__star-image" width={37} height={33}>
-                          <use xlinkHref="#icon-star" />
-                        </svg>
-                      </label>
-                      <input className="form__rating-input visually-hidden" name="rating" defaultValue={4} id="4-stars" type="radio" />
-                      <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                        <svg className="form__star-image" width={37} height={33}>
-                          <use xlinkHref="#icon-star" />
-                        </svg>
-                      </label>
-                      <input className="form__rating-input visually-hidden" name="rating" defaultValue={3} id="3-stars" type="radio" />
-                      <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                        <svg className="form__star-image" width={37} height={33}>
-                          <use xlinkHref="#icon-star" />
-                        </svg>
-                      </label>
-                      <input className="form__rating-input visually-hidden" name="rating" defaultValue={2} id="2-stars" type="radio" />
-                      <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                        <svg className="form__star-image" width={37} height={33}>
-                          <use xlinkHref="#icon-star" />
-                        </svg>
-                      </label>
-                      <input className="form__rating-input visually-hidden" name="rating" defaultValue={1} id="1-star" type="radio" />
-                      <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                        <svg className="form__star-image" width={37} height={33}>
-                          <use xlinkHref="#icon-star" />
-                        </svg>
-                      </label>
-                    </div>
-                    <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" />
-                    <div className="reviews__button-wrapper">
-                      <p className="reviews__help">
-                        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                      </p>
-                      <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
-                    </div>
-                  </form>
+                  {/* form */}
                 </section>
               </div>
             </div>
@@ -210,7 +167,7 @@ export default function Room(props) {
 
 Room.propTypes = {
   offer: PropTypes.shape({
-    offerId: PropTypes.number.isRequired,
+    offerId: PropTypes.string.isRequired,
     favourite: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
@@ -228,5 +185,7 @@ Room.propTypes = {
       name: PropTypes.string.isRequired,
       super: PropTypes.bool.isRequired
     })
-  }).isRequired
+  }).isRequired,
+  offers: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };

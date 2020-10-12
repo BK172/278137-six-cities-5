@@ -21,9 +21,15 @@ const App = (props) => {
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route exact path="/offer/:id">
-          <Room offers={offers} reviews={reviews} />
-        </Route>
+        <Route exact path="/offer/:id"
+          render={({match}) => (
+            <Room
+              offer={offers.find((item) => item.offerId === match.params.id)}
+              offers={offers}
+              reviews={reviews}
+            />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );

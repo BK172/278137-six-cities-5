@@ -54,7 +54,7 @@ export default function OfferCard(props) {
 
 OfferCard.propTypes = {
   offer: PropTypes.shape({
-    offerId: PropTypes.number.isRequired,
+    offerId: PropTypes.string.isRequired,
     favourite: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
@@ -73,5 +73,5 @@ OfferCard.propTypes = {
       super: PropTypes.bool.isRequired
     })
   }).isRequired,
-  onOfferCardMouseOver: PropTypes.func.isRequired,
+  onOfferCardMouseOver: PropTypes.func,
 };

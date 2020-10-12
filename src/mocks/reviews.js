@@ -1,6 +1,6 @@
 export default [
   {
-    reviewId: 0,
+    reviewId: `0`,
     avatar: `img/avatar-max.jpg`,
     name: `Max`,
     rating: 4,
@@ -8,7 +8,7 @@ export default [
     date: `2019-04-24`
   },
   {
-    reviewId: 1,
+    reviewId: `1`,
     avatar: `img/avatar-angelina.jpg`,
     name: `Angelina`,
     rating: 3,

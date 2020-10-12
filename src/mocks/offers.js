@@ -1,6 +1,6 @@
 export default [
   {
-    offerId: 0,
+    offerId: `0`,
     favourite: false,
     image: `img/apartment-01.jpg`,
     premium: true,
@@ -13,7 +13,6 @@ export default [
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
       `img/apartment-01.jpg`,
-      `img/apartment-02.jpg`,
       `img/studio-01.jpg`
     ],
     description: [
@@ -41,7 +40,7 @@ export default [
     }
   },
   {
-    offerId: 1,
+    offerId: `1`,
     favourite: true,
     image: `img/room.jpg`,
     premium: false,
@@ -81,7 +80,7 @@ export default [
     }
   },
   {
-    offerId: 2,
+    offerId: `2`,
     favourite: false,
     image: `img/apartment-02.jpg`,
     premium: false,
@@ -94,7 +93,6 @@ export default [
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
       `img/apartment-01.jpg`,
-      `img/apartment-02.jpg`,
       `img/studio-01.jpg`
     ],
     description: [
@@ -122,7 +120,7 @@ export default [
     }
   },
   {
-    offerId: 3,
+    offerId: `3`,
     favourite: false,
     image: `img/apartment-03.jpg`,
     premium: true,
