@@ -20,18 +20,16 @@ export default class OfferList extends PureComponent {
     const {offers} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
-          <OfferCard
-            key={offer.offerId}
-            offer={offer}
-            onOfferCardMouseOver={this.onOfferCardMouseOver}
-          />
-        ))}
-      </div>
+      offers.map((offer) => (
+        <OfferCard
+          key={offer.offerId}
+          offer={offer}
+          onOfferCardMouseOver={this.onOfferCardMouseOver}
+        />
+      ))
     );
   }
-};
+}
 
 OfferList.propTypes = {
   offers: PropTypes.array.isRequired,
