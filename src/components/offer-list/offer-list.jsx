@@ -34,5 +34,5 @@ export default class OfferList extends PureComponent {
 };
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
 };

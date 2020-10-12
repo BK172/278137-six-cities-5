@@ -64,5 +64,5 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired
   }).isRequired,
-  onOfferCardMouseOver: PropTypes.func.isRequired
+  onOfferCardMouseOver: PropTypes.func.isRequired,
 };
