@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {ratingToInteger} from "utils";
 
 export default function OfferCard(props) {
-  const {offer, onOfferCardMouseover} = props;
+  const {offer, onOfferCardMouseOver} = props;
   const {offerId, favourite, image, premium, cost, title, type, rating} = offer;
 
   return (
@@ -12,7 +12,7 @@ export default function OfferCard(props) {
       className="cities__place-card place-card"
       onMouseOver={(evt) => {
         evt.preventDefault();
-        onOfferCardMouseover(offerId);
+        onOfferCardMouseOver(offerId);
       }}
     >
       {premium && (
@@ -63,5 +63,6 @@ OfferCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  onOfferCardMouseOver: PropTypes.func.isRequired
 };
