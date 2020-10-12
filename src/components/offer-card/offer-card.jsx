@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
+import {offerPropTypes} from "../../app-prop-types";
 
 export default function OfferCard(props) {
   const {offer, offerType, onOfferCardMouseOver = () => false} = props;
@@ -50,26 +51,7 @@ export default function OfferCard(props) {
 }
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape({
-    offerId: PropTypes.string.isRequired,
-    favorite: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    cost: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    photos: PropTypes.array.isRequired,
-    description: PropTypes.array.isRequired,
-    bedrooms: PropTypes.string.isRequired,
-    guests: PropTypes.string.isRequired,
-    facilities: PropTypes.array.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired
-    })
-  }).isRequired,
+  offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
   onOfferCardMouseOver: PropTypes.func,
 };
