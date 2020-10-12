@@ -1,6 +1,7 @@
 export default [
   {
-    id: 0,
+    offerId: 0,
+    favourite: false,
     image: `img/apartment-01.jpg`,
     premium: true,
     cost: 120,
@@ -37,7 +38,8 @@ export default [
     }
   },
   {
-    id: 1,
+    offerId: 1,
+    favourite: true,
     image: `img/room.jpg`,
     premium: false,
     cost: 80,
@@ -73,7 +75,8 @@ export default [
     }
   },
   {
-    id: 2,
+    offerId: 2,
+    favourite: false,
     image: `img/apartment-02.jpg`,
     premium: false,
     cost: 132,
@@ -110,7 +113,8 @@ export default [
     }
   },
   {
-    id: 3,
+    offerId: 3,
+    favourite: false,
     image: `img/apartment-03.jpg`,
     premium: true,
     cost: 180,
