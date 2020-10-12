@@ -1,40 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {ratingToInteger} from "../../utils";
+import {ratingToInteger, cardClasses} from "../../utils";
 
 export default function OfferCard(props) {
-  const {offer, onOfferCardMouseOver} = props;
+  const {offer, offerType, onOfferCardMouseOver = () => false} = props;
 
   return (
     <article
-      className="cities__place-card place-card"
-      onMouseOver={(evt) => {
-        evt.preventDefault();
-        onOfferCardMouseOver(offer.offerId);
-      }}
+      className={`${cardClasses[offerType][`place-card`]} place-card`}
+      onMouseOver={() => onOfferCardMouseOver(offer.offerId)}
     >
       {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${cardClasses[offerType][`place-card__image-wrapper`]} place-card__image-wrapper`}>
         <Link to={`/offer/${offer.offerId}`}>
           <img className="place-card__image" src={offer.image} width={260} height={200} alt="Place image" />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className= {`${cardClasses[offerType][`place-card__info`]} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.cost}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${offer.favourite && `place-card__bookmark-button--active`} button`} type="button">
+          <button className={`place-card__bookmark-button ${offer.favorite && `place-card__bookmark-button--active`} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">{offer.favorite ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -55,7 +52,7 @@ export default function OfferCard(props) {
 OfferCard.propTypes = {
   offer: PropTypes.shape({
     offerId: PropTypes.string.isRequired,
-    favourite: PropTypes.bool.isRequired,
+    favorite: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
     cost: PropTypes.number.isRequired,
@@ -73,5 +70,6 @@ OfferCard.propTypes = {
       super: PropTypes.bool.isRequired
     })
   }).isRequired,
+  offerType: PropTypes.string.isRequired,
   onOfferCardMouseOver: PropTypes.func,
 };

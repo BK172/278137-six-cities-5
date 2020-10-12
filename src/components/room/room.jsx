@@ -154,6 +154,7 @@ export default function Room(props) {
                   <OfferCard
                     key={item.offerId}
                     offer={item}
+                    offerType={`room`}
                   />
                 ))}
               </div>
@@ -168,7 +169,7 @@ export default function Room(props) {
 Room.propTypes = {
   offer: PropTypes.shape({
     offerId: PropTypes.string.isRequired,
-    favourite: PropTypes.bool.isRequired,
+    favorite: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
     cost: PropTypes.number.isRequired,

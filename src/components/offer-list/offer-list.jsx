@@ -24,6 +24,7 @@ export default class OfferList extends PureComponent {
         <OfferCard
           key={offer.offerId}
           offer={offer}
+          offerType={`main`}
           onOfferCardMouseOver={this.onOfferCardMouseOver}
         />
       ))
