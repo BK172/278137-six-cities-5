@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import moment from "moment";
+// import moment from "moment";
 
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.string.isRequired,
@@ -28,12 +28,13 @@ export const reviewPropTypes = PropTypes.shape({
   name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
-  date: (props, propName, componentName) => {
-    if (moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
-      return new Error(
-          `Invalid prop \`` + propName + `\` supplied to` +
-          ` \`` + componentName + `\`. Validation failed.`
-      );
-    }
-  }
+  date: PropTypes.string.isRequired,
+  // date: function (props, propName, componentName) {
+  //   if (moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
+  //     return new Error(
+  //         `Invalid prop \`` + propName + `\` supplied to` +
+  //         ` \`` + componentName + `\`. Validation failed.`
+  //     );
+  //   }
+  // },
 }).isRequired;

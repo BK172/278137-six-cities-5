@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import moment from "moment";
 import OfferCard from "../offer-card/offer-card";
+import Review from "../review/review";
 import {ratingToInteger} from "../../utils";
-import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
+import {offerPropTypes} from "../../app-prop-types";
 
 export default function Room(props) {
   const {offer, offers, reviews} = props;
@@ -114,31 +114,13 @@ export default function Room(props) {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
+                  <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
                   <ul className="reviews__list">
                     {reviews.map((item) => (
-                      <li key={item.reviewId} className="reviews__item">
-                        <div className="reviews__user user">
-                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                            <img className="reviews__avatar user__avatar" src={item.avatar} width={54} height={54} alt="Reviews avatar" />
-                          </div>
-                          <span className="reviews__user-name">
-                            {item.name}
-                          </span>
-                        </div>
-                        <div className="reviews__info">
-                          <div className="reviews__rating rating">
-                            <div className="reviews__stars rating__stars">
-                              <span style={{width: `${ratingToInteger(item.rating)}%`}} />
-                              <span className="visually-hidden">Rating</span>
-                            </div>
-                          </div>
-                          <p className="reviews__text">
-                            {item.comment}
-                          </p>
-                          <time className="reviews__time" dateTime={item.date}>{moment(item.date, `YYYY-MM-DD`).format(`MMMM YYYY`)}</time>
-                        </div>
-                      </li>
+                      <Review
+                        key={item.reviewId}
+                        review={item}
+                      />
                     ))}
                   </ul>
                   {/* form */}
@@ -170,5 +152,5 @@ export default function Room(props) {
 Room.propTypes = {
   offer: offerPropTypes,
   offers: PropTypes.array.isRequired,
-  reviews: reviewPropTypes,
+  reviews: PropTypes.array.isRequired,
 };
