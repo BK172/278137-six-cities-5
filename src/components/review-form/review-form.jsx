@@ -26,7 +26,7 @@ export default class OfferList extends PureComponent {
     const ratingTtitle = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
     return (
-      <form className="reviews__form form" action="#" method="post">
+      <form className="reviews__form form" action="#" method="post" onSubmit={this.onFormSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {ratingMark.map((item, i) => (
