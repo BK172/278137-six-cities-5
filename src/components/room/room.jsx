@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import OfferCard from "../offer-card/offer-card";
 import Review from "../review/review";
+import ReviewForm from "../review-form/review-form";
 import {ratingToInteger} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 
@@ -123,7 +124,7 @@ export default function Room(props) {
                       />
                     ))}
                   </ul>
-                  {/* form */}
+                  <ReviewForm />
                 </section>
               </div>
             </div>
