@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-// import moment from "moment";
+import moment from "moment";
 
-export const offerPropTypes = PropTypes.shape({
+const offerPropType = PropTypes.shape({
   offerId: PropTypes.string.isRequired,
   favorite: PropTypes.bool.isRequired,
   image: PropTypes.string.isRequired,
@@ -20,7 +20,10 @@ export const offerPropTypes = PropTypes.shape({
     name: PropTypes.string.isRequired,
     super: PropTypes.bool.isRequired
   })
-}).isRequired;
+});
+
+export const offerPropTypes = offerPropType.isRequired;
+export const offerPropTypesNotRequired = offerPropType;
 
 export const reviewPropTypes = PropTypes.shape({
   reviewId: PropTypes.string.isRequired,
@@ -28,13 +31,13 @@ export const reviewPropTypes = PropTypes.shape({
   name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  // date: function (props, propName, componentName) {
-  //   if (moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
-  //     return new Error(
-  //         `Invalid prop \`` + propName + `\` supplied to` +
-  //         ` \`` + componentName + `\`. Validation failed.`
-  //     );
-  //   }
-  // },
+  date(props, propName, componentName) {
+    if (!moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
+      return new Error(
+          `Invalid prop \`` + propName + `\` supplied to` +
+          ` \`` + componentName + `\`. Validation failed.`
+      );
+    }
+    return null;
+  },
 }).isRequired;

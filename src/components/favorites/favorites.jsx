@@ -4,7 +4,7 @@ import Header from "../header/header";
 import OfferCard from "../offer-card/offer-card";
 import offers from "../../mocks/offers";
 
-export default function Favorites() {
+const Favorites = () => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -65,4 +65,6 @@ export default function Favorites() {
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default Favorites;

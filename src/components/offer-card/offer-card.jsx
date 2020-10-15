@@ -2,15 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
-import {offerPropTypes} from "../../app-prop-types";
+import {offerPropTypes, offerPropTypesNotRequired} from "../../app-prop-types";
 
-export default function OfferCard(props) {
-  const {offer, offerType, onOfferCardMouseOver = () => false} = props;
-
+const OfferCard = ({offer, offerType, currentOffer, handleOfferCardHover = () => false}) => {
   return (
     <article
       className={`${cardClasses[offerType][`place-card`]} place-card`}
-      onMouseOver={() => onOfferCardMouseOver(offer.offerId)}
+      onMouseOver={() => {
+        if (typeof currentOffer !== `undefined` && currentOffer.offerId !== offer.offerId) {
+          handleOfferCardHover(offer);
+        }
+      }}
     >
       {offer.premium && (
         <div className="place-card__mark">
@@ -48,10 +50,13 @@ export default function OfferCard(props) {
       </div>
     </article>
   );
-}
+};
 
 OfferCard.propTypes = {
   offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
-  onOfferCardMouseOver: PropTypes.func,
+  currentOffer: offerPropTypesNotRequired,
+  handleOfferCardHover: PropTypes.func,
 };
+
+export default OfferCard;

@@ -5,11 +5,9 @@ import OfferCard from "../offer-card/offer-card";
 import Review from "../review/review";
 import ReviewForm from "../review-form/review-form";
 import {ratingToInteger} from "../../utils";
-import {offerPropTypes} from "../../app-prop-types";
+import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 
-export default function Room(props) {
-  const {offer, offers, reviews} = props;
-
+const Room = ({offer, offers, reviews}) => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -128,10 +126,12 @@ export default function Room(props) {
       </div>
     </React.Fragment>
   );
-}
+};
 
 Room.propTypes = {
   offer: offerPropTypes,
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
+
+export default Room;

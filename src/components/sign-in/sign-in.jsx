@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SignIn() {
+const SignIn = () => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -56,4 +56,7 @@ export default function SignIn() {
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default SignIn;
+

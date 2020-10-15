@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import OfferList from "../offer-list/offer-list";
+import {offerPropTypes} from "../../app-prop-types";
 
-export default function Main(props) {
-  const {offers} = props;
-
+const Main = ({offers}) => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -92,8 +91,10 @@ export default function Main(props) {
       </div>
     </React.Fragment>
   );
-}
+};
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
 };
+
+export default Main;

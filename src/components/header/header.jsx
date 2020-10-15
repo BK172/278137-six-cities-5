@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-export default function Review() {
+const Header = () => {
   return (
     <header className="header">
       <div className="container">
@@ -25,4 +25,6 @@ export default function Review() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

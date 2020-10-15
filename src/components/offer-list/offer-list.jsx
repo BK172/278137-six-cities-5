@@ -1,18 +1,19 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
+import {offerPropTypes} from "../../app-prop-types";
 
-export default class OfferList extends PureComponent {
+class OfferList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       activeOffer: this.props.offers[0],
     };
 
-    this.onOfferCardMouseOver = this.onOfferCardMouseOver.bind(this);
+    this.handleOfferCardHover = this.handleOfferCardHover.bind(this);
   }
 
-  onOfferCardMouseOver(offer) {
+  handleOfferCardHover(offer) {
     this.setState({activeOffer: offer});
   }
 
@@ -25,7 +26,8 @@ export default class OfferList extends PureComponent {
           key={offer.offerId}
           offer={offer}
           offerType={`main`}
-          onOfferCardMouseOver={this.onOfferCardMouseOver}
+          currentOffer={this.state.activeOffer}
+          handleOfferCardHover={this.handleOfferCardHover}
         />
       ))
     );
@@ -33,5 +35,7 @@ export default class OfferList extends PureComponent {
 }
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
 };
+
+export default OfferList;

@@ -3,9 +3,7 @@ import moment from "moment";
 import {reviewPropTypes} from "../../app-prop-types";
 import {ratingToInteger} from "../../utils";
 
-export default function Review(props) {
-  const {review} = props;
-
+const Review = ({review}) => {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -30,8 +28,10 @@ export default function Review(props) {
       </div>
     </li>
   );
-}
+};
 
 Review.propTypes = {
   review: reviewPropTypes,
 };
+
+export default Review;
