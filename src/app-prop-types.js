@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import moment from "moment";
 
-const offerPropType = PropTypes.shape({
+export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.string.isRequired,
   favorite: PropTypes.bool.isRequired,
   image: PropTypes.string.isRequired,
@@ -20,10 +20,7 @@ const offerPropType = PropTypes.shape({
     name: PropTypes.string.isRequired,
     super: PropTypes.bool.isRequired
   })
-});
-
-export const offerPropTypes = offerPropType.isRequired;
-export const offerPropTypesNotRequired = offerPropType;
+}).isRequired;
 
 export const reviewPropTypes = PropTypes.shape({
   reviewId: PropTypes.string.isRequired,

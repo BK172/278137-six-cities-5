@@ -14,7 +14,12 @@ class OfferList extends PureComponent {
   }
 
   handleOfferCardHover(offer) {
-    this.setState({activeOffer: offer});
+    this.setState((state) => {
+      if (state.activeOffer.offerId !== offer.offerId) {
+        return {activeOffer: offer};
+      }
+      return null;
+    });
   }
 
   render() {
