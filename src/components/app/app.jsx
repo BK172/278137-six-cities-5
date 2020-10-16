@@ -1,34 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import MainPage from "../main-page/main-page";
-import SignInPage from "../sign-in-page/sign-in-page";
-import FavoritesPage from "../favorites-page/favorites-page";
-import RoomPage from "../room-page/room-page";
+import Main from "../main/main";
+import SignIn from "../sign-in/sign-in";
+import Favorites from "../favorites/favorites";
+import Room from "../room/room";
+import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 
-const App = ({offersCount}) => {
+const App = ({offers, reviews}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage offersCount={offersCount} />
+          <Main offers={offers} />
         </Route>
         <Route exact path="/login">
-          <SignInPage />
+          <SignIn />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesPage />
+          <Favorites />
         </Route>
-        <Route exact path="/offer/:id">
-          <RoomPage />
-        </Route>
+        <Route exact path="/offer/:id"
+          render={({match}) => (
+            <Room
+              offer={offers.find((item) => item.offerId === match.params.id)}
+              offers={offers}
+              reviews={reviews}
+            />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
 export default App;
