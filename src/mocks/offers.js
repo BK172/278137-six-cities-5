@@ -2,6 +2,7 @@ export default [
   {
     offerId: `0`,
     favorite: false,
+    coordinates: [52.3909553943508, 4.85309666406198],
     image: `img/apartment-01.jpg`,
     premium: true,
     cost: 120,
@@ -42,6 +43,7 @@ export default [
   {
     offerId: `1`,
     favorite: true,
+    coordinates: [52.369553943508, 4.85309666406198],
     image: `img/room.jpg`,
     premium: false,
     cost: 80,
@@ -82,6 +84,7 @@ export default [
   {
     offerId: `2`,
     favorite: false,
+    coordinates: [52.3909553943508, 4.929309666406198],
     image: `img/apartment-02.jpg`,
     premium: false,
     cost: 132,
@@ -122,6 +125,7 @@ export default [
   {
     offerId: `3`,
     favorite: false,
+    coordinates: [52.3809553943508, 4.939309666406198],
     image: `img/apartment-03.jpg`,
     premium: true,
     cost: 180,
