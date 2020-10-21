@@ -1,5 +1,10 @@
 export const ratingToInteger = (rating) => Math.round(rating) * 20;
 
+export const mapClasses = {
+  cities: `cities__map`,
+  property: `property__map`
+};
+
 export const cardClasses = {
   main: {
     'place-card': `cities__place-card`,

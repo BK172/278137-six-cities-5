@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {offerPropTypes} from "../../app-prop-types";
+import {mapClasses} from "../../utils";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
@@ -36,13 +37,16 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {mapType} = this.props;
+
     return (
-      <section id="map" className="cities__map map"></section>
+      <section id="map" className={`${mapClasses[mapType]} map`}></section>
     );
   }
 }
 
 Map.propTypes = {
+  mapType: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
 };
 

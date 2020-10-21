@@ -4,6 +4,7 @@ import Header from "../header/header";
 import OfferCard from "../offer-card/offer-card";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
+import Map from "../map/map";
 import {ratingToInteger} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 
@@ -98,7 +99,7 @@ const Room = ({offer, offers, reviews}) => {
                 </section>
               </div>
             </div>
-            <section className="property__map map" />
+            <Map mapType={`property`} offers={offers.slice(0, 3)} />
           </section>
           <div className="container">
             <section className="near-places places">
