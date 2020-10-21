@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import OfferCard from "../offer-card/offer-card";
-import Review from "../review/review";
+import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import {ratingToInteger} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
@@ -93,15 +93,7 @@ const Room = ({offer, offers, reviews}) => {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
-                  <ul className="reviews__list">
-                    {reviews.map((item) => (
-                      <Review
-                        key={item.reviewId}
-                        review={item}
-                      />
-                    ))}
-                  </ul>
+                  <ReviewList reviews={reviews} />
                   <ReviewForm />
                 </section>
               </div>
