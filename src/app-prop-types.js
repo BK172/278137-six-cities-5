@@ -4,6 +4,7 @@ import moment from "moment";
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.string.isRequired,
   favorite: PropTypes.bool.isRequired,
+  city: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   image: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
