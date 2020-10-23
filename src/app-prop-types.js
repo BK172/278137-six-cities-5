@@ -37,6 +37,7 @@ export const reviewPropTypes = PropTypes.shape({
           ` \`` + componentName + `\`. Validation failed.`
       );
     }
+
     return null;
   },
 }).isRequired;
