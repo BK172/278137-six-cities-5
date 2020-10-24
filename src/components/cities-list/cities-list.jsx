@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {citiesPropTypes} from "../../app-prop-types";
 
 const CitiesList = ({cities, activeCity, changeCity}) => {
-  const handleLocationClick = (city, evt) => {
+  const handleLocationClick = (evt, city) => {
     evt.preventDefault();
     changeCity(city);
   };
@@ -12,14 +13,13 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
-        <li className="locations__item" >
+        <li className="locations__item" key={city.cityId}>
           <a
-            className={`locations__item-link tabs__item ${activeCity === city && `tabs__item--active`}`}
+            className={`locations__item-link tabs__item ${activeCity.name === city.name && `tabs__item--active`}`}
             href="#"
-            key={city}
-            onClick={(evt) => handleLocationClick(city, evt)}
+            onClick={(evt) => handleLocationClick(evt, city)}
           >
-            <span>{city}</span>
+            <span>{city.name}</span>
           </a>
         </li>
       ))}
@@ -28,8 +28,8 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
+  activeCity: citiesPropTypes,
   changeCity: PropTypes.func.isRequired,
 };
 

@@ -41,3 +41,9 @@ export const reviewPropTypes = PropTypes.shape({
     return null;
   },
 }).isRequired;
+
+export const citiesPropTypes = PropTypes.shape({
+  cityId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+}).isRequired;

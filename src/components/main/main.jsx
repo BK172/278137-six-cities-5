@@ -5,9 +5,9 @@ import Header from "../header/header";
 import OfferList from "../offer-list/offer-list";
 import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
-import {offerPropTypes} from "../../app-prop-types";
+import {offerPropTypes, citiesPropTypes} from "../../app-prop-types";
 
-const Main = ({offers, cities, activeCity}) => {
+const Main = ({offers, activeCity}) => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -26,7 +26,7 @@ const Main = ({offers, cities, activeCity}) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+                <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -55,7 +55,7 @@ const Main = ({offers, cities, activeCity}) => {
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map mapType={`cities`} offers={offers} />
+                <Map mapType={`cities`} />
               </div>
             </div>
           </div>
@@ -67,13 +67,11 @@ const Main = ({offers, cities, activeCity}) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: citiesPropTypes,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  cities: state.cities,
   activeCity: state.activeCity,
 });
 
