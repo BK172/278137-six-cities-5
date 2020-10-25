@@ -18,6 +18,7 @@ class OfferList extends PureComponent {
       if (state.activeOffer.offerId !== offer.offerId) {
         return {activeOffer: offer};
       }
+
       return null;
     });
   }

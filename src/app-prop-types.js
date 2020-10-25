@@ -4,6 +4,7 @@ import moment from "moment";
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.string.isRequired,
   favorite: PropTypes.bool.isRequired,
+  city: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   image: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
@@ -36,6 +37,13 @@ export const reviewPropTypes = PropTypes.shape({
           ` \`` + componentName + `\`. Validation failed.`
       );
     }
+
     return null;
   },
+}).isRequired;
+
+export const citiesPropTypes = PropTypes.shape({
+  cityId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
 }).isRequired;
