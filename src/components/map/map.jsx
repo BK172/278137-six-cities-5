@@ -7,9 +7,12 @@ import {mapClasses} from "../../utils";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
-  _update() {
-    const {offers, activeOffer, activeCity} = this.props;
+  componentDidMount() {
+    const {offers, activeCity} = this.props;
     const city = activeCity.coordinates;
+    const zoom = 12;
+
+    this.markers = [];
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -18,7 +21,6 @@ class Map extends PureComponent {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    const zoom = 12;
     this.map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -32,25 +34,35 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
 
-    offers.forEach(({offerId, coordinates, title}) => {
-      const activeOfferId = activeOffer && activeOffer.offerId;
-      const offerIcon = (activeOfferId === offerId) ? this.activeIcon : this.icon;
-
-      leaflet
-        .marker(coordinates, {icon: offerIcon, title})
-        .addTo(this.map);
-    });
-
+    this._addMarkers(offers);
     this.map.setView(city, zoom);
   }
 
-  componentDidMount() {
-    this._update();
+  componentDidUpdate() {
+    const {offers} = this.props;
+    this._removeMarkers();
+    this._addMarkers(offers);
   }
 
-  componentDidUpdate() {
-    this.map.remove();
-    this._update();
+  _addMarkers(offers) {
+    const {activeOffer} = this.props;
+    const activeOfferId = activeOffer && activeOffer.offerId;
+
+    offers.forEach(({offerId, coordinates, title}) => {
+      const offerIcon = (activeOfferId === offerId) ? this.activeIcon : this.icon;
+
+      const marker = leaflet
+        .marker(coordinates, {icon: offerIcon, title})
+        .addTo(this.map);
+      this.markers.push(marker);
+    });
+  }
+
+  _removeMarkers() {
+    this.markers.forEach((item) => {
+      item.removeFrom(this.map);
+    });
+    this.markers = [];
   }
 
   render() {
