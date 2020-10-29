@@ -2,23 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {offerPropTypes} from "../../app-prop-types";
 import {SortingType} from "../../utils";
 
-const SortingOptions = ({activeSortingOption, changeSorting, sortingOpeningFlag, openSortingList}) => {
+const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortingToggleFlag, toggleSortingList, sortOffers}) => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => openSortingList(!sortingOpeningFlag)}
+        onClick={() => toggleSortingList(!sortingToggleFlag)}
       >
         {activeSortingOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${sortingOpeningFlag ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${sortingToggleFlag ? `places__options--opened` : ``}`}>
         {
           Object.values(SortingType).map((item) => (
             <li
@@ -26,7 +27,9 @@ const SortingOptions = ({activeSortingOption, changeSorting, sortingOpeningFlag,
               className={`places__option ${activeSortingOption === item ? `places__option--active` : ``}`}
               tabIndex={0}
               onClick={(evt) => {
-                changeSorting(evt.target.textContent);
+                toggleSortingList(false);
+                changeSortingType(evt.target.textContent);
+                sortOffers(offers);
               }}
             >
               {item}
@@ -45,25 +48,32 @@ const SortingOptions = ({activeSortingOption, changeSorting, sortingOpeningFlag,
 };
 
 SortingOptions.propTypes = {
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeSortingOption: PropTypes.string.isRequired,
-  changeSorting: PropTypes.func.isRequired,
-  sortingOpeningFlag: PropTypes.bool.isRequired,
-  openSortingList: PropTypes.func.isRequired
+  changeSortingType: PropTypes.func.isRequired,
+  sortingToggleFlag: PropTypes.bool.isRequired,
+  toggleSortingList: PropTypes.func.isRequired,
+  sortOffers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.offers,
   activeSortingOption: state.activeSortingOption,
-  changeSorting: state.changeSorting,
-  sortingOpeningFlag: state.sortingOpeningFlag,
-  openSortingList: state.openSortingList
+  changeSortingType: state.changeSortingType,
+  sortingToggleFlag: state.sortingToggleFlag,
+  toggleSortingList: state.toggleSortingList,
+  sortOffers: state.sortOffers
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  changeSorting(activeSortingOption) {
-    dispatch(ActionCreator.changeSorting(activeSortingOption));
+  changeSortingType(activeSortingOption) {
+    dispatch(ActionCreator.changeSortingType(activeSortingOption));
   },
-  openSortingList(sortingOpeningFlag) {
-    dispatch(ActionCreator.openSortingList(sortingOpeningFlag));
+  toggleSortingList(sortingToggleFlag) {
+    dispatch(ActionCreator.toggleSortingList(sortingToggleFlag));
+  },
+  sortOffers(offers) {
+    dispatch(ActionCreator.sortOffers(offers));
   }
 }));
 

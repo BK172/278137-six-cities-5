@@ -64,7 +64,7 @@ const Room = ({offer, offers, reviews}) => {
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">€{offer.cost}</b>
+                  <b className="property__price-value">€{offer.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">

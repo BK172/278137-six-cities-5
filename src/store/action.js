@@ -1,8 +1,9 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFERS_LIST: `GET_OFFERS_LIST`,
-  CHANGE_SORTING: `CHANGE_SORTING`,
-  OPEN_SORTING_LIST: `OPEN_SORTING_LIST`
+  CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
+  TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
+  SORT_OFFERS: `SORT_OFFERS`
 };
 
 export const ActionCreator = {
@@ -13,12 +14,16 @@ export const ActionCreator = {
   getOffersList: () => ({
     type: ActionType.GET_OFFERS_LIST
   }),
-  changeSorting: (activeSortingOption) => ({
-    type: ActionType.CHANGE_SORTING,
+  changeSortingType: (activeSortingOption) => ({
+    type: ActionType.CHANGE_SORTING_TYPE,
     payload: activeSortingOption
   }),
-  openSortingList: (sortingOpeningFlag) => ({
-    type: ActionType.OPEN_SORTING_LIST,
-    payload: sortingOpeningFlag
+  toggleSortingList: (sortingToggleFlag) => ({
+    type: ActionType.TOGGLE_SORTING_LIST,
+    payload: sortingToggleFlag
+  }),
+  sortOffers: (offers) => ({
+    type: ActionType.SORT_OFFERS,
+    payload: offers
   })
 };
