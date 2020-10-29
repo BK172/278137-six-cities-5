@@ -62,7 +62,7 @@ const mapStateToProps = (state) => ({
   changeSortingType: state.changeSortingType,
   sortingToggleFlag: state.sortingToggleFlag,
   toggleSortingList: state.toggleSortingList,
-  sortOffers: state.sortOffers
+  sortOffers: state.sortOffers,
 });
 
 const mapDispatchToProps = ((dispatch) => ({

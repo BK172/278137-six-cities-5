@@ -3,7 +3,8 @@ export const ActionType = {
   GET_OFFERS_LIST: `GET_OFFERS_LIST`,
   CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
   TOGGLE_SORTING_LIST: `TOGGLE_SORTING_LIST`,
-  SORT_OFFERS: `SORT_OFFERS`
+  SORT_OFFERS: `SORT_OFFERS`,
+  SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
 };
 
 export const ActionCreator = {
@@ -25,5 +26,9 @@ export const ActionCreator = {
   sortOffers: (offers) => ({
     type: ActionType.SORT_OFFERS,
     payload: offers
-  })
+  }),
+  setActiveOffer: (activeOffer) => ({
+    type: ActionType.SET_ACTIVE_OFFER,
+    payload: activeOffer
+  }),
 };

@@ -8,10 +8,14 @@ import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
   _update() {
-    const {offers, activeCity} = this.props;
+    const {offers, activeOffer, activeCity} = this.props;
     const city = activeCity.coordinates;
-    const icon = leaflet.icon({
+    this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    this.activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
     const zoom = 12;
@@ -28,9 +32,12 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
 
-    offers.forEach((offer) => {
+    offers.forEach(({offerId, coordinates, title}) => {
+      const activeOfferId = activeOffer && activeOffer.offerId;
+      const offerIcon = (activeOfferId === offerId) ? this.activeIcon : this.icon;
+
       leaflet
-        .marker(offer.coordinates, {icon})
+        .marker(coordinates, {icon: offerIcon, title})
         .addTo(this.map);
     });
 
@@ -59,11 +66,16 @@ Map.propTypes = {
   mapType: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeCity: citiesPropTypes,
+  activeOffer: PropTypes.oneOfType([
+    offerPropTypes,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
   activeCity: state.activeCity,
+  activeOffer: state.activeOffer,
 });
 
 export {Map};

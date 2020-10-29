@@ -7,10 +7,11 @@ const filteredOffers = offers.filter((offer) => offer.city === cities[0].name);
 
 const initialState = {
   offers: getSortedOffers(filteredOffers, SortingType[`POPULAR`]).slice(),
+  activeOffer: null,
   cities,
   activeCity: cities[0],
   activeSortingOption: SortingType[`POPULAR`],
-  sortingToggleFlag: false
+  sortingToggleFlag: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,6 +35,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SORT_OFFERS:
       return extend(state, {
         offers: getSortedOffers(offers, state.activeSortingOption),
+      });
+    case ActionType.SET_ACTIVE_OFFER:
+      return extend(state, {
+        activeOffer: action.payload
       });
   }
 

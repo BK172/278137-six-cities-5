@@ -1,26 +1,26 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {ActionCreator} from "../../store/action";
+import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
 import {offerPropTypes} from "../../app-prop-types";
 
 class OfferList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeOffer: this.props.offers[0],
-    };
 
-    this.handleOfferCardHover = this.handleOfferCardHover.bind(this);
+    this._handleOfferCardOver = this._handleOfferCardOver.bind(this);
+    this._handleOfferCardOut = this._handleOfferCardOut.bind(this);
   }
 
-  handleOfferCardHover(offer) {
-    this.setState((state) => {
-      if (state.activeOffer.offerId !== offer.offerId) {
-        return {activeOffer: offer};
-      }
+  _handleOfferCardOver(hoveredOffer) {
+    const {setActiveOffer} = this.props;
+    setActiveOffer(hoveredOffer);
+  }
 
-      return null;
-    });
+  _handleOfferCardOut() {
+    const {setActiveOffer} = this.props;
+    setActiveOffer(null);
   }
 
   render() {
@@ -32,8 +32,8 @@ class OfferList extends PureComponent {
           key={offer.offerId}
           offer={offer}
           offerType={`main`}
-          currentOffer={this.state.activeOffer}
-          handleOfferCardHover={this.handleOfferCardHover}
+          handleOfferCardOver={() => this._handleOfferCardOver(offer)}
+          handleOfferCardOut={this._handleOfferCardOut}
         />
       ))
     );
@@ -42,6 +42,24 @@ class OfferList extends PureComponent {
 
 OfferList.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
+  activeOffer: PropTypes.oneOfType([
+    offerPropTypes,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
+  setActiveOffer: PropTypes.func.isRequired,
 };
 
-export default OfferList;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  activeOffer: state.activeOffer,
+  setActiveOffer: state.setActiveOffer,
+});
+
+const mapDispatchToProps = ((dispatch) => ({
+  setActiveOffer(activeOffer) {
+    dispatch(ActionCreator.setActiveOffer(activeOffer));
+  }
+}));
+
+export {OfferList};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferList);
