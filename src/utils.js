@@ -4,6 +4,13 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const SortingType = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED_FIRST: `Top rated first`
+};
+
 export const mapClasses = {
   cities: `cities__map`,
   property: `property__map`
