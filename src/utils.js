@@ -4,6 +4,28 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const SortingType = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED_FIRST: `Top rated first`
+};
+
+export const getSortedOffers = (offers, sortType) => {
+  switch (sortType) {
+    case SortingType.POPULAR:
+      return offers.slice();
+    case SortingType.PRICE_LOW_TO_HIGH:
+      return offers.slice().sort((a, b) => a.price - b.price);
+    case SortingType.PRICE_HIGH_TO_LOW:
+      return offers.slice().sort((a, b) => b.price - a.price);
+    case SortingType.TOP_RATED_FIRST:
+      return offers.slice().sort((a, b) => b.rating - a.rating);
+  }
+
+  return offers;
+};
+
 export const mapClasses = {
   cities: `cities__map`,
   property: `property__map`

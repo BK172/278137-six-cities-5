@@ -4,11 +4,12 @@ import {Link} from "react-router-dom";
 import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 
-const OfferCard = ({offer, offerType, handleOfferCardHover = () => false}) => {
+const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleOfferCardOut = () => false}) => {
   return (
     <article
       className={`${cardClasses[offerType][`place-card`]} place-card`}
-      onMouseOver={() => handleOfferCardHover(offer)}
+      onMouseOver={handleOfferCardOver}
+      onMouseOut={handleOfferCardOut}
     >
       {offer.premium && (
         <div className="place-card__mark">
@@ -23,7 +24,7 @@ const OfferCard = ({offer, offerType, handleOfferCardHover = () => false}) => {
       <div className= {`${cardClasses[offerType][`place-card__info`]} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{offer.cost}</b>
+            <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button className={`place-card__bookmark-button ${offer.favorite && `place-card__bookmark-button--active`} button`} type="button">
@@ -51,7 +52,8 @@ const OfferCard = ({offer, offerType, handleOfferCardHover = () => false}) => {
 OfferCard.propTypes = {
   offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
-  handleOfferCardHover: PropTypes.func,
+  handleOfferCardOver: PropTypes.func,
+  handleOfferCardOut: PropTypes.func,
 };
 
 export default OfferCard;

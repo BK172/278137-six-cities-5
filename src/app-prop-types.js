@@ -8,7 +8,7 @@ export const offerPropTypes = PropTypes.shape({
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   image: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
-  cost: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
