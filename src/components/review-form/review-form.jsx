@@ -9,17 +9,16 @@ class ReviewForm extends PureComponent {
       review: ``,
     };
 
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleInputChange = this._handleInputChange.bind(this);
   }
 
-  handleFormSubmit(evt) {
+  _handleFormSubmit(evt) {
     evt.preventDefault();
   }
 
-  handleInputChange(evt) {
+  _handleInputChange(evt) {
     const {name, value} = evt.target;
-
     this.setState({[name]: value});
   }
 
@@ -28,13 +27,13 @@ class ReviewForm extends PureComponent {
     const ratingTtitle = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
     return (
-      <form className="reviews__form form" action="#" method="post" onSubmit={this.handleFormSubmit}>
+      <form className="reviews__form form" action="#" method="post" onSubmit={this._handleFormSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {ratingMark.map((item, i) => (
             <React.Fragment key={item}>
               <input className="form__rating-input visually-hidden" name="rating" defaultValue={item} id={`${item}-stars`} type="radio"
-                onChange={this.handleInputChange}
+                onChange={this._handleInputChange}
               />
               <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title={ratingTtitle[i]}>
                 <svg className="form__star-image" width={37} height={33}>

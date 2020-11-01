@@ -20,10 +20,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload
       });
-    case ActionType.GET_OFFERS_LIST:
-      return extend(state, {
-        offers: offers.filter((offer) => offer.city === state.activeCity.name)
-      });
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
         activeSortingOption: action.payload

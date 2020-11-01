@@ -13,15 +13,18 @@ class OfferList extends PureComponent {
     this._handleOfferCardOut = this._handleOfferCardOut.bind(this);
   }
 
+  componentWillUnmount() {
+    const {setActiveOffer} = this.props;
+    setActiveOffer(null);
+  }
+
   _handleOfferCardOver(hoveredOffer) {
     const {setActiveOffer} = this.props;
-
     setActiveOffer(hoveredOffer);
   }
 
   _handleOfferCardOut() {
     const {setActiveOffer} = this.props;
-
     setActiveOffer(null);
   }
 
@@ -49,7 +52,6 @@ OfferList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
   activeOffer: state.activeOffer,
   setActiveOffer: state.setActiveOffer,
 });

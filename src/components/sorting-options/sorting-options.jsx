@@ -24,7 +24,7 @@ const SortingOptions = ({offers, activeSortingOption, changeSortingType, sorting
         tabIndex={0}
         onClick={onSortingListBtnClick}
       >
-        {activeSortingOption}
+        &nbsp;{activeSortingOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>

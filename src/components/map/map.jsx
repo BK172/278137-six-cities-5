@@ -69,7 +69,6 @@ class Map extends PureComponent {
 
   render() {
     const {mapType} = this.props;
-
     return <section id="map" className={`${mapClasses[mapType]} map`}></section>;
   }
 }
@@ -82,7 +81,6 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
   activeCity: state.activeCity,
   activeOffer: state.activeOffer,
 });
