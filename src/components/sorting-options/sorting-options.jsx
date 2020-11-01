@@ -3,16 +3,26 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {offerPropTypes} from "../../app-prop-types";
-import {SortingType} from "../../utils";
+import {SortingTypes} from "../../utils";
 
 const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortingToggleFlag, toggleSortingList, sortOffers}) => {
+  const onSortingListBtnClick = () => {
+    toggleSortingList(!sortingToggleFlag);
+  };
+
+  const onSortingListItemClick = (evt) => {
+    toggleSortingList(false);
+    changeSortingType(evt.target.textContent);
+    sortOffers(offers);
+  };
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => toggleSortingList(!sortingToggleFlag)}
+        onClick={onSortingListBtnClick}
       >
         {activeSortingOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -21,20 +31,16 @@ const SortingOptions = ({offers, activeSortingOption, changeSortingType, sorting
       </span>
       <ul className={`places__options places__options--custom ${sortingToggleFlag ? `places__options--opened` : ``}`}>
         {
-          Object.values(SortingType).map((item) => (
+          Object.values(SortingTypes).map((item) => (
             <li
               key={item}
               className={`places__option ${activeSortingOption === item ? `places__option--active` : ``}`}
               tabIndex={0}
-              onClick={(evt) => {
-                toggleSortingList(false);
-                changeSortingType(evt.target.textContent);
-                sortOffers(offers);
-              }}
+              onClick={(evt) => onSortingListItemClick(evt)}
             >
               {item}
-            </li>)
-          )
+            </li>
+          ))
         }
       </ul>
       {/* <select class="places__sorting-type" id="places-sorting">
@@ -74,7 +80,7 @@ const mapDispatchToProps = ((dispatch) => ({
   },
   sortOffers(offers) {
     dispatch(ActionCreator.sortOffers(offers));
-  }
+  },
 }));
 
 export {SortingOptions};

@@ -1,16 +1,16 @@
 import {ActionType} from "./action";
 import offers from "../mocks/offers";
 import cities from "../mocks/cities";
-import {extend, SortingType, getSortedOffers} from "../utils";
+import {extend, SortingTypes, getSortedOffers} from "../utils";
 
 const filteredOffers = offers.filter((offer) => offer.city === cities[0].name);
 
 const initialState = {
-  offers: getSortedOffers(filteredOffers, SortingType[`POPULAR`]).slice(),
+  offers: getSortedOffers(filteredOffers, SortingTypes[`POPULAR`]).slice(),
   activeOffer: null,
   cities,
   activeCity: cities[0],
-  activeSortingOption: SortingType[`POPULAR`],
+  activeSortingOption: SortingTypes[`POPULAR`],
   sortingToggleFlag: false,
 };
 

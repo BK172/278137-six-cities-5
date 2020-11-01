@@ -1,10 +1,12 @@
-export const ratingToInteger = (rating) => Math.round(rating) * 20;
+const ratingToInteger = (rating) => Math.round(rating);
+
+export const getRatingElementWidth = (rating) => ratingToInteger(rating) * 20;
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const SortingType = {
+export const SortingTypes = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,
   PRICE_HIGH_TO_LOW: `Price: high to low`,
@@ -13,13 +15,13 @@ export const SortingType = {
 
 export const getSortedOffers = (offers, sortType) => {
   switch (sortType) {
-    case SortingType.POPULAR:
+    case SortingTypes.POPULAR:
       return offers.slice();
-    case SortingType.PRICE_LOW_TO_HIGH:
+    case SortingTypes.PRICE_LOW_TO_HIGH:
       return offers.slice().sort((a, b) => a.price - b.price);
-    case SortingType.PRICE_HIGH_TO_LOW:
+    case SortingTypes.PRICE_HIGH_TO_LOW:
       return offers.slice().sort((a, b) => b.price - a.price);
-    case SortingType.TOP_RATED_FIRST:
+    case SortingTypes.TOP_RATED_FIRST:
       return offers.slice().sort((a, b) => b.rating - a.rating);
   }
 

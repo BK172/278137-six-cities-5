@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
+import {getRatingElementWidth, cardClasses, cardImgShapes} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 
-const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleOfferCardOut = () => false}) => {
+const OfferCard = ({offer, offerType, onOfferCardMouseOver = () => false, onOfferCardMouseOut = () => false}) => {
   return (
     <article
       className={`${cardClasses[offerType][`place-card`]} place-card`}
-      onMouseOver={handleOfferCardOver}
-      onMouseOut={handleOfferCardOut}
+      onMouseOver={onOfferCardMouseOver}
+      onMouseOut={onOfferCardMouseOut}
     >
       {offer.premium && (
         <div className="place-card__mark">
@@ -27,7 +27,7 @@ const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleO
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${offer.favorite && `place-card__bookmark-button--active`} button`} type="button">
+          <button className={`place-card__bookmark-button ${offer.favorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -36,7 +36,7 @@ const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleO
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${ratingToInteger(offer.rating)}%`}} />
+            <span style={{width: `${getRatingElementWidth(offer.rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -52,8 +52,8 @@ const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleO
 OfferCard.propTypes = {
   offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
-  handleOfferCardOver: PropTypes.func,
-  handleOfferCardOut: PropTypes.func,
+  onOfferCardMouseOver: PropTypes.func,
+  onOfferCardMouseOut: PropTypes.func,
 };
 
 export default OfferCard;

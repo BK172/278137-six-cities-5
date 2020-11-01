@@ -5,7 +5,7 @@ import {ActionCreator} from "../../store/action";
 import {citiesPropTypes} from "../../app-prop-types";
 
 const CitiesList = ({cities, activeCity, changeCity}) => {
-  const handleLocationClick = (evt, city) => {
+  const onLocationClick = (evt, city) => {
     evt.preventDefault();
     changeCity(city);
   };
@@ -15,9 +15,9 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
       {cities.map((city) => (
         <li className="locations__item" key={city.cityId}>
           <a
-            className={`locations__item-link tabs__item ${activeCity.name === city.name && `tabs__item--active`}`}
+            className={`locations__item-link tabs__item ${activeCity.name === city.name ? `tabs__item--active` : ``}`}
             href="#"
-            onClick={(evt) => handleLocationClick(evt, city)}
+            onClick={(evt) => onLocationClick(evt, city)}
           >
             <span>{city.name}</span>
           </a>
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-  }
+  },
 });
 
 export {CitiesList};

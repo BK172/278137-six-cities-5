@@ -3,6 +3,7 @@ import React, {PureComponent} from "react";
 class ReviewForm extends PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {
       rating: ``,
       review: ``,
@@ -18,6 +19,7 @@ class ReviewForm extends PureComponent {
 
   handleInputChange(evt) {
     const {name, value} = evt.target;
+
     this.setState({[name]: value});
   }
 

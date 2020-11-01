@@ -47,3 +47,8 @@ export const citiesPropTypes = PropTypes.shape({
   name: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
 }).isRequired;
+
+export const activeOfferPropTypes = PropTypes.oneOfType([
+  offerPropTypes,
+  PropTypes.oneOf([null]).isRequired,
+]);
