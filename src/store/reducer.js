@@ -11,7 +11,6 @@ const initialState = {
   cities,
   activeCity: cities[0],
   activeSortingOption: SortingTypes[`POPULAR`],
-  sortingToggleFlag: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,10 +22,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
         activeSortingOption: action.payload
-      });
-    case ActionType.TOGGLE_SORTING_LIST:
-      return extend(state, {
-        sortingToggleFlag: action.payload
       });
     case ActionType.SORT_OFFERS:
       return extend(state, {

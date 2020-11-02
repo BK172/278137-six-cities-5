@@ -1,17 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import withToggle from "../../hocs/with-toggle/with-toggle";
 import {ActionCreator} from "../../store/action";
 import {offerPropTypes} from "../../app-prop-types";
 import {SortingTypes} from "../../utils";
 
-const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortingToggleFlag, toggleSortingList, sortOffers}) => {
-  const onSortingListBtnClick = () => {
-    toggleSortingList(!sortingToggleFlag);
-  };
-
-  const onSortingListItemClick = (evt) => {
-    toggleSortingList(false);
+const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortOffers, toggleFlag, onToggleChange}) => {
+  const onListItemClick = (evt) => {
+    onToggleChange(false);
     changeSortingType(evt.target.textContent);
     sortOffers(offers);
   };
@@ -22,21 +20,21 @@ const SortingOptions = ({offers, activeSortingOption, changeSortingType, sorting
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={onSortingListBtnClick}
+        onClick={onToggleChange}
       >
         &nbsp;{activeSortingOption}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${sortingToggleFlag ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${toggleFlag ? `places__options--opened` : ``}`}>
         {
           Object.values(SortingTypes).map((item) => (
             <li
               key={item}
               className={`places__option ${activeSortingOption === item ? `places__option--active` : ``}`}
               tabIndex={0}
-              onClick={(evt) => onSortingListItemClick(evt)}
+              onClick={(evt) => onListItemClick(evt)}
             >
               {item}
             </li>
@@ -57,17 +55,15 @@ SortingOptions.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeSortingOption: PropTypes.string.isRequired,
   changeSortingType: PropTypes.func.isRequired,
-  sortingToggleFlag: PropTypes.bool.isRequired,
-  toggleSortingList: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
+  toggleFlag: PropTypes.bool.isRequired,
+  onToggleChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
   activeSortingOption: state.activeSortingOption,
   changeSortingType: state.changeSortingType,
-  sortingToggleFlag: state.sortingToggleFlag,
-  toggleSortingList: state.toggleSortingList,
   sortOffers: state.sortOffers,
 });
 
@@ -75,13 +71,10 @@ const mapDispatchToProps = ((dispatch) => ({
   changeSortingType(activeSortingOption) {
     dispatch(ActionCreator.changeSortingType(activeSortingOption));
   },
-  toggleSortingList(sortingToggleFlag) {
-    dispatch(ActionCreator.toggleSortingList(sortingToggleFlag));
-  },
   sortOffers(offers) {
     dispatch(ActionCreator.sortOffers(offers));
   },
 }));
 
 export {SortingOptions};
-export default connect(mapStateToProps, mapDispatchToProps)(SortingOptions);
+export default compose(withToggle, connect(mapStateToProps, mapDispatchToProps))(SortingOptions);
