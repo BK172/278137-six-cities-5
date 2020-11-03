@@ -9,13 +9,14 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
     evt.preventDefault();
     changeCity(city);
   };
+  const getTabsItemActiveClass = (city) => activeCity.name === city.name ? `tabs__item--active` : ``;
 
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
         <li className="locations__item" key={city.cityId}>
           <a
-            className={`locations__item-link tabs__item ${activeCity.name === city.name ? `tabs__item--active` : ``}`}
+            className={`locations__item-link tabs__item ${getTabsItemActiveClass(city)}`}
             href="#"
             onClick={(evt) => onLocationClick(evt, city)}
           >

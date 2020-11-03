@@ -7,12 +7,21 @@ import {ActionCreator} from "../../store/action";
 import {offerPropTypes} from "../../app-prop-types";
 import {SortingTypes} from "../../utils";
 
-const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortOffers, toggleFlag, onToggleChange}) => {
-  const onListItemClick = (evt) => {
+const SortingOptions = ({
+  offers,
+  activeSortingType,
+  changeSortingType,
+  sortOffers,
+  isActive,
+  onToggleChange
+}) => {
+  const onListItemClick = (filter) => {
     onToggleChange(false);
-    changeSortingType(evt.target.textContent);
+    changeSortingType(filter);
     sortOffers(offers);
   };
+  const getPlacesOptionsOpenedClass = () => isActive ? `places__options--opened` : ``;
+  const getPlacesOptionActiveClass = (item) => activeSortingType === item ? `places__option--active` : ``;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -22,21 +31,21 @@ const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortOff
         tabIndex={0}
         onClick={onToggleChange}
       >
-        &nbsp;{activeSortingOption}
+        &nbsp;{SortingTypes[activeSortingType]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${toggleFlag ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${getPlacesOptionsOpenedClass()}`}>
         {
-          Object.values(SortingTypes).map((item) => (
+          Object.keys(SortingTypes).map((item) => (
             <li
               key={item}
-              className={`places__option ${activeSortingOption === item ? `places__option--active` : ``}`}
+              className={`places__option ${getPlacesOptionActiveClass(item)}`}
               tabIndex={0}
-              onClick={(evt) => onListItemClick(evt)}
+              onClick={() => onListItemClick(item)}
             >
-              {item}
+              {SortingTypes[item]}
             </li>
           ))
         }
@@ -53,23 +62,23 @@ const SortingOptions = ({offers, activeSortingOption, changeSortingType, sortOff
 
 SortingOptions.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeSortingOption: PropTypes.string.isRequired,
+  activeSortingType: PropTypes.string.isRequired,
   changeSortingType: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
-  toggleFlag: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
   onToggleChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeSortingOption: state.activeSortingOption,
+  activeSortingType: state.activeSortingType,
   changeSortingType: state.changeSortingType,
   sortOffers: state.sortOffers,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  changeSortingType(activeSortingOption) {
-    dispatch(ActionCreator.changeSortingType(activeSortingOption));
+  changeSortingType(activeSortingType) {
+    dispatch(ActionCreator.changeSortingType(activeSortingType));
   },
   sortOffers(offers) {
     dispatch(ActionCreator.sortOffers(offers));
@@ -77,4 +86,10 @@ const mapDispatchToProps = ((dispatch) => ({
 }));
 
 export {SortingOptions};
-export default compose(withToggle, connect(mapStateToProps, mapDispatchToProps))(SortingOptions);
+
+const enhance = compose(
+    withToggle,
+    connect(mapStateToProps, mapDispatchToProps)
+);
+
+export default enhance(SortingOptions);

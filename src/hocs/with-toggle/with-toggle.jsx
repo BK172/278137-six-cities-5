@@ -6,7 +6,7 @@ const withToggle = (Component) => {
       super(props);
 
       this.state = {
-        toggleFlag: false
+        isActive: false
       };
 
       this._handleToggle = this._handleToggle.bind(this);
@@ -14,7 +14,7 @@ const withToggle = (Component) => {
 
     _handleToggle() {
       this.setState(
-          (state) => ({toggleFlag: !state.toggleFlag})
+          (state) => ({isActive: !state.isActive})
       );
     }
 
@@ -22,7 +22,7 @@ const withToggle = (Component) => {
       return (
         <Component
           {...this.props}
-          toggleFlag={this.state.toggleFlag}
+          isActive={this.state.isActive}
           onToggleChange={this._handleToggle}
         />
       );

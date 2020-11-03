@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
 import {offerPropTypes, citiesPropTypes, activeOfferPropTypes} from "../../app-prop-types";
-import {mapClasses} from "../../utils";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
@@ -67,9 +66,20 @@ class Map extends PureComponent {
     this.markers = [];
   }
 
+  _getMapClass(mapType) {
+    switch (mapType) {
+      case `cities`:
+        return `cities__map`;
+      case `property`:
+        return `property__map`;
+    }
+
+    return ``;
+  }
+
   render() {
     const {mapType} = this.props;
-    return <section id="map" className={`${mapClasses[mapType]} map`}></section>;
+    return <section id="map" className={`${this._getMapClass(mapType)} map`}></section>;
   }
 }
 

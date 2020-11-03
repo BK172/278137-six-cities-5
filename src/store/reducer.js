@@ -1,16 +1,16 @@
 import {ActionType} from "./action";
 import offers from "../mocks/offers";
 import cities from "../mocks/cities";
-import {extend, SortingTypes, getSortedOffers} from "../utils";
+import {extend, getSortedOffers} from "../utils";
 
 const filteredOffers = offers.filter((offer) => offer.city === cities[0].name);
 
 const initialState = {
-  offers: getSortedOffers(filteredOffers, SortingTypes[`POPULAR`]).slice(),
+  offers: getSortedOffers(filteredOffers, `popular`).slice(),
   activeOffer: null,
   cities,
   activeCity: cities[0],
-  activeSortingOption: SortingTypes[`POPULAR`],
+  activeSortingType: `popular`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,11 +21,11 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
-        activeSortingOption: action.payload
+        activeSortingType: action.payload
       });
     case ActionType.SORT_OFFERS:
       return extend(state, {
-        offers: getSortedOffers(offers, state.activeSortingOption),
+        offers: getSortedOffers(offers, state.activeSortingType),
       });
     case ActionType.SET_ACTIVE_OFFER:
       return extend(state, {
