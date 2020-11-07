@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
+import clsx from "clsx";
 
 const OfferCard = ({
   offer,
@@ -41,9 +42,6 @@ const OfferCard = ({
     }
   };
 
-  const getBookmarkBtnActiveClass = () => offer.favorite ? `place-card__bookmark-button--active` : ``;
-  const getBookmarkAREAText = () => offer.favorite ? `In bookmarks` : `To bookmarks`;
-
   return (
     <article
       className={`${cardClasses[offerType][`article`]} place-card`}
@@ -66,11 +64,11 @@ const OfferCard = ({
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${getBookmarkBtnActiveClass()} button`} type="button">
+          <button className={`place-card__bookmark-button ${clsx(offer.favorite && `place-card__bookmark-button--active`)} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">{getBookmarkAREAText()}</span>
+            <span className="visually-hidden">{clsx(offer.favorite ? `In bookmarks` : `To bookmarks`)}</span>
           </button>
         </div>
         <div className="place-card__rating rating">

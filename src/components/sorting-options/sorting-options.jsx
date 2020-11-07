@@ -6,13 +6,14 @@ import withToggle from "../../hocs/with-toggle/with-toggle";
 import {ActionCreator} from "../../store/action";
 import {offerPropTypes} from "../../app-prop-types";
 import {SortingTypes, getSortedOffers} from "../../utils";
+import clsx from "clsx";
 
 const SortingOptions = ({
   offers,
+  sortOffers,
   sortingType,
   changeSortingType,
-  sortOffers,
-  isActive,
+  isToggleActive,
   onToggleChange
 }) => {
   const onListItemClick = (filter) => {
@@ -20,8 +21,6 @@ const SortingOptions = ({
     changeSortingType(filter);
     sortOffers(getSortedOffers(offers, filter));
   };
-  const getPlacesOptionsOpenedClass = () => isActive ? `places__options--opened` : ``;
-  const getPlacesOptionActiveClass = (item) => sortingType === item ? `places__option--active` : ``;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -36,12 +35,12 @@ const SortingOptions = ({
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${getPlacesOptionsOpenedClass()}`}>
+      <ul className={`places__options places__options--custom ${clsx(isToggleActive && `places__options--opened`)}`}>
         {
           Object.keys(SortingTypes).map((item) => (
             <li
               key={item}
-              className={`places__option ${getPlacesOptionActiveClass(item)}`}
+              className={`places__option ${clsx(sortingType === item && `places__option--active`)}`}
               tabIndex={0}
               onClick={() => onListItemClick(item)}
             >
@@ -65,7 +64,7 @@ SortingOptions.propTypes = {
   sortingType: PropTypes.string.isRequired,
   changeSortingType: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isToggleActive: PropTypes.bool.isRequired,
   onToggleChange: PropTypes.func.isRequired,
 };
 
