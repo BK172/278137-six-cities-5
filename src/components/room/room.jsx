@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
-import OfferCard from "../offer-card/offer-card";
+import OfferList from "../offer-list/offer-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
-import {ratingToInteger} from "../../utils";
+import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 
 const Room = ({offer, offers, reviews}) => {
+  const getBookmarkBtnActiveClass = () => offer.favorite ? `place-card__bookmark-button--active` : ``;
+  const getAvatarWrapperProClass = () => offer.owner.super ? `property__avatar-wrapper--pro` : ``;
+
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -38,7 +41,7 @@ const Room = ({offer, offers, reviews}) => {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className={`place-card__bookmark-button ${offer.favourite && `place-card__bookmark-button--active`} button`} type="button">
+                  <button className={`place-card__bookmark-button ${getBookmarkBtnActiveClass()} button`} type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -47,7 +50,7 @@ const Room = ({offer, offers, reviews}) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${ratingToInteger(offer.rating)}%`}} />
+                    <span style={{width: `${getElementWidthByRating(offer.rating)}%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -80,7 +83,7 @@ const Room = ({offer, offers, reviews}) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper ${offer.owner.super && `property__avatar-wrapper--pro`} user__avatar-wrapper`}>
+                    <div className={`property__avatar-wrapper ${getAvatarWrapperProClass()} user__avatar-wrapper`}>
                       <img className="property__avatar user__avatar" src={offer.owner.avatar} width={74} height={74} alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
@@ -105,13 +108,7 @@ const Room = ({offer, offers, reviews}) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {offers.slice(0, 3).map((item) => (
-                  <OfferCard
-                    key={item.offerId}
-                    offer={item}
-                    offerType={`room`}
-                  />
-                ))}
+                <OfferList offers={offers.slice(0, 3)} />
               </div>
             </section>
           </div>

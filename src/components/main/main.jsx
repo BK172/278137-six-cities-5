@@ -34,7 +34,7 @@ const Main = ({offers, activeCity}) => {
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map mapType={`cities`} />
+                <Map mapType={`cities`} offers={offers} />
               </div>
             </div>
           </div>

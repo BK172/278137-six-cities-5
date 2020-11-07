@@ -1,42 +1,81 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {ratingToInteger, cardClasses, cardImgShapes} from "../../utils";
+import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 
-const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleOfferCardOut = () => false}) => {
+const OfferCard = ({
+  offer,
+  offerType,
+  onOfferCardMouseOver = () => false,
+  onOfferCardMouseOut = () => false
+}) => {
+  const cardClasses = {
+    main: {
+      article: `cities__place-card`,
+      wrapper: `cities__image-wrapper`
+    },
+    room: {
+      article: `near-places__card`,
+      wrapper: `near-places__image-wrapper`
+    },
+    favorite: {
+      article: `favorites__card`,
+      wrapper: `favorites__image-wrapper`,
+      info: `favorites__card-info`
+    }
+  };
+
+  const cardImgShapes = {
+    main: {
+      width: 260,
+      height: 200
+    },
+    room: {
+      width: 260,
+      height: 200
+    },
+    favorite: {
+      width: 150,
+      height: 110
+    }
+  };
+
+  const getBookmarkBtnActiveClass = () => offer.favorite ? `place-card__bookmark-button--active` : ``;
+  const getBookmarkAREAText = () => offer.favorite ? `In bookmarks` : `To bookmarks`;
+
   return (
     <article
-      className={`${cardClasses[offerType][`place-card`]} place-card`}
-      onMouseOver={handleOfferCardOver}
-      onMouseOut={handleOfferCardOut}
+      className={`${cardClasses[offerType][`article`]} place-card`}
+      onMouseOver={onOfferCardMouseOver}
+      onMouseOut={onOfferCardMouseOut}
     >
       {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${cardClasses[offerType][`place-card__image-wrapper`]} place-card__image-wrapper`}>
+      <div className={`${cardClasses[offerType][`wrapper`]} place-card__image-wrapper`}>
         <Link to={`/offer/${offer.offerId}`}>
           <img className="place-card__image" src={offer.image} width={cardImgShapes[offerType].width} height={cardImgShapes[offerType].height} alt="Place image" />
         </Link>
       </div>
-      <div className= {`${cardClasses[offerType][`place-card__info`]} place-card__info`}>
+      <div className= {`${cardClasses[offerType][`info`]} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${offer.favorite && `place-card__bookmark-button--active`} button`} type="button">
+          <button className={`place-card__bookmark-button ${getBookmarkBtnActiveClass()} button`} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
-            <span className="visually-hidden">{offer.favorite ? `In bookmarks` : `To bookmarks`}</span>
+            <span className="visually-hidden">{getBookmarkAREAText()}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${ratingToInteger(offer.rating)}%`}} />
+            <span style={{width: `${getElementWidthByRating(offer.rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -52,8 +91,8 @@ const OfferCard = ({offer, offerType, handleOfferCardOver = () => false, handleO
 OfferCard.propTypes = {
   offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
-  handleOfferCardOver: PropTypes.func,
-  handleOfferCardOut: PropTypes.func,
+  onOfferCardMouseOver: PropTypes.func,
+  onOfferCardMouseOut: PropTypes.func,
 };
 
 export default OfferCard;

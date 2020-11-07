@@ -2,14 +2,13 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {offerPropTypes, citiesPropTypes} from "../../app-prop-types";
-import {mapClasses} from "../../utils";
+import {offerPropTypes, citiesPropTypes, activeOfferPropTypes} from "../../app-prop-types";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
   componentDidMount() {
     const {offers, activeCity} = this.props;
-    const city = activeCity.coordinates;
+    const mapCenter = activeCity.coordinates;
     const zoom = 12;
 
     this.markers = [];
@@ -22,7 +21,7 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     this.map = leaflet.map(`map`, {
-      center: city,
+      center: mapCenter,
       zoom,
       zoomControl: false,
       marker: true
@@ -35,11 +34,12 @@ class Map extends PureComponent {
       .addTo(this.map);
 
     this._addMarkers(offers);
-    this.map.setView(city, zoom);
+    this.map.setView(mapCenter, zoom);
   }
 
   componentDidUpdate() {
     const {offers} = this.props;
+
     this._removeMarkers();
     this._addMarkers(offers);
   }
@@ -50,10 +50,10 @@ class Map extends PureComponent {
 
     offers.forEach(({offerId, coordinates, title}) => {
       const offerIcon = (activeOfferId === offerId) ? this.activeIcon : this.icon;
-
       const marker = leaflet
         .marker(coordinates, {icon: offerIcon, title})
         .addTo(this.map);
+
       this.markers.push(marker);
     });
   }
@@ -62,15 +62,24 @@ class Map extends PureComponent {
     this.markers.forEach((item) => {
       item.removeFrom(this.map);
     });
+
     this.markers = [];
+  }
+
+  _getMapClass(mapType) {
+    switch (mapType) {
+      case `cities`:
+        return `cities__map`;
+      case `property`:
+        return `property__map`;
+    }
+
+    return ``;
   }
 
   render() {
     const {mapType} = this.props;
-
-    return (
-      <section id="map" className={`${mapClasses[mapType]} map`}></section>
-    );
+    return <section id="map" className={`${this._getMapClass(mapType)} map`}></section>;
   }
 }
 
@@ -78,14 +87,10 @@ Map.propTypes = {
   mapType: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeCity: citiesPropTypes,
-  activeOffer: PropTypes.oneOfType([
-    offerPropTypes,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
+  activeOffer: activeOfferPropTypes,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
   activeCity: state.activeCity,
   activeOffer: state.activeOffer,
 });

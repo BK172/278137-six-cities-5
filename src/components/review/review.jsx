@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import {reviewPropTypes} from "../../app-prop-types";
-import {ratingToInteger} from "../../utils";
+import {getElementWidthByRating} from "../../utils";
 
 const Review = ({review}) => {
   return (
@@ -17,7 +17,7 @@ const Review = ({review}) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${ratingToInteger(review.rating)}%`}} />
+            <span style={{width: `${getElementWidthByRating(review.rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
