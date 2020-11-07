@@ -5,11 +5,11 @@ import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {ActionCreator} from "../../store/action";
 import {offerPropTypes} from "../../app-prop-types";
-import {SortingTypes} from "../../utils";
+import {SortingTypes, getSortedOffers} from "../../utils";
 
 const SortingOptions = ({
   offers,
-  activeSortingType,
+  sortingType,
   changeSortingType,
   sortOffers,
   isActive,
@@ -18,10 +18,10 @@ const SortingOptions = ({
   const onListItemClick = (filter) => {
     onToggleChange(false);
     changeSortingType(filter);
-    sortOffers(offers);
+    sortOffers(getSortedOffers(offers, filter));
   };
   const getPlacesOptionsOpenedClass = () => isActive ? `places__options--opened` : ``;
-  const getPlacesOptionActiveClass = (item) => activeSortingType === item ? `places__option--active` : ``;
+  const getPlacesOptionActiveClass = (item) => sortingType === item ? `places__option--active` : ``;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -31,7 +31,7 @@ const SortingOptions = ({
         tabIndex={0}
         onClick={onToggleChange}
       >
-        &nbsp;{SortingTypes[activeSortingType]}
+        &nbsp;{SortingTypes[sortingType]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
@@ -62,7 +62,7 @@ const SortingOptions = ({
 
 SortingOptions.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeSortingType: PropTypes.string.isRequired,
+  sortingType: PropTypes.string.isRequired,
   changeSortingType: PropTypes.func.isRequired,
   sortOffers: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
@@ -71,14 +71,14 @@ SortingOptions.propTypes = {
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeSortingType: state.activeSortingType,
+  sortingType: state.sortingType,
   changeSortingType: state.changeSortingType,
   sortOffers: state.sortOffers,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  changeSortingType(activeSortingType) {
-    dispatch(ActionCreator.changeSortingType(activeSortingType));
+  changeSortingType(sortingType) {
+    dispatch(ActionCreator.changeSortingType(sortingType));
   },
   sortOffers(offers) {
     dispatch(ActionCreator.sortOffers(offers));

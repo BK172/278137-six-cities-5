@@ -1,9 +1,9 @@
-import React from "react";
+import React, {Fragment, memo} from "react";
 import {citiesPropTypes} from "../../app-prop-types";
 
 const MainEmpty = ({activeCity}) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <section className="cities__no-places">
         <div className="cities__status-wrapper tabs__content">
           <b className="cities__status">No places to stay available</b>
@@ -12,7 +12,7 @@ const MainEmpty = ({activeCity}) => {
         </div>
       </section>
       <div className="cities__right-section"/>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -20,4 +20,4 @@ MainEmpty.propTypes = {
   activeCity: citiesPropTypes,
 };
 
-export default MainEmpty;
+export default memo(MainEmpty);

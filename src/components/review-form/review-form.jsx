@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, Fragment} from "react";
 
 class ReviewForm extends PureComponent {
   constructor(props) {
@@ -31,7 +31,7 @@ class ReviewForm extends PureComponent {
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {ratingMark.map((item, i) => (
-            <React.Fragment key={item}>
+            <Fragment key={item}>
               <input className="form__rating-input visually-hidden" name="rating" defaultValue={item} id={`${item}-stars`} type="radio"
                 onChange={this._handleInputChange}
               />
@@ -40,7 +40,7 @@ class ReviewForm extends PureComponent {
                   <use xlinkHref="#icon-star"/>
                 </svg>
               </label>
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
         <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" />
