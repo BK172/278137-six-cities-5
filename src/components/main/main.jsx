@@ -13,7 +13,9 @@ class Main extends PureComponent {
   render() {
     const {offers, activeCity} = this.props;
 
-    if (!offers.length) return <MainEmpty activeCity={activeCity} />
+    if (!offers.length) {
+      return <MainEmpty activeCity={activeCity} />;
+    }
 
     return (
       <Fragment>

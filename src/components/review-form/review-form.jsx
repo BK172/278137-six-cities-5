@@ -24,15 +24,15 @@ class ReviewForm extends PureComponent {
 
   render() {
     const ratings = [{
-        mark: 5, title: `perfect`
-      },{
-        mark: 4, title: `good`
-      },{
-        mark: 3, title: `not bad`
-      },{
-        mark: 2, title: `badly`
-      },{
-        mark: 1, title: `terribly`
+      mark: 5, title: `perfect`
+    }, {
+      mark: 4, title: `good`
+    }, {
+      mark: 3, title: `not bad`
+    }, {
+      mark: 2, title: `badly`
+    }, {
+      mark: 1, title: `terribly`
     }];
 
     return (

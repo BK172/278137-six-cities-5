@@ -1,4 +1,6 @@
 import React, {Fragment, memo} from "react";
+import Header from "../header/header";
+import CitiesList from "../cities-list/cities-list";
 import {citiesPropTypes} from "../../app-prop-types";
 
 const MainEmpty = ({activeCity}) => {
