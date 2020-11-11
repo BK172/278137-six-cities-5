@@ -35,12 +35,12 @@ const SortingOptions = ({
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${clsx(isToggleActive && `places__options--opened`)}`}>
+      <ul className={clsx(`places__options places__options--custom`, {'places__options--opened': isToggleActive})}>
         {
           Object.keys(SortingTypes).map((item) => (
             <li
               key={item}
-              className={`places__option ${clsx(sortingType === item && `places__option--active`)}`}
+              className={clsx(`places__option`, {'places__option--active': sortingType === item})}
               tabIndex={0}
               onClick={() => onListItemClick(item)}
             >

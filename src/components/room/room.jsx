@@ -39,7 +39,7 @@ const Room = ({offer, offers, reviews}) => {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className={`place-card__bookmark-button ${clsx(offer.favorite && `place-card__bookmark-button--active`)} button`} type="button">
+                  <button className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})} type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -81,7 +81,7 @@ const Room = ({offer, offers, reviews}) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={`property__avatar-wrapper ${clsx(offer.owner.super && `property__avatar-wrapper--pro`)} user__avatar-wrapper`}>
+                    <div className={clsx(`property__avatar-wrapper user__avatar-wrapper`, {'property__avatar-wrapper--pro': offer.owner.super})}>
                       <img className="property__avatar user__avatar" src={offer.owner.avatar} width={74} height={74} alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
