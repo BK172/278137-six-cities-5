@@ -66,20 +66,14 @@ class Map extends PureComponent {
     this.markers = [];
   }
 
-  _getMapClass(mapType) {
-    switch (mapType) {
-      case `cities`:
-        return `cities__map`;
-      case `property`:
-        return `property__map`;
-    }
-
-    return ``;
-  }
-
   render() {
     const {mapType} = this.props;
-    return <section id="map" className={`${this._getMapClass(mapType)} map`}></section>;
+    const mapClasses = {
+      cities: `cities__map`,
+      property: `property__map`
+    };
+
+    return <section id="map" className={`${mapClasses[mapType]} map`}></section>;
   }
 }
 

@@ -10,7 +10,7 @@ const initialState = {
   activeOffer: null,
   cities,
   activeCity: cities[0],
-  activeSortingType: `popular`,
+  sortingType: `popular`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,11 +21,11 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_SORTING_TYPE:
       return extend(state, {
-        activeSortingType: action.payload
+        sortingType: action.payload
       });
     case ActionType.SORT_OFFERS:
       return extend(state, {
-        offers: getSortedOffers(offers, state.activeSortingType),
+        offers: action.payload
       });
     case ActionType.SET_ACTIVE_OFFER:
       return extend(state, {

@@ -3,20 +3,20 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {citiesPropTypes} from "../../app-prop-types";
+import clsx from "clsx";
 
 const CitiesList = ({cities, activeCity, changeCity}) => {
   const onLocationClick = (evt, city) => {
     evt.preventDefault();
     changeCity(city);
   };
-  const getTabsItemActiveClass = (city) => activeCity.name === city.name ? `tabs__item--active` : ``;
 
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
         <li className="locations__item" key={city.cityId}>
           <a
-            className={`locations__item-link tabs__item ${getTabsItemActiveClass(city)}`}
+            className={clsx(`locations__item-link tabs__item`, {'tabs__item--active': activeCity.name === city.name})}
             href="#"
             onClick={(evt) => onLocationClick(evt, city)}
           >
