@@ -5,10 +5,10 @@ import {ActionCreator} from "../../store/action";
 import {citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
-const CitiesList = ({cities, activeCity, changeCity}) => {
+const CitiesList = ({cities, activeCity, setActiveCity}) => {
   const onLocationClick = (evt, city) => {
     evt.preventDefault();
-    changeCity(city);
+    setActiveCity(city);
   };
 
   return (
@@ -31,7 +31,7 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
   activeCity: citiesPropTypes,
-  changeCity: PropTypes.func.isRequired,
+  setActiveCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -40,8 +40,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  setActiveCity(activeCity) {
+    dispatch(ActionCreator.setActiveCity(activeCity));
   },
 });
 
