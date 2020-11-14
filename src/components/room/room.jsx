@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
-import OfferList from "../offer-list/offer-list";
+import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
@@ -106,7 +106,7 @@ const Room = ({offer, offers, reviews}) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OfferList offers={offers.slice(0, 3)} />
+                <OffersList offers={offers.slice(0, 3)} />
               </div>
             </section>
           </div>

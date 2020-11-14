@@ -1,11 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../store/action";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import OfferCard from "../offer-card/offer-card";
 import {offerPropTypes, activeOfferPropTypes} from "../../app-prop-types";
 
-class OfferList extends PureComponent {
+class OffersList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,7 +45,7 @@ class OfferList extends PureComponent {
   }
 }
 
-OfferList.propTypes = {
+OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeOffer: activeOfferPropTypes,
   setActiveOffer: PropTypes.func.isRequired,
@@ -62,5 +62,5 @@ const mapDispatchToProps = ((dispatch) => ({
   },
 }));
 
-export {OfferList};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferList);
+export {OffersList};
+export default connect(mapStateToProps, mapDispatchToProps)(OffersList);
