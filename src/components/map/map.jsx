@@ -87,9 +87,9 @@ Map.propTypes = {
   activeOffer: activeOfferPropTypes,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  activeOffer: state.activeOffer,
+const mapStateToProps = ({PROCESS}) => ({
+  activeCity: PROCESS.activeCity,
+  activeOffer: PROCESS.activeOffer,
 });
 
 export {Map};

@@ -40,8 +40,8 @@ App.propTypes = {
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({DATA}) => ({
+  offers: DATA.offers,
 });
 
 export {App};

@@ -68,11 +68,11 @@ SortingOptions.propTypes = {
   onToggleChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  sortingType: state.sortingType,
-  changeSortingType: state.changeSortingType,
-  sortOffers: state.sortOffers,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: DATA.offers,
+  sortingType: PROCESS.sortingType,
+  changeSortingType: PROCESS.changeSortingType,
+  sortOffers: DATA.sortOffers,
 });
 
 const mapDispatchToProps = ((dispatch) => ({

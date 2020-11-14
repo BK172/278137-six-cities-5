@@ -51,9 +51,9 @@ OffersList.propTypes = {
   setActiveOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeOffer: state.activeOffer,
-  setActiveOffer: state.setActiveOffer,
+const mapStateToProps = ({PROCESS}) => ({
+  activeOffer: PROCESS.activeOffer,
+  setActiveOffer: PROCESS.setActiveOffer,
 });
 
 const mapDispatchToProps = ((dispatch) => ({

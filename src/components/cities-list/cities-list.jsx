@@ -34,9 +34,9 @@ CitiesList.propTypes = {
   setActiveCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  cities: DATA.cities,
+  activeCity: PROCESS.activeCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({

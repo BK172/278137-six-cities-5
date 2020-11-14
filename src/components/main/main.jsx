@@ -58,9 +58,9 @@ Main.propTypes = {
   activeCity: citiesPropTypes,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  activeCity: state.activeCity,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: DATA.offers,
+  activeCity: PROCESS.activeCity,
 });
 
 export {Main};
