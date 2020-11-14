@@ -18,13 +18,15 @@ const store = createStore(
     )
 );
 
-store.dispatch(fetchOffersList());
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        reviews={reviews}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchOffersList()),
+]).then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          reviews={reviews}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});
