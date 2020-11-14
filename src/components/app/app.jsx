@@ -6,6 +6,7 @@ import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
+import {getSortedOffers} from "../../utils";
 
 const App = ({offers, reviews}) => {
   return (
@@ -20,7 +21,7 @@ const App = ({offers, reviews}) => {
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route exact path="/offer/:id"
+        <Route exact path="/offer/:id">
           render={({match}) => (
             <Room
               offer={offers.find((item) => item.offerId === match.params.id)}
@@ -28,7 +29,7 @@ const App = ({offers, reviews}) => {
               reviews={reviews}
             />
           )}
-        />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
@@ -39,4 +40,9 @@ App.propTypes = {
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: getSortedOffers(state.offers),
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

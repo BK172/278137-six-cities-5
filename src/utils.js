@@ -1,3 +1,7 @@
+export const APIRoute = {
+  OFFERS: `/hotels`,
+};
+
 const ratingToInteger = (rating) => Math.round(rating);
 
 export const getElementWidthByRating = (rating) => ratingToInteger(rating) * 20;
