@@ -1,5 +1,3 @@
-export const initialSortingType = `popular`;
-
 export const APIRoute = {
   OFFERS: `/hotels`,
 };
@@ -10,6 +8,7 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const initialSortingType = `popular`;
 export const SortingTypes = {
   'popular': `Popular`,
   'to-high': `Price: low to high`,
@@ -17,7 +16,7 @@ export const SortingTypes = {
   'top-rated': `Top rated first`
 };
 
-export const getSortedOffers = (offers, sortingType) => {
+export const getSortedOffers = (offers, sortingType = initialSortingType) => {
   switch (sortingType) {
     case `popular`:
       return offers.slice();
@@ -33,7 +32,7 @@ export const getSortedOffers = (offers, sortingType) => {
 };
 
 export const getCitiesFromOffersList = (offers) => {
-  let cities = offers.reduce((acc, item) => {
+  return offers.reduce((acc, item) => {
     if (acc.map[item.city.name]) {
       return acc;
     }
@@ -47,8 +46,6 @@ export const getCitiesFromOffersList = (offers) => {
     cities: []
   })
   .cities;
-
-  return cities;
 };
 
 export const offersAdapter = (offer) => {

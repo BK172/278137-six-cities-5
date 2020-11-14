@@ -9,7 +9,9 @@ import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
-const Room = ({offer, offers, reviews}) => {
+const Room = ({matchId, offers, reviews}) => {
+  const offer = offers.find((item) => item.offerId === parseInt(matchId, 10));
+
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -115,7 +117,7 @@ const Room = ({offer, offers, reviews}) => {
 };
 
 Room.propTypes = {
-  offer: offerPropTypes,
+  matchId: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
