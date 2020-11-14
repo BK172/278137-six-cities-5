@@ -8,8 +8,8 @@ import "leaflet/dist/leaflet.css";
 class Map extends PureComponent {
   componentDidMount() {
     const {offers, activeCity} = this.props;
-    const mapCenter = activeCity.coordinates;
-    const zoom = 12;
+    const center = activeCity.coordinates;
+    const zoom = activeCity.zoom;
 
     this.markers = [];
     this.icon = leaflet.icon({
@@ -21,7 +21,7 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     this.map = leaflet.map(`map`, {
-      center: mapCenter,
+      center,
       zoom,
       zoomControl: false,
       marker: true
@@ -34,14 +34,17 @@ class Map extends PureComponent {
       .addTo(this.map);
 
     this._addMarkers(offers);
-    this.map.setView(mapCenter, zoom);
+    this.map.setView(center, zoom);
   }
 
   componentDidUpdate() {
-    const {offers} = this.props;
+    const {offers, activeCity} = this.props;
+    const center = activeCity.coordinates;
+    const zoom = activeCity.zoom;
 
     this._removeMarkers();
     this._addMarkers(offers);
+    this.map.setView(center, zoom);
   }
 
   _addMarkers(offers) {
