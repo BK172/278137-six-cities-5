@@ -14,7 +14,7 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
-        <li className="locations__item" key={city.cityId}>
+        <li className="locations__item" key={city.name}>
           <a
             className={clsx(`locations__item-link tabs__item`, {'tabs__item--active': activeCity.name === city.name})}
             href="#"

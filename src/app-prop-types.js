@@ -1,11 +1,18 @@
 import PropTypes from "prop-types";
 import moment from "moment";
 
-export const offerPropTypes = PropTypes.shape({
-  offerId: PropTypes.string.isRequired,
-  favorite: PropTypes.bool.isRequired,
-  city: PropTypes.string.isRequired,
+export const citiesPropTypes = PropTypes.shape({
+  name: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
+}).isRequired;
+
+export const offerPropTypes = PropTypes.shape({
+  offerId: PropTypes.number.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  city: citiesPropTypes,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
@@ -13,15 +20,16 @@ export const offerPropTypes = PropTypes.shape({
   type: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   photos: PropTypes.arrayOf(PropTypes.string).isRequired,
-  description: PropTypes.arrayOf(PropTypes.string).isRequired,
-  bedrooms: PropTypes.string.isRequired,
-  guests: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  bedrooms: PropTypes.number.isRequired,
+  guests: PropTypes.number.isRequired,
   facilities: PropTypes.arrayOf(PropTypes.string).isRequired,
   owner: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     super: PropTypes.bool.isRequired
-  })
+  }),
 }).isRequired;
 
 export const reviewPropTypes = PropTypes.shape({
@@ -40,12 +48,6 @@ export const reviewPropTypes = PropTypes.shape({
 
     return null;
   },
-}).isRequired;
-
-export const citiesPropTypes = PropTypes.shape({
-  cityId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
 }).isRequired;
 
 export const activeOfferPropTypes = PropTypes.oneOfType([

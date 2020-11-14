@@ -1,11 +1,16 @@
 import {ActionType} from "./action";
-import {extend} from "../utils";
+import {extend, initialSortingType} from "../utils";
 
 const initialState = {
   offers: [],
   activeOffer: null,
-  activeCity: ``,
-  sortingType: `popular`,
+  cities: [],
+  activeCity: {
+    name: `a`,
+    coordinates: [1, 1],
+    zoom: 14,
+  },
+  sortingType: initialSortingType,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,9 +31,13 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeOffer: action.payload
       });
-    case ActionType.LOAD_OFFERS:
+    case ActionType.GET_OFFERS:
       return extend(state, {
         offers: action.payload
+      });
+    case ActionType.GET_CITIES:
+      return extend(state, {
+        cities: action.payload
       });
   }
 

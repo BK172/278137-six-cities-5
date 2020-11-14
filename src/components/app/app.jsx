@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
-import {getSortedOffers} from "../../utils";
 
 const App = ({offers, reviews}) => {
   return (
@@ -21,15 +21,15 @@ const App = ({offers, reviews}) => {
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route exact path="/offer/:id">
+        <Route exact path="/offer/:id"
           render={({match}) => (
             <Room
-              offer={offers.find((item) => item.offerId === match.params.id)}
+              offer={offers.find((item) => item.offerId === parseInt(match.params.id, 10))}
               offers={offers}
               reviews={reviews}
             />
           )}
-        </Route>
+        />
       </Switch>
     </BrowserRouter>
   );
@@ -41,7 +41,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getSortedOffers(state.offers),
+  offers: state.offers,
 });
 
 export {App};

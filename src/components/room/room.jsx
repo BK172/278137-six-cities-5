@@ -58,10 +58,10 @@ const Room = ({offer, offers, reviews}) => {
                     {offer.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {offer.bedrooms}
+                    {`${offer.bedrooms} Bedrooms`}
                   </li>
                   <li className="property__feature property__feature--adults">
-                    {offer.guests}
+                    {`Max ${offer.guests} adults`}
                   </li>
                 </ul>
                 <div className="property__price">
@@ -89,9 +89,7 @@ const Room = ({offer, offers, reviews}) => {
                     </span>
                   </div>
                   <div className="property__description">
-                    {offer.description.map((item) => (
-                      <p key={item} className="property__text">{item}</p>
-                    ))}
+                    {offer.description}
                   </div>
                 </div>
                 <section className="property__reviews reviews">
