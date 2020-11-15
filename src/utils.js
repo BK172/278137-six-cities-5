@@ -11,6 +11,11 @@ export const APIRoute = {
   OFFERS: `/hotels`,
 };
 
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const getElementWidthByRating = (rating) => Math.round(rating) * 20;
 
 export const extend = (a, b) => {
