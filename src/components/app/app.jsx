@@ -2,27 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
+import PrivateRoute from "../private-route/private-route";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import {getFilteredOffers} from "../../store/selectors";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
+import {AppRoute} from "../../utils";
 
 const App = ({offers, reviews}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.MAIN}>
           <Main />
         </Route>
-        <Route exact path="/login">
+        <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
-        <Route exact path="/favorites">
+        <PrivateRoute exact path={AppRoute.FAVORITES}>
           <Favorites />
-        </Route>
-        <Route exact path="/offer/:id"
+        </PrivateRoute>
+        <Route
+          exact
+          path={AppRoute.ROOM}
           render={({match}) => (
             <Room
               offerId={match.params.id}

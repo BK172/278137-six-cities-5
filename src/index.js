@@ -6,13 +6,13 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import rootReducer from "./store/reducers/root-reducer";
 import App from "./components/app/app";
-import {fetchOffersList} from "./store/api-actions";
+import {fetchOffersList, checkAuth} from "./store/api-actions";
 import reviews from "./mocks/reviews";
-import {requireAuthorization} from "./action";
-import {AuthorizationStatus} from "../utils";
+import {requireAuthorization} from "./store/action";
+import {AuthorizationStatus} from "./utils";
 
 const api = createAPI(
-  () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
 const store = createStore(
