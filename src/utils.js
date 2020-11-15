@@ -16,21 +16,6 @@ export const SortingTypes = {
   'top-rated': `Top rated first`
 };
 
-export const getSortedOffers = (offers, sortingType = initialSortingType) => {
-  switch (sortingType) {
-    case `popular`:
-      return offers.slice();
-    case `to-high`:
-      return offers.slice().sort((a, b) => a.price - b.price);
-    case `to-low`:
-      return offers.slice().sort((a, b) => b.price - a.price);
-    case `top-rated`:
-      return offers.slice().sort((a, b) => b.rating - a.rating);
-  }
-
-  return offers;
-};
-
 export const getCitiesFromOffersList = (offers) => {
   return offers.reduce((acc, item) => {
     if (acc.map[item.city.name]) {

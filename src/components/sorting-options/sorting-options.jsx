@@ -4,13 +4,10 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {ActionCreator} from "../../store/action";
-import {offerPropTypes} from "../../app-prop-types";
-import {SortingTypes, getSortedOffers} from "../../utils";
+import {SortingTypes} from "../../utils";
 import clsx from "clsx";
 
 const SortingOptions = ({
-  offers,
-  sortOffers,
   sortingType,
   changeSortingType,
   isToggleActive,
@@ -19,7 +16,6 @@ const SortingOptions = ({
   const onListItemClick = (filter) => {
     onToggleChange(false);
     changeSortingType(filter);
-    sortOffers(getSortedOffers(offers, filter));
   };
 
   return (
@@ -60,27 +56,20 @@ const SortingOptions = ({
 };
 
 SortingOptions.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   sortingType: PropTypes.string.isRequired,
   changeSortingType: PropTypes.func.isRequired,
-  sortOffers: PropTypes.func.isRequired,
   isToggleActive: PropTypes.bool.isRequired,
   onToggleChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  offers: DATA.offers,
+const mapStateToProps = ({PROCESS}) => ({
   sortingType: PROCESS.sortingType,
   changeSortingType: PROCESS.changeSortingType,
-  sortOffers: DATA.sortOffers,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
   changeSortingType(sortingType) {
     dispatch(ActionCreator.changeSortingType(sortingType));
-  },
-  sortOffers(offers) {
-    dispatch(ActionCreator.sortOffers(offers));
   },
 }));
 

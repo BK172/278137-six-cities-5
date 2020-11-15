@@ -5,7 +5,6 @@ export const ActionType = {
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   GET_CITIES: `GET_CITIES`,
   GET_OFFERS: `GET_OFFERS`,
-  // GET_INITIAL_OFFERS: `GET_INITIAL_OFFERS`,
 };
 
 export const ActionCreator = {
@@ -33,8 +32,4 @@ export const ActionCreator = {
     type: ActionType.GET_OFFERS,
     payload: offers
   }),
-  // getInitialOffers: (initalOffers) => ({
-  //   type: ActionType.GET_INITIAL_OFFERS,
-  //   payload: initalOffers
-  // }),
 };

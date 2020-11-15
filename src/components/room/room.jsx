@@ -33,7 +33,7 @@ const Room = ({matchId, offers, reviews}) => {
             <div className="property__container container">
               <div className="property__wrapper">
                 {offer.premium && (
-                  <div className="place-card__mark">
+                  <div className="property__mark">
                     <span>Premium</span>
                   </div>
                 )}
@@ -41,7 +41,7 @@ const Room = ({matchId, offers, reviews}) => {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})} type="button">
+                  <button className={clsx(`property__bookmark-button button`, {'property__bookmark-button--active': offer.favorite})} type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
