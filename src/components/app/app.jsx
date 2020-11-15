@@ -6,6 +6,7 @@ import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
+import {getFilteredOffers} from "../../store/selectors";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 
 const App = ({offers, reviews}) => {
@@ -40,8 +41,8 @@ App.propTypes = {
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  offers: DATA.offers,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: getFilteredOffers({DATA, PROCESS}),
 });
 
 export {App};

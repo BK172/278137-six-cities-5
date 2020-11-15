@@ -7,6 +7,7 @@ import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingOptions from "../sorting-options/sorting-options";
 import Map from "../map/map";
+import {getFilteredOffers} from "../../store/selectors";
 import {offerPropTypes, citiesPropTypes} from "../../app-prop-types";
 
 class Main extends PureComponent {
@@ -59,7 +60,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = ({DATA, PROCESS}) => ({
-  offers: DATA.offers,
+  offers: getFilteredOffers({DATA, PROCESS}),
   activeCity: PROCESS.activeCity,
 });
 

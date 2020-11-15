@@ -10,7 +10,7 @@ import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
 const Room = ({matchId, offers, reviews}) => {
-  const offer = offers.find((item) => item.offerId === parseInt(matchId, 10));
+  const offer = offers.find((item) => item.offerId === parseInt(matchId, 10) && item);
 
   return (
     <Fragment>
