@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
-import {ActionCreator} from "../../store/action";
+import {changeSortingType} from "../../store/action";
 import {SortingTypes} from "../../utils";
 import clsx from "clsx";
 
 const SortingOptions = ({
   sortingType,
-  changeSortingType,
+  changeSortingTypeAction,
   isToggleActive,
   onToggleChange
 }) => {
   const onListItemClick = (filter) => {
     onToggleChange(false);
-    changeSortingType(filter);
+    changeSortingTypeAction(filter);
   };
 
   return (
@@ -51,19 +51,19 @@ const SortingOptions = ({
 
 SortingOptions.propTypes = {
   sortingType: PropTypes.string.isRequired,
-  changeSortingType: PropTypes.func.isRequired,
+  changeSortingTypeAction: PropTypes.func.isRequired,
   isToggleActive: PropTypes.bool.isRequired,
   onToggleChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({PROCESS}) => ({
   sortingType: PROCESS.sortingType,
-  changeSortingType: PROCESS.changeSortingType,
+  changeSortingTypeAction: PROCESS.changeSortingTypeAction,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  changeSortingType(sortingType) {
-    dispatch(ActionCreator.changeSortingType(sortingType));
+  changeSortingTypeAction(sortingType) {
+    dispatch(changeSortingType(sortingType));
   },
 }));
 

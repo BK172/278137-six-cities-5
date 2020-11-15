@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setActiveOffer} from "../../store/action";
 import OfferCard from "../offer-card/offer-card";
 import {offerPropTypes, activeOfferPropTypes} from "../../app-prop-types";
 
@@ -14,18 +14,18 @@ class OffersList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const {setActiveOffer} = this.props;
-    setActiveOffer(null);
+    const {setActiveOfferAction} = this.props;
+    setActiveOfferAction(null);
   }
 
   _handleOfferCardOver(hoveredOffer) {
-    const {setActiveOffer} = this.props;
-    setActiveOffer(hoveredOffer);
+    const {setActiveOfferAction} = this.props;
+    setActiveOfferAction(hoveredOffer);
   }
 
   _handleOfferCardOut() {
-    const {setActiveOffer} = this.props;
-    setActiveOffer(null);
+    const {setActiveOfferAction} = this.props;
+    setActiveOfferAction(null);
   }
 
   render() {
@@ -48,17 +48,17 @@ class OffersList extends PureComponent {
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   activeOffer: activeOfferPropTypes,
-  setActiveOffer: PropTypes.func.isRequired,
+  setActiveOfferAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({PROCESS}) => ({
   activeOffer: PROCESS.activeOffer,
-  setActiveOffer: PROCESS.setActiveOffer,
+  setActiveOfferAction: PROCESS.setActiveOfferAction,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  setActiveOffer(activeOffer) {
-    dispatch(ActionCreator.setActiveOffer(activeOffer));
+  setActiveOfferAction(activeOffer) {
+    dispatch(setActiveOffer(activeOffer));
   },
 }));
 

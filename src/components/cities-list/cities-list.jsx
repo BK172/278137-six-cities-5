@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setActiveCity} from "../../store/action";
 import {citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
-const CitiesList = ({cities, activeCity, setActiveCity}) => {
+const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
   const onLocationClick = (evt, city) => {
     evt.preventDefault();
-    setActiveCity(city);
+    setActiveCityAction(city);
   };
 
   return (
@@ -31,7 +31,7 @@ const CitiesList = ({cities, activeCity, setActiveCity}) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
   activeCity: citiesPropTypes,
-  setActiveCity: PropTypes.func.isRequired,
+  setActiveCityAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({DATA, PROCESS}) => ({
@@ -40,8 +40,8 @@ const mapStateToProps = ({DATA, PROCESS}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveCity(activeCity) {
-    dispatch(ActionCreator.setActiveCity(activeCity));
+  setActiveCityAction(activeCity) {
+    dispatch(setActiveCity(activeCity));
   },
 });
 
