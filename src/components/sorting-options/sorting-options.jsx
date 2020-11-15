@@ -45,12 +45,6 @@ const SortingOptions = ({
           ))
         }
       </ul>
-      {/* <select class="places__sorting-type" id="places-sorting">
-        <option class="places__option" value="popular" selected="">Popular</option>
-        <option class="places__option" value="to-high">Price: low to high</option>
-        <option class="places__option" value="to-low">Price: high to low</option>
-        <option class="places__option" value="top-rated">Top rated first</option>
-      </select> */}
     </form>
   );
 };
