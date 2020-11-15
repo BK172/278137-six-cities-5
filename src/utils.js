@@ -9,6 +9,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   OFFERS: `/hotels`,
+  LOGIN: `/login`,
 };
 
 export const AuthorizationStatus = {
@@ -35,14 +36,18 @@ export const getCitiesFromOffersList = (offers) => {
   return _.uniqWith(cities, _.isEqual);
 };
 
+export const citiesAdapter = (city) => {
+  return {
+    name: city.name,
+    coordinates: [city.location.latitude, city.location.longitude],
+    zoom: city.location.zoom,
+  };
+};
+
 export const offersAdapter = (offer) => {
   return {
     bedrooms: offer.bedrooms,
-    city: {
-      name: offer.city.name,
-      coordinates: [offer.city.location.latitude, offer.city.location.longitude],
-      zoom: offer.city.location.zoom,
-    },
+    city: citiesAdapter(offer.city),
     description: offer.description,
     facilities: offer.goods,
     owner: {
@@ -63,13 +68,5 @@ export const offersAdapter = (offer) => {
     rating: offer.rating,
     title: offer.title,
     type: offer.type,
-  };
-};
-
-export const citiesAdapter = (city) => {
-  return {
-    name: city.name,
-    coordinates: [city.location.latitude, city.location.longitude],
-    zoom: city.location.zoom,
   };
 };
