@@ -1,4 +1,4 @@
-import {getOffers, getCities, setActiveCity, requireAuthorization, getAuthInfo} from "./action";
+import {getOffers, getCities, setActiveCity, requireAuthorization, getAuthInfo, redirectToRoute} from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus, getCitiesFromOffersList, offersAdapter, citiesAdapter, ResponseType, HttpCode} from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -45,6 +45,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
         return response;
       }
     })
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
     .catch((err) => {
       throw err;
     })

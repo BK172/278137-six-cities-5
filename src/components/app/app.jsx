@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
+import browserHistory from "../../browser-history";
 import {connect} from "react-redux";
 import PrivateRoute from "../private-route/private-route";
 import Main from "../main/main";
@@ -13,7 +14,7 @@ import {AppRoute} from "../../utils";
 
 const App = ({offers, reviews}) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <Main />

@@ -7,6 +7,7 @@ export const ActionType = {
   GET_OFFERS: `GET_OFFERS`,
   GET_AUTH_INFO: `GET_AUTH_INFO`,
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const changeSortingType = (sortingType) => ({
@@ -47,4 +48,9 @@ export const getAuthInfo = (authInfo) => ({
 export const requireAuthorization = (status) => ({
   type: ActionType.REQUIRE_AUTHORIZATION,
   payload: status,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
 });
