@@ -1,5 +1,5 @@
-import {getOffers, getCities, setActiveCity, requireAuthorization} from "./action";
-import {APIRoute, AuthorizationStatus, getCitiesFromOffersList, offersAdapter, citiesAdapter} from "../utils";
+import {getOffers, getCities, setActiveCity, requireAuthorization, getAuthInfo} from "./action";
+import {APIRoute, AppRoute, AuthorizationStatus, getCitiesFromOffersList, offersAdapter, citiesAdapter, ResponseType, HttpCode} from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
@@ -18,15 +18,33 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(getAuthInfo(response.data));
+
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
     .catch((err) => {
       throw err;
     })
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+  api.post(APIRoute.LOGIN, {email, password})
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(getAuthInfo(response.data));
+
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
     .catch((err) => {
       throw err;
     })

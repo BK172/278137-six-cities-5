@@ -5,6 +5,7 @@ export const ActionType = {
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   GET_CITIES: `GET_CITIES`,
   GET_OFFERS: `GET_OFFERS`,
+  GET_AUTH_INFO: `GET_AUTH_INFO`,
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
 };
 
@@ -36,6 +37,11 @@ export const getCities = (cities) => ({
 export const getOffers = (offers) => ({
   type: ActionType.GET_OFFERS,
   payload: offers
+});
+
+export const getAuthInfo = (authInfo) => ({
+  type: ActionType.GET_AUTH_INFO,
+  payload: authInfo
 });
 
 export const requireAuthorization = (status) => ({

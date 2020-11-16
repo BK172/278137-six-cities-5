@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 import _ from "lodash";
+=======
+export const ResponseType = {
+  SUCCESS: `SUCCESS`,
+  ERROR: `ERROR`,
+};
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+};
+>>>>>>> проверка авторизации
 
 export const AppRoute = {
   MAIN: `/`,
