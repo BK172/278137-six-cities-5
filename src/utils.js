@@ -1,3 +1,12 @@
+import _ from "lodash";
+
+export const AppRoute = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  ROOM: `/offer/:id`,
+};
+
 export const APIRoute = {
   OFFERS: `/hotels`,
 };
@@ -17,20 +26,8 @@ export const SortingTypes = {
 };
 
 export const getCitiesFromOffersList = (offers) => {
-  return offers.reduce((acc, item) => {
-    if (acc.map[item.city.name]) {
-      return acc;
-    }
-
-    acc.map[item.city.name] = true;
-    acc.cities.push(item.city);
-
-    return acc;
-  }, {
-    map: {},
-    cities: []
-  })
-  .cities;
+	const cities = offers.map((offer) => offer.city);
+	return _.uniqWith(cities, _.isEqual);
 };
 
 export const offersAdapter = (offer) => {

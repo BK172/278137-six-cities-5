@@ -25,7 +25,7 @@ const App = ({offers, reviews}) => {
         <Route exact path="/offer/:id"
           render={({match}) => (
             <Room
-              matchId={match.params.id}
+              offerId={match.params.id}
               offers={offers}
               reviews={reviews}
             />
