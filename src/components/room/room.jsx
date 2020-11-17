@@ -132,7 +132,7 @@ const Room = ({offerId, offers, reviews}) => {
 };
 
 Room.propTypes = {
-  matchId: PropTypes.string.isRequired,
+  offerId: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };

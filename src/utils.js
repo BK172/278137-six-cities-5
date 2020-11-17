@@ -26,8 +26,8 @@ export const SortingTypes = {
 };
 
 export const getCitiesFromOffersList = (offers) => {
-	const cities = offers.map((offer) => offer.city);
-	return _.uniqWith(cities, _.isEqual);
+  const cities = offers.map((offer) => offer.city);
+  return _.uniqWith(cities, _.isEqual);
 };
 
 export const offersAdapter = (offer) => {
