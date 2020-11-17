@@ -1,5 +1,14 @@
 import _ from "lodash";
 
+export const ResponseType = {
+  SUCCESS: `SUCCESS`,
+  ERROR: `ERROR`,
+};
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+};
+
 export const AppRoute = {
   MAIN: `/`,
   LOGIN: `/login`,
@@ -9,6 +18,12 @@ export const AppRoute = {
 
 export const APIRoute = {
   OFFERS: `/hotels`,
+  LOGIN: `/login`,
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };
 
 export const getElementWidthByRating = (rating) => Math.round(rating) * 20;
@@ -30,14 +45,18 @@ export const getCitiesFromOffersList = (offers) => {
   return _.uniqWith(cities, _.isEqual);
 };
 
+export const citiesAdapter = (city) => {
+  return {
+    name: city.name,
+    coordinates: [city.location.latitude, city.location.longitude],
+    zoom: city.location.zoom,
+  };
+};
+
 export const offersAdapter = (offer) => {
   return {
     bedrooms: offer.bedrooms,
-    city: {
-      name: offer.city.name,
-      coordinates: [offer.city.location.latitude, offer.city.location.longitude],
-      zoom: offer.city.location.zoom,
-    },
+    city: citiesAdapter(offer.city),
     description: offer.description,
     facilities: offer.goods,
     owner: {
@@ -58,13 +77,5 @@ export const offersAdapter = (offer) => {
     rating: offer.rating,
     title: offer.title,
     type: offer.type,
-  };
-};
-
-export const citiesAdapter = (city) => {
-  return {
-    name: city.name,
-    coordinates: [city.location.latitude, city.location.longitude],
-    zoom: city.location.zoom,
   };
 };

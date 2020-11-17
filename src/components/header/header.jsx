@@ -1,7 +1,12 @@
-import React, {memo} from "react";
+import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {AuthorizationStatus, AppRoute} from "../../utils";
 
-const Header = () => {
+const Header = ({authorizationStatus, avatar, email}) => {
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+
   return (
     <header className="header">
       <div className="container">
@@ -14,10 +19,19 @@ const Header = () => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper" />
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </a>
+                <Link
+                  className="header__nav-link header__nav-link--profile"
+                  to={isAuthorized ? AppRoute.FAVORITES : AppRoute.LOGIN}
+                >
+                  <div
+                    className="header__avatar-wrapper user__avatar-wrapper"
+                    style={isAuthorized ? {backgroundImage: `url(${avatar})`} : undefined}
+                  >
+                  </div>
+                  <span className="header__user-name user__name">
+                    {isAuthorized ? email : `Sign in`}
+                  </span>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -27,4 +41,17 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+Header.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = ({DATA, USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  avatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
+  email: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.email : ``,
+});
+
+export {Header};
+export default connect(mapStateToProps)(Header);
