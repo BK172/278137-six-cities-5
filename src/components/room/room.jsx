@@ -1,15 +1,32 @@
 import React, {Fragment} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Header from "../header/header";
-import OfferList from "../offer-list/offer-list";
+import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
-import {getElementWidthByRating} from "../../utils";
+import {getElementWidthByRating, AppRoute} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
-const Room = ({offer, offers, reviews}) => {
+const Room = ({offerId, offers, reviews}) => {
+  const offer = offers.find((item) => item.offerId === parseInt(offerId, 10) && item);
+
+  if (!offer) {
+    return (
+      <div style={{marginLeft: `20px`}}>
+        <h1>404</h1>
+        <p><b>Page not found</b></p>
+        <p>
+          <Link to={AppRoute.MAIN} style={{textDecoration: `underline`}}>
+            Go to main page
+          </Link>
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -31,7 +48,7 @@ const Room = ({offer, offers, reviews}) => {
             <div className="property__container container">
               <div className="property__wrapper">
                 {offer.premium && (
-                  <div className="place-card__mark">
+                  <div className="property__mark">
                     <span>Premium</span>
                   </div>
                 )}
@@ -39,7 +56,7 @@ const Room = ({offer, offers, reviews}) => {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})} type="button">
+                  <button className={clsx(`property__bookmark-button button`, {'property__bookmark-button--active': offer.favorite})} type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -58,10 +75,10 @@ const Room = ({offer, offers, reviews}) => {
                     {offer.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {offer.bedrooms}
+                    {`${offer.bedrooms} Bedrooms`}
                   </li>
                   <li className="property__feature property__feature--adults">
-                    {offer.guests}
+                    {`Max ${offer.guests} adults`}
                   </li>
                 </ul>
                 <div className="property__price">
@@ -89,9 +106,7 @@ const Room = ({offer, offers, reviews}) => {
                     </span>
                   </div>
                   <div className="property__description">
-                    {offer.description.map((item) => (
-                      <p key={item} className="property__text">{item}</p>
-                    ))}
+                    {offer.description}
                   </div>
                 </div>
                 <section className="property__reviews reviews">
@@ -106,7 +121,7 @@ const Room = ({offer, offers, reviews}) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OfferList offers={offers.slice(0, 3)} />
+                <OffersList offers={offers.slice(0, 3)} />
               </div>
             </section>
           </div>
@@ -117,7 +132,7 @@ const Room = ({offer, offers, reviews}) => {
 };
 
 Room.propTypes = {
-  offer: offerPropTypes,
+  offerId: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };

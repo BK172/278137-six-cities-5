@@ -5,16 +5,16 @@ import {ActionCreator} from "../../store/action";
 import {citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
-const CitiesList = ({cities, activeCity, changeCity}) => {
+const CitiesList = ({cities, activeCity, setActiveCity}) => {
   const onLocationClick = (evt, city) => {
     evt.preventDefault();
-    changeCity(city);
+    setActiveCity(city);
   };
 
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => (
-        <li className="locations__item" key={city.cityId}>
+        <li className="locations__item" key={city.name}>
           <a
             className={clsx(`locations__item-link tabs__item`, {'tabs__item--active': activeCity.name === city.name})}
             href="#"
@@ -31,17 +31,17 @@ const CitiesList = ({cities, activeCity, changeCity}) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
   activeCity: citiesPropTypes,
-  changeCity: PropTypes.func.isRequired,
+  setActiveCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  cities: DATA.cities,
+  activeCity: PROCESS.activeCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  setActiveCity(activeCity) {
+    dispatch(ActionCreator.setActiveCity(activeCity));
   },
 });
 

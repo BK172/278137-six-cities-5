@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
-import OfferList from "../offer-list/offer-list";
+import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingOptions from "../sorting-options/sorting-options";
 import Map from "../map/map";
+import {getFilteredOffers} from "../../store/selectors";
 import {offerPropTypes, citiesPropTypes} from "../../app-prop-types";
 
 class Main extends PureComponent {
@@ -38,7 +39,7 @@ class Main extends PureComponent {
                   <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
                   <SortingOptions />
                   <div className="cities__places-list places__list tabs__content">
-                    <OfferList offers={offers} />
+                    <OffersList offers={offers} />
                   </div>
                 </section>
                 <div className="cities__right-section">
@@ -58,9 +59,9 @@ Main.propTypes = {
   activeCity: citiesPropTypes,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  activeCity: state.activeCity,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: getFilteredOffers({DATA, PROCESS}),
+  activeCity: PROCESS.activeCity,
 });
 
 export {Main};
