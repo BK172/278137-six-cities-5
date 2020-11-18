@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 import Header from "../header/header";
 import OfferCard from "../offer-card/offer-card";
-import offers from "../../mocks/offers";
 
 const Favorites = () => {
   return (
@@ -26,13 +25,13 @@ const Favorites = () => {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.slice(0, 2).map((item) => (
+                    {/* {offers.slice(0, 2).map((item) => (
                       <OfferCard
                         key={item.offerId}
                         offer={item}
                         offerType={`favorite`}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </li>
                 <li className="favorites__locations-items">
@@ -44,13 +43,13 @@ const Favorites = () => {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.slice(2, 3).map((item) => (
+                    {/* {offers.slice(2, 3).map((item) => (
                       <OfferCard
                         key={item.offerId}
                         offer={item}
                         offerType={`favorite`}
                       />
-                    ))}
+                    ))} */}
                   </div>
                 </li>
               </ul>

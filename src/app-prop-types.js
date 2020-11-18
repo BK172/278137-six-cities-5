@@ -28,21 +28,22 @@ export const offerPropTypes = PropTypes.shape({
     id: PropTypes.number.isRequired,
     avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    super: PropTypes.bool.isRequired
+    isPro: PropTypes.bool.isRequired,
   }),
 }).isRequired;
 
 export const reviewPropTypes = PropTypes.shape({
-  reviewId: PropTypes.string.isRequired,
+  reviewId: PropTypes.number.isRequired,
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
+  isPro: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
   date(props, propName, componentName) {
     if (!moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
       return new Error(
-          `Invalid prop \`` + propName + `\` supplied to` +
-          ` \`` + componentName + `\`. Validation failed.`
+          `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Validation failed.`
       );
     }
 

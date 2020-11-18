@@ -1,11 +1,12 @@
 import {
+  setActiveCity,
   getOffers,
   getOfferById,
   getOffersNearBy,
   getCities,
-  setActiveCity,
-  requireAuthorization,
   getAuthInfo,
+  getReviews,
+  requireAuthorization,
   redirectToRoute
 } from "./action";
 import {
@@ -16,6 +17,7 @@ import {
   orderCitiesByList,
   offersAdapter,
   citiesAdapter,
+  reviewsAdapter,
   ResponseType,
   HttpCode
 } from "../utils";
@@ -94,6 +96,33 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       }
     })
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
+    .catch((err) => {
+      throw err;
+    })
+);
+
+
+export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.REVIEWS}/${offerId}`)
+    .then(({data}) => {
+      const reviews = data.map((review) => reviewsAdapter(review));
+      dispatch(getReviews(reviews));
+
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      throw err;
+    })
+);
+
+export const postReview = ({review: comment, rating, offerId}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
+    .then(({data}) => {
+      const reviews = data.map((review) => reviewsAdapter(review));
+      dispatch(getReviews(reviews));
+
+      return ResponseType.SUCCESS;
+    })
     .catch((err) => {
       throw err;
     })

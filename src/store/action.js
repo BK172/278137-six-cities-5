@@ -7,6 +7,7 @@ export const ActionType = {
   GET_OFFERS_NEARBY: `GET_OFFERS_NEARBY`,
   GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
   GET_AUTH_INFO: `GET_AUTH_INFO`,
+  GET_REVIEWS: `GET_REVIEWS`,
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
@@ -49,6 +50,11 @@ export const getOfferById = (offer) => ({
 export const getAuthInfo = (authInfo) => ({
   type: ActionType.GET_AUTH_INFO,
   payload: authInfo,
+});
+
+export const getReviews = (reviews) => ({
+  type: ActionType.GET_AUTH_INFO,
+  payload: reviews,
 });
 
 export const requireAuthorization = (status) => ({

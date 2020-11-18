@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import browserHistory from "../../browser-history";
 import PrivateRoute from "../private-route/private-route";
@@ -8,10 +7,9 @@ import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import PageNotFound from "../page-not-found/page-not-found";
-import {reviewPropTypes} from "../../app-prop-types";
 import {AppRoute} from "../../utils";
 
-const App = ({reviews}) => {
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -28,10 +26,7 @@ const App = ({reviews}) => {
           exact
           path={AppRoute.ROOM}
           render={({match}) => (
-            <Room
-              offerId={match.params.id}
-              reviews={reviews}
-            />
+            <Room offerId={match.params.id} />
           )}
         />
         <Route>
@@ -40,10 +35,6 @@ const App = ({reviews}) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
 export default App;

@@ -12,8 +12,6 @@ import {requireAuthorization} from "./store/action";
 import {redirect} from "./store/middlewares/redirect";
 import {AuthorizationStatus} from "./utils";
 
-import reviews from "./mocks/reviews";
-
 const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
@@ -32,9 +30,7 @@ Promise.all([
 ]).then(() => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          reviews={reviews}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

@@ -7,56 +7,44 @@ import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
 import PageNotFound from "../page-not-found/page-not-found";
-import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
+import {fetchOfferById, fetchOffersNearBy, fetchReviews} from "../../store/api-actions";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
 import clsx from "clsx";
-import _ from "lodash";
 
 class Room extends PureComponent {
-  // constructor (props) {
-  //   super(props);
-
-  //   this.state = {
-  //     offersNearBy: [],
-  //     currentOffer: {},
-  //   }
-  // }
-
   componentDidMount() {
-    const {offerId, getOfferByIdAction, getOffersNearByAction, currentOffer, offersNearBy} = this.props;
+    const {
+      offerId,
+      getOfferByIdAction,
+      getOffersNearByAction,
+      getReviewsAction
+    } = this.props;
+    // const {currentOffer, offersNearBy, reviews} = this.props;
 
-    // getOfferByIdAction(offerId);
-    // getOffersNearByAction(offerId);
+    getOfferByIdAction(offerId);
+    getOffersNearByAction(offerId);
+    getReviewsAction(offerId);
 
     // Promise.all([
-      getOfferByIdAction(offerId);
-      getOffersNearByAction(offerId);
+    //   getOfferByIdAction(offerId),
+    //   getOffersNearByAction(offerId),
+    //   getReviewsAction(offerId),
     // ]).then(() => {
-      // this.setState({currentOffer, offersNearBy});
+    //   console.log(`data loaded`);
+    //   console.log(`c`,offersNearBy);
+    //   console.log(`c`,currentOffer);
+    //   console.log(`c`,reviews);
     // });
   }
 
-  // componentDidUpdate() {
-  //   const {currentOffer, offersNearBy} = this.props;
-  //   this.setState({currentOffer, offersNearBy});
-  // }
-
   render() {
     const {offerId, offersNearBy, currentOffer: offer, reviews} = this.props;
-    // const {reviews} = this.props;
-    // const {offersNearBy, currentOffer: offer} = this.state;
+    console.log(`r`,offersNearBy);
+    console.log(`r`,offer);
+    console.log(`r`,reviews);
 
-    // console.log(offersNearBy);
-    // console.log(offer);
-
-    // console.log('st',this.state.offersNearBy);
-    // console.log('st',this.state.currentOffer);
-
-    // if (_.isEmpty(offersNearBy) || _.isEmpty(offer)) {
-    //   return <h1 style={{marginLeft: `20px`}}>Loading...</h1>
-    // } else
-    if (!offerId || !offersNearBy || !offer) {
+    if (!offerId || !offersNearBy || !offer || !reviews) {
       return <PageNotFound />;
     }
 
@@ -131,7 +119,7 @@ class Room extends PureComponent {
                   <div className="property__host">
                     <h2 className="property__host-title">Meet the host</h2>
                     <div className="property__host-user user">
-                      <div className={clsx(`property__avatar-wrapper user__avatar-wrapper`, {'property__avatar-wrapper--pro': offer.owner.super})}>
+                      <div className={clsx(`property__avatar-wrapper user__avatar-wrapper`, {'property__avatar-wrapper--pro': offer.owner.isPro})}>
                         <img className="property__avatar user__avatar" src={offer.owner.avatar} width={74} height={74} alt="Host avatar" />
                       </div>
                       <span className="property__user-name">
@@ -166,6 +154,7 @@ class Room extends PureComponent {
 }
 
 Room.propTypes = {
+  offerId: PropTypes.string.isRequired,
   offersNearBy: PropTypes.oneOfType([
     PropTypes.arrayOf(offerPropTypes),
     PropTypes.oneOf([null]).isRequired,
@@ -174,16 +163,19 @@ Room.propTypes = {
     offerPropTypes,
     PropTypes.oneOf([null]).isRequired,
   ]),
+  reviews: PropTypes.oneOfType([
+    reviewPropTypes,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
   getOfferByIdAction: PropTypes.func.isRequired,
   getOffersNearByAction: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  getReviewsAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({DATA}) => ({
   offersNearBy: DATA.offersNearBy,
   currentOffer: DATA.currentOffer,
-  getOfferByIdAction: PropTypes.func.isRequired,
-  getOffersNearByAction: PropTypes.func.isRequired,
+  reviews: DATA.reviews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -192,6 +184,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getOffersNearByAction(offerId) {
     dispatch(fetchOffersNearBy(offerId));
+  },
+  getReviewsAction(offerId) {
+    dispatch(fetchReviews(offerId));
   },
 });
 

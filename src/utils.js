@@ -28,6 +28,7 @@ export const AppRoute = {
 export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
+  REVIEWS: `/comments`,
 };
 
 export const AuthorizationStatus = {
@@ -54,7 +55,10 @@ export const orderCitiesByList = (cities) => {
 
   MarkupCitiesList.forEach((cityName) => {
     const city = cities.find((item) => item.name === cityName);
-    city && orderedCities.push(city);
+
+    if (city) {
+      orderedCities.push(city);
+    }
   });
 
   return orderedCities;
@@ -66,7 +70,7 @@ export const getCitiesFromOffersList = (offers) => {
 };
 
 export const citiesAdapter = (city) => {
-  return {
+  return city && {
     name: city.name,
     coordinates: [city.location.latitude, city.location.longitude],
     zoom: city.location.zoom,
@@ -74,7 +78,7 @@ export const citiesAdapter = (city) => {
 };
 
 export const offersAdapter = (offer) => {
-  return {
+  return offer && {
     bedrooms: offer.bedrooms,
     city: citiesAdapter(offer.city),
     description: offer.description,
@@ -83,7 +87,7 @@ export const offersAdapter = (offer) => {
       id: offer.host.id,
       avatar: offer.host.avatar_url,
       name: offer.host.name,
-      super: offer.host.is_pro,
+      isPro: offer.host.is_pro,
     },
     offerId: offer.id,
     photos: offer.images,
@@ -97,5 +101,18 @@ export const offersAdapter = (offer) => {
     rating: offer.rating,
     title: offer.title,
     type: offer.type,
+  };
+};
+
+export const reviewsAdapter = (review) => {
+  return review && {
+    reviewId: review.id,
+    avatar: review.user.avatar_url,
+    name: review.user.name,
+    rating: review.rating,
+    comment: review.comment,
+    isPro: review.user.is_pro,
+    date: review.date,
+    userId: review.user.id,
   };
 };

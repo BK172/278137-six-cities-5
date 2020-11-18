@@ -7,6 +7,7 @@ const initialState = {
   currentOffer: null,
   cities: [],
   authInfo: {},
+  reviews: null,
 };
 
 const appData = (state = initialState, action) => {
@@ -30,6 +31,10 @@ const appData = (state = initialState, action) => {
     case ActionType.GET_AUTH_INFO:
       return extend(state, {
         authInfo: action.payload
+      });
+    case ActionType.GET_REVIEWS:
+      return extend(state, {
+        reviews: action.payload
       });
   }
   return state;
