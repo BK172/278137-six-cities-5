@@ -1,12 +1,12 @@
 import React, {Fragment} from "react";
-import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
-import {getElementWidthByRating, AppRoute} from "../../utils";
+import PageNotFound from "../page-not-found/page-not-found";
+import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
@@ -14,17 +14,7 @@ const Room = ({offerId, offers, reviews}) => {
   const offer = offers.find((item) => item.offerId === parseInt(offerId, 10) && item);
 
   if (!offer) {
-    return (
-      <div style={{marginLeft: `20px`}}>
-        <h1>404</h1>
-        <p><b>Page not found</b></p>
-        <p>
-          <Link to={AppRoute.MAIN} style={{textDecoration: `underline`}}>
-            Go to main page
-          </Link>
-        </p>
-      </div>
-    );
+    return <PageNotFound />;
   }
 
   return (
