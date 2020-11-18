@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from "react";
+import React, {PureComponent, Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../header/header";
@@ -12,34 +12,51 @@ import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
 import clsx from "clsx";
 
-class Room extends PureComponent {
-  componentDidMount() {
-    const {
-      offerId,
-      getOfferByIdAction,
-      getOffersNearByAction,
-      getReviewsAction
-    } = this.props;
-    // const {currentOffer, offersNearBy, reviews} = this.props;
+// class Room extends PureComponent {
+//   componentDidMount() {
+//     const {
+//       offerId,
+//       getOfferByIdAction,
+//       getOffersNearByAction,
+//       getReviewsAction
+//     } = this.props;
+//     // const {currentOffer, offersNearBy, reviews} = this.props;
 
-    getOfferByIdAction(offerId);
-    getOffersNearByAction(offerId);
-    getReviewsAction(offerId);
+//     getOfferByIdAction(offerId);
+//     getOffersNearByAction(offerId);
+//     getReviewsAction(offerId);
 
     // Promise.all([
     //   getOfferByIdAction(offerId),
     //   getOffersNearByAction(offerId),
     //   getReviewsAction(offerId),
     // ]).then(() => {
-    //   console.log(`data loaded`);
     //   console.log(`c`,offersNearBy);
     //   console.log(`c`,currentOffer);
     //   console.log(`c`,reviews);
     // });
-  }
+  // }
 
-  render() {
-    const {offerId, offersNearBy, currentOffer: offer, reviews} = this.props;
+  // render() {
+
+const Room = ({
+  offerId,
+  getOfferByIdAction,
+  getOffersNearByAction,
+  getReviewsAction,
+  offersNearBy,
+  currentOffer: offer,
+  reviews,
+}) => {
+
+  useEffect(() => {
+    (async () => {
+      await getReviewsAction(offerId);
+      await getOfferByIdAction(offerId);
+      await getOffersNearByAction(offerId);
+    })();
+  }, []);
+
     console.log(`r`,offersNearBy);
     console.log(`r`,offer);
     console.log(`r`,reviews);
@@ -151,7 +168,7 @@ class Room extends PureComponent {
       </Fragment>
     );
   }
-}
+// }
 
 Room.propTypes = {
   offerId: PropTypes.string.isRequired,
