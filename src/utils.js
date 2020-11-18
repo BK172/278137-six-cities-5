@@ -1,5 +1,14 @@
 import _ from "lodash";
 
+const MarkupCitiesList = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`,
+];
+
 export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
@@ -38,6 +47,17 @@ export const SortingTypes = {
   'to-high': `Price: low to high`,
   'to-low': `Price: high to low`,
   'top-rated': `Top rated first`
+};
+
+export const orderCitiesByList = (cities) => {
+  const orderedCities = [];
+
+  MarkupCitiesList.forEach((cityName) => {
+    const city = cities.find((city) => city.name === cityName);
+    city && orderedCities.push(city);
+  });
+
+  return orderedCities;
 };
 
 export const getCitiesFromOffersList = (offers) => {

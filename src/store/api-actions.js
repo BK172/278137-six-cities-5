@@ -11,6 +11,7 @@ import {
   AppRoute,
   AuthorizationStatus,
   getCitiesFromOffersList,
+  orderCitiesByList,
   offersAdapter,
   citiesAdapter,
   ResponseType,
@@ -24,8 +25,9 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
       dispatch(getOffers(offers));
 
       const cities = getCitiesFromOffersList(data).map((city) => citiesAdapter(city));
-      dispatch(getCities(cities));
-      dispatch(setActiveCity(cities[0]));
+      const orderedCities = orderCitiesByList(cities);
+      dispatch(getCities(orderedCities));
+      dispatch(setActiveCity(orderedCities[0]));
     })
     .catch((err) => {
       throw err;
