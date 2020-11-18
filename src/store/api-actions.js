@@ -1,5 +1,21 @@
-import {getOffers, getCities, setActiveCity, requireAuthorization, getAuthInfo, redirectToRoute} from "./action";
-import {APIRoute, AppRoute, AuthorizationStatus, getCitiesFromOffersList, offersAdapter, citiesAdapter, ResponseType, HttpCode} from "../utils";
+import {
+  getOffers,
+  getCities,
+  setActiveCity,
+  requireAuthorization,
+  getAuthInfo,
+  redirectToRoute
+} from "./action";
+import {
+  APIRoute,
+  AppRoute,
+  AuthorizationStatus,
+  getCitiesFromOffersList,
+  offersAdapter,
+  citiesAdapter,
+  ResponseType,
+  HttpCode
+} from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)

@@ -1,13 +1,15 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import Header from "../header/header";
 import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
 import PageNotFound from "../page-not-found/page-not-found";
-import {getElementWidthByRating} from "../../utils";
+import {getSortedOffers} from "../../store/selectors";
 import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
+import {getElementWidthByRating} from "../../utils";
 import clsx from "clsx";
 
 const Room = ({offerId, offers, reviews}) => {
@@ -127,4 +129,9 @@ Room.propTypes = {
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-export default Room;
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: getSortedOffers({DATA, PROCESS}),
+});
+
+export {Room};
+export default connect(mapStateToProps)(Room);

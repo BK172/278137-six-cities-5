@@ -5,21 +5,27 @@ const getOffers = (({DATA}) => DATA.offers);
 const getSortingType = (({PROCESS}) => PROCESS.sortingType);
 
 export const getFilteredOffers = createSelector(
-    [getSortingType, getActiveCity, getOffers],
-    (sortingType, activeCity, offers) => {
-      const filteredOffers = offers.filter((offer) => offer.city.name === activeCity.name);
+    [getActiveCity, getOffers],
+    (activeCity, offers) => {
+      return offers.filter((offer) => offer.city.name === activeCity.name);
+    }
+);
+
+export const getSortedOffers = createSelector(
+    [getSortingType, getFilteredOffers],
+    (sortingType, offers) => {
 
       switch (sortingType) {
         case `popular`:
-          return filteredOffers.slice();
+          return offers.slice();
         case `to-high`:
-          return filteredOffers.slice().sort((a, b) => a.price - b.price);
+          return offers.slice().sort((a, b) => a.price - b.price);
         case `to-low`:
-          return filteredOffers.slice().sort((a, b) => b.price - a.price);
+          return offers.slice().sort((a, b) => b.price - a.price);
         case `top-rated`:
-          return filteredOffers.slice().sort((a, b) => b.rating - a.rating);
+          return offers.slice().sort((a, b) => b.rating - a.rating);
       }
 
-      return filteredOffers;
+      return offers;
     }
 );

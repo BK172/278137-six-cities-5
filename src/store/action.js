@@ -12,37 +12,37 @@ export const ActionType = {
 
 export const changeSortingType = (sortingType) => ({
   type: ActionType.CHANGE_SORTING_TYPE,
-  payload: sortingType
+  payload: sortingType,
 });
 
 export const sortOffers = (offers) => ({
   type: ActionType.SORT_OFFERS,
-  payload: offers
+  payload: offers,
 });
 
 export const setActiveCity = (activeCity) => ({
   type: ActionType.SET_ACTIVE_CITY,
-  payload: activeCity
+  payload: activeCity,
 });
 
 export const setActiveOffer = (activeOffer) => ({
   type: ActionType.SET_ACTIVE_OFFER,
-  payload: activeOffer
+  payload: activeOffer,
 });
 
 export const getCities = (cities) => ({
   type: ActionType.GET_CITIES,
-  payload: cities
+  payload: cities,
 });
 
 export const getOffers = (offers) => ({
   type: ActionType.GET_OFFERS,
-  payload: offers
+  payload: offers,
 });
 
 export const getAuthInfo = (authInfo) => ({
   type: ActionType.GET_AUTH_INFO,
-  payload: authInfo
+  payload: authInfo,
 });
 
 export const requireAuthorization = (status) => ({
