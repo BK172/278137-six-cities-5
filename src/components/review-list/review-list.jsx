@@ -35,7 +35,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
 ReviewList.propTypes = {
   offerId: PropTypes.string.isRequired,
   reviews: PropTypes.oneOfType([
-    reviewPropTypes,
+    PropTypes.arrayOf(reviewPropTypes),
     PropTypes.oneOf([null]).isRequired,
   ]),
   getReviewsAction: PropTypes.func.isRequired,
