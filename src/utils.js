@@ -53,7 +53,7 @@ export const orderCitiesByList = (cities) => {
   const orderedCities = [];
 
   MarkupCitiesList.forEach((cityName) => {
-    const city = cities.find((city) => city.name === cityName);
+    const city = cities.find((item) => item.name === cityName);
     city && orderedCities.push(city);
   });
 

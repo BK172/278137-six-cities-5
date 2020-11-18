@@ -1,10 +1,11 @@
 export const ActionType = {
   CHANGE_SORTING_TYPE: `CHANGE_SORTING_TYPE`,
-  SORT_OFFERS: `SORT_OFFERS`,
   SET_ACTIVE_CITY: `SET_ACTIVE_CITY`,
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   GET_CITIES: `GET_CITIES`,
   GET_OFFERS: `GET_OFFERS`,
+  GET_OFFERS_NEARBY: `GET_OFFERS_NEARBY`,
+  GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
   GET_AUTH_INFO: `GET_AUTH_INFO`,
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
@@ -13,11 +14,6 @@ export const ActionType = {
 export const changeSortingType = (sortingType) => ({
   type: ActionType.CHANGE_SORTING_TYPE,
   payload: sortingType,
-});
-
-export const sortOffers = (offers) => ({
-  type: ActionType.SORT_OFFERS,
-  payload: offers,
 });
 
 export const setActiveCity = (activeCity) => ({
@@ -38,6 +34,16 @@ export const getCities = (cities) => ({
 export const getOffers = (offers) => ({
   type: ActionType.GET_OFFERS,
   payload: offers,
+});
+
+export const getOffersNearBy = (offers) => ({
+  type: ActionType.GET_OFFERS_NEARBY,
+  payload: offers,
+});
+
+export const getOfferById = (offer) => ({
+  type: ActionType.GET_OFFER_BY_ID,
+  payload: offer,
 });
 
 export const getAuthInfo = (authInfo) => ({

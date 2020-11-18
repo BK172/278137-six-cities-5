@@ -14,7 +14,6 @@ export const getFilteredOffers = createSelector(
 export const getSortedOffers = createSelector(
     [getSortingType, getFilteredOffers],
     (sortingType, offers) => {
-
       switch (sortingType) {
         case `popular`:
           return offers.slice();
