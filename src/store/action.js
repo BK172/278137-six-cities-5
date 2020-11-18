@@ -53,7 +53,7 @@ export const getAuthInfo = (authInfo) => ({
 });
 
 export const getReviews = (reviews) => ({
-  type: ActionType.GET_AUTH_INFO,
+  type: ActionType.GET_REVIEWS,
   payload: reviews,
 });
 

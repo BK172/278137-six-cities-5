@@ -41,9 +41,10 @@ export const reviewPropTypes = PropTypes.shape({
   isPro: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
   date(props, propName, componentName) {
-    if (!moment(props[propName], `YYYY-MM-DD`, true).isValid()) {
+    if (!moment(props[propName]).isValid()) {
       return new Error(
-          `Invalid prop \`${propName}\` supplied to \`${componentName}\`. Validation failed.`
+          `Invalid prop \`` + propName + `\` supplied to` +
+          ` \`` + componentName + `\`. Validation failed.`
       );
     }
 
