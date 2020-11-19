@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {setActiveCity} from "../../store/action";
-import {citiesPropTypes} from "../../app-prop-types";
+import {cityPropTypes, citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
 const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
@@ -29,8 +29,8 @@ const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
-  activeCity: citiesPropTypes,
+  cities: citiesPropTypes,
+  activeCity: cityPropTypes,
   setActiveCityAction: PropTypes.func.isRequired,
 };
 

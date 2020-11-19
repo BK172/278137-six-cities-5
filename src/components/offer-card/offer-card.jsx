@@ -55,16 +55,25 @@ const OfferCard = ({
       )}
       <div className={`${cardClasses[offerType][`wrapper`]} place-card__image-wrapper`}>
         <Link to={`/offer/${offer.offerId}`}>
-          <img className="place-card__image" src={offer.image} width={cardImgShapes[offerType].width} height={cardImgShapes[offerType].height} alt="Place image" />
+          <img
+            className="place-card__image"
+            src={offer.image}
+            width={cardImgShapes[offerType].width}
+            height={cardImgShapes[offerType].height}
+            alt="Place image"
+          />
         </Link>
       </div>
-      <div className= {`${cardClasses[offerType][`info`]} place-card__info`}>
+      <div className={`${cardClasses[offerType][`info`]} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})} type="button">
+          <button
+            className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>

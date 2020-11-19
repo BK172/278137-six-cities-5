@@ -7,7 +7,7 @@ import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import PageNotFound from "../page-not-found/page-not-found";
-import {AppRoute} from "../../utils";
+import {AppRoute} from "../../const";
 
 const App = () => {
   return (

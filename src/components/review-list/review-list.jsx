@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
-import {reviewPropTypes} from "../../app-prop-types";
+import {reviewsOrNullPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 
 const ReviewList = ({offerId, reviews, getReviewsAction}) => {
@@ -29,15 +29,12 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
     );
   }
 
-  return <div></div>;
+  return null;
 };
 
 ReviewList.propTypes = {
   offerId: PropTypes.string.isRequired,
-  reviews: PropTypes.oneOfType([
-    PropTypes.arrayOf(reviewPropTypes),
-    PropTypes.oneOf([null]).isRequired,
-  ]),
+  reviews: reviewsOrNullPropTypes,
   getReviewsAction: PropTypes.func.isRequired,
 };
 

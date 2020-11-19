@@ -13,14 +13,17 @@ import {
   APIRoute,
   AppRoute,
   AuthorizationStatus,
+  ResponseType,
+  HttpCode
+} from "../const";
+import {
   getCitiesFromOffersList,
   orderCitiesByList,
   offersAdapter,
   citiesAdapter,
-  reviewsAdapter,
-  ResponseType,
-  HttpCode
+  reviewsAdapter
 } from "../utils";
+
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)

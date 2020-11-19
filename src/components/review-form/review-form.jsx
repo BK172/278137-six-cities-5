@@ -41,7 +41,12 @@ class ReviewForm extends PureComponent {
         <div className="reviews__rating-form form__rating">
           {ratings.map(({mark, title}) => (
             <Fragment key={title}>
-              <input className="form__rating-input visually-hidden" name="rating" defaultValue={mark} id={title} type="radio"
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                defaultValue={mark}
+                id={title}
+                type="radio"
                 onChange={this._handleInputChange}
               />
               <label htmlFor={title} className="reviews__rating-label form__rating-label" title={title}>
@@ -52,10 +57,18 @@ class ReviewForm extends PureComponent {
             </Fragment>
           ))}
         </div>
-        <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" />
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+        />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
-            To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+            To submit review please make sure to set
+            <span className="reviews__star">rating</span>
+            and describe your stay with at least
+            <b className="reviews__text-amount">50 characters</b>.
           </p>
           <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
         </div>

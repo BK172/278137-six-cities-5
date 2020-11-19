@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {setActiveOffer} from "../../store/action";
 import OfferCard from "../offer-card/offer-card";
-import {offerPropTypes, activeOfferPropTypes} from "../../app-prop-types";
+import {offersPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 
 class OffersList extends PureComponent {
   constructor(props) {
@@ -46,8 +46,8 @@ class OffersList extends PureComponent {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeOffer: activeOfferPropTypes,
+  offers: offersPropTypes,
+  activeOffer: offerOrNullPropTypes,
   setActiveOfferAction: PropTypes.func.isRequired,
 };
 

@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {offerPropTypes, citiesPropTypes, activeOfferPropTypes} from "../../app-prop-types";
+import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
@@ -84,9 +84,9 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   mapType: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeCity: citiesPropTypes,
-  activeOffer: activeOfferPropTypes,
+  offers: offersPropTypes,
+  activeCity: cityPropTypes,
+  activeOffer: offerOrNullPropTypes,
 };
 
 const mapStateToProps = ({PROCESS}) => ({

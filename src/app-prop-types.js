@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import moment from "moment";
 
-export const citiesPropTypes = PropTypes.shape({
+export const cityPropTypes = PropTypes.shape({
   name: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
@@ -10,7 +10,7 @@ export const citiesPropTypes = PropTypes.shape({
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.number.isRequired,
   favorite: PropTypes.bool.isRequired,
-  city: citiesPropTypes,
+  city: cityPropTypes,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
@@ -49,7 +49,21 @@ export const reviewPropTypes = PropTypes.shape({
   },
 }).isRequired;
 
-export const activeOfferPropTypes = PropTypes.oneOfType([
+export const citiesPropTypes = PropTypes.arrayOf(cityPropTypes).isRequired;
+export const offersPropTypes = PropTypes.arrayOf(offerPropTypes).isRequired;
+export const reviewsPropTypes = PropTypes.arrayOf(reviewPropTypes).isRequired;
+
+export const offerOrNullPropTypes = PropTypes.oneOfType([
   offerPropTypes,
+  PropTypes.oneOf([null]).isRequired,
+]);
+
+export const offersOrNullPropTypes = PropTypes.oneOfType([
+  PropTypes.arrayOf(offerPropTypes),
+  PropTypes.oneOf([null]).isRequired,
+]);
+
+export const reviewsOrNullPropTypes = PropTypes.oneOfType([
+  PropTypes.arrayOf(reviewPropTypes),
   PropTypes.oneOf([null]).isRequired,
 ]);
