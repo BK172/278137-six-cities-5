@@ -29,10 +29,6 @@ const appData = (state = initialState, action) => {
       return extend(state, {
         favoriteOffers: action.payload
       });
-    case ActionType.GET_OFFERS_NEARBY:
-      return extend(state, {
-        offersNearBy: action.payload
-      });
     case ActionType.GET_CITIES:
       return extend(state, {
         cities: action.payload

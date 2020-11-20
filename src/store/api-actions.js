@@ -136,7 +136,7 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
-        const offers = data.map((offer) => offersAdapter(offer));
+        const offers = response.data.map((offer) => offersAdapter(offer));
         dispatch(getFavoriteOffers(offers));
 
         return ResponseType.SUCCESS;

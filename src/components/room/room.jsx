@@ -6,10 +6,12 @@ import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import Map from "../map/map";
+import W3CMarkup from "../w3c-markup/w3c-markup";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
 import {offerOrNullPropTypes, offersOrNullPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
+import {OfferType, MapType} from "../../const";
 import clsx from "clsx";
 
 const Room = ({
@@ -30,19 +32,7 @@ const Room = ({
 
   return (
     <Fragment>
-      <div style={{display: `none`}}>
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <symbol id="icon-arrow-select" viewBox="0 0 7 4">
-            <path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z" />
-          </symbol>
-          <symbol id="icon-bookmark" viewBox="0 0 17 18">
-            <path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z" />
-          </symbol>
-          <symbol id="icon-star" viewBox="0 0 13 12">
-            <path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z" />
-          </symbol>
-        </svg>
-      </div>
+      <W3CMarkup />
       <div className="page">
         <Header />
         <main className="page__main page__main--property">
@@ -135,13 +125,13 @@ const Room = ({
                 </section>
               </div>
             </div>
-            <Map mapType={`property`} offers={offersNearBy} />
+            <Map mapType={MapType.ROOM} offers={offersNearBy} />
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OffersList offers={offersNearBy} />
+                <OffersList offers={offersNearBy} offerType={OfferType.ROOM} />
               </div>
             </section>
           </div>

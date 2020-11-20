@@ -29,14 +29,14 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, offerType} = this.props;
 
     return (
       offers.map((offer) => (
         <OfferCard
           key={offer.offerId}
           offer={offer}
-          offerType={`main`}
+          offerType={offerType}
           onOfferCardMouseOver={() => this._handleOfferCardOver(offer)}
           onOfferCardMouseOut={this._handleOfferCardOut}
         />
@@ -47,6 +47,7 @@ class OffersList extends PureComponent {
 
 OffersList.propTypes = {
   offers: offersPropTypes,
+  offerType: PropTypes.string.isRequired,
   activeOffer: offerOrNullPropTypes,
   setActiveOfferAction: PropTypes.func.isRequired,
 };

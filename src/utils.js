@@ -7,11 +7,22 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const getFavoriteOffersByCity = (favoriteOffers, cityName) => {
+  const offers = favoriteOffers.slice();
+  return offers.filter((offer) => offer.city.name === cityName);
+};
+
 export const updateOfferInOffersById = (offers, offer) => {
   const clonedOffers = offers.slice();
-  const index = clonedOffers.findIndex((item) => item.offerId === offer.offerId);
+  const offerIndex = clonedOffers.findIndex((item) => item.offerId === offer.offerId);
 
-  return index === -1 ? offers : clonedOffers[index] = offer;
+  if (offerIndex === -1) {
+    return offers;
+  }
+
+  clonedOffers[offerIndex] = offer;
+
+  return clonedOffers;
 };
 
 export const orderCitiesByList = (cities) => {

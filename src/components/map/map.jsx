@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
+import {MapClasses} from "../../const";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import "leaflet/dist/leaflet.css";
 
@@ -73,12 +74,7 @@ class Map extends PureComponent {
 
   render() {
     const {mapType} = this.props;
-    const mapClasses = {
-      cities: `cities__map`,
-      property: `property__map`
-    };
-
-    return <section id="map" className={`${mapClasses[mapType]} map`}></section>;
+    return <section id="map" className={`${MapClasses[mapType]} map`}></section>;
   }
 }
 

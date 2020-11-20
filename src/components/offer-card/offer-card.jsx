@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {APIRoute, OfferClasses, OfferImgShapes} from "../../const";
 import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
@@ -11,40 +12,9 @@ const OfferCard = ({
   onOfferCardMouseOver = () => false,
   onOfferCardMouseOut = () => false
 }) => {
-  const cardClasses = {
-    main: {
-      article: `cities__place-card`,
-      wrapper: `cities__image-wrapper`
-    },
-    room: {
-      article: `near-places__card`,
-      wrapper: `near-places__image-wrapper`
-    },
-    favorite: {
-      article: `favorites__card`,
-      wrapper: `favorites__image-wrapper`,
-      info: `favorites__card-info`
-    }
-  };
-
-  const cardImgShapes = {
-    main: {
-      width: 260,
-      height: 200
-    },
-    room: {
-      width: 260,
-      height: 200
-    },
-    favorite: {
-      width: 150,
-      height: 110
-    }
-  };
-
   return (
     <article
-      className={`${cardClasses[offerType][`article`]} place-card`}
+      className={`${OfferClasses[offerType][`article`]} place-card`}
       onMouseOver={onOfferCardMouseOver}
       onMouseOut={onOfferCardMouseOut}
     >
@@ -53,18 +23,18 @@ const OfferCard = ({
           <span>Premium</span>
         </div>
       )}
-      <div className={`${cardClasses[offerType][`wrapper`]} place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.offerId}`}>
+      <div className={`${OfferClasses[offerType][`wrapper`]} place-card__image-wrapper`}>
+        <Link to={`${APIRoute.OFFERS}/${offer.offerId}`}>
           <img
             className="place-card__image"
             src={offer.image}
-            width={cardImgShapes[offerType].width}
-            height={cardImgShapes[offerType].height}
+            width={OfferImgShapes[offerType].width}
+            height={OfferImgShapes[offerType].height}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={`${cardClasses[offerType][`info`]} place-card__info`}>
+      <div className={`${OfferClasses[offerType][`info`]} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
@@ -87,7 +57,7 @@ const OfferCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.offerId}`}>{offer.title}</Link>
+          <Link to={`${APIRoute.OFFERS}/${offer.offerId}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
