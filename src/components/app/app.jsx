@@ -19,9 +19,12 @@ const App = () => {
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
-        <PrivateRoute exact path={AppRoute.FAVORITES}>
+        {/* <PrivateRoute exact path={AppRoute.FAVORITES}>
           <Favorites />
-        </PrivateRoute>
+        </PrivateRoute> */}
+        <Route exact path={AppRoute.FAVORITES}>
+          <Favorites />
+        </Route>
         <Route
           exact
           path={AppRoute.ROOM}

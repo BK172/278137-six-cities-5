@@ -9,8 +9,7 @@ import {
   getReviews,
   requireAuthorization,
   redirectToRoute,
-  setOfferAsFavoriteInOffers,
-  setOfferAsFavoriteInOffersNearBy
+  setOfferAsFavorite
 } from "./action";
 import {
   APIRoute,
@@ -153,8 +152,7 @@ export const updateOfferFavoriteStatus = (offerId, isFavorite) => (dispatch, _ge
   api.post(`${APIRoute.FAVORITE}/${offerId}/${isFavorite ? 1 : 0}`)
     .then(({data}) => {
       const offer = offersAdapter(data);
-      dispatch(setOfferAsFavoriteInOffers(offer));
-      dispatch(setOfferAsFavoriteInOffersNearBy(offer));
+      dispatch(setOfferAsFavorite(offer));
 
       return ResponseType.SUCCESS;
     })

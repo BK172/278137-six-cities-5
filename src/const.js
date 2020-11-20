@@ -20,6 +20,7 @@ export const AppRoute = {
   MAIN: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
+  OFFER: `/offer`,
   ROOM: `/offer/:id`,
 };
 
@@ -27,6 +28,7 @@ export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
   REVIEWS: `/comments`,
+  FAVORITE: `/favorite`,
 };
 
 export const AuthorizationStatus = {
@@ -42,15 +44,12 @@ export const SortingTypes = {
   'top-rated': `Top rated first`,
 };
 
+export const MAX_PHOTOS_COUNT = 6;
+
 export const OfferType = {
   MAIN: `MAIN`,
   ROOM: `ROOM`,
   FAVORITE: `FAVORITE`,
-};
-
-export const MapType = {
-  MAIN: `MAIN`,
-  ROOM: `ROOM`,
 };
 
 export const OfferClasses = {
@@ -84,7 +83,41 @@ export const OfferImgShapes = {
   },
 };
 
+export const MapType = {
+  MAIN: `MAIN`,
+  ROOM: `ROOM`,
+};
+
 export const MapClasses = {
   MAIN: `cities__map`,
   ROOM: `property__map`,
+};
+
+export const BookmarkBtnType = {
+  MAIN: `MAIN`,
+  ROOM: `ROOM`,
+};
+
+export const BookmarkBtnClasses = {
+  MAIN: {
+    btn: `place-card__bookmark-button button`,
+    btnActive: `place-card__bookmark-button--active`,
+    img: `place-card__bookmark-icon`,
+  },
+  ROOM: {
+    btn: `property__bookmark-button button`,
+    btnActive: `property__bookmark-button--active`,
+    img: `property__bookmark-icon`,
+  },
+};
+
+export const BookmarkBtnShapes = {
+  MAIN: {
+    width: 18,
+    height: 19,
+  },
+  ROOM: {
+    width: 31,
+    height: 33,
+  },
 };

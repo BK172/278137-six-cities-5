@@ -22,16 +22,11 @@ const appProcess = (state = initialState, action) => {
       return extend(state, {
         activeOffer: action.payload
       });
-    case ActionType.SET_OFFER_AS_FAVORITE_IN_OFFERS:
+    case ActionType.SET_OFFER_AS_FAVORITE:
       return extend(state, {
         offers: updateOfferInOffersById(state.offers, action.payload),
-        // ???
-        currentOffer: action.payload,
-      });
-    case ActionType.SET_OFFER_AS_FAVORITE_IN_OFFERS_NEARBY:
-      return extend(state, {
-        offers: updateOfferInOffersById(state.offers, action.payload),
-        // ???
+        offersNearBy: updateOfferInOffersById(state.offersNearBy, action.payload),
+        favoriteOffers: updateOfferInOffersById(state.favoriteOffers, action.payload),
         currentOffer: action.payload,
       });
   }

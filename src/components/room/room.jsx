@@ -2,16 +2,17 @@ import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../header/header";
+import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
-import Map from "../map/map";
+import OfferBookmarkBtn from "../offer-bookmark-btn/offer-bookmark-btn";
 import W3CMarkup from "../w3c-markup/w3c-markup";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
 import {offerOrNullPropTypes, offersOrNullPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
-import {OfferType, MapType} from "../../const";
+import {OfferType, MapType, BookmarkBtnType, MAX_PHOTOS_COUNT} from "../../const";
 import clsx from "clsx";
 
 const Room = ({
@@ -24,7 +25,7 @@ const Room = ({
   useEffect(() => {
     getOfferByIdAction(offerId);
     getOffersNearByAction(offerId);
-  }, []);
+  }, [offerId]);
 
   if (!offerId || !offersNearBy || !offer) {
     return <PageNotFound />;
@@ -39,7 +40,7 @@ const Room = ({
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {offer.photos.slice(0, 6).map((item) => (
+                {offer.photos.slice(0, MAX_PHOTOS_COUNT).map((item) => (
                   <div key={item} className="property__image-wrapper">
                     <img className="property__image" src={item} alt="Photo studio" />
                   </div>
@@ -57,15 +58,7 @@ const Room = ({
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button
-                    className={clsx(`property__bookmark-button button`, {'property__bookmark-button--active': offer.favorite})}
-                    type="button"
-                  >
-                    <svg className="property__bookmark-icon" width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <OfferBookmarkBtn offer={offer} bookmarkType={BookmarkBtnType.ROOM} />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -102,7 +95,10 @@ const Room = ({
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={clsx(`property__avatar-wrapper user__avatar-wrapper`, {'property__avatar-wrapper--pro': offer.owner.isPro})}>
+                    <div
+                      className={clsx(`property__avatar-wrapper user__avatar-wrapper`,
+                          {'property__avatar-wrapper--pro': offer.owner.isPro})}
+                    >
                       <img
                         className="property__avatar user__avatar"
                         src={offer.owner.avatar}

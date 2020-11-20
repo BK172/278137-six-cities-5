@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {APIRoute, OfferClasses, OfferImgShapes} from "../../const";
+import OfferBookmarkBtn from "../offer-bookmark-btn/offer-bookmark-btn";
+import {AppRoute, OfferClasses, OfferImgShapes, BookmarkBtnType} from "../../const";
 import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
-import clsx from "clsx";
 
 const OfferCard = ({
   offer,
@@ -24,7 +24,7 @@ const OfferCard = ({
         </div>
       )}
       <div className={`${OfferClasses[offerType][`wrapper`]} place-card__image-wrapper`}>
-        <Link to={`${APIRoute.OFFERS}/${offer.offerId}`}>
+        <Link to={`${AppRoute.OFFER}/${offer.offerId}`}>
           <img
             className="place-card__image"
             src={offer.image}
@@ -40,15 +40,7 @@ const OfferCard = ({
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className={clsx(`place-card__bookmark-button button`, {'place-card__bookmark-button--active': offer.favorite})}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">{offer.favorite ? `In bookmarks` : `To bookmarks`}</span>
-          </button>
+          <OfferBookmarkBtn offer={offer} bookmarkType={BookmarkBtnType.MAIN} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -57,7 +49,7 @@ const OfferCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${APIRoute.OFFERS}/${offer.offerId}`}>{offer.title}</Link>
+          <Link to={`${AppRoute.OFFER}/${offer.offerId}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
