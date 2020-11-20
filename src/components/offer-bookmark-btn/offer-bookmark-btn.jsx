@@ -46,7 +46,7 @@ const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authoriz
       onClick={onBookmarkBtnClick}
     >
       <svg
-        className={BookmarkBtnClasses[bookmarkType][`img`]}
+        className="place-card__bookmark-icon"
         width={BookmarkBtnShapes[bookmarkType][`width`]}
         height={BookmarkBtnShapes[bookmarkType][`height`]}
       >

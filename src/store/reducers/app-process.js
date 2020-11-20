@@ -1,6 +1,6 @@
 import {ActionType} from "./../action";
 import {initialSortingType} from "../../const";
-import {extend, updateOfferInOffersById} from "../../utils";
+import {extend} from "../../utils";
 
 const initialState = {
   activeOffer: null,
@@ -21,13 +21,6 @@ const appProcess = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload
-      });
-    case ActionType.SET_OFFER_AS_FAVORITE:
-      return extend(state, {
-        offers: updateOfferInOffersById(state.offers, action.payload),
-        offersNearBy: updateOfferInOffersById(state.offersNearBy, action.payload),
-        favoriteOffers: updateOfferInOffersById(state.favoriteOffers, action.payload),
-        currentOffer: action.payload,
       });
   }
   return state;

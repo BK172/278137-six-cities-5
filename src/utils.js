@@ -13,7 +13,7 @@ export const getFavoriteOffersByCity = (favoriteOffers, cityName) => {
 };
 
 export const updateOfferInOffersById = (offers, offer) => {
-  const clonedOffers = offers.slice();
+  const clonedOffers = offers ? offers.slice() : [];
   const offerIndex = clonedOffers.findIndex((item) => item.offerId === offer.offerId);
 
   if (offerIndex === -1) {

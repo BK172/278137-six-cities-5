@@ -33,6 +33,7 @@ class ReviewForm extends PureComponent {
 
   _handleFormSubmit(evt) {
     evt.preventDefault();
+
     const {offerId, postReviewAction} = this.props;
     const review = this.state.review;
     const rating = this.state.rating;
@@ -43,8 +44,8 @@ class ReviewForm extends PureComponent {
     postReviewAction({review, rating, offerId, onClearFormFields, onChangeFormWaitingFlag});
   }
 
-  _handleInputChange(evt) {
-    const {name, value} = evt.target;
+  _handleInputChange({target}) {
+    const {name, value} = target;
     this.setState({[name]: value});
   }
 
@@ -76,7 +77,6 @@ class ReviewForm extends PureComponent {
                 value={mark}
                 id={title}
                 type="radio"
-                checked={this.state.rating === mark}
                 onChange={this._handleInputChange}
               />
               <label htmlFor={title} className="reviews__rating-label form__rating-label" title={title}>
@@ -91,6 +91,7 @@ class ReviewForm extends PureComponent {
           className="reviews__textarea form__textarea"
           id="review"
           name="review"
+          onChange={this._handleInputChange}
           placeholder="Tell how was your stay, what you like and what can be improved"
         />
         <div className="reviews__button-wrapper">
@@ -103,7 +104,7 @@ class ReviewForm extends PureComponent {
           <button
             className="reviews__submit form__submit button"
             type="submit"
-            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse ? `false` : `disabled`}
+            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse ? `` : `disabled`}
           >
             Submit
           </button>

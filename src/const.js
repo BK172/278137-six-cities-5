@@ -47,16 +47,16 @@ export const SortingTypes = {
 export const MAX_PHOTOS_COUNT = 6;
 
 export const ReviewFormTextAreaLength = {
-  MIN: 2,
+  MIN: 50,
   MAX: 300,
 };
 
 export const ReviewFormRatings = [
-  {mark: 5, title: `perfect`},
-  {mark: 4, title: `good`},
-  {mark: 3, title: `not bad`},
-  {mark: 2, title: `badly`},
-  {mark: 1, title: `terribly`},
+  {mark: `5`, title: `perfect`},
+  {mark: `4`, title: `good`},
+  {mark: `3`, title: `not bad`},
+  {mark: `2`, title: `badly`},
+  {mark: `1`, title: `terribly`},
 ];
 
 export const OfferType = {
@@ -115,12 +115,10 @@ export const BookmarkBtnClasses = {
   MAIN: {
     btn: `place-card__bookmark-button button`,
     btnActive: `place-card__bookmark-button--active`,
-    img: `place-card__bookmark-icon`,
   },
   ROOM: {
     btn: `property__bookmark-button button`,
     btnActive: `property__bookmark-button--active`,
-    img: `property__bookmark-icon`,
   },
 };
 

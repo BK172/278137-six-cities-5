@@ -9,7 +9,7 @@ import _ from "lodash";
 const ReviewList = ({offerId, reviews, getReviewsAction}) => {
   useEffect(() => {
     getReviewsAction(offerId);
-  }, []);
+  }, [offerId]);
 
   if (reviews && !_.isEmpty(reviews)) {
     return (

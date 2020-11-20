@@ -4,8 +4,10 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AuthorizationStatus, AppRoute} from "../../const";
 
-const Header = ({authorizationStatus, avatar, email}) => {
+// const Header = ({authorizationStatus, avatar, email}) => {
+const Header = ({authorizationStatus, email}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+  // const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
     <header className="header">
@@ -25,7 +27,7 @@ const Header = ({authorizationStatus, avatar, email}) => {
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
-                    style={isAuthorized ? {backgroundImage: `url(${avatar})`} : undefined}
+                    // style={isAuthorized ? avatarBgrImage : undefined}
                   >
                   </div>
                   <span className="header__user-name user__name">
@@ -43,13 +45,13 @@ const Header = ({authorizationStatus, avatar, email}) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  // avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
   authorizationStatus: USER.authorizationStatus,
-  avatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
+  // avatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
   email: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.email : ``,
 });
 
