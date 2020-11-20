@@ -4,6 +4,7 @@ import {extend} from "../../utils";
 const initialState = {
   offers: [],
   offersNearBy: null,
+  favoriteOffers: [],
   currentOffer: null,
   cities: [],
   authInfo: {},
@@ -23,6 +24,14 @@ const appData = (state = initialState, action) => {
     case ActionType.GET_OFFER_BY_ID:
       return extend(state, {
         currentOffer: action.payload
+      });
+    case ActionType.GET_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload
+      });
+    case ActionType.GET_OFFERS_NEARBY:
+      return extend(state, {
+        offersNearBy: action.payload
       });
     case ActionType.GET_CITIES:
       return extend(state, {

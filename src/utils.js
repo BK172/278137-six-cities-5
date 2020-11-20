@@ -7,6 +7,13 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const updateOfferInOffersById = (offers, offer) => {
+  const clonedOffers = offers.slice();
+  const index = clonedOffers.findIndex((item) => item.offerId === offer.offerId);
+
+  return index === -1 ? offers : clonedOffers[index] = offer;
+};
+
 export const orderCitiesByList = (cities) => {
   const orderedCities = [];
 

@@ -6,6 +6,9 @@ export const ActionType = {
   GET_OFFERS: `GET_OFFERS`,
   GET_OFFERS_NEARBY: `GET_OFFERS_NEARBY`,
   GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
+  GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
+  SET_OFFER_AS_FAVORITE_IN_OFFERS: `SET_OFFER_AS_FAVORITE_IN_OFFERS`,
+  SET_OFFER_AS_FAVORITE_IN_OFFERS_NEARBY: `SET_OFFER_AS_FAVORITE_IN_OFFERS_NEARBY`,
   GET_AUTH_INFO: `GET_AUTH_INFO`,
   GET_REVIEWS: `GET_REVIEWS`,
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
@@ -37,13 +40,28 @@ export const getOffers = (offers) => ({
   payload: offers,
 });
 
-export const getOffersNearBy = (offers) => ({
+export const getOffersNearBy = (offersNearBy) => ({
   type: ActionType.GET_OFFERS_NEARBY,
-  payload: offers,
+  payload: offersNearBy,
 });
 
-export const getOfferById = (offer) => ({
+export const getOfferById = (currentOffer) => ({
   type: ActionType.GET_OFFER_BY_ID,
+  payload: currentOffer,
+});
+
+export const getFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.GET_FAVORITE_OFFERS,
+  payload: favoriteOffers,
+});
+
+export const setOfferAsFavoriteInOffers = (offer) => ({
+  type: ActionType.SET_OFFER_AS_FAVORITE_IN_OFFERS,
+  payload: offer,
+});
+
+export const setOfferAsFavoriteInOffersNearBy = (offer) => ({
+  type: ActionType.SET_OFFER_AS_FAVORITE_IN_OFFERS_NEARBY,
   payload: offer,
 });
 

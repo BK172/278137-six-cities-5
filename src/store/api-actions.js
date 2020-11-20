@@ -1,29 +1,31 @@
 import {
-  setActiveCity,
   getOffers,
   getOfferById,
   getOffersNearBy,
+  getFavoriteOffers,
   getCities,
+  setActiveCity,
   getAuthInfo,
   getReviews,
   requireAuthorization,
-  redirectToRoute
+  redirectToRoute,
+  setOfferAsFavoriteInOffers,
+  setOfferAsFavoriteInOffersNearBy
 } from "./action";
 import {
   APIRoute,
   AppRoute,
-  AuthorizationStatus,
+  HttpCode,
   ResponseType,
-  HttpCode
+  AuthorizationStatus
 } from "../const";
 import {
-  getCitiesFromOffersList,
-  orderCitiesByList,
   offersAdapter,
   citiesAdapter,
-  reviewsAdapter
+  reviewsAdapter,
+  orderCitiesByList,
+  getCitiesFromOffersList
 } from "../utils";
-
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
@@ -104,7 +106,6 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
 );
 
-
 export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.REVIEWS}/${offerId}`)
     .then(({data}) => {
@@ -123,6 +124,37 @@ export const postReview = ({review: comment, rating, offerId}) => (dispatch, _ge
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
       dispatch(getReviews(reviews));
+
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      throw err;
+    })
+);
+
+export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const offers = data.map((offer) => offersAdapter(offer));
+        dispatch(getFavoriteOffers(offers));
+
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
+    .catch((err) => {
+      throw err;
+    })
+);
+
+export const updateOfferFavoriteStatus = (offerId, isFavorite) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${offerId}/${isFavorite ? 1 : 0}`)
+    .then(({data}) => {
+      const offer = offersAdapter(data);
+      dispatch(setOfferAsFavoriteInOffers(offer));
+      dispatch(setOfferAsFavoriteInOffersNearBy(offer));
 
       return ResponseType.SUCCESS;
     })
