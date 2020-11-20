@@ -12,7 +12,7 @@ import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
 import {offerOrNullPropTypes, offersOrNullPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
-import {OfferType, MapType, BookmarkBtnType, MAX_PHOTOS_COUNT} from "../../const";
+import {OfferType, MapType, BookmarkBtnType, AuthorizationStatus, MAX_PHOTOS_COUNT} from "../../const";
 import clsx from "clsx";
 
 const Room = ({
@@ -21,11 +21,14 @@ const Room = ({
   currentOffer: offer,
   getOfferByIdAction,
   getOffersNearByAction,
+  authorizationStatus
 }) => {
   useEffect(() => {
     getOfferByIdAction(offerId);
     getOffersNearByAction(offerId);
   }, [offerId]);
+
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
 
   if (!offerId || !offersNearBy || !offer) {
     return <PageNotFound />;
@@ -117,7 +120,7 @@ const Room = ({
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewList offerId={offerId} />
-                  <ReviewForm />
+                  {isAuthorized && <ReviewForm offerId={offerId} />}
                 </section>
               </div>
             </div>
@@ -143,11 +146,13 @@ Room.propTypes = {
   currentOffer: offerOrNullPropTypes,
   getOfferByIdAction: PropTypes.func.isRequired,
   getOffersNearByAction: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
+const mapStateToProps = ({DATA, USER}) => ({
   offersNearBy: DATA.offersNearBy,
   currentOffer: DATA.currentOffer,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

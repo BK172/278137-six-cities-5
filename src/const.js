@@ -46,6 +46,19 @@ export const SortingTypes = {
 
 export const MAX_PHOTOS_COUNT = 6;
 
+export const ReviewFormTextAreaLength = {
+  MIN: 2,
+  MAX: 300,
+};
+
+export const ReviewFormRatings = [
+  {mark: 5, title: `perfect`},
+  {mark: 4, title: `good`},
+  {mark: 3, title: `not bad`},
+  {mark: 2, title: `badly`},
+  {mark: 1, title: `terribly`},
+];
+
 export const OfferType = {
   MAIN: `MAIN`,
   ROOM: `ROOM`,

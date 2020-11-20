@@ -118,11 +118,13 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
     })
 );
 
-export const postReview = ({review: comment, rating, offerId}) => (dispatch, _getState, api) => (
+export const postReview = ({review: comment, rating, offerId, onClearFormFields, onChangeFormResponseStatus}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
       dispatch(getReviews(reviews));
+      onChangeFormResponseStatus(false);
+      onClearFormFields();
 
       return ResponseType.SUCCESS;
     })
