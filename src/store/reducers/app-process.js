@@ -4,7 +4,7 @@ import {extend} from "../../utils";
 
 const initialState = {
   activeOffer: null,
-  activeCity: null,
+  activeCity: {},
   sortingType: initialSortingType,
 };
 

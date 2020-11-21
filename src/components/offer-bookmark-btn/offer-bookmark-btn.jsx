@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {fetchFavoriteOffers, updateOfferFavoriteStatus} from "../../store/api-actions";
+import {updateOfferFavoriteStatus} from "../../store/api-actions";
 import {offerPropTypes} from "../../app-prop-types";
 import {AppRoute, AuthorizationStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../const";
 import clsx from "clsx";
@@ -71,7 +71,6 @@ const mapStateToProps = ({USER}) => ({
 const mapDispatchToProps = (dispatch) => ({
   bookmarkBtnClickAction(offerId, favoriteStatus) {
     dispatch(updateOfferFavoriteStatus(offerId, favoriteStatus));
-    dispatch(fetchFavoriteOffers());
   },
 });
 

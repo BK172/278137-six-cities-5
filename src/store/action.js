@@ -44,9 +44,9 @@ export const getOffersNearBy = (offers) => ({
   payload: offers,
 });
 
-export const getOfferById = (currentOffer) => ({
+export const getOfferById = (currentRoomOffer) => ({
   type: ActionType.GET_OFFER_BY_ID,
-  payload: currentOffer,
+  payload: currentRoomOffer,
 });
 
 export const getFavoriteOffers = (favoriteOffers) => ({

@@ -62,8 +62,3 @@ export const offersOrNullPropTypes = PropTypes.oneOfType([
   PropTypes.arrayOf(offerPropTypes),
   PropTypes.oneOf([null]).isRequired,
 ]);
-
-export const reviewsOrNullPropTypes = PropTypes.oneOfType([
-  PropTypes.arrayOf(reviewPropTypes),
-  PropTypes.oneOf([null]).isRequired,
-]);

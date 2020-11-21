@@ -6,6 +6,7 @@ const getOffers = (({DATA}) => DATA.offers);
 // export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
 const getFavoriteOffers = (({DATA}) => DATA.favoriteOffers);
 // export const getCurrentOffer = (({DATA}) => DATA.currentOffer);
+// export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
 const getCities = (({DATA}) => DATA.cities);
 // export const getAuthInfo = (({DATA}) => DATA.authInfo);
 // export const getReviews = (({DATA}) => DATA.reviews);
@@ -23,12 +24,14 @@ export const getFavoriteOffersMapByCity = createSelector(
         favoritesMap.set(cityName, []);
       });
 
-      (favoriteOffers || []).forEach((offer) => {
+      favoriteOffers.forEach((offer) => {
         favoritesMap.get(offer.city.name).push(offer);
       });
 
       favoritesMap.forEach((value, key, map) => {
-        !value.length && map.delete(key);
+        if (!value.length) {
+          map.delete(key);
+        }
       });
 
       return favoritesMap;
@@ -58,27 +61,27 @@ export const getSortedOffersByPrice = createSelector(
     }
 );
 
-export const orderCitiesByList = createSelector(
-    getCities,
-    (cities) => {
-      const orderedCities = [];
+// export const orderCitiesByList = createSelector(
+//     getCities,
+//     (cities) => {
+//       const orderedCities = [];
 
-      MarkupCitiesList.forEach((cityName) => {
-        const city = cities.find((item) => item.name === cityName);
+//       MarkupCitiesList.forEach((cityName) => {
+//         const city = cities.find((item) => item.name === cityName);
 
-        if (city) {
-          orderedCities.push(city);
-        }
-      });
+//         if (city) {
+//           orderedCities.push(city);
+//         }
+//       });
 
-      return orderedCities;
-    }
-);
+//       return orderedCities;
+//     }
+// );
 
-export const getCitiesFromOffersList = createSelector(
-    getOffers,
-    (offers) => {
-      const cities = offers.map((offer) => offer.city);
-      return _.uniqWith(cities, _.isEqual);
-    }
-);
+// export const getCitiesFromOffersList = createSelector(
+//     getOffers,
+//     (offers) => {
+//       const cities = offers.map((offer) => offer.city);
+//       return _.uniqWith(cities, _.isEqual);
+//     }
+// );

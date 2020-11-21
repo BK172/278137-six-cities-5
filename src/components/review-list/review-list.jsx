@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
-import {reviewsOrNullPropTypes} from "../../app-prop-types";
+import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 
 const ReviewList = ({offerId, reviews, getReviewsAction}) => {
@@ -11,7 +11,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
     getReviewsAction(offerId);
   }, [offerId]);
 
-  if (reviews && !_.isEmpty(reviews)) {
+  if (!_.isEmpty(reviews)) {
     return (
       <Fragment>
         <h2 className="reviews__title">
@@ -34,7 +34,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
 
 ReviewList.propTypes = {
   offerId: PropTypes.string.isRequired,
-  reviews: reviewsOrNullPropTypes,
+  reviews: reviewsPropTypes,
   getReviewsAction: PropTypes.func.isRequired,
 };
 

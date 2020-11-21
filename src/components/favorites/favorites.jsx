@@ -7,7 +7,6 @@ import OffersList from "../offers-list/offers-list";
 import {fetchFavoriteOffers} from "../../store/api-actions";
 import {AppRoute, OfferType} from "../../const";
 import {getFavoriteOffersMapByCity} from "../../store/selectors";
-// import {getFavoriteOffersMapByCity} from "../../utils";
 
 const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   useEffect(() => {
@@ -65,10 +64,7 @@ const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
 };
 
 Favorites.propTypes = {
-  favoriteOffersMapByCity: PropTypes.oneOfType([
-    PropTypes.instanceOf(Map),
-    PropTypes.oneOf([null]).isRequired,
-  ]),
+  favoriteOffersMapByCity: PropTypes.instanceOf(Map).isRequired,
   getFavoriteOffersAction: PropTypes.func.isRequired,
 };
 

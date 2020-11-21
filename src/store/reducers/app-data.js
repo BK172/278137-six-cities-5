@@ -2,13 +2,14 @@ import {ActionType} from "./../action";
 import {extend, updateOfferInOffersById} from "../../utils";
 
 const initialState = {
-  offers: null, // [],
-  offersNearBy: null,
-  favoriteOffers: null, // [],
-  currentOffer: null,
-  cities: null, // [],
-  authInfo: null, // {},
-  reviews: null,
+  offers: [],
+  offersNearBy: [],
+  favoriteOffers: [],
+  // currentOffer: {},
+  currentRoomOffer: null,
+  cities: [],
+  authInfo: {},
+  reviews: [],
 };
 
 const appData = (state = initialState, action) => {
@@ -23,7 +24,7 @@ const appData = (state = initialState, action) => {
       });
     case ActionType.GET_OFFER_BY_ID:
       return extend(state, {
-        currentOffer: action.payload
+        currentRoomOffer: action.payload
       });
     case ActionType.GET_FAVORITE_OFFERS:
       return extend(state, {
@@ -46,7 +47,6 @@ const appData = (state = initialState, action) => {
         offers: updateOfferInOffersById(state.offers, action.payload),
         offersNearBy: updateOfferInOffersById(state.offersNearBy, action.payload),
         favoriteOffers: updateOfferInOffersById(state.favoriteOffers, action.payload),
-        currentOffer: action.payload,
       });
   }
   return state;
