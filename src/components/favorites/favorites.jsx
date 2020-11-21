@@ -1,15 +1,15 @@
-import React, {useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Header from "../header/header";
 import OffersList from "../offers-list/offers-list";
 import {fetchFavoriteOffers} from "../../store/api-actions";
-import {offersOrNullPropTypes} from "../../app-prop-types";
 import {AppRoute, OfferType} from "../../const";
-import {getCitiesFromOffersList, getFavoriteOffersByCity} from "../../utils";
+import {getFavoriteOffersMapByCity} from "../../store/selectors";
+// import {getFavoriteOffersMapByCity} from "../../utils";
 
-const Favorites = ({favoriteOffers, getFavoriteOffersAction}) => {
+const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   useEffect(() => {
     getFavoriteOffersAction();
   }, []);
@@ -20,26 +20,38 @@ const Favorites = ({favoriteOffers, getFavoriteOffersAction}) => {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {favoriteOffers && getCitiesFromOffersList(favoriteOffers).map((city) => (
-                <li key={city.name} className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <Link className="locations__item-link" to={AppRoute.MAIN}>
-                        <span>{city.name}</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    <OffersList
-                      offers={getFavoriteOffersByCity(favoriteOffers, city.name)}
-                      offerType={OfferType.FAVORITE}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {favoriteOffersMapByCity.size ? (
+              <Fragment>
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {Array.from(favoriteOffersMapByCity.keys()).map((cityName) =>
+                    <li key={cityName} className="favorites__locations-items">
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <Link className="locations__item-link" to={AppRoute.MAIN}>
+                            <span>{cityName}</span>
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="favorites__places">
+                        <OffersList
+                          offers={favoriteOffersMapByCity.get(cityName)}
+                          offerType={OfferType.FAVORITE}
+                        />
+                      </div>
+                    </li>
+                  )}
+                </ul>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <h1 className="visually-hidden">FavoritesPage (empty)</h1>
+                <div className="favorites__status-wrapper">
+                  <b className="favorites__status">Nothing yet saved.</b>
+                  <p className="favorites__status-description">Save properties to narrow down search or plan yor future trips.</p>
+                </div>
+              </Fragment>
+            )}
           </section>
         </div>
       </main>
@@ -53,12 +65,15 @@ const Favorites = ({favoriteOffers, getFavoriteOffersAction}) => {
 };
 
 Favorites.propTypes = {
-  favoriteOffers: offersOrNullPropTypes,
+  favoriteOffersMapByCity: PropTypes.oneOfType([
+    PropTypes.instanceOf(Map),
+    PropTypes.oneOf([null]).isRequired,
+  ]),
   getFavoriteOffersAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({DATA}) => ({
-  favoriteOffers: DATA.favoriteOffers,
+  favoriteOffersMapByCity: getFavoriteOffersMapByCity({DATA}),
 });
 
 const mapDispatchToProps = (dispatch) => ({

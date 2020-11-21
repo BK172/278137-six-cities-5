@@ -11,6 +11,10 @@ import {
   redirectToRoute,
   setOfferAsFavorite
 } from "./action";
+// import {
+//   orderCitiesByList,
+//   getCitiesFromOffersList
+// } from "./selectors";
 import {
   APIRoute,
   AppRoute,

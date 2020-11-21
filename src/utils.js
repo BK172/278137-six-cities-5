@@ -7,9 +7,18 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const getFavoriteOffersByCity = (favoriteOffers, cityName) => {
-  const offers = favoriteOffers.slice();
-  return offers.filter((offer) => offer.city.name === cityName);
+export const getFavoriteOffersMapByCity = (favoriteOffers) => {
+  const map = new Map();
+
+  MarkupCitiesList.forEach((cityName) => {
+    map.set(cityName, []);
+  });
+
+  favoriteOffers.forEach((offer) => {
+    map.get(offer.city.name).push(offer);
+  });
+
+  return map;
 };
 
 export const updateOfferInOffersById = (offers, offer) => {
