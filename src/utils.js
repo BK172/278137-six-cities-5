@@ -20,26 +20,27 @@ export const updateOfferInOffersById = (offers, offer) => {
   return clonedOffers;
 };
 
-export const orderCitiesByList = (cities) => {
-  const orderedCities = [];
+export const getOffersMapByCity = (offers) => {
+  const offersMap = new Map();
 
   MarkupCitiesList.forEach((cityName) => {
-    const city = cities.find((item) => item.name === cityName);
+    offersMap.set(cityName, []);
+  });
 
-    if (city) {
-      orderedCities.push(city);
+  offers.forEach((offer) => {
+    offersMap.get(offer.city.name).push(offer);
+  });
+
+  offersMap.forEach((value, key, map) => {
+    if (!value.length) {
+      map.delete(key);
     }
   });
 
-  return orderedCities;
+  return offersMap;
 };
 
-export const getCitiesFromOffersList = (offers) => {
-  const cities = offers.map((offer) => offer.city);
-  return _.uniqWith(cities, _.isEqual);
-};
-
-export const citiesAdapter = (city) => {
+const citiesAdapter = (city) => {
   return city && {
     name: city.name,
     coordinates: [city.location.latitude, city.location.longitude],

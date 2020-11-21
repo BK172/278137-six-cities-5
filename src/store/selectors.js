@@ -1,13 +1,12 @@
 import {createSelector} from "reselect";
-import {MarkupCitiesList} from "../const";
-import _ from "lodash";
+import {getOffersMapByCity} from "../utils";
 
 const getOffers = (({DATA}) => DATA.offers);
 // export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
 const getFavoriteOffers = (({DATA}) => DATA.favoriteOffers);
 // export const getCurrentOffer = (({DATA}) => DATA.currentOffer);
 // export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
-const getCities = (({DATA}) => DATA.cities);
+// const getCities = (({DATA}) => DATA.cities);
 // export const getAuthInfo = (({DATA}) => DATA.authInfo);
 // export const getReviews = (({DATA}) => DATA.reviews);
 
@@ -18,23 +17,7 @@ const getSortingType = (({PROCESS}) => PROCESS.sortingType);
 export const getFavoriteOffersMapByCity = createSelector(
     getFavoriteOffers,
     (favoriteOffers) => {
-      const favoritesMap = new Map();
-
-      MarkupCitiesList.forEach((cityName) => {
-        favoritesMap.set(cityName, []);
-      });
-
-      favoriteOffers.forEach((offer) => {
-        favoritesMap.get(offer.city.name).push(offer);
-      });
-
-      favoritesMap.forEach((value, key, map) => {
-        if (!value.length) {
-          map.delete(key);
-        }
-      });
-
-      return favoritesMap;
+      return getOffersMapByCity(favoriteOffers);
     }
 );
 
@@ -61,27 +44,11 @@ export const getSortedOffersByPrice = createSelector(
     }
 );
 
-// export const orderCitiesByList = createSelector(
-//     getCities,
-//     (cities) => {
-//       const orderedCities = [];
-
-//       MarkupCitiesList.forEach((cityName) => {
-//         const city = cities.find((item) => item.name === cityName);
-
-//         if (city) {
-//           orderedCities.push(city);
-//         }
-//       });
-
-//       return orderedCities;
-//     }
-// );
-
-// export const getCitiesFromOffersList = createSelector(
+// export const getCities = createSelector(
 //     getOffers,
 //     (offers) => {
-//       const cities = offers.map((offer) => offer.city);
-//       return _.uniqWith(cities, _.isEqual);
+//       const cities = getOffersMapByCity(offers).values();
+
+//       return Array.from(cities);
 //     }
 // );

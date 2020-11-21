@@ -4,6 +4,7 @@ export const ActionType = {
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   GET_CITIES: `GET_CITIES`,
   GET_OFFERS: `GET_OFFERS`,
+  SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   GET_OFFERS_NEARBY: `GET_OFFERS_NEARBY`,
   GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
   GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
@@ -37,6 +38,11 @@ export const getCities = (cities) => ({
 export const getOffers = (offers) => ({
   type: ActionType.GET_OFFERS,
   payload: offers,
+});
+
+export const setCurrentOffer = (currentOffer) => ({
+  type: ActionType.SET_CURRENT_OFFER,
+  payload: currentOffer,
 });
 
 export const getOffersNearBy = (offers) => ({

@@ -4,17 +4,13 @@ import {
   getOffersNearBy,
   getFavoriteOffers,
   getCities,
-  setActiveCity,
   getAuthInfo,
   getReviews,
+  setActiveCity,
+  setOfferAsFavorite,
   requireAuthorization,
   redirectToRoute,
-  setOfferAsFavorite
 } from "./action";
-// import {
-//   orderCitiesByList,
-//   getCitiesFromOffersList
-// } from "./selectors";
 import {
   APIRoute,
   AppRoute,
@@ -24,10 +20,8 @@ import {
 } from "../const";
 import {
   offersAdapter,
-  citiesAdapter,
   reviewsAdapter,
-  orderCitiesByList,
-  getCitiesFromOffersList
+  getOffersMapByCity
 } from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -36,10 +30,10 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
       const offers = data.map((offer) => offersAdapter(offer));
       dispatch(getOffers(offers));
 
-      const cities = getCitiesFromOffersList(data).map((city) => citiesAdapter(city));
-      const orderedCities = orderCitiesByList(cities);
-      dispatch(getCities(orderedCities));
-      dispatch(setActiveCity(orderedCities[0]));
+      const cities = Array.from(getOffersMapByCity(offers).values())
+        .map((city) => city[0].city);
+      dispatch(getCities(cities));
+      dispatch(setActiveCity(cities[0]));
 
       return ResponseType.SUCCESS;
     })

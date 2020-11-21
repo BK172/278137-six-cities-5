@@ -1,11 +1,12 @@
 import {ActionType} from "./../action";
+import {getCities} from "./../selectors";
 import {extend, updateOfferInOffersById} from "../../utils";
 
 const initialState = {
   offers: [],
   offersNearBy: [],
   favoriteOffers: [],
-  // currentOffer: {},
+  currentOffer: {},
   currentRoomOffer: null,
   cities: [],
   authInfo: {},
@@ -17,6 +18,10 @@ const appData = (state = initialState, action) => {
     case ActionType.GET_OFFERS:
       return extend(state, {
         offers: action.payload
+      });
+    case ActionType.SET_CURRENT_OFFER:
+      return extend(state, {
+        currentOffer: action.payload
       });
     case ActionType.GET_OFFERS_NEARBY:
       return extend(state, {
