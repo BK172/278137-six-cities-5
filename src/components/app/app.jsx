@@ -1,5 +1,5 @@
 import React from "react";
-import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import browserHistory from "../../browser-history";
 import PrivateRoute from "../private-route/private-route";
 import PageMain from "../pages/page-main/page-main";
@@ -11,32 +11,22 @@ import {AppRoute} from "../../const";
 
 const App = () => {
   return (
-    <BrowserRouter history={browserHistory}>
+    <Router history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <PageMain />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <PageSignIn />
-        </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
+        <Route exact path={AppRoute.MAIN} component={PageMain} />
+        <Route exact path={AppRoute.LOGIN} component={PageSignIn} />
+        <PrivateRoute exact path={AppRoute.FAVORITES}
           render={() => <PageFavorites />}
         >
         </PrivateRoute>
-        <Route
-          exact
-          path={AppRoute.ROOM}
+        <Route exact path={AppRoute.ROOM}
           render={({match}) => (
             <PageRoom offerId={match.params.id} />
           )}
         />
-        <Route>
-          <PageNotFound />
-        </Route>
+        <Route component={PageNotFound} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
