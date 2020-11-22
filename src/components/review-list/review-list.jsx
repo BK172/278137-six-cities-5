@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
+import {getReviews} from "../../store/selectors";
 import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 
@@ -18,7 +19,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
           Reviews · <span className="reviews__amount">{reviews.length}</span>
         </h2>
         <ul className="reviews__list">
-          {reviews.map((item) => (
+          {reviews.slice(-10).map((item) => (
             <Review
               key={item.reviewId}
               review={item}
@@ -39,7 +40,7 @@ ReviewList.propTypes = {
 };
 
 const mapStateToProps = ({DATA}) => ({
-  reviews: DATA.reviews,
+  reviews: getReviews({DATA}),
 });
 
 const mapDispatchToProps = (dispatch) => ({

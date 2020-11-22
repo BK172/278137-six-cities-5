@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {changeSortingType} from "../../store/action";
+import {getSortingType} from "../../store/selectors";
 import {SortingTypes} from "../../const";
 import clsx from "clsx";
 
@@ -57,7 +58,7 @@ SortingOptions.propTypes = {
 };
 
 const mapStateToProps = ({PROCESS}) => ({
-  sortingType: PROCESS.sortingType,
+  sortingType: getSortingType({PROCESS}),
   changeSortingTypeAction: PROCESS.changeSortingTypeAction,
 });
 

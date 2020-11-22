@@ -1,4 +1,3 @@
-import _ from "lodash";
 import {MarkupCitiesList} from "./const";
 
 export const getElementWidthByRating = (rating) => Math.round(rating) * 20;
@@ -7,17 +6,19 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const updateOfferInOffersById = (offers, offer) => {
-  const clonedOffers = offers ? offers.slice() : [];
-  const offerIndex = clonedOffers.findIndex((item) => item.offerId === offer.offerId);
+export const updateOfferById = (offer, offers) => {
+  const offerIndex = offers.findIndex((item) => item.offerId === offer.offerId);
 
-  if (offerIndex === -1) {
-    return offers;
-  }
+  return offerIndex !== -1
+    ? [...offers.slice(0, offerIndex), offer, ...offers.slice(offerIndex + 1)]
+    : [...offers, offer];
+};
 
-  clonedOffers[offerIndex] = offer;
-
-  return clonedOffers;
+export const removeOfferById = (offer, offers) => {
+  const offerIndex = offers.findIndex((item) => item.id === offer.id);
+  return offerIndex !== -1
+    ? [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)]
+    : [...offers];
 };
 
 export const getOffersMapByCity = (offers) => {
@@ -41,7 +42,7 @@ export const getOffersMapByCity = (offers) => {
 };
 
 const citiesAdapter = (city) => {
-  return city && {
+  return {
     name: city.name,
     coordinates: [city.location.latitude, city.location.longitude],
     zoom: city.location.zoom,
@@ -49,7 +50,7 @@ const citiesAdapter = (city) => {
 };
 
 export const offersAdapter = (offer) => {
-  return offer && {
+  return {
     bedrooms: offer.bedrooms,
     city: citiesAdapter(offer.city),
     description: offer.description,
@@ -76,7 +77,7 @@ export const offersAdapter = (offer) => {
 };
 
 export const reviewsAdapter = (review) => {
-  return review && {
+  return {
     reviewId: review.id,
     avatar: review.user.avatar_url,
     name: review.user.name,

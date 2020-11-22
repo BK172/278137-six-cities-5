@@ -3,17 +3,18 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {updateOfferFavoriteStatus} from "../../store/api-actions";
+import {getAuthStatus} from "../../store/selectors";
 import {offerPropTypes} from "../../app-prop-types";
-import {AppRoute, AuthorizationStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../const";
+import {AppRoute, AuthStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../const";
 import clsx from "clsx";
 
-const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authorizationStatus}) => {
+const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStatus}) => {
   const onBookmarkBtnClick = (evt) => {
     evt.preventDefault();
     bookmarkBtnClickAction(offer.offerId, !offer.favorite);
   };
 
-  if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+  if (authStatus === AuthStatus.NO_AUTH) {
     return (
       <button
         className={
@@ -61,11 +62,11 @@ OfferBookmarkBtn.propTypes = {
   offer: offerPropTypes,
   bookmarkType: PropTypes.string.isRequired,
   bookmarkBtnClickAction: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  authStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+  authStatus: getAuthStatus({USER}),
 });
 
 const mapDispatchToProps = (dispatch) => ({

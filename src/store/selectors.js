@@ -1,18 +1,26 @@
 import {createSelector} from "reselect";
 import {getOffersMapByCity} from "../utils";
+import {SortingTypesNames} from "../const";
+import moment from "moment";
 
 const getOffers = (({DATA}) => DATA.offers);
-// export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
+export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
 const getFavoriteOffers = (({DATA}) => DATA.favoriteOffers);
-// export const getCurrentOffer = (({DATA}) => DATA.currentOffer);
-// export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
-// const getCities = (({DATA}) => DATA.cities);
+export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
+export const getCities = (({DATA}) => DATA.cities);
 // export const getAuthInfo = (({DATA}) => DATA.authInfo);
-// export const getReviews = (({DATA}) => DATA.reviews);
+export const getReviews = (({DATA}) => {
+  return DATA.reviews.sort((a, b) => {
+    return moment.utc(a.date, `DD/MM/YYYY`).diff(moment.utc(b.date, `DD/MM/YYYY`));
+  });
+});
 
-// export const getActiveOffer = (({PROCESS}) => PROCESS.activeOffer);
-const getActiveCity = (({PROCESS}) => PROCESS.activeCity);
-const getSortingType = (({PROCESS}) => PROCESS.sortingType);
+export const getActiveOffer = (({PROCESS}) => PROCESS.activeOffer);
+export const getActiveCity = (({PROCESS}) => PROCESS.activeCity);
+export const getSortingType = (({PROCESS}) => PROCESS.sortingType);
+export const getIsLoadingFlag = (({PROCESS}) => PROCESS.isLoadingFlag);
+
+export const getAuthStatus = (({USER}) => USER.authStatus);
 
 export const getFavoriteOffersMapByCity = createSelector(
     getFavoriteOffers,
@@ -32,23 +40,14 @@ export const getSortedOffersByPrice = createSelector(
     [getSortingType, getFilteredOffersByCity],
     (sortingType, offers) => {
       switch (sortingType) {
-        case `to-high`:
+        case SortingTypesNames.TO_HIGH:
           return offers.slice().sort((a, b) => a.price - b.price);
-        case `to-low`:
+        case SortingTypesNames.TO_LOW:
           return offers.slice().sort((a, b) => b.price - a.price);
-        case `top-rated`:
+        case SortingTypesNames.TOP_RATED:
           return offers.slice().sort((a, b) => b.rating - a.rating);
         default:
           return offers.slice();
       }
     }
 );
-
-// export const getCities = createSelector(
-//     getOffers,
-//     (offers) => {
-//       const cities = getOffersMapByCity(offers).values();
-
-//       return Array.from(cities);
-//     }
-// );

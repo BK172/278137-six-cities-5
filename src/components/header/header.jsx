@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {AuthorizationStatus, AppRoute} from "../../const";
+import {getAuthStatus} from "../../store/selectors";
+import {AuthStatus, AppRoute} from "../../const";
 
-// const Header = ({authorizationStatus, avatar, email}) => {
-const Header = ({authorizationStatus, email}) => {
-  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+// const Header = ({authStatus, avatar, email}) => {
+const Header = ({authStatus, email}) => {
+  const isAuthorized = authStatus === AuthStatus.AUTH;
   // const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
@@ -44,15 +45,15 @@ const Header = ({authorizationStatus, email}) => {
 };
 
 Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  authStatus: PropTypes.string.isRequired,
   // avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  // avatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
-  email: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.email : ``,
+  authStatus: getAuthStatus({USER}),
+  // avatar: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
+  email: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.email : ``,
 });
 
 export {Header};

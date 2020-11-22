@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {setActiveCity} from "../../store/action";
+import {getCities, getActiveCity} from "../../store/selectors";
 import {cityPropTypes, citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
@@ -35,8 +36,8 @@ CitiesList.propTypes = {
 };
 
 const mapStateToProps = ({DATA, PROCESS}) => ({
-  cities: DATA.cities,
-  activeCity: PROCESS.activeCity,
+  cities: getCities({DATA}),
+  activeCity: getActiveCity({PROCESS}),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,8 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {MapClasses} from "../../const";
+import {getActiveOffer, getActiveCity} from "../../store/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
+import {MapClasses} from "../../const";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
@@ -86,8 +87,8 @@ Map.propTypes = {
 };
 
 const mapStateToProps = ({PROCESS}) => ({
-  activeCity: PROCESS.activeCity,
-  activeOffer: PROCESS.activeOffer,
+  activeCity: getActiveCity({PROCESS}),
+  activeOffer: getActiveOffer({PROCESS}),
 });
 
 export {Map};

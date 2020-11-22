@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 import Header from "../header/header";
 import OffersList from "../offers-list/offers-list";
 import {fetchFavoriteOffers} from "../../store/api-actions";
-import {AppRoute, OfferType} from "../../const";
 import {getFavoriteOffersMapByCity} from "../../store/selectors";
+import {AppRoute, OfferType} from "../../const";
 
 const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   useEffect(() => {

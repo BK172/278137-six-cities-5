@@ -31,12 +31,18 @@ export const APIRoute = {
   FAVORITE: `/favorite`,
 };
 
-export const AuthorizationStatus = {
+export const AuthStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
 
-export const initialSortingType = `popular`;
+export const SortingTypesNames = {
+  POPULAR: `popular`,
+  TO_HIGH: `to-high`,
+  TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`,
+};
+
 export const SortingTypes = {
   'popular': `Popular`,
   'to-high': `Price: low to high`,
@@ -44,12 +50,16 @@ export const SortingTypes = {
   'top-rated': `Top rated first`,
 };
 
-export const MAX_PHOTOS_COUNT = 6;
+export const InitialSortingType = SortingTypesNames.POPULAR;
+
+export const MaxPhotosCount = 6;
 
 export const ReviewFormTextAreaLength = {
   MIN: 50,
   MAX: 300,
 };
+
+export const MaxReviewsOnPage = 10;
 
 export const ReviewFormRatings = [
   {mark: `5`, title: `perfect`},

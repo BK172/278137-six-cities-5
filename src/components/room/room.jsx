@@ -3,15 +3,18 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../header/header";
 import Map from "../map/map";
+import Loader from "../loader/loader";
 import OffersList from "../offers-list/offers-list";
 import ReviewList from "../review-list/review-list";
 import ReviewForm from "../review-form/review-form";
 import OfferBookmarkBtn from "../offer-bookmark-btn/offer-bookmark-btn";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
+import {getOfferById} from "../../store/action";
+import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../store/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../app-prop-types";
 import {getElementWidthByRating} from "../../utils";
-import {OfferType, MapType, BookmarkBtnType, AuthorizationStatus, MAX_PHOTOS_COUNT} from "../../const";
+import {OfferType, MapType, BookmarkBtnType, AuthStatus, MaxPhotosCount} from "../../const";
 import clsx from "clsx";
 import _ from "lodash";
 
@@ -21,16 +24,23 @@ const Room = ({
   currentRoomOffer: offer,
   getOfferByIdAction,
   getOffersNearByAction,
-  authorizationStatus
+  updateCurrentOfferAction,
+  isLoadingFlag,
+  authStatus
 }) => {
   useEffect(() => {
     getOfferByIdAction(offerId);
     getOffersNearByAction(offerId);
-  }, [offerId, offer]);
+    return () => updateCurrentOfferAction();
+  }, [offerId]);
 
-  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+  const isAuthorized = authStatus === AuthStatus.AUTH;
 
-  if (!offerId || _.isEmpty(offersNearBy) || _.isEmpty(offer)) {
+  if (isLoadingFlag) {
+    return <Loader />;
+  } else if (!isLoadingFlag &&
+    (!offerId || _.isEmpty(offersNearBy) || _.isEmpty(offer))
+  ) {
     return <PageNotFound />;
   }
 
@@ -41,7 +51,7 @@ const Room = ({
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.photos.slice(0, MAX_PHOTOS_COUNT).map((item) => (
+              {offer.photos.slice(0, MaxPhotosCount).map((item) => (
                 <div key={item} className="property__image-wrapper">
                   <img className="property__image" src={item} alt="Photo studio" />
                 </div>
@@ -143,13 +153,16 @@ Room.propTypes = {
   currentRoomOffer: offerOrNullPropTypes,
   getOfferByIdAction: PropTypes.func.isRequired,
   getOffersNearByAction: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  updateCurrentOfferAction: PropTypes.func.isRequired,
+  authStatus: PropTypes.string.isRequired,
+  isLoadingFlag: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({DATA, USER}) => ({
-  offersNearBy: DATA.offersNearBy,
-  currentRoomOffer: DATA.currentRoomOffer,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = ({DATA, PROCESS, USER}) => ({
+  offersNearBy: getOffersNearBy({DATA}),
+  currentRoomOffer: getCurrentRoomOffer({DATA}),
+  authStatus: getAuthStatus({USER}),
+  isLoadingFlag: getIsLoadingFlag({PROCESS}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -158,6 +171,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getOffersNearByAction(offerId) {
     dispatch(fetchOffersNearBy(offerId));
+  },
+  updateCurrentOfferAction() {
+    dispatch(getOfferById(null));
   },
 });
 

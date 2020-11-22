@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {setActiveOffer} from "../../store/action";
 import OfferCard from "../offer-card/offer-card";
+import {setActiveOffer} from "../../store/action";
+import {getActiveOffer} from "../../store/selectors";
 import {offersPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 
 class OffersList extends PureComponent {
@@ -53,7 +54,7 @@ OffersList.propTypes = {
 };
 
 const mapStateToProps = ({PROCESS}) => ({
-  activeOffer: PROCESS.activeOffer,
+  activeOffer: getActiveOffer({PROCESS}),
   setActiveOfferAction: PROCESS.setActiveOfferAction,
 });
 

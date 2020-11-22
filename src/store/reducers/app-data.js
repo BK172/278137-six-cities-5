@@ -1,12 +1,10 @@
 import {ActionType} from "./../action";
-import {getCities} from "./../selectors";
-import {extend, updateOfferInOffersById} from "../../utils";
+import {extend, updateOfferById, removeOfferById} from "../../utils";
 
 const initialState = {
   offers: [],
   offersNearBy: [],
   favoriteOffers: [],
-  currentOffer: {},
   currentRoomOffer: null,
   cities: [],
   authInfo: {},
@@ -18,10 +16,6 @@ const appData = (state = initialState, action) => {
     case ActionType.GET_OFFERS:
       return extend(state, {
         offers: action.payload
-      });
-    case ActionType.SET_CURRENT_OFFER:
-      return extend(state, {
-        currentOffer: action.payload
       });
     case ActionType.GET_OFFERS_NEARBY:
       return extend(state, {
@@ -49,9 +43,18 @@ const appData = (state = initialState, action) => {
       });
     case ActionType.SET_OFFER_AS_FAVORITE:
       return extend(state, {
-        offers: updateOfferInOffersById(state.offers, action.payload),
-        offersNearBy: updateOfferInOffersById(state.offersNearBy, action.payload),
-        favoriteOffers: updateOfferInOffersById(state.favoriteOffers, action.payload),
+        // offers: updateOfferById(state.offers, action.payload),
+        // offersNearBy: updateOfferById(state.offersNearBy, action.payload),
+        // favoriteOffers: updateOfferById(state.favoriteOffers, action.payload),
+        offers: updateOfferById(action.payload, state.offers),
+        offersNearBy: state.currentRoomOffer && (
+          state.currentRoomOffer.offerId !== action.payload.offerId) ?
+          updateOfferById(action.payload, state.offersNearBy) : state.offersNearBy,
+        favoriteOffers: action.payload.favorite ?
+          updateOfferById(action.payload, state.offers) : removeOfferById(action.payload, state.favoriteOffers),
+        currentRoomOffer: state.currentRoomOffer && (
+          state.currentRoomOffer.offerId === action.payload.offerId) ?
+          action.payload : state.currentRoomOffer,
       });
   }
   return state;

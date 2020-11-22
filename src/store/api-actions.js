@@ -10,13 +10,14 @@ import {
   setOfferAsFavorite,
   requireAuthorization,
   redirectToRoute,
+  isLoading
 } from "./action";
 import {
   APIRoute,
   AppRoute,
   HttpCode,
   ResponseType,
-  AuthorizationStatus
+  AuthStatus
 } from "../const";
 import {
   offersAdapter,
@@ -42,7 +43,8 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
     })
 );
 
-export const fetchOfferById = (offerId) => (dispatch, _getState, api) => (
+export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
+  dispatch(isLoading(true));
   api.get(`${APIRoute.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = offersAdapter(data);
@@ -50,10 +52,11 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => (
 
       return ResponseType.SUCCESS;
     })
+    .then(() => dispatch(isLoading(false)))
     .catch((err) => {
       throw err;
-    })
-);
+    });
+};
 
 export const fetchOffersNearBy = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${offerId}/nearby`)
@@ -72,7 +75,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(requireAuthorization(AuthStatus.AUTH));
         dispatch(getAuthInfo(response.data));
 
         return ResponseType.SUCCESS;
@@ -89,7 +92,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(APIRoute.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(requireAuthorization(AuthStatus.AUTH));
         dispatch(getAuthInfo(response.data));
 
         return ResponseType.SUCCESS;
