@@ -2,13 +2,13 @@ import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import Header from "../header/header";
-import OffersList from "../offers-list/offers-list";
-import {fetchFavoriteOffers} from "../../store/api-actions";
-import {getFavoriteOffersMapByCity} from "../../store/selectors";
-import {AppRoute, OfferType} from "../../const";
+import Header from "../../header/header";
+import OffersList from "../../offers-list/offers-list";
+import {fetchFavoriteOffers} from "../../../store/api-actions";
+import {getFavoriteOffersMapByCity} from "../../../store/selectors";
+import {AppRoute, OfferType} from "../../../const";
 
-const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
+const PageFavorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   useEffect(() => {
     getFavoriteOffersAction();
   }, []);
@@ -34,8 +34,8 @@ const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
                       </div>
                       <div className="favorites__places">
                         <OffersList
-                          offers={favoriteOffersMapByCity.get(cityName)}
                           offerType={OfferType.FAVORITE}
+                          offers={favoriteOffersMapByCity.get(cityName)}
                         />
                       </div>
                     </li>
@@ -63,7 +63,7 @@ const Favorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   );
 };
 
-Favorites.propTypes = {
+PageFavorites.propTypes = {
   favoriteOffersMapByCity: PropTypes.instanceOf(Map).isRequired,
   getFavoriteOffersAction: PropTypes.func.isRequired,
 };
@@ -78,5 +78,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Favorites};
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export {PageFavorites};
+export default connect(mapStateToProps, mapDispatchToProps)(PageFavorites);

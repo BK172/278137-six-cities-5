@@ -5,10 +5,9 @@ import {Link} from "react-router-dom";
 import {getAuthStatus} from "../../store/selectors";
 import {AuthStatus, AppRoute} from "../../const";
 
-// const Header = ({authStatus, avatar, email}) => {
-const Header = ({authStatus, email}) => {
+const Header = ({authStatus, avatar, email}) => {
   const isAuthorized = authStatus === AuthStatus.AUTH;
-  // const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
+  const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
     <header className="header">
@@ -28,7 +27,7 @@ const Header = ({authStatus, email}) => {
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
-                    // style={isAuthorized ? avatarBgrImage : undefined}
+                    style={isAuthorized ? avatarBgrImage : undefined}
                   >
                   </div>
                   <span className="header__user-name user__name">
@@ -46,13 +45,13 @@ const Header = ({authStatus, email}) => {
 
 Header.propTypes = {
   authStatus: PropTypes.string.isRequired,
-  // avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
   authStatus: getAuthStatus({USER}),
-  // avatar: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
+  avatar: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.avatar_url : ``,
   email: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.email : ``,
 });
 

@@ -1,24 +1,24 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Header from "../header/header";
-import Map from "../map/map";
-import Loader from "../loader/loader";
-import OffersList from "../offers-list/offers-list";
-import ReviewList from "../review-list/review-list";
-import ReviewForm from "../review-form/review-form";
-import OfferBookmarkBtn from "../offer-bookmark-btn/offer-bookmark-btn";
+import Header from "../../header/header";
+import Map from "../../map/map";
+import OffersList from "../../offers-list/offers-list";
+import ReviewsList from "../../reviews-list/reviews-list";
+import ReviewForm from "../../review-form/review-form";
+import OfferBookmarkBtn from "../../offer-bookmark-btn/offer-bookmark-btn";
+import PageLoading from "../page-loading/page-loading";
 import PageNotFound from "../page-not-found/page-not-found";
-import {fetchOfferById, fetchOffersNearBy} from "../../store/api-actions";
-import {getOfferById} from "../../store/action";
-import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../store/selectors";
-import {offerOrNullPropTypes, offersPropTypes} from "../../app-prop-types";
-import {getElementWidthByRating} from "../../utils";
-import {OfferType, MapType, BookmarkBtnType, AuthStatus, MaxPhotosCount} from "../../const";
+import {fetchOfferById, fetchOffersNearBy} from "../../../store/api-actions";
+import {getOfferById} from "../../../store/action";
+import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../../store/selectors";
+import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
+import {getElementWidthByRating} from "../../../utils";
+import {OfferType, MapType, BookmarkBtnType, AuthStatus, MaxPhotosCount} from "../../../const";
 import clsx from "clsx";
 import _ from "lodash";
 
-const Room = ({
+const PageRoom = ({
   offerId,
   offersNearBy,
   currentRoomOffer: offer,
@@ -31,16 +31,15 @@ const Room = ({
   useEffect(() => {
     getOfferByIdAction(offerId);
     getOffersNearByAction(offerId);
+
     return () => updateCurrentOfferAction();
   }, [offerId]);
 
   const isAuthorized = authStatus === AuthStatus.AUTH;
 
   if (isLoadingFlag) {
-    return <Loader />;
-  } else if (!isLoadingFlag &&
-    (!offerId || _.isEmpty(offersNearBy) || _.isEmpty(offer))
-  ) {
+    return <PageLoading />;
+  } else if (!isLoadingFlag && (!offerId || _.isEmpty(offer))) {
     return <PageNotFound />;
   }
 
@@ -127,18 +126,22 @@ const Room = ({
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewList offerId={offerId} />
+                <ReviewsList offerId={offerId} />
                 {isAuthorized && <ReviewForm offerId={offerId} />}
               </section>
             </div>
           </div>
-          <Map mapType={MapType.ROOM} offers={offersNearBy} />
+          {!_.isEmpty(offersNearBy) && (
+            <Map mapType={MapType.ROOM} offers={offersNearBy} />
+          )}
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OffersList offers={offersNearBy} offerType={OfferType.ROOM} />
+              {!_.isEmpty(offersNearBy) && (
+                <OffersList offerType={OfferType.ROOM} offers={offersNearBy} />
+              )}
             </div>
           </section>
         </div>
@@ -147,7 +150,7 @@ const Room = ({
   );
 };
 
-Room.propTypes = {
+PageRoom.propTypes = {
   offerId: PropTypes.string.isRequired,
   offersNearBy: offersPropTypes,
   currentRoomOffer: offerOrNullPropTypes,
@@ -177,5 +180,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Room};
-export default connect(mapStateToProps, mapDispatchToProps)(Room);
+export {PageRoom};
+export default connect(mapStateToProps, mapDispatchToProps)(PageRoom);

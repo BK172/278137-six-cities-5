@@ -1,10 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
+import {AppRoute} from "../../../const";
 
 const PageNotFound = () => {
   return (
-    <div style={{marginLeft: `20px`}}>
+    <div className="container">
       <h1>404</h1>
       <p><b>Page not found</b></p>
       <p>

@@ -1,12 +1,3 @@
-export const MarkupCitiesList = [
-  `Paris`,
-  `Cologne`,
-  `Brussels`,
-  `Amsterdam`,
-  `Hamburg`,
-  `Dusseldorf`,
-];
-
 export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
@@ -52,7 +43,20 @@ export const SortingTypes = {
 
 export const InitialSortingType = SortingTypesNames.POPULAR;
 
+export const MarkupCitiesList = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`,
+];
+
 export const MaxPhotosCount = 6;
+
+export const ReviewDateFormat = `MMMM YYYY`;
+
+export const ReviewRatingElementWidth = 20;
 
 export const ReviewFormTextAreaLength = {
   MIN: 50,

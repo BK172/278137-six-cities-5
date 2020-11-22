@@ -22,7 +22,7 @@ import {
 import {
   offersAdapter,
   reviewsAdapter,
-  getOffersMapByCity
+  getCitiesFromOffers
 } from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -31,8 +31,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
       const offers = data.map((offer) => offersAdapter(offer));
       dispatch(getOffers(offers));
 
-      const cities = Array.from(getOffersMapByCity(offers).values())
-        .map((city) => city[0].city);
+      const cities = getCitiesFromOffers(offers);
       dispatch(getCities(cities));
       dispatch(setActiveCity(cities[0]));
 
@@ -54,6 +53,8 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
     })
     .then(() => dispatch(isLoading(false)))
     .catch((err) => {
+      dispatch(isLoading(false));
+
       throw err;
     });
 };
@@ -119,11 +120,13 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
     })
 );
 
-export const postReview = ({review: comment, rating, offerId, onClearFormFields, onChangeFormResponseStatus}) => (dispatch, _getState, api) => (
+export const postReview = ({review: comment, rating, offerId,
+  onClearFormFields, onChangeFormResponseStatus}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
       dispatch(getReviews(reviews));
+
       onChangeFormResponseStatus(false);
       onClearFormFields();
 

@@ -1,6 +1,9 @@
-import {MarkupCitiesList} from "./const";
+import {MarkupCitiesList, ReviewDateFormat, ReviewRatingElementWidth} from "./const";
+import moment from "moment";
 
-export const getElementWidthByRating = (rating) => Math.round(rating) * 20;
+export const getElementWidthByRating = (rating) => Math.round(rating) * ReviewRatingElementWidth;
+
+export const getReviewDate = (date) => moment(date).format(ReviewDateFormat);
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -16,20 +19,27 @@ export const updateOfferById = (offer, offers) => {
 
 export const removeOfferById = (offer, offers) => {
   const offerIndex = offers.findIndex((item) => item.id === offer.id);
+
   return offerIndex !== -1
     ? [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)]
     : [...offers];
 };
 
+const capitalizeWord = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+};
+
 export const getOffersMapByCity = (offers) => {
   const offersMap = new Map();
+  const citiesList = MarkupCitiesList.map((city) => capitalizeWord(city));
 
-  MarkupCitiesList.forEach((cityName) => {
+  citiesList.forEach((cityName) => {
     offersMap.set(cityName, []);
   });
 
   offers.forEach((offer) => {
-    offersMap.get(offer.city.name).push(offer);
+    const cityName = capitalizeWord(offer.city.name);
+    offersMap.get(cityName).push(offer);
   });
 
   offersMap.forEach((value, key, map) => {
@@ -41,7 +51,12 @@ export const getOffersMapByCity = (offers) => {
   return offersMap;
 };
 
-const citiesAdapter = (city) => {
+export const getCitiesFromOffers = (offers) => {
+  return Array.from(getOffersMapByCity(offers).values())
+    .map((city) => city[0].city);
+};
+
+const cityAdapter = (city) => {
   return {
     name: city.name,
     coordinates: [city.location.latitude, city.location.longitude],
@@ -49,18 +64,22 @@ const citiesAdapter = (city) => {
   };
 };
 
+const hostAdapter = (host) => {
+  return {
+    id: host.id,
+    avatar: host.avatar_url,
+    name: host.name,
+    isPro: host.is_pro,
+  };
+};
+
 export const offersAdapter = (offer) => {
   return {
     bedrooms: offer.bedrooms,
-    city: citiesAdapter(offer.city),
+    city: cityAdapter(offer.city),
     description: offer.description,
     facilities: offer.goods,
-    owner: {
-      id: offer.host.id,
-      avatar: offer.host.avatar_url,
-      name: offer.host.name,
-      isPro: offer.host.is_pro,
-    },
+    owner: hostAdapter(offer.host),
     offerId: offer.id,
     photos: offer.images,
     favorite: offer.is_favorite,

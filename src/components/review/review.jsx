@@ -1,7 +1,6 @@
 import React from "react";
-import moment from "moment";
 import {reviewPropTypes} from "../../app-prop-types";
-import {getElementWidthByRating} from "../../utils";
+import {getElementWidthByRating, getReviewDate} from "../../utils";
 
 const Review = ({review}) => {
   return (
@@ -32,7 +31,7 @@ const Review = ({review}) => {
         </p>
         <time
           className="reviews__time"
-          dateTime={review.date}>{moment(review.date, `YYYY-MM-DD`).format(`MMMM YYYY`)}
+          dateTime={review.date}>{getReviewDate(review.date)}
         </time>
       </div>
     </li>

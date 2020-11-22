@@ -24,7 +24,9 @@ class ReviewForm extends PureComponent {
   componentDidUpdate() {
     const {rating, review} = this.state;
 
-    if (rating && review.length >= ReviewFormTextAreaLength.MIN && review.length <= ReviewFormTextAreaLength.MAX) {
+    if (rating && review.length >=
+        ReviewFormTextAreaLength.MIN && review.length <= ReviewFormTextAreaLength.MAX
+    ) {
       this.setState({isFormValid: true});
     } else {
       this.setState({isFormValid: false});
@@ -53,8 +55,6 @@ class ReviewForm extends PureComponent {
     this.setState({
       rating: ``,
       review: ``,
-      // ???
-      isFormValid: false,
     });
   }
 
@@ -104,7 +104,8 @@ class ReviewForm extends PureComponent {
           <button
             className="reviews__submit form__submit button"
             type="submit"
-            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse ? `` : `disabled`}
+            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse
+              ? `` : `disabled`}
           >
             Submit
           </button>

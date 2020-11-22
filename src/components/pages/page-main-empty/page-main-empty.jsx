@@ -1,9 +1,9 @@
-import React, {memo} from "react";
-import Header from "../header/header";
-import CitiesList from "../cities-list/cities-list";
-import {cityPropTypes} from "../../app-prop-types";
+import React from "react";
+import Header from "../../header/header";
+import CitiesList from "../../cities-list/cities-list";
+import {cityPropTypes} from "../../../app-prop-types";
 
-const MainEmpty = ({activeCity}) => {
+const PageMainEmpty = ({activeCity}) => {
   return (
     <div className="page page--gray page--main page__main--index-empty">
       <Header />
@@ -33,8 +33,8 @@ const MainEmpty = ({activeCity}) => {
   );
 };
 
-MainEmpty.propTypes = {
+PageMainEmpty.propTypes = {
   activeCity: cityPropTypes,
 };
 
-export default memo(MainEmpty);
+export default PageMainEmpty;

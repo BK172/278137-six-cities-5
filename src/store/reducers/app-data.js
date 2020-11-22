@@ -43,9 +43,6 @@ const appData = (state = initialState, action) => {
       });
     case ActionType.SET_OFFER_AS_FAVORITE:
       return extend(state, {
-        // offers: updateOfferById(state.offers, action.payload),
-        // offersNearBy: updateOfferById(state.offersNearBy, action.payload),
-        // favoriteOffers: updateOfferById(state.favoriteOffers, action.payload),
         offers: updateOfferById(action.payload, state.offers),
         offersNearBy: state.currentRoomOffer && (
           state.currentRoomOffer.offerId !== action.payload.offerId) ?

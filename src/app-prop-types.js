@@ -7,6 +7,13 @@ export const cityPropTypes = PropTypes.shape({
   zoom: PropTypes.number.isRequired,
 }).isRequired;
 
+export const hostPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isPro: PropTypes.bool.isRequired,
+}).isRequired;
+
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.number.isRequired,
   favorite: PropTypes.bool.isRequired,
@@ -24,12 +31,7 @@ export const offerPropTypes = PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
   guests: PropTypes.number.isRequired,
   facilities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  owner: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    isPro: PropTypes.bool.isRequired,
-  }),
+  owner: hostPropTypes,
 }).isRequired;
 
 export const reviewPropTypes = PropTypes.shape({
@@ -55,10 +57,5 @@ export const reviewsPropTypes = PropTypes.arrayOf(reviewPropTypes).isRequired;
 
 export const offerOrNullPropTypes = PropTypes.oneOfType([
   offerPropTypes,
-  PropTypes.oneOf([null]).isRequired,
-]);
-
-export const offersOrNullPropTypes = PropTypes.oneOfType([
-  PropTypes.arrayOf(offerPropTypes),
   PropTypes.oneOf([null]).isRequired,
 ]);

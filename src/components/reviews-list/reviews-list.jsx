@@ -4,10 +4,11 @@ import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
 import {getReviews} from "../../store/selectors";
+import {MaxReviewsOnPage} from "../../const";
 import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 
-const ReviewList = ({offerId, reviews, getReviewsAction}) => {
+const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
   useEffect(() => {
     getReviewsAction(offerId);
   }, [offerId]);
@@ -19,7 +20,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
           Reviews · <span className="reviews__amount">{reviews.length}</span>
         </h2>
         <ul className="reviews__list">
-          {reviews.slice(-10).map((item) => (
+          {reviews.slice(-MaxReviewsOnPage).map((item) => (
             <Review
               key={item.reviewId}
               review={item}
@@ -33,7 +34,7 @@ const ReviewList = ({offerId, reviews, getReviewsAction}) => {
   return null;
 };
 
-ReviewList.propTypes = {
+ReviewsList.propTypes = {
   offerId: PropTypes.string.isRequired,
   reviews: reviewsPropTypes,
   getReviewsAction: PropTypes.func.isRequired,
@@ -49,5 +50,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {ReviewList};
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);
+export {ReviewsList};
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsList);

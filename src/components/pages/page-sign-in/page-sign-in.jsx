@@ -2,11 +2,11 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import Header from "../header/header";
-import {login} from "../../store/api-actions";
-import {AppRoute} from "../../const";
+import Header from "../../header/header";
+import {login} from "../../../store/api-actions";
+import {AppRoute} from "../../../const";
 
-class SignIn extends PureComponent {
+class PageSignIn extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -74,7 +74,7 @@ class SignIn extends PureComponent {
   }
 }
 
-SignIn.propTypes = {
+PageSignIn.propTypes = {
   onSubmitAction: PropTypes.func.isRequired,
 };
 
@@ -84,5 +84,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {SignIn};
-export default connect(undefined, mapDispatchToProps)(SignIn);
+export {PageSignIn};
+export default connect(undefined, mapDispatchToProps)(PageSignIn);

@@ -1,21 +1,22 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import Header from "../header/header";
-import MainEmpty from "../main-empty/main-empty";
-import OffersList from "../offers-list/offers-list";
-import CitiesList from "../cities-list/cities-list";
-import SortingOptions from "../sorting-options/sorting-options";
-import Map from "../map/map";
-import {getSortedOffersByPrice, getActiveCity} from "../../store/selectors";
-import {offersPropTypes, cityPropTypes} from "../../app-prop-types";
-import {OfferType, MapType} from "../../const";
+import Header from "../../header/header";
+import PageMainEmpty from "../page-main-empty/page-main-empty";
+import OffersList from "../../offers-list/offers-list";
+import CitiesList from "../../cities-list/cities-list";
+import SortingOptions from "../../sorting-options/sorting-options";
+import Map from "../../map/map";
+import {getSortedOffersByPrice, getActiveCity} from "../../../store/selectors";
+import {offersPropTypes, cityPropTypes} from "../../../app-prop-types";
+import {OfferType, MapType} from "../../../const";
+import _ from "lodash";
 
-class Main extends PureComponent {
+class PageMain extends PureComponent {
   render() {
     const {offers, activeCity} = this.props;
 
-    if (!offers.length) {
-      return <MainEmpty activeCity={activeCity} />;
+    if (_.isEmpty(offers)) {
+      return <PageMainEmpty activeCity={activeCity} />;
     }
 
     return (
@@ -35,7 +36,7 @@ class Main extends PureComponent {
                 <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
                 <SortingOptions />
                 <div className="cities__places-list places__list tabs__content">
-                  <OffersList offers={offers} offerType={OfferType.MAIN} />
+                  <OffersList offerType={OfferType.MAIN} offers={offers} />
                 </div>
               </section>
               <div className="cities__right-section">
@@ -49,7 +50,7 @@ class Main extends PureComponent {
   }
 }
 
-Main.propTypes = {
+PageMain.propTypes = {
   offers: offersPropTypes,
   activeCity: cityPropTypes,
 };
@@ -59,5 +60,5 @@ const mapStateToProps = ({DATA, PROCESS}) => ({
   activeCity: getActiveCity({PROCESS}),
 });
 
-export {Main};
-export default connect(mapStateToProps)(Main);
+export {PageMain};
+export default connect(mapStateToProps)(PageMain);
