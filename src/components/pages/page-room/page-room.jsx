@@ -14,7 +14,7 @@ import {getOfferById} from "../../../store/action";
 import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../../store/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
 import {getElementWidthByRating} from "../../../utils";
-import {OfferType, MapType, BookmarkBtnType, AuthStatus, MaxPhotosCount} from "../../../const";
+import {OfferType, MapType, BookmarkBtnType, AuthStatus, MAX_PHOTOS_COUNT} from "../../../const";
 import clsx from "clsx";
 import _ from "lodash";
 
@@ -50,7 +50,7 @@ const PageRoom = ({
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.photos.slice(0, MaxPhotosCount).map((item) => (
+              {offer.photos.slice(0, MAX_PHOTOS_COUNT).map((item) => (
                 <div key={item} className="property__image-wrapper">
                   <img className="property__image" src={item} alt="Photo studio" />
                 </div>

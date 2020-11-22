@@ -1,9 +1,13 @@
-import {MarkupCitiesList, ReviewDateFormat, ReviewRatingElementWidth} from "./const";
+import {
+  MARKUP_CITIES_LIST,
+  REVIEW_DATE_FORMAT,
+  REVIEW_RATING_ELEMENT_WIDTH
+} from "./const";
 import moment from "moment";
 
-export const getElementWidthByRating = (rating) => Math.round(rating) * ReviewRatingElementWidth;
+export const getElementWidthByRating = (rating) => Math.round(rating) * REVIEW_RATING_ELEMENT_WIDTH;
 
-export const getReviewDate = (date) => moment(date).format(ReviewDateFormat);
+export const getReviewDate = (date) => moment(date).format(REVIEW_DATE_FORMAT);
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -31,7 +35,7 @@ const capitalizeWord = (word) => {
 
 export const getOffersMapByCity = (offers) => {
   const offersMap = new Map();
-  const citiesList = MarkupCitiesList.map((city) => capitalizeWord(city));
+  const citiesList = MARKUP_CITIES_LIST.map((city) => capitalizeWord(city));
 
   citiesList.forEach((cityName) => {
     offersMap.set(cityName, []);

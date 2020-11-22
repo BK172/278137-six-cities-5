@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
 import {getReviews} from "../../store/selectors";
-import {MaxReviewsOnPage} from "../../const";
+import {MAX_REVIEWS_ON_PAGE} from "../../const";
 import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 
@@ -20,7 +20,7 @@ const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
           Reviews · <span className="reviews__amount">{reviews.length}</span>
         </h2>
         <ul className="reviews__list">
-          {reviews.slice(-MaxReviewsOnPage).map((item) => (
+          {reviews.slice(-MAX_REVIEWS_ON_PAGE).map((item) => (
             <Review
               key={item.reviewId}
               review={item}

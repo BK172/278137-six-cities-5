@@ -41,9 +41,9 @@ export const SortingTypes = {
   'top-rated': `Top rated first`,
 };
 
-export const InitialSortingType = SortingTypesNames.POPULAR;
+export const INITIAL_SORTING_TYPE = SortingTypesNames.POPULAR;
 
-export const MarkupCitiesList = [
+export const MARKUP_CITIES_LIST = [
   `Paris`,
   `Cologne`,
   `Brussels`,
@@ -52,18 +52,16 @@ export const MarkupCitiesList = [
   `Dusseldorf`,
 ];
 
-export const MaxPhotosCount = 6;
+export const MAX_PHOTOS_COUNT = 6;
 
-export const ReviewDateFormat = `MMMM YYYY`;
-
-export const ReviewRatingElementWidth = 20;
+export const REVIEW_DATE_FORMAT = `MMMM YYYY`;
+export const REVIEW_RATING_ELEMENT_WIDTH = 20;
+export const MAX_REVIEWS_ON_PAGE = 10;
 
 export const ReviewFormTextAreaLength = {
   MIN: 50,
   MAX: 300,
 };
-
-export const MaxReviewsOnPage = 10;
 
 export const ReviewFormRatings = [
   {mark: `5`, title: `perfect`},

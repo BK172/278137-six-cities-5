@@ -1,11 +1,11 @@
 import {ActionType} from "./../action";
-import {InitialSortingType} from "../../const";
+import {INITIAL_SORTING_TYPE} from "../../const";
 import {extend} from "../../utils";
 
 const initialState = {
   activeOffer: null,
   activeCity: {},
-  sortingType: InitialSortingType,
+  sortingType: INITIAL_SORTING_TYPE,
   isLoadingFlag: false,
 };
 
