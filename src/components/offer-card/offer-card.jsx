@@ -18,7 +18,7 @@ const OfferCard = ({
       onMouseOver={onOfferCardMouseOver}
       onMouseOut={onOfferCardMouseOut}
     >
-      {offer.premium && (
+      {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>

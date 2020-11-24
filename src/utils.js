@@ -87,7 +87,7 @@ export const offersAdapter = (offer) => {
     offerId: offer.id,
     photos: offer.images,
     isFavorite: offer.is_favorite,
-    premium: offer.is_premium,
+    isPremium: offer.is_premium,
     coordinates: [offer.location.latitude, offer.location.longitude],
     zoom: offer.location.zoom,
     guests: offer.max_adults,

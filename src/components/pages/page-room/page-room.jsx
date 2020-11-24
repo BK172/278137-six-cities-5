@@ -59,7 +59,7 @@ const PageRoom = ({
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.premium && (
+              {offer.isPremium && (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>

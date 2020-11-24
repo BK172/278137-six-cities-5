@@ -21,7 +21,7 @@ export const offerPropTypes = PropTypes.shape({
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  premium: PropTypes.bool.isRequired,
+  isPremium: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
