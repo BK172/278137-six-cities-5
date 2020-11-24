@@ -13,6 +13,7 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   OFFER: `/offer`,
   ROOM: `/offer/:id`,
+  ERROR: `/error`,
 };
 
 export const APIRoute = {

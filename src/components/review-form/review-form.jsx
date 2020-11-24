@@ -2,7 +2,7 @@ import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 import {postReview} from "../../store/api-actions";
 import {connect} from "react-redux";
-import {ReviewFormTextAreaLength, ReviewFormRatings} from "../../const";
+import {ReviewFormTextAreaLength, ReviewFormRatings, ResponseType} from "../../const";
 
 class ReviewForm extends PureComponent {
   constructor(props) {
@@ -13,6 +13,7 @@ class ReviewForm extends PureComponent {
       review: ``,
       isFormValid: false,
       isFormWaitingResponse: false,
+      postReviewStatus: ``,
     };
 
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
@@ -41,9 +42,18 @@ class ReviewForm extends PureComponent {
     const rating = this.state.rating;
     const onClearFormFields = this._handleClearFormFields;
     const onChangeFormWaitingFlag = this._handleChangeFormWaitingFlag;
+    const onChangePostReviewStatus = this._handleChangePostReviewStatus;
 
     this._handleChangeFormWaitingFlag(true);
-    postReviewAction({review, rating, offerId, onClearFormFields, onChangeFormWaitingFlag});
+    this._handleChangePostReviewStatus(``);
+    postReviewAction({
+      review,
+      rating,
+      offerId,
+      onClearFormFields,
+      onChangeFormWaitingFlag,
+      onChangePostReviewStatus,
+    });
   }
 
   _handleInputChange({target}) {
@@ -61,6 +71,12 @@ class ReviewForm extends PureComponent {
   _handleChangeFormWaitingFlag(isWaitingFlag) {
     this.setState(() => ({
       isFormWaitingResponse: isWaitingFlag,
+    }));
+  }
+
+  _handleChangePostReviewStatus(postReviewStatus) {
+    this.setState(() => ({
+      postReviewStatus,
     }));
   }
 
@@ -110,6 +126,11 @@ class ReviewForm extends PureComponent {
             Submit
           </button>
         </div>
+        {this.state.postReviewStatus === ResponseType.ERROR && (
+          <p className="reviews__error-container" style={{color: `orangered`, textAlign: `right`}}>
+            posting review error
+          </p>
+        )}
       </form>
     );
   }

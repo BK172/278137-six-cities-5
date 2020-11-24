@@ -10,19 +10,19 @@ import {
   setOfferAsFavorite,
   requireAuthorization,
   redirectToRoute,
-  isLoading
+  isLoading,
 } from "./action";
 import {
   APIRoute,
   AppRoute,
   HttpCode,
   ResponseType,
-  AuthStatus
+  AuthStatus,
 } from "../const";
 import {
   offersAdapter,
   reviewsAdapter,
-  getCitiesFromOffers
+  getCitiesFromOffers,
 } from "../utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -38,7 +38,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
@@ -55,7 +55,7 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
     .catch((err) => {
       dispatch(isLoading(false));
 
-      throw err;
+      return err;
     });
 };
 
@@ -68,7 +68,7 @@ export const fetchOffersNearBy = (offerId) => (dispatch, _getState, api) => (
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
@@ -85,7 +85,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
       }
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
@@ -103,7 +103,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
@@ -116,12 +116,12 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
 export const postReview = ({review: comment, rating, offerId,
-  onClearFormFields, onChangeFormResponseStatus}) => (dispatch, _getState, api) => (
+  onClearFormFields, onChangeFormResponseStatus, onChangePostReviewStatus}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
@@ -129,11 +129,13 @@ export const postReview = ({review: comment, rating, offerId,
 
       onChangeFormResponseStatus(false);
       onClearFormFields();
+      onChangePostReviewStatus(ResponseType.SUCCESS);
 
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      onChangePostReviewStatus(ResponseType.ERROR);
+      return err;
     })
 );
 
@@ -150,7 +152,7 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
       }
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
@@ -163,6 +165,6 @@ export const updateOfferFavoriteStatus = (offerId, isFavorite) => (dispatch, _ge
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
