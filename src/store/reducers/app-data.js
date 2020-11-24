@@ -47,7 +47,7 @@ const appData = (state = initialState, action) => {
         offersNearBy: state.currentRoomOffer && (
           state.currentRoomOffer.offerId !== action.payload.offerId) ?
           updateOfferById(action.payload, state.offersNearBy) : state.offersNearBy,
-        favoriteOffers: action.payload.favorite ?
+        favoriteOffers: action.payload.isFavorite ?
           updateOfferById(action.payload, state.offers) : removeOfferById(action.payload, state.favoriteOffers),
         currentRoomOffer: state.currentRoomOffer && (
           state.currentRoomOffer.offerId === action.payload.offerId) ?

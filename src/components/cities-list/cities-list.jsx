@@ -17,7 +17,8 @@ const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
       {cities.map((city) => (
         <li className="locations__item" key={city.name}>
           <a
-            className={clsx(`locations__item-link tabs__item`, {'tabs__item--active': activeCity.name === city.name})}
+            className={clsx(`locations__item-link tabs__item`,
+                {'tabs__item--active': activeCity.name === city.name})}
             href="#"
             onClick={(evt) => onLocationClick(evt, city)}
           >

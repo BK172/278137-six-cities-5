@@ -11,7 +11,7 @@ import clsx from "clsx";
 const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStatus}) => {
   const onBookmarkBtnClick = (evt) => {
     evt.preventDefault();
-    bookmarkBtnClickAction(offer.offerId, !offer.favorite);
+    bookmarkBtnClickAction(offer.offerId, !offer.isFavorite);
   };
 
   if (authStatus === AuthStatus.NO_AUTH) {
@@ -19,7 +19,7 @@ const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStat
       <button
         className={
           clsx(BookmarkBtnClasses[bookmarkType][`btn`],
-              {[BookmarkBtnClasses[bookmarkType][`btnActive`]]: offer.favorite})
+              {[BookmarkBtnClasses[bookmarkType][`btnActive`]]: offer.isFavorite})
         }
         type="button"
       >
@@ -31,7 +31,7 @@ const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStat
           >
             <use xlinkHref="#icon-bookmark" />
           </svg>
-          <span className="visually-hidden">{offer.favorite ? `In` : `To`} bookmarks</span>
+          <span className="visually-hidden">{offer.isFavorite ? `In` : `To`} bookmarks</span>
         </Link>
       </button>
     );
@@ -41,7 +41,7 @@ const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStat
     <button
       className={
         clsx(BookmarkBtnClasses[bookmarkType][`btn`],
-            {[BookmarkBtnClasses[bookmarkType][`btnActive`]]: offer.favorite})
+            {[BookmarkBtnClasses[bookmarkType][`btnActive`]]: offer.isFavorite})
       }
       type="button"
       onClick={onBookmarkBtnClick}
@@ -53,7 +53,7 @@ const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStat
       >
         <use xlinkHref="#icon-bookmark" />
       </svg>
-      <span className="visually-hidden">{offer.favorite ? `In` : `To`} bookmarks</span>
+      <span className="visually-hidden">{offer.isFavorite ? `In` : `To`} bookmarks</span>
     </button>
   );
 };

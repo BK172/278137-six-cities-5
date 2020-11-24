@@ -16,7 +16,7 @@ export const hostPropTypes = PropTypes.shape({
 
 export const offerPropTypes = PropTypes.shape({
   offerId: PropTypes.number.isRequired,
-  favorite: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   city: cityPropTypes,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired,

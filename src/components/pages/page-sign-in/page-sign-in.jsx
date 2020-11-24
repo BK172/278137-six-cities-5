@@ -17,9 +17,10 @@ class PageSignIn extends PureComponent {
   }
 
   _handleSubmit(evt) {
+    evt.preventDefault();
+
     const {onSubmitAction} = this.props;
 
-    evt.preventDefault();
     onSubmitAction({
       login: this.loginRef.current.value,
       password: this.passwordRef.current.value,

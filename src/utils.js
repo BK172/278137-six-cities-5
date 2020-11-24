@@ -86,7 +86,7 @@ export const offersAdapter = (offer) => {
     owner: hostAdapter(offer.host),
     offerId: offer.id,
     photos: offer.images,
-    favorite: offer.is_favorite,
+    isFavorite: offer.is_favorite,
     premium: offer.is_premium,
     coordinates: [offer.location.latitude, offer.location.longitude],
     zoom: offer.location.zoom,

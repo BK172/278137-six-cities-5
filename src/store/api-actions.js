@@ -136,6 +136,7 @@ export const postReview = ({review: comment, rating, offerId,
     .catch((err) => {
       onChangeFormWaitingFlag(false);
       onChangePostReviewStatus(ResponseType.ERROR);
+
       return err;
     })
 );
