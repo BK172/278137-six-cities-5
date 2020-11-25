@@ -2,14 +2,17 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {offerPropTypes, citiesPropTypes, activeOfferPropTypes} from "../../app-prop-types";
+import {getActiveOffer, getActiveCity} from "../../store/selectors";
+import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
+import {MapClasses} from "../../constants";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
   componentDidMount() {
     const {offers, activeCity} = this.props;
-    const center = activeCity.coordinates;
-    const zoom = activeCity.zoom;
+    const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
+    const center = city.coordinates;
+    const zoom = city.zoom;
 
     this.markers = [];
     this.icon = leaflet.icon({
@@ -39,8 +42,9 @@ class Map extends PureComponent {
 
   componentDidUpdate() {
     const {offers, activeCity} = this.props;
-    const center = activeCity.coordinates;
-    const zoom = activeCity.zoom;
+    const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
+    const center = city.coordinates;
+    const zoom = city.zoom;
 
     this._removeMarkers();
     this._addMarkers(offers);
@@ -71,25 +75,20 @@ class Map extends PureComponent {
 
   render() {
     const {mapType} = this.props;
-    const mapClasses = {
-      cities: `cities__map`,
-      property: `property__map`
-    };
-
-    return <section id="map" className={`${mapClasses[mapType]} map`}></section>;
+    return <section id="map" className={`${MapClasses[mapType]} map`}></section>;
   }
 }
 
 Map.propTypes = {
   mapType: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeCity: citiesPropTypes,
-  activeOffer: activeOfferPropTypes,
+  offers: offersPropTypes,
+  activeCity: cityPropTypes,
+  activeOffer: offerOrNullPropTypes,
 };
 
 const mapStateToProps = ({PROCESS}) => ({
-  activeCity: PROCESS.activeCity,
-  activeOffer: PROCESS.activeOffer,
+  activeCity: getActiveCity({PROCESS}),
+  activeOffer: getActiveOffer({PROCESS}),
 });
 
 export {Map};

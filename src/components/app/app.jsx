@@ -1,54 +1,33 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import {connect} from "react-redux";
 import PrivateRoute from "../private-route/private-route";
-import Main from "../main/main";
-import SignIn from "../sign-in/sign-in";
-import Favorites from "../favorites/favorites";
-import Room from "../room/room";
-import {getFilteredOffers} from "../../store/selectors";
-import {offerPropTypes, reviewPropTypes} from "../../app-prop-types";
-import {AppRoute} from "../../utils";
+import PageMain from "../pages/page-main/page-main";
+import PageSignIn from "../pages/page-sign-in/page-sign-in";
+import PageFavorites from "../pages/page-favorites/page-favorites";
+import PageRoom from "../pages/page-room/page-room";
+import PageNotFound from "../pages/page-not-found/page-not-found";
+import {AppRoute} from "../../constants";
 
-const App = ({offers, reviews}) => {
+const App = () => {
   return (
-    <BrowserRouter history={browserHistory}>
+    <Router history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <Main />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn />
-        </Route>
-        <PrivateRoute exact path={AppRoute.FAVORITES}>
-          <Favorites />
+        <Route exact path={AppRoute.MAIN} component={PageMain} />
+        <Route exact path={AppRoute.LOGIN} component={PageSignIn} />
+        <PrivateRoute exact path={AppRoute.FAVORITES}
+          render={() => <PageFavorites />}
+        >
         </PrivateRoute>
-        <Route
-          exact
-          path={AppRoute.ROOM}
+        <Route exact path={AppRoute.ROOM}
           render={({match}) => (
-            <Room
-              offerId={match.params.id}
-              offers={offers}
-              reviews={reviews}
-            />
+            <PageRoom offerId={match.params.id} />
           )}
         />
+        <Route component={PageNotFound} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
-App.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
-};
-
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  offers: getFilteredOffers({DATA, PROCESS}),
-});
-
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;

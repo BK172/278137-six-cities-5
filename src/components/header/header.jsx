@@ -2,17 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {AuthorizationStatus, AppRoute} from "../../utils";
+import {getAuthStatus} from "../../store/selectors";
+import {AuthStatus, AppRoute} from "../../constants";
 
-const Header = ({authorizationStatus, avatar, email}) => {
-  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+const Header = ({authStatus, avatar, email}) => {
+  const isAuthorized = authStatus === AuthStatus.AUTH;
+  const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link" to={`/`}>
+            <Link className="header__logo-link" to={AppRoute.MAIN}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
             </Link>
           </div>
@@ -25,7 +27,7 @@ const Header = ({authorizationStatus, avatar, email}) => {
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
-                    style={isAuthorized ? {backgroundImage: `url(${avatar})`} : undefined}
+                    style={isAuthorized ? avatarBgrImage : undefined}
                   >
                   </div>
                   <span className="header__user-name user__name">
@@ -42,15 +44,15 @@ const Header = ({authorizationStatus, avatar, email}) => {
 };
 
 Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  authStatus: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  avatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.avatarUrl : ``,
-  email: USER.authorizationStatus === AuthorizationStatus.AUTH ? DATA.authInfo.email : ``,
+  authStatus: getAuthStatus({USER}),
+  avatar: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.avatar_url : ``,
+  email: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.email : ``,
 });
 
 export {Header};

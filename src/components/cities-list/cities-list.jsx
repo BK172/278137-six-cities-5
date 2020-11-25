@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {setActiveCity} from "../../store/action";
-import {citiesPropTypes} from "../../app-prop-types";
+import {getCities, getActiveCity} from "../../store/selectors";
+import {cityPropTypes, citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 
 const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
@@ -16,7 +17,8 @@ const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
       {cities.map((city) => (
         <li className="locations__item" key={city.name}>
           <a
-            className={clsx(`locations__item-link tabs__item`, {'tabs__item--active': activeCity.name === city.name})}
+            className={clsx(`locations__item-link tabs__item`,
+                {'tabs__item--active': activeCity.name === city.name})}
             href="#"
             onClick={(evt) => onLocationClick(evt, city)}
           >
@@ -29,14 +31,14 @@ const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(citiesPropTypes).isRequired,
-  activeCity: citiesPropTypes,
+  cities: citiesPropTypes,
+  activeCity: cityPropTypes,
   setActiveCityAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({DATA, PROCESS}) => ({
-  cities: DATA.cities,
-  activeCity: PROCESS.activeCity,
+  cities: getCities({DATA}),
+  activeCity: getActiveCity({PROCESS}),
 });
 
 const mapDispatchToProps = (dispatch) => ({

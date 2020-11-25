@@ -1,10 +1,12 @@
 import {ActionType} from "./../action";
-import {extend, initialSortingType} from "../../utils";
+import {INITIAL_SORTING_TYPE} from "../../constants";
+import {extend} from "../../utils";
 
 const initialState = {
   activeOffer: null,
-  activeCity: null,
-  sortingType: initialSortingType,
+  activeCity: {},
+  sortingType: INITIAL_SORTING_TYPE,
+  isLoadingFlag: false,
 };
 
 const appProcess = (state = initialState, action) => {
@@ -20,6 +22,10 @@ const appProcess = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload
+      });
+    case ActionType.IS_LOADING:
+      return extend(state, {
+        isLoadingFlag: action.payload
       });
   }
   return state;

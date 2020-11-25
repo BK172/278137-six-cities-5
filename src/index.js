@@ -5,17 +5,20 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {createAPI} from "./services/api";
-import rootReducer from "./store/reducers/root-reducer";
 import App from "./components/app/app";
+import PageError from "./components/pages/page-error/page-error";
+import rootReducer from "./store/reducers/root-reducer";
 import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {requireAuthorization} from "./store/action";
 import {redirect} from "./store/middlewares/redirect";
-import {AuthorizationStatus} from "./utils";
+import {AuthStatus, ResponseType} from "./constants";
 
-import reviews from "./mocks/reviews";
+const checkResponseSuccess = (response) => {
+  return response.every((item) => item === ResponseType.SUCCESS);
+};
 
 const api = createAPI(
-    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+    () => store.dispatch(requireAuthorization(AuthStatus.NO_AUTH))
 );
 
 const store = createStore(
@@ -27,15 +30,20 @@ const store = createStore(
 );
 
 Promise.all([
-  store.dispatch(fetchOffersList()),
   store.dispatch(checkAuth()),
-]).then(() => {
-  ReactDOM.render(
-      <Provider store={store}>
-        <App
-          reviews={reviews}
-        />
-      </Provider>,
-      document.querySelector(`#root`)
-  );
+  store.dispatch(fetchOffersList()),
+]).then((response) => {
+  if (checkResponseSuccess(response)) {
+    ReactDOM.render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  } else {
+    ReactDOM.render(
+        <PageError />,
+        document.querySelector(`#root`)
+    );
+  }
 });

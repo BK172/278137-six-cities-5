@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {changeSortingType} from "../../store/action";
-import {SortingTypes} from "../../utils";
+import {getSortingType} from "../../store/selectors";
+import {SortingTypes} from "../../constants";
 import clsx from "clsx";
 
 const SortingOptions = ({
@@ -31,12 +32,14 @@ const SortingOptions = ({
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={clsx(`places__options places__options--custom`, {'places__options--opened': isToggleActive})}>
+      <ul className={clsx(`places__options places__options--custom`,
+          {'places__options--opened': isToggleActive})}>
         {
           Object.keys(SortingTypes).map((item) => (
             <li
               key={item}
-              className={clsx(`places__option`, {'places__option--active': sortingType === item})}
+              className={clsx(`places__option`,
+                  {'places__option--active': sortingType === item})}
               tabIndex={0}
               onClick={() => onListItemClick(item)}
             >
@@ -57,7 +60,7 @@ SortingOptions.propTypes = {
 };
 
 const mapStateToProps = ({PROCESS}) => ({
-  sortingType: PROCESS.sortingType,
+  sortingType: getSortingType({PROCESS}),
   changeSortingTypeAction: PROCESS.changeSortingTypeAction,
 });
 

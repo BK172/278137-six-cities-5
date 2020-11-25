@@ -1,5 +1,5 @@
 import axios from "axios";
-import {HttpCode} from "../utils";
+import {HttpCode} from "../constants";
 
 const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
@@ -18,7 +18,6 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
-
       return response;
     }
 
