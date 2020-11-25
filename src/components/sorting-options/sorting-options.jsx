@@ -5,7 +5,7 @@ import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {changeSortingType} from "../../store/action";
 import {getSortingType} from "../../store/selectors";
-import {SortingTypes} from "../../const";
+import {SortingTypes} from "../../constants";
 import clsx from "clsx";
 
 const SortingOptions = ({

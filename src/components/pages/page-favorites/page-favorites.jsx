@@ -6,7 +6,7 @@ import Header from "../../header/header";
 import OffersList from "../../offers-list/offers-list";
 import {fetchFavoriteOffers} from "../../../store/api-actions";
 import {getFavoriteOffersMapByCity} from "../../../store/selectors";
-import {AppRoute, OfferType} from "../../../const";
+import {AppRoute, OfferType} from "../../../constants";
 
 const PageFavorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
   useEffect(() => {

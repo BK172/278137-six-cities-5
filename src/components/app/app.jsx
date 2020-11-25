@@ -7,7 +7,7 @@ import PageSignIn from "../pages/page-sign-in/page-sign-in";
 import PageFavorites from "../pages/page-favorites/page-favorites";
 import PageRoom from "../pages/page-room/page-room";
 import PageNotFound from "../pages/page-not-found/page-not-found";
-import {AppRoute} from "../../const";
+import {AppRoute} from "../../constants";
 
 const App = () => {
   return (

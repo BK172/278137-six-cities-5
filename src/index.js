@@ -11,7 +11,7 @@ import rootReducer from "./store/reducers/root-reducer";
 import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {requireAuthorization} from "./store/action";
 import {redirect} from "./store/middlewares/redirect";
-import {AuthStatus, ResponseType} from "./const";
+import {AuthStatus, ResponseType} from "./constants";
 
 const checkResponseSuccess = (response) => {
   return response.every((item) => item === ResponseType.SUCCESS);

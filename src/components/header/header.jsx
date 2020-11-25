@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getAuthStatus} from "../../store/selectors";
-import {AuthStatus, AppRoute} from "../../const";
+import {AuthStatus, AppRoute} from "../../constants";
 
 const Header = ({authStatus, avatar, email}) => {
   const isAuthorized = authStatus === AuthStatus.AUTH;

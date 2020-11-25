@@ -4,7 +4,7 @@ import {
   REVIEW_RATING_ELEMENT_WIDTH,
   INITIAL_SORTING_TYPE,
   AuthStatus
-} from "./const";
+} from "./constants";
 import {NameSpace} from "./store/reducers/root-reducer";
 import moment from "moment";
 

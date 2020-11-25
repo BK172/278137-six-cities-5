@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import leaflet from "leaflet";
 import {getActiveOffer, getActiveCity} from "../../store/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
-import {MapClasses} from "../../const";
+import {MapClasses} from "../../constants";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {

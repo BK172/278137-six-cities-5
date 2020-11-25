@@ -14,7 +14,7 @@ import {getOfferById} from "../../../store/action";
 import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../../store/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
 import {getElementWidthByRating} from "../../../utils";
-import {OfferType, MapType, BookmarkBtnType, AuthStatus, MAX_PHOTOS_COUNT} from "../../../const";
+import {OfferType, MapType, BookmarkBtnType, AuthStatus, MAX_PHOTOS_COUNT} from "../../../constants";
 import clsx from "clsx";
 import _ from "lodash";
 
@@ -37,10 +37,10 @@ const PageRoom = ({
 
   const isAuthorized = authStatus === AuthStatus.AUTH;
 
-  if (isLoadingFlag) {
-    return <PageLoading />;
-  } else if (!isLoadingFlag && (!offerId || _.isEmpty(offer))) {
+  if (!offerId || _.isEmpty(offer)) {
     return <PageNotFound />;
+  } else if (isLoadingFlag) {
+    return <PageLoading />;
   }
 
   return (

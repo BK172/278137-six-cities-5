@@ -1,5 +1,5 @@
 import {ActionType} from "../action";
-import {AuthStatus} from "../../const";
+import {AuthStatus} from "../../constants";
 import {extend} from "../../utils";
 
 const initialState = {

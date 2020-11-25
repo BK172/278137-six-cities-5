@@ -18,7 +18,7 @@ import {
   HttpCode,
   ResponseType,
   AuthStatus,
-} from "../const";
+} from "../constants";
 import {
   offersAdapter,
   reviewsAdapter,

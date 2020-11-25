@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
 import {getReviews} from "../../store/selectors";
-import {MAX_REVIEWS_ON_PAGE} from "../../const";
+import {MAX_REVIEWS_ON_PAGE} from "../../constants";
 import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import OfferBookmarkBtn from "../offer-bookmark-btn/offer-bookmark-btn";
-import {AppRoute, OfferClasses, OfferImgShapes, BookmarkBtnType} from "../../const";
+import {AppRoute, OfferClasses, OfferImgShapes, BookmarkBtnType} from "../../constants";
 import {getElementWidthByRating} from "../../utils";
 import {offerPropTypes} from "../../app-prop-types";
 

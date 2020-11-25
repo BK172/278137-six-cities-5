@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {updateOfferFavoriteStatus} from "../../store/api-actions";
 import {getAuthStatus} from "../../store/selectors";
 import {offerPropTypes} from "../../app-prop-types";
-import {AppRoute, AuthStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../const";
+import {AppRoute, AuthStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../constants";
 import clsx from "clsx";
 
 const OfferBookmarkBtn = ({offer, bookmarkType, bookmarkBtnClickAction, authStatus}) => {

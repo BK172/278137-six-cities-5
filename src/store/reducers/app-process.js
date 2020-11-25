@@ -1,5 +1,5 @@
 import {ActionType} from "./../action";
-import {INITIAL_SORTING_TYPE} from "../../const";
+import {INITIAL_SORTING_TYPE} from "../../constants";
 import {extend} from "../../utils";
 
 const initialState = {

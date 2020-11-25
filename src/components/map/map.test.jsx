@@ -30,7 +30,9 @@ it(`Should Map render correctly`, () => {
             activeCity={mockCity}
             activeOffer={mockOffer}
           />
-        </Provider>
+        </Provider>, {
+          createNodeMock: () => document.createElement(`<div id="map"></div>`)
+        }
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

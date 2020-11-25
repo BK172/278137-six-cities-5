@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 import {getOffersMapByCity} from "../utils";
-import {SortingTypesNames} from "../const";
+import {SortingTypesNames} from "../constants";
 import moment from "moment";
 
 export const getOffers = (({DATA}) => DATA.offers);

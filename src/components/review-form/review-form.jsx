@@ -2,7 +2,7 @@ import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 import {postReview} from "../../store/api-actions";
 import {connect} from "react-redux";
-import {ReviewFormTextAreaLength, ReviewFormRatings, ResponseType} from "../../const";
+import {ReviewFormTextAreaLength, ReviewFormRatings, ResponseType} from "../../constants";
 
 class ReviewForm extends PureComponent {
   constructor(props) {

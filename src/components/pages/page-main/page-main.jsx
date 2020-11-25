@@ -8,7 +8,7 @@ import SortingOptions from "../../sorting-options/sorting-options";
 import Map from "../../map/map";
 import {getSortedOffersByPrice, getActiveCity} from "../../../store/selectors";
 import {offersPropTypes, cityPropTypes} from "../../../app-prop-types";
-import {OfferType, MapType} from "../../../const";
+import {OfferType, MapType} from "../../../constants";
 import _ from "lodash";
 
 const PageMain = ({offers, activeCity}) => {
