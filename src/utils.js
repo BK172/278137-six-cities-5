@@ -1,8 +1,11 @@
 import {
   MARKUP_CITIES_LIST,
   REVIEW_DATE_FORMAT,
-  REVIEW_RATING_ELEMENT_WIDTH
+  REVIEW_RATING_ELEMENT_WIDTH,
+  INITIAL_SORTING_TYPE,
+  AuthStatus
 } from "./const";
+import {NameSpace} from "./store/reducers/root-reducer";
 import moment from "moment";
 
 export const getElementWidthByRating = (rating) => Math.round(rating) * REVIEW_RATING_ELEMENT_WIDTH;
@@ -111,3 +114,82 @@ export const reviewsAdapter = (review) => {
     userId: review.user.id,
   };
 };
+
+export const mockCity = {
+  name: `Paris`,
+  coordinates: [52.3909553943508, 4.85309666406398],
+  zoom: 12,
+};
+
+export const mockCities = [mockCity];
+
+export const mockHost = {
+  avatar: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
+  id: 1,
+  isPro: false,
+  name: `qwerty`,
+};
+
+export const mockOffer = {
+  bedrooms: 3,
+  city: mockCity,
+  description: `A new spacious villa, one floor. All commodities.`,
+  facilities: [`Heating`, `Kitchen`, `Cable TV`],
+  owner: mockHost,
+  offerId: 1,
+  photos: [`https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`],
+  isFavorite: false,
+  isPremium: true,
+  coordinates: [52.3909553943508, 4.85309666406398],
+  zoom: 12,
+  guests: 2,
+  image: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`,
+  price: 1500,
+  rating: 5,
+  title: `Beautiful & luxurious studio at great location`,
+  type: `apartment`,
+};
+
+export const mockOffers = [mockOffer];
+
+export const mockReview = {
+  reviewId: 10,
+  avatar: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
+  name: `Qwerty`,
+  rating: 5,
+  comment: `What an amazing view! The house is stunning and in an amazing location.`,
+  isPro: true,
+  date: new Date(`2020-11-23T21:00:00.000Z`),
+  userId: 20,
+};
+
+export const mockReviews = [mockReview];
+
+export const mockAuthInfo = {
+  'avatar_url': `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
+  'email': `qwerty@qwerty.ru`,
+  'id': 1,
+  'is_pro': false,
+  'name': `qwerty`,
+};
+
+export const makeInitialStateMock = () => ({
+  [NameSpace.DATA]: {
+    offers: [mockOffer],
+    offersNearBy: [mockOffer],
+    favoriteOffers: [mockOffer],
+    currentRoomOffer: mockOffer,
+    cities: [mockCity],
+    authInfo: mockAuthInfo,
+    reviews: [mockReview],
+  },
+  [NameSpace.PROCESS]: {
+    activeOffer: mockOffer,
+    activeCity: mockCity,
+    sortingType: INITIAL_SORTING_TYPE,
+    isLoadingFlag: false,
+  },
+  [NameSpace.USER]: {
+    authStatus: AuthStatus.AUTH,
+  }
+});

@@ -36,10 +36,10 @@ export const SortingTypesNames = {
 };
 
 export const SortingTypes = {
-  'popular': `Popular`,
-  'to-high': `Price: low to high`,
-  'to-low': `Price: high to low`,
-  'top-rated': `Top rated first`,
+  [SortingTypesNames.POPULAR]: `Popular`,
+  [SortingTypesNames.TO_HIGH]: `Price: low to high`,
+  [SortingTypesNames.TO_LOW]: `Price: high to low`,
+  [SortingTypesNames.TOP_RATED]: `Top rated first`,
 };
 
 export const INITIAL_SORTING_TYPE = SortingTypesNames.POPULAR;
