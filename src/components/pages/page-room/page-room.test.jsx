@@ -3,6 +3,8 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
+import {createAPI} from "../../../services/api";
+import thunk from "redux-thunk";
 import {PageRoom} from "./page-room";
 import {makeInitialStateMock, mockOffers, mockOffer} from "../../../utils";
 import {AuthStatus} from "../../../constants";
@@ -21,11 +23,8 @@ jest.mock(`leaflet`, () => ({
   }),
 }));
 
-const emptyStr = ``;
-const nullValue = null;
-
 describe(`Should PageRoom render correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
+  const store = configureStore([thunk.withExtraArgument(createAPI(() => false))])(makeInitialStateMock());
 
   it(`Should PageRoom render correctly if offerId is not defined`, () => {
     const tree = renderer
@@ -33,7 +32,7 @@ describe(`Should PageRoom render correctly`, () => {
           <Provider store={store}>
             <BrowserRouter>
               <PageRoom
-                offerId={emptyStr}
+                offerId={``}
                 offersNearBy={mockOffers}
                 currentRoomOffer={mockOffer}
                 getOfferByIdAction={()=>{}}
@@ -57,7 +56,7 @@ describe(`Should PageRoom render correctly`, () => {
               <PageRoom
                 offerId={`1`}
                 offersNearBy={mockOffers}
-                currentRoomOffer={nullValue}
+                currentRoomOffer={null}
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
@@ -93,47 +92,47 @@ describe(`Should PageRoom render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // it(`Should PageRoom render correctly if authStatus={AuthStatus.AUTH}`, () => {
-  //   const tree = renderer
-  //     .create(
-  //         <Provider store={store}>
-  //           <BrowserRouter>
-  //             <PageRoom
-  //               offerId={`1`}
-  //               offersNearBy={mockOffers}
-  //               currentRoomOffer={mockOffer}
-  //               getOfferByIdAction={()=>{}}
-  //               getOffersNearByAction={()=>{}}
-  //               updateCurrentOfferAction={()=>{}}
-  //               authStatus={AuthStatus.AUTH}
-  //               isLoadingFlag={false}
-  //             />
-  //           </BrowserRouter>
-  //         </Provider>
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it(`Should PageRoom render correctly if authStatus={AuthStatus.AUTH}`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <BrowserRouter>
+              <PageRoom
+                offerId={`1`}
+                offersNearBy={mockOffers}
+                currentRoomOffer={mockOffer}
+                getOfferByIdAction={()=>{}}
+                getOffersNearByAction={()=>{}}
+                updateCurrentOfferAction={()=>{}}
+                authStatus={AuthStatus.AUTH}
+                isLoadingFlag={false}
+              />
+            </BrowserRouter>
+          </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-  // it(`Should PageRoom render correctly if isLoadingFlag true`, () => {
-  //   const tree = renderer
-  //     .create(
-  //         <Provider store={store}>
-  //           <BrowserRouter>
-  //             <PageRoom
-  //               offerId={`1`}
-  //               offersNearBy={mockOffers}
-  //               currentRoomOffer={mockOffer}
-  //               getOfferByIdAction={()=>{}}
-  //               getOffersNearByAction={()=>{}}
-  //               updateCurrentOfferAction={()=>{}}
-  //               authStatus={AuthStatus.AUTH}
-  //               isLoadingFlag={true}
-  //             />
-  //           </BrowserRouter>
-  //         </Provider>
-  //     )
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it(`Should PageRoom render correctly if isLoadingFlag true`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <BrowserRouter>
+              <PageRoom
+                offerId={`1`}
+                offersNearBy={mockOffers}
+                currentRoomOffer={mockOffer}
+                getOfferByIdAction={()=>{}}
+                getOffersNearByAction={()=>{}}
+                updateCurrentOfferAction={()=>{}}
+                authStatus={AuthStatus.AUTH}
+                isLoadingFlag={true}
+              />
+            </BrowserRouter>
+          </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
