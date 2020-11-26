@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {makeInitialStateMock, mockOffers, mockOffer, mockCity} from "../../utils";
 import {Map} from "./map";
+import {makeInitialStateMock, mockOffers, mockOffer, mockCity} from "../../utils";
 
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
@@ -24,14 +25,16 @@ it(`Should Map render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Map
-            mapType={`main`}
-            offers={mockOffers}
-            activeCity={mockCity}
-            activeOffer={mockOffer}
-          />
+          <BrowserRouter>
+            <Map
+              mapType={`main`}
+              offers={mockOffers}
+              activeCity={mockCity}
+              activeOffer={mockOffer}
+            />
+          </BrowserRouter>
         </Provider>, {
-          createNodeMock: () => document.createElement(`<div id="map"></div>`)
+          createNodeMock: () => document.createElement(`div`)
         }
     )
     .toJSON();
