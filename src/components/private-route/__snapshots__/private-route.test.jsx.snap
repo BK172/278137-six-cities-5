@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PrivateRoute render correctly Should PrivateRoute render correctly authStatus={AuthStatus.AUTH} 1`] = `null`;
+
+exports[`Should PrivateRoute render correctly Should PrivateRoute render correctly authStatus={AuthStatus.NO_AUTH} 1`] = `null`;
