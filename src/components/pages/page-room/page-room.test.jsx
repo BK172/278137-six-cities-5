@@ -19,7 +19,8 @@ jest.mock(`leaflet`, () => ({
     addTo: jest.fn()
   }),
   marker: jest.fn().mockReturnValue({
-    addTo: jest.fn()
+    addTo: jest.fn(),
+    removeFrom: jest.fn()
   }),
 }));
 
