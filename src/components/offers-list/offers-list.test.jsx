@@ -11,10 +11,10 @@ it(`Should OffersList render correctly`, () => {
     .create(
         <Provider store={store}>
           <OffersList
-              offers={mockOffers}
-              offerType={`MAIN`}
-              activeOffer={mockOffer}
-              setActiveOfferAction={()=>{}}
+            offers={mockOffers}
+            offerType={`MAIN`}
+            activeOffer={mockOffer}
+            setActiveOfferAction={()=>{}}
           />
         </Provider>
     )

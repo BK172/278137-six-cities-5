@@ -1,6 +1,5 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {Map} from "./map";
@@ -25,14 +24,12 @@ it(`Should Map render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
-            <Map
-              mapType={`main`}
-              offers={mockOffers}
-              activeCity={mockCity}
-              activeOffer={mockOffer}
-            />
-          </BrowserRouter>
+          <Map
+            mapType={`main`}
+            offers={mockOffers}
+            activeCity={mockCity}
+            activeOffer={mockOffer}
+          />
         </Provider>, {
           createNodeMock: () => document.createElement(`div`)
         }

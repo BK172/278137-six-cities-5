@@ -1,22 +1,34 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import {ReviewsList} from "./reviews-list";
-import {makeInitialStateMock, mockReviews} from "../../utils";
+import {SortingOptions} from "./sorting-options";
+import {INITIAL_SORTING_TYPE} from "../../constants";
 
-it(`Should ReviewsList render correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <ReviewsList
-            offerId={1}
-            reviews={mockReviews}
-            getReviewsAction={()=>{}}
+describe(`Should SortingOptions render correctly`, () => {
+  it(`Should SortingOptions render correctly if isToggleActive true`, () => {
+    const tree = renderer
+      .create(
+          <SortingOptions
+            sortingType={INITIAL_SORTING_TYPE}
+            changeSortingTypeAction={()=>{}}
+            isToggleActive={true}
+            onToggleChange={()=>{}}
           />
-        </Provider>
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Should SortingOptions render correctly if isToggleActive false`, () => {
+    const tree = renderer
+      .create(
+          <SortingOptions
+            sortingType={INITIAL_SORTING_TYPE}
+            changeSortingTypeAction={()=>{}}
+            isToggleActive={false}
+            onToggleChange={()=>{}}
+          />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
