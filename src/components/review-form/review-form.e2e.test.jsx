@@ -5,12 +5,12 @@ import {ReviewForm} from "./review-form";
 
 configure({adapter: new Adapter()});
 
-it(`Click on submit button`, () => {
+it(`Click on submit button ReviewForm`, () => {
   const postReviewAction = jest.fn();
 
   const wrapper = shallow(
       <ReviewForm
-        offerId={1}
+        offerId={`1`}
         postReviewAction={postReviewAction}
       />
   );

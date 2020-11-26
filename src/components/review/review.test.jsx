@@ -1,8 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {Review} from "./review";
+import Review from "./review";
 import {makeInitialStateMock, mockReview} from "../../utils";
 
 it(`Should Review render correctly`, () => {
@@ -10,9 +11,11 @@ it(`Should Review render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Review
-            review={mockReview}
-          />
+          <BrowserRouter>
+            <Review
+              review={mockReview}
+            />
+          </BrowserRouter>
         </Provider>
     )
     .toJSON();

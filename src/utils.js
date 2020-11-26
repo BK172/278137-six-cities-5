@@ -153,8 +153,10 @@ export const mockOffer = {
 export const mockOffers = [mockOffer];
 
 const mockOffersMapByCity = new Map();
+const mockOffersMapByCityEmpty = new Map();
+
 mockOffersMapByCity.set(`Paris`, mockOffers);
-export {mockOffersMapByCity};
+export {mockOffersMapByCity, mockOffersMapByCityEmpty};
 
 export const mockReview = {
   reviewId: 10,

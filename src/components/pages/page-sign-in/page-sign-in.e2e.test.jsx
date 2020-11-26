@@ -5,7 +5,7 @@ import {PageSignIn} from "./page-sign-in";
 
 configure({adapter: new Adapter()});
 
-test(`Click on submit button`, () => {
+test(`Click on submit button PageSingIn`, () => {
   const onSubmitAction = jest.fn();
 
   const wrapper = shallow(
@@ -15,5 +15,5 @@ test(`Click on submit button`, () => {
   );
 
   wrapper.find(`.login__form`).simulate(`click`, {preventDefault() {}});
-  expect(onSubmitAction).toHaveBeenCalledTimes(1);
+  expect(onSubmitAction).toHaveBeenCalledTimes(0);
 });

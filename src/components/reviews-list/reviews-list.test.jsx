@@ -11,7 +11,7 @@ it(`Should ReviewsList render correctly`, () => {
     .create(
         <Provider store={store}>
           <ReviewsList
-            offerId={1}
+            offerId={`1`}
             reviews={mockReviews}
             getReviewsAction={()=>{}}
           />

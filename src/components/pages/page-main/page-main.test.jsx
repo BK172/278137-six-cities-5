@@ -3,8 +3,22 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {PageMain} from "./main-page";
+import {PageMain} from "./page-main";
 import {makeInitialStateMock, mockOffers, mockCity} from "../../../utils";
+
+jest.mock(`leaflet`, () => ({
+  icon: jest.fn(),
+  map: jest.fn().mockReturnValue({
+    setView: jest.fn(),
+    remove: jest.fn()
+  }),
+  tileLayer: jest.fn().mockReturnValue({
+    addTo: jest.fn()
+  }),
+  marker: jest.fn().mockReturnValue({
+    addTo: jest.fn()
+  }),
+}));
 
 describe(`Should PageMain render correctly`, () => {
   const store = configureStore()(makeInitialStateMock());
@@ -19,9 +33,7 @@ describe(`Should PageMain render correctly`, () => {
                 activeCity={mockCity}
               />
             </BrowserRouter>
-          </Provider>, {
-            createNodeMock: () => document.createElement(`div`)
-          }
+          </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -37,9 +49,7 @@ describe(`Should PageMain render correctly`, () => {
                 activeCity={mockCity}
               />
             </BrowserRouter>
-          </Provider>, {
-            createNodeMock: () => document.createElement(`div`)
-          }
+          </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

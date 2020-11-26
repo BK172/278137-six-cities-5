@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {BrowserRouter} from "react-router-dom";
-import {OfferBookmarkBtn} from "./offer-bookmark";
+import {OfferBookmarkBtn} from "./offer-bookmark-btn";
 import {makeInitialStateMock, mockOffer} from "../../utils";
 import {AuthStatus} from "../../constants";
 

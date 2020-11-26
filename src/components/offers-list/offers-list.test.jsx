@@ -1,5 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {OffersList} from "./offers-list";
@@ -10,12 +11,14 @@ it(`Should OffersList render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <OffersList
-            offers={mockOffers}
-            offerType={`MAIN`}
-            activeOffer={mockOffer}
-            setActiveOfferAction={()=>{}}
-          />
+          <BrowserRouter>
+            <OffersList
+              offers={mockOffers}
+              offerType={`MAIN`}
+              activeOffer={mockOffer}
+              setActiveOfferAction={()=>{}}
+            />
+          </BrowserRouter>
         </Provider>
     )
     .toJSON();

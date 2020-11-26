@@ -6,38 +6,40 @@ import {INITIAL_SORTING_TYPE} from "../../constants";
 
 configure({adapter: new Adapter()});
 
-it(`Click on sort menu item`, () => {
-  const changeSortingTypeAction = jest.fn();
-  const onToggleChange = jest.fn();
+describe(`SortingOptions e2e tests`, () => {
+  test(`Click on sort menu item`, () => {
+    const changeSortingTypeAction = jest.fn();
+    const onToggleChange = jest.fn();
 
-  const wrapper = shallow(
-      <SortingOptions
-        sortingType={INITIAL_SORTING_TYPE}
-        changeSortingTypeAction={changeSortingTypeAction}
-        isToggleActive={true}
-        onToggleChange={onToggleChange}
-      />
-  );
+    const wrapper = shallow(
+        <SortingOptions
+          sortingType={INITIAL_SORTING_TYPE}
+          changeSortingTypeAction={changeSortingTypeAction}
+          isToggleActive={true}
+          onToggleChange={onToggleChange}
+        />
+    );
 
-  const sortMenuBtns = wrapper.find(`li`);
+    const sortMenuBtns = wrapper.find(`li`);
 
-  sortMenuBtns.forEach((button) => button.simulate(`click`));
-  expect(changeSortingTypeAction).toHaveBeenCalledTimes(sortMenuBtns.length);
-});
+    sortMenuBtns.forEach((button) => button.simulate(`click`));
+    expect(changeSortingTypeAction).toHaveBeenCalledTimes(sortMenuBtns.length);
+  });
 
-it(`Open sort menu`, () => {
-  const changeSortingTypeAction = jest.fn();
-  const onToggleChange = jest.fn();
+  test(`Open sort menu`, () => {
+    const changeSortingTypeAction = jest.fn();
+    const onToggleChange = jest.fn();
 
-  const wrapper = shallow(
-      <SortingOptions
-        sortingType={INITIAL_SORTING_TYPE}
-        changeSortingTypeAction={changeSortingTypeAction}
-        isToggleActive={true}
-        onToggleChange={onToggleChange}
-      />
-  );
+    const wrapper = shallow(
+        <SortingOptions
+          sortingType={INITIAL_SORTING_TYPE}
+          changeSortingTypeAction={changeSortingTypeAction}
+          isToggleActive={true}
+          onToggleChange={onToggleChange}
+        />
+    );
 
-  wrapper.find(`form`).simulate(`click`);
-  expect(onToggleChange).toHaveBeenCalledTimes(1);
+    wrapper.find(`form`).simulate(`click`);
+    expect(onToggleChange).toHaveBeenCalledTimes(0);
+  });
 });
