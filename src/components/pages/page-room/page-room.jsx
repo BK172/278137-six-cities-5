@@ -37,9 +37,9 @@ const PageRoom = ({
 
   const isAuthorized = authStatus === AuthStatus.AUTH;
 
-  if (!offerId) {
+  if (!offerId || (_.isEmpty(offer) && !isLoadingFlag)) {
     return <PageNotFound />;
-  } else if (isLoadingFlag || _.isEmpty(offer)) {
+  } else if (isLoadingFlag) {
     return <PageLoading />;
   }
 
