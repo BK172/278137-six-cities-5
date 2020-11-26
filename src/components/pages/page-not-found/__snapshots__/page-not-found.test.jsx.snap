@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PageNotFound render correctly 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    404
+  </h1>
+  <p>
+    <b>
+      Page not found
+    </b>
+  </p>
+  <p>
+    <a
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "textDecoration": "underline",
+        }
+      }
+    >
+      Go to main page
+    </a>
+  </p>
+</div>
+`;

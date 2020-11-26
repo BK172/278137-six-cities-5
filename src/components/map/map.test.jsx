@@ -2,8 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import {makeInitialStateMock, mockOffers, mockOffer, mockCity} from "../../utils";
 import {Map} from "./map";
+import {makeInitialStateMock, mockOffers, mockOffer, mockCity} from "../../utils";
 
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
@@ -15,7 +15,8 @@ jest.mock(`leaflet`, () => ({
     addTo: jest.fn()
   }),
   marker: jest.fn().mockReturnValue({
-    addTo: jest.fn()
+    addTo: jest.fn(),
+    removeFrom: jest.fn()
   }),
 }));
 
@@ -30,9 +31,7 @@ it(`Should Map render correctly`, () => {
             activeCity={mockCity}
             activeOffer={mockOffer}
           />
-        </Provider>, {
-          createNodeMock: () => document.createElement(`<div id="map"></div>`)
-        }
+        </Provider>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

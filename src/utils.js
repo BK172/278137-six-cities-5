@@ -152,6 +152,12 @@ export const mockOffer = {
 
 export const mockOffers = [mockOffer];
 
+const mockOffersMapByCity = new Map();
+const mockOffersMapByCityEmpty = new Map();
+
+mockOffersMapByCity.set(`Paris`, mockOffers);
+export {mockOffersMapByCity, mockOffersMapByCityEmpty};
+
 export const mockReview = {
   reviewId: 10,
   avatar: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
