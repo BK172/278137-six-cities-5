@@ -1,4 +1,4 @@
-import {ActionType, requireAuthorization, getAuthInfo, isLoggedIn} from "./actions";
+import {ActionType, requireAuthorization, getAuthInfo} from "./actions";
 import {AuthStatus} from "../../../constants";
 import {mockAuthInfo} from "../../../utils";
 
@@ -14,13 +14,6 @@ describe(`Should action creators for reducer user work correctly`, () => {
     expect(getAuthInfo(mockAuthInfo)).toEqual({
       type: ActionType.GET_AUTH_INFO,
       payload: mockAuthInfo,
-    });
-  });
-
-  it(`Should isLoggedIn works correctly`, () => {
-    expect(isLoggedIn(false)).toEqual({
-      type: ActionType.IS_LOGGED_IN,
-      payload: false,
     });
   });
 });

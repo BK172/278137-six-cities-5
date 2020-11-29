@@ -2,13 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {requireAuthorization, getAuthInfo as getAuthInfoAction} from "../../store/reducers/user/actions";
-import {getAuthStatus, getAuthInfo, getIsLoggedInFlag} from "../../store/reducers/user/selectors";
+import {
+  requireAuthorization,
+  getAuthInfo as getAuthInfoAction,
+} from "../../store/reducers/user/actions";
+import {
+  getAuthStatus,
+  getAuthInfo,
+} from "../../store/reducers/user/selectors";
 import {redirectToRoute} from "../../store/middlewares/actions";
 import {authInfoPropTypes} from "../../app-prop-types";
 import {AuthStatus, AppRoute} from "../../constants";
 
-const Header = ({authStatus, authInfo, onSignOutAction}) => {
+const Header = ({authInfo, authStatus, onSignOutAction}) => {
   const isLoggedIn = authStatus === AuthStatus.AUTH;
   const avatar = authInfo ? authInfo.avatar : ``;
   const email = authInfo ? authInfo.email : ``;
@@ -63,14 +69,12 @@ const Header = ({authStatus, authInfo, onSignOutAction}) => {
 Header.propTypes = {
   authStatus: PropTypes.string.isRequired,
   authInfo: authInfoPropTypes,
-  isLoggedInFlag: PropTypes.bool.isRequired,
   onSignOutAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({USER}) => ({
   authStatus: getAuthStatus({USER}),
   authInfo: getAuthInfo({USER}),
-  isLoggedInFlag: getIsLoggedInFlag({USER}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
