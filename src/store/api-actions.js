@@ -127,7 +127,7 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
 );
 
 export const postReview = ({review: comment, rating, offerId,
-  onClearFormFields, onChangeFormWaitingFlag, onChangePostReviewStatus}) => (dispatch, _getState, api) => (
+  onClearFormFields, onChangeFormWaitingFlag, onChangeReviewPostingError}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
@@ -140,7 +140,7 @@ export const postReview = ({review: comment, rating, offerId,
     })
     .catch((err) => {
       onChangeFormWaitingFlag(false);
-      onChangePostReviewStatus(ResponseType.ERROR);
+      onChangeReviewPostingError(ResponseType.ERROR);
 
       return err;
     })

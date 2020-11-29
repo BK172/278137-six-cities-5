@@ -13,14 +13,14 @@ class ReviewForm extends PureComponent {
       review: ``,
       isFormValid: false,
       isFormWaitingResponse: false,
-      postReviewStatus: ``,
+      reviewPostingError: ``,
     };
 
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleClearFormFields = this._handleClearFormFields.bind(this);
     this._handleChangeFormWaitingFlag = this._handleChangeFormWaitingFlag.bind(this);
-    this._handleChangePostReviewStatus = this._handleChangePostReviewStatus.bind(this);
+    this._handleChangeReviewPostingError = this._handleChangeReviewPostingError.bind(this);
   }
 
   componentDidUpdate() {
@@ -43,17 +43,17 @@ class ReviewForm extends PureComponent {
     const rating = this.state.rating;
     const onClearFormFields = this._handleClearFormFields;
     const onChangeFormWaitingFlag = this._handleChangeFormWaitingFlag;
-    const onChangePostReviewStatus = this._handleChangePostReviewStatus;
+    const onChangeReviewPostingError = this._handleChangeReviewPostingError;
 
     this._handleChangeFormWaitingFlag(true);
-    this._handleChangePostReviewStatus(``);
+    this._handleChangeReviewPostingError(``);
     postReviewAction({
       review,
       rating,
       offerId,
       onClearFormFields,
       onChangeFormWaitingFlag,
-      onChangePostReviewStatus,
+      onChangeReviewPostingError,
     });
   }
 
@@ -75,9 +75,9 @@ class ReviewForm extends PureComponent {
     }));
   }
 
-  _handleChangePostReviewStatus(postReviewStatus) {
+  _handleChangeReviewPostingError(reviewPostingError) {
     this.setState(() => ({
-      postReviewStatus,
+      reviewPostingError,
     }));
   }
 
@@ -129,7 +129,7 @@ class ReviewForm extends PureComponent {
             Submit
           </button>
         </div>
-        {this.state.postReviewStatus === ResponseType.ERROR && (
+        {this.state.reviewPostingError === ResponseType.ERROR && (
           <p className="reviews__error-container">
             posting review error
           </p>
