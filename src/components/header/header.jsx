@@ -2,13 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {getAuthStatus} from "../../store/reducers/user/selectors";
-import {requireAuthorization} from "../../store/reducers/user/actions";
+import {requireAuthorization, getAuthInfo as getAuthInfoAction} from "../../store/reducers/user/actions";
+import {getAuthStatus, getAuthInfo, getIsLoggedInFlag} from "../../store/reducers/user/selectors";
 import {redirectToRoute} from "../../store/middlewares/actions";
+import {authInfoPropTypes} from "../../app-prop-types";
 import {AuthStatus, AppRoute} from "../../constants";
 
-const Header = ({authStatus, avatar, email, onSignOutAction}) => {
+const Header = ({authStatus, authInfo, onSignOutAction}) => {
   const isLoggedIn = authStatus === AuthStatus.AUTH;
+  const avatar = authInfo ? authInfo.avatar : ``;
+  const email = authInfo ? authInfo.email : ``;
   const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
@@ -59,20 +62,21 @@ const Header = ({authStatus, avatar, email, onSignOutAction}) => {
 
 Header.propTypes = {
   authStatus: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  authInfo: authInfoPropTypes,
+  isLoggedInFlag: PropTypes.bool.isRequired,
   onSignOutAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, USER}) => ({
+const mapStateToProps = ({USER}) => ({
   authStatus: getAuthStatus({USER}),
-  avatar: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.avatar_url : ``,
-  email: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.email : ``,
+  authInfo: getAuthInfo({USER}),
+  isLoggedInFlag: getIsLoggedInFlag({USER}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSignOutAction() {
     dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+    dispatch(getAuthInfoAction(null));
     dispatch(redirectToRoute(AppRoute.MAIN));
   },
 });

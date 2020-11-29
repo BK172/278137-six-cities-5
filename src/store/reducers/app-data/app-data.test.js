@@ -5,7 +5,6 @@ import {
   mockOffer,
   mockOffers,
   mockReviews,
-  mockAuthInfo,
   extend,
 } from "../../../utils";
 
@@ -19,7 +18,6 @@ describe(`Should reducer appData works correctly`, () => {
       favoriteOffers: [],
       currentRoomOffer: null,
       cities: [],
-      authInfo: {},
       reviews: [],
     });
   });
@@ -76,17 +74,6 @@ describe(`Should reducer appData works correctly`, () => {
       payload: mockCities
     })).toEqual({
       cities: mockCities
-    });
-  });
-
-  it(`Should reducer appData update authInfo`, () => {
-    expect(appData({
-      authInfo: {},
-    }, {
-      type: ActionType.GET_AUTH_INFO,
-      payload: mockAuthInfo
-    })).toEqual({
-      authInfo: mockAuthInfo
     });
   });
 

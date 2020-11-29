@@ -6,7 +6,6 @@ import {
   getOfferById,
   getFavoriteOffers,
   setOfferAsFavorite,
-  getAuthInfo,
   getReviews,
 } from "./actions";
 import {
@@ -14,7 +13,6 @@ import {
   mockOffer,
   mockOffers,
   mockReviews,
-  mockAuthInfo,
 } from "../../../utils";
 
 describe(`Should action creators for reducer app-data work correctly`, () => {
@@ -50,13 +48,6 @@ describe(`Should action creators for reducer app-data work correctly`, () => {
     expect(getFavoriteOffers(mockOffers)).toEqual({
       type: ActionType.GET_FAVORITE_OFFERS,
       payload: mockOffers,
-    });
-  });
-
-  it(`Should getAuthInfo works correctly`, () => {
-    expect(getAuthInfo(mockAuthInfo)).toEqual({
-      type: ActionType.GET_AUTH_INFO,
-      payload: mockAuthInfo,
     });
   });
 

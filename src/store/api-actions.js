@@ -5,7 +5,6 @@ import {
   getFavoriteOffers,
   getCities,
   getReviews,
-  getAuthInfo,
   setOfferAsFavorite,
 } from "./reducers/app-data/actions";
 import {
@@ -14,6 +13,7 @@ import {
 } from "./reducers/app-process/actions";
 import {
   requireAuthorization,
+  getAuthInfo,
 } from "./reducers/user/actions";
 import {
   redirectToRoute,
@@ -28,6 +28,7 @@ import {
 import {
   offersAdapter,
   reviewsAdapter,
+  authInfoAdapter,
   getCitiesFromOffers,
 } from "../utils";
 
@@ -82,8 +83,10 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = authInfoAdapter(response.data);
+
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(response.data));
+        dispatch(getAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {
@@ -99,8 +102,10 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(APIRoute.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = authInfoAdapter(response.data);
+
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(response.data));
+        dispatch(getAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {

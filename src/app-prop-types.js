@@ -59,3 +59,14 @@ export const offerOrNullPropTypes = PropTypes.oneOfType([
   offerPropTypes,
   PropTypes.oneOf([null]).isRequired,
 ]);
+
+export const authInfoPropTypes = PropTypes.oneOfType([
+  PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  PropTypes.oneOf([null]).isRequired,
+]);

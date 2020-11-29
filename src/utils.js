@@ -80,6 +80,16 @@ const hostAdapter = (host) => {
   };
 };
 
+export const authInfoAdapter = (authInfo) => {
+  return {
+    id: authInfo.id,
+    avatar: authInfo.avatar_url,
+    name: authInfo.name,
+    isPro: authInfo.is_pro,
+    email: authInfo.email,
+  };
+};
+
 export const offersAdapter = (offer) => {
   return {
     bedrooms: offer.bedrooms,
@@ -172,11 +182,11 @@ export const mockReview = {
 export const mockReviews = [mockReview];
 
 export const mockAuthInfo = {
-  'avatar_url': `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
-  'email': `qwerty@qwerty.ru`,
-  'id': 1,
-  'is_pro': false,
-  'name': `qwerty`,
+  avatar: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg`,
+  email: `qwerty@qwerty.ru`,
+  id: 1,
+  isPro: false,
+  name: `qwerty`,
 };
 
 export const makeInitialStateMock = () => ({
@@ -186,7 +196,6 @@ export const makeInitialStateMock = () => ({
     favoriteOffers: [mockOffer],
     currentRoomOffer: mockOffer,
     cities: [mockCity],
-    authInfo: mockAuthInfo,
     reviews: [mockReview],
   },
   [NameSpace.PROCESS]: {
@@ -197,5 +206,6 @@ export const makeInitialStateMock = () => ({
   },
   [NameSpace.USER]: {
     authStatus: AuthStatus.AUTH,
+    authInfo: mockAuthInfo,
   }
 });

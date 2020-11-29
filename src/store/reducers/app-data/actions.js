@@ -4,7 +4,6 @@ export const ActionType = {
   GET_OFFERS_NEARBY: `GET_OFFERS_NEARBY`,
   GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
   GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
-  GET_AUTH_INFO: `GET_AUTH_INFO`,
   GET_REVIEWS: `GET_REVIEWS`,
   SET_OFFER_AS_FAVORITE: `SET_OFFER_AS_FAVORITE`,
 };
@@ -32,11 +31,6 @@ export const getOfferById = (currentRoomOffer) => ({
 export const getFavoriteOffers = (favoriteOffers) => ({
   type: ActionType.GET_FAVORITE_OFFERS,
   payload: favoriteOffers,
-});
-
-export const getAuthInfo = (authInfo) => ({
-  type: ActionType.GET_AUTH_INFO,
-  payload: authInfo,
 });
 
 export const getReviews = (reviews) => ({
