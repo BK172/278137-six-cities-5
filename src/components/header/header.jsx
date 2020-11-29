@@ -6,7 +6,7 @@ import {getAuthStatus} from "../../store/selectors";
 import {AuthStatus, AppRoute} from "../../constants";
 
 const Header = ({authStatus, avatar, email}) => {
-  const isAuthorized = authStatus === AuthStatus.AUTH;
+  const isLoggedIn = authStatus === AuthStatus.AUTH;
   const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
   return (
@@ -23,15 +23,15 @@ const Header = ({authStatus, avatar, email}) => {
               <li className="header__nav-item user">
                 <Link
                   className="header__nav-link header__nav-link--profile"
-                  to={isAuthorized ? AppRoute.FAVORITES : AppRoute.LOGIN}
+                  to={isLoggedIn ? AppRoute.FAVORITES : AppRoute.LOGIN}
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
-                    style={isAuthorized ? avatarBgrImage : undefined}
+                    style={isLoggedIn ? avatarBgrImage : undefined}
                   >
                   </div>
                   <span className="header__user-name user__name">
-                    {isAuthorized ? email : `Sign in`}
+                    {isLoggedIn ? email : `Sign in`}
                   </span>
                 </Link>
               </li>
