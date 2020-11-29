@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getAuthStatus} from "../../store/reducers/user/selectors";
+import {requireAuthorization} from "../../store/reducers/user/actions";
+import {redirectToRoute} from "../../store/middlewares/actions";
 import {AuthStatus, AppRoute} from "../../constants";
 
-const Header = ({authStatus, avatar, email}) => {
+const Header = ({authStatus, avatar, email, onSignOutAction}) => {
   const isLoggedIn = authStatus === AuthStatus.AUTH;
   const avatarBgrImage = avatar ? {backgroundImage: `url(${avatar})`} : undefined;
 
@@ -36,6 +38,18 @@ const Header = ({authStatus, avatar, email}) => {
                 </Link>
               </li>
             </ul>
+            {isLoggedIn && (
+              <div className="header__signout">
+                <button
+                  className="header__signout-button"
+                  type="button"
+                  title="Sign out"
+                  onClick={onSignOutAction}
+                >
+                  <span className="header__signout-button-icon"></span>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       </div>
@@ -47,6 +61,7 @@ Header.propTypes = {
   authStatus: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  onSignOutAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
@@ -55,5 +70,12 @@ const mapStateToProps = ({DATA, USER}) => ({
   email: getAuthStatus({USER}) === AuthStatus.AUTH ? DATA.authInfo.email : ``,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onSignOutAction() {
+    dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+    dispatch(redirectToRoute(AppRoute.MAIN));
+  },
+});
+
 export {Header};
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -82,7 +82,7 @@ PageSignIn.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onSubmitAction(authData) {
     dispatch(login(authData));
-  }
+  },
 });
 
 export {PageSignIn};
