@@ -1,5 +1,5 @@
-import {ActionType} from "./../action";
-import {extend, updateOfferById, removeOfferById} from "../../utils";
+import {ActionType} from "./actions";
+import {extend, updateOfferById, removeOfferById} from "../../../utils";
 
 const initialState = {
   offers: [],

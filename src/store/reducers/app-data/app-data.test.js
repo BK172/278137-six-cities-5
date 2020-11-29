@@ -1,5 +1,5 @@
 import {appData} from "./app-data";
-import {ActionType} from "../action";
+import {ActionType} from "./actions";
 import {
   mockCities,
   mockOffer,
@@ -7,7 +7,7 @@ import {
   mockReviews,
   mockAuthInfo,
   extend
-} from "../../utils";
+} from "../../../utils";
 
 jest.mock(`./root-reducer`);
 

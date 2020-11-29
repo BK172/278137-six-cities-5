@@ -1,6 +1,6 @@
-import {ActionType} from "../action";
-import {AuthStatus} from "../../constants";
-import {extend} from "../../utils";
+import {ActionType} from "./actions";
+import {AuthStatus} from "../../../constants";
+import {extend} from "../../../utils";
 
 const initialState = {
   authStatus: AuthStatus.NO_AUTH,

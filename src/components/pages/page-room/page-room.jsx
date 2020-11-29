@@ -10,7 +10,7 @@ import OfferBookmarkBtn from "../../offer-bookmark-btn/offer-bookmark-btn";
 import PageLoading from "../page-loading/page-loading";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../../store/api-actions";
-import {getOfferById} from "../../../store/action";
+import {getOfferById} from "../../store/reducers/app-data/actions";
 import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../../store/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
 import {getElementWidthByRating} from "../../../utils";

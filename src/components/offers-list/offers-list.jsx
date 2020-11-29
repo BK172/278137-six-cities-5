@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
-import {setActiveOffer} from "../../store/action";
+import {setActiveOffer} from "../../store/reducers/app-process/actions";
 import {getActiveOffer} from "../../store/selectors";
 import {offersPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 

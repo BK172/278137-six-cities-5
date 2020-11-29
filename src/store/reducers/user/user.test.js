@@ -1,6 +1,6 @@
 import {user} from "./user";
-import {ActionType} from "../action";
-import {AuthStatus} from "../../constants";
+import {ActionType} from "./actions";
+import {AuthStatus} from "../../../constants";
 
 jest.mock(`./root-reducer`);
 
