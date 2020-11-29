@@ -5,6 +5,7 @@ import {
   getFavoriteOffers,
   getCities,
   getReviews,
+  getAuthInfo,
   setOfferAsFavorite,
 } from "./reducers/app-data/actions";
 import {
