@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Router, Switch, Route} from "react-router-dom";
 import browserHistory from "../../browser-history";
-import {getAuthStatus} from "../../store/selectors";
+import {getAuthStatus} from "../../store/reducers/user/selectors";
 import PrivateRoute from "../private-route/private-route";
 import PageMain from "../pages/page-main/page-main";
 import PageSignIn from "../pages/page-sign-in/page-sign-in";

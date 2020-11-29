@@ -2,7 +2,7 @@ import {user} from "./user";
 import {ActionType} from "./actions";
 import {AuthStatus} from "../../../constants";
 
-jest.mock(`./root-reducer`);
+jest.mock(`../root-reducer`);
 
 describe(`Should reducer user works correctly`, () => {
   it(`Should reducer user return initial state`, () => {

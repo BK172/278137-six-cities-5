@@ -3,7 +3,7 @@ import {ActionType} from "./actions";
 import {INITIAL_SORTING_TYPE} from "../../../constants";
 import {mockCity, mockOffer} from "../../../utils";
 
-jest.mock(`./root-reducer`);
+jest.mock(`../root-reducer`);
 
 describe(`Should reducer appProcess works correctly`, () => {
   it(`Should reducer appProcess return initial state`, () => {

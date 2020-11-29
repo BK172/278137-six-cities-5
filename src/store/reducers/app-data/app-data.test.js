@@ -6,10 +6,10 @@ import {
   mockOffers,
   mockReviews,
   mockAuthInfo,
-  extend
+  extend,
 } from "../../../utils";
 
-jest.mock(`./root-reducer`);
+jest.mock(`../root-reducer`);
 
 describe(`Should reducer appData works correctly`, () => {
   it(`Should reducer appData return initial state`, () => {

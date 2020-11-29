@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {getActiveOffer, getActiveCity} from "../../store/selectors";
+import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import {MapClasses} from "../../constants";
 import "leaflet/dist/leaflet.css";
