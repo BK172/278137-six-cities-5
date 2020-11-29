@@ -6,7 +6,7 @@ import OffersList from "../../offers-list/offers-list";
 import CitiesList from "../../cities-list/cities-list";
 import SortingOptions from "../../sorting-options/sorting-options";
 import Map from "../../map/map";
-import {getSortedOffersByPrice, getActiveCity} from "../../store/reducers/app-process/selectors";
+import {getSortedOffersByPrice, getActiveCity} from "../../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes} from "../../../app-prop-types";
 import {OfferType, MapType} from "../../../constants";
 import _ from "lodash";

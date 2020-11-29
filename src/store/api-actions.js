@@ -4,14 +4,19 @@ import {
   getOffersNearBy,
   getFavoriteOffers,
   getCities,
-  getAuthInfo,
   getReviews,
-  setActiveCity,
   setOfferAsFavorite,
-  requireAuthorization,
-  redirectToRoute,
+} from "./reducers/app-data/actions";
+import {
+  setActiveCity,
   isLoading,
-} from "./action";
+} from "./reducers/app-process/actions";
+import {
+  requireAuthorization,
+} from "./reducers/user/actions";
+import {
+  redirectToRoute,
+} from "./middlewares/actions";
 import {
   APIRoute,
   AppRoute,

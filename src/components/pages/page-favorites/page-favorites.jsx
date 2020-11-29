@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import Header from "../../header/header";
 import OfferCard from "../../offer-card/offer-card";
 import {fetchFavoriteOffers} from "../../../store/api-actions";
-import {getFavoriteOffersMapByCity} from "../../store/reducers/app-process/selectors";
+import {getFavoriteOffersMapByCity} from "../../../store/reducers/app-process/selectors";
 import {AppRoute, OfferType} from "../../../constants";
 
 const PageFavorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
