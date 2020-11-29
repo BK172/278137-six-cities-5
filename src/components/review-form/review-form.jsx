@@ -26,8 +26,8 @@ class ReviewForm extends PureComponent {
   componentDidUpdate() {
     const {rating, review} = this.state;
 
-    if (rating && review.length >=
-        ReviewFormTextAreaLength.MIN && review.length <= ReviewFormTextAreaLength.MAX
+    if (rating && review.trim().length >=
+        ReviewFormTextAreaLength.MIN && review.trim().length <= ReviewFormTextAreaLength.MAX
     ) {
       this.setState({isFormValid: true});
     } else {
@@ -39,7 +39,7 @@ class ReviewForm extends PureComponent {
     evt.preventDefault();
 
     const {offerId, postReviewAction} = this.props;
-    const review = this.state.review;
+    const review = this.state.review.trim();
     const rating = this.state.rating;
     const onClearFormFields = this._handleClearFormFields;
     const onChangeFormWaitingFlag = this._handleChangeFormWaitingFlag;
