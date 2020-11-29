@@ -20,6 +20,7 @@ class ReviewForm extends PureComponent {
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleClearFormFields = this._handleClearFormFields.bind(this);
     this._handleChangeFormWaitingFlag = this._handleChangeFormWaitingFlag.bind(this);
+    this._handleChangePostReviewStatus = this._handleChangePostReviewStatus.bind(this);
   }
 
   componentDidUpdate() {
@@ -93,6 +94,7 @@ class ReviewForm extends PureComponent {
                 value={mark}
                 id={title}
                 type="radio"
+                checked={mark === this.state.rating}
                 onChange={this._handleInputChange}
               />
               <label htmlFor={title} className="reviews__rating-label form__rating-label" title={title}>
@@ -107,6 +109,7 @@ class ReviewForm extends PureComponent {
           className="reviews__textarea form__textarea"
           id="review"
           name="review"
+          value={this.state.review}
           onChange={this._handleInputChange}
           placeholder="Tell how was your stay, what you like and what can be improved"
         />
@@ -127,7 +130,7 @@ class ReviewForm extends PureComponent {
           </button>
         </div>
         {this.state.postReviewStatus === ResponseType.ERROR && (
-          <p className="reviews__error-container" style={{color: `orangered`, textAlign: `right`}}>
+          <p className="reviews__error-container">
             posting review error
           </p>
         )}

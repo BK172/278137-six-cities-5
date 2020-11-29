@@ -135,7 +135,6 @@ export const postReview = ({review: comment, rating, offerId,
 
       onChangeFormWaitingFlag(false);
       onClearFormFields();
-      onChangePostReviewStatus(ResponseType.SUCCESS);
 
       return ResponseType.SUCCESS;
     })
