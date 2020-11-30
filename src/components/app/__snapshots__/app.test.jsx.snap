@@ -60,6 +60,20 @@ exports[`Should App render correctly 1`] = `
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>

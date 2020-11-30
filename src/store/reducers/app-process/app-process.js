@@ -1,6 +1,6 @@
-import {ActionType} from "./../action";
-import {INITIAL_SORTING_TYPE} from "../../constants";
-import {extend} from "../../utils";
+import {ActionType} from "./actions";
+import {INITIAL_SORTING_TYPE} from "../../../constants";
+import {extend} from "../../../utils";
 
 const initialState = {
   activeOffer: null,

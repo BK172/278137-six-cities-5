@@ -4,14 +4,20 @@ import {
   getOffersNearBy,
   getFavoriteOffers,
   getCities,
-  getAuthInfo,
   getReviews,
-  setActiveCity,
   setOfferAsFavorite,
-  requireAuthorization,
-  redirectToRoute,
+} from "./reducers/app-data/actions";
+import {
+  setActiveCity,
   isLoading,
-} from "./action";
+} from "./reducers/app-process/actions";
+import {
+  requireAuthorization,
+  getAuthInfo,
+} from "./reducers/user/actions";
+import {
+  redirectToRoute,
+} from "./middlewares/actions";
 import {
   APIRoute,
   AppRoute,
@@ -22,6 +28,7 @@ import {
 import {
   offersAdapter,
   reviewsAdapter,
+  authInfoAdapter,
   getCitiesFromOffers,
 } from "../utils";
 
@@ -76,8 +83,10 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = authInfoAdapter(response.data);
+
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(response.data));
+        dispatch(getAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {
@@ -93,8 +102,10 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(APIRoute.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = authInfoAdapter(response.data);
+
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(response.data));
+        dispatch(getAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {
@@ -121,7 +132,7 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
 );
 
 export const postReview = ({review: comment, rating, offerId,
-  onClearFormFields, onChangeFormWaitingFlag, onChangePostReviewStatus}) => (dispatch, _getState, api) => (
+  onClearFormFields, onChangeFormWaitingFlag, onChangeReviewPostingError}) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
@@ -129,13 +140,12 @@ export const postReview = ({review: comment, rating, offerId,
 
       onChangeFormWaitingFlag(false);
       onClearFormFields();
-      onChangePostReviewStatus(ResponseType.SUCCESS);
 
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
       onChangeFormWaitingFlag(false);
-      onChangePostReviewStatus(ResponseType.ERROR);
+      onChangeReviewPostingError(ResponseType.ERROR);
 
       return err;
     })

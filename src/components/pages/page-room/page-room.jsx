@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../../header/header";
 import Map from "../../map/map";
-import OffersList from "../../offers-list/offers-list";
+import OfferCard from "../../offer-card/offer-card";
 import ReviewsList from "../../reviews-list/reviews-list";
 import ReviewForm from "../../review-form/review-form";
 import OfferBookmarkBtn from "../../offer-bookmark-btn/offer-bookmark-btn";
 import PageLoading from "../page-loading/page-loading";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../../store/api-actions";
-import {getOfferById} from "../../../store/action";
-import {getAuthStatus, getOffersNearBy, getCurrentRoomOffer, getIsLoadingFlag} from "../../../store/selectors";
+import {getOfferById} from "../../../store/reducers/app-data/actions";
+import {getOffersNearBy, getCurrentRoomOffer} from "../../../store/reducers/app-data/selectors";
+import {getIsLoadingFlag} from "../../../store/reducers/app-process/selectors";
+import {getAuthStatus} from "../../../store/reducers/user/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
 import {getElementWidthByRating} from "../../../utils";
 import {OfferType, MapType, BookmarkBtnType, AuthStatus, MAX_PHOTOS_COUNT} from "../../../constants";
@@ -35,7 +37,7 @@ const PageRoom = ({
     return () => updateCurrentOfferAction();
   }, [offerId]);
 
-  const isAuthorized = authStatus === AuthStatus.AUTH;
+  const isLoggedIn = authStatus === AuthStatus.AUTH;
 
   if (!offerId || (_.isEmpty(offer) && !isLoadingFlag)) {
     return <PageNotFound />;
@@ -127,12 +129,12 @@ const PageRoom = ({
               </div>
               <section className="property__reviews reviews">
                 <ReviewsList offerId={offerId} />
-                {isAuthorized && <ReviewForm offerId={offerId} />}
+                {isLoggedIn && <ReviewForm offerId={offerId} />}
               </section>
             </div>
           </div>
           {!_.isEmpty(offersNearBy) && (
-            <Map mapType={MapType.ROOM} offers={offersNearBy} />
+            <Map mapType={MapType.ROOM} offers={offersNearBy} currentOffer={offer} />
           )}
         </section>
         <div className="container">
@@ -140,7 +142,13 @@ const PageRoom = ({
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {!_.isEmpty(offersNearBy) && (
-                <OffersList offerType={OfferType.ROOM} offers={offersNearBy} />
+                offersNearBy.map((offerNearBy) => (
+                  <OfferCard
+                    key={offerNearBy.offerId}
+                    offer={offerNearBy}
+                    offerType={OfferType.ROOM}
+                  />
+                ))
               )}
             </div>
           </section>

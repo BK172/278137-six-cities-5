@@ -1,26 +1,19 @@
-import {createSelector} from "reselect";
-import {getOffersMapByCity} from "../utils";
-import {SortingTypesNames} from "../constants";
 import moment from "moment";
+import {createSelector} from "reselect";
+import {getActiveCity, getSortingType} from "../app-process/selectors";
+import {getOffersMapByCity} from "../../../utils";
+import {SortingTypesNames} from "../../../constants";
 
 export const getOffers = (({DATA}) => DATA.offers);
 export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
 export const getFavoriteOffers = (({DATA}) => DATA.favoriteOffers);
 export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
 export const getCities = (({DATA}) => DATA.cities);
-export const getAuthInfo = (({DATA}) => DATA.authInfo);
 export const getReviews = (({DATA}) => {
   return DATA.reviews.sort((a, b) => {
     return moment.utc(a.date, `DD/MM/YYYY`).diff(moment.utc(b.date, `DD/MM/YYYY`));
   });
 });
-
-export const getActiveOffer = (({PROCESS}) => PROCESS.activeOffer);
-export const getActiveCity = (({PROCESS}) => PROCESS.activeCity);
-export const getSortingType = (({PROCESS}) => PROCESS.sortingType);
-export const getIsLoadingFlag = (({PROCESS}) => PROCESS.isLoadingFlag);
-
-export const getAuthStatus = (({USER}) => USER.authStatus);
 
 export const getFavoriteOffersMapByCity = createSelector(
     getFavoriteOffers,

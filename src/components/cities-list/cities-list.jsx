@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {setActiveCity} from "../../store/action";
-import {getCities, getActiveCity} from "../../store/selectors";
+import {setActiveCity} from "../../store/reducers/app-process/actions";
+import {getCities} from "../../store/reducers/app-data/selectors";
+import {getActiveCity} from "../../store/reducers/app-process/selectors";
 import {cityPropTypes, citiesPropTypes} from "../../app-prop-types";
 import clsx from "clsx";
 

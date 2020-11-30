@@ -3,20 +3,20 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {PrivateRoute} from "./private-route";
+import PrivateRoute from "./private-route";
 import {makeInitialStateMock} from "../../utils";
-import {AuthStatus} from "../../constants";
 
 describe(`Should PrivateRoute render correctly`, () => {
   const store = configureStore()(makeInitialStateMock());
 
-  it(`Should PrivateRoute render correctly authStatus={AuthStatus.NO_AUTH}`, () => {
+  it(`Should PrivateRoute render correctly if loginStatus true`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <BrowserRouter>
               <PrivateRoute
-                authStatus={AuthStatus.NO_AUTH}
+                loginStatus={true}
+                redirectToURL={`/`}
                 exact={true}
                 path={``}
                 render={()=>{}}
@@ -28,13 +28,14 @@ describe(`Should PrivateRoute render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PrivateRoute render correctly authStatus={AuthStatus.AUTH}`, () => {
+  it(`Should PrivateRoute render correctly if loginStatus false`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <BrowserRouter>
               <PrivateRoute
-                authStatus={AuthStatus.AUTH}
+                loginStatus={false}
+                redirectToURL={`/`}
                 exact={true}
                 path={``}
                 render={()=>{}}

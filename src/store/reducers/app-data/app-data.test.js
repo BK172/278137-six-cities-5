@@ -1,15 +1,14 @@
 import {appData} from "./app-data";
-import {ActionType} from "../action";
+import {ActionType} from "./actions";
 import {
   mockCities,
   mockOffer,
   mockOffers,
   mockReviews,
-  mockAuthInfo,
-  extend
-} from "../../utils";
+  extend,
+} from "../../../utils";
 
-jest.mock(`./root-reducer`);
+jest.mock(`../root-reducer`);
 
 describe(`Should reducer appData works correctly`, () => {
   it(`Should reducer appData return initial state`, () => {
@@ -19,7 +18,6 @@ describe(`Should reducer appData works correctly`, () => {
       favoriteOffers: [],
       currentRoomOffer: null,
       cities: [],
-      authInfo: {},
       reviews: [],
     });
   });
@@ -76,17 +74,6 @@ describe(`Should reducer appData works correctly`, () => {
       payload: mockCities
     })).toEqual({
       cities: mockCities
-    });
-  });
-
-  it(`Should reducer appData update authInfo`, () => {
-    expect(appData({
-      authInfo: {},
-    }, {
-      type: ActionType.GET_AUTH_INFO,
-      payload: mockAuthInfo
-    })).toEqual({
-      authInfo: mockAuthInfo
     });
   });
 

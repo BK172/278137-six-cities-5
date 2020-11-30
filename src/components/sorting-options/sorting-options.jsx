@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import withToggle from "../../hocs/with-toggle/with-toggle";
-import {changeSortingType} from "../../store/action";
-import {getSortingType} from "../../store/selectors";
+import {changeSortingType} from "../../store/reducers/app-process/actions";
+import {getSortingType} from "../../store/reducers/app-process/selectors";
 import {SortingTypes} from "../../constants";
 import clsx from "clsx";
 

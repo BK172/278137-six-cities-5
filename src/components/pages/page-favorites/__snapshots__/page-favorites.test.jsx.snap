@@ -60,6 +60,20 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>
@@ -298,6 +312,20 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>

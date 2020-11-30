@@ -13,20 +13,21 @@ class ReviewForm extends PureComponent {
       review: ``,
       isFormValid: false,
       isFormWaitingResponse: false,
-      postReviewStatus: ``,
+      reviewPostingError: ``,
     };
 
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleClearFormFields = this._handleClearFormFields.bind(this);
     this._handleChangeFormWaitingFlag = this._handleChangeFormWaitingFlag.bind(this);
+    this._handleChangeReviewPostingError = this._handleChangeReviewPostingError.bind(this);
   }
 
   componentDidUpdate() {
     const {rating, review} = this.state;
 
-    if (rating && review.length >=
-        ReviewFormTextAreaLength.MIN && review.length <= ReviewFormTextAreaLength.MAX
+    if (rating && review.trim().length >=
+        ReviewFormTextAreaLength.MIN && review.trim().length <= ReviewFormTextAreaLength.MAX
     ) {
       this.setState({isFormValid: true});
     } else {
@@ -38,21 +39,21 @@ class ReviewForm extends PureComponent {
     evt.preventDefault();
 
     const {offerId, postReviewAction} = this.props;
-    const review = this.state.review;
+    const review = this.state.review.trim();
     const rating = this.state.rating;
     const onClearFormFields = this._handleClearFormFields;
     const onChangeFormWaitingFlag = this._handleChangeFormWaitingFlag;
-    const onChangePostReviewStatus = this._handleChangePostReviewStatus;
+    const onChangeReviewPostingError = this._handleChangeReviewPostingError;
 
     this._handleChangeFormWaitingFlag(true);
-    this._handleChangePostReviewStatus(``);
+    this._handleChangeReviewPostingError(``);
     postReviewAction({
       review,
       rating,
       offerId,
       onClearFormFields,
       onChangeFormWaitingFlag,
-      onChangePostReviewStatus,
+      onChangeReviewPostingError,
     });
   }
 
@@ -74,9 +75,9 @@ class ReviewForm extends PureComponent {
     }));
   }
 
-  _handleChangePostReviewStatus(postReviewStatus) {
+  _handleChangeReviewPostingError(reviewPostingError) {
     this.setState(() => ({
-      postReviewStatus,
+      reviewPostingError,
     }));
   }
 
@@ -93,6 +94,7 @@ class ReviewForm extends PureComponent {
                 value={mark}
                 id={title}
                 type="radio"
+                checked={mark === this.state.rating}
                 onChange={this._handleInputChange}
               />
               <label htmlFor={title} className="reviews__rating-label form__rating-label" title={title}>
@@ -107,6 +109,7 @@ class ReviewForm extends PureComponent {
           className="reviews__textarea form__textarea"
           id="review"
           name="review"
+          value={this.state.review}
           onChange={this._handleInputChange}
           placeholder="Tell how was your stay, what you like and what can be improved"
         />
@@ -126,8 +129,8 @@ class ReviewForm extends PureComponent {
             Submit
           </button>
         </div>
-        {this.state.postReviewStatus === ResponseType.ERROR && (
-          <p className="reviews__error-container" style={{color: `orangered`, textAlign: `right`}}>
+        {this.state.reviewPostingError === ResponseType.ERROR && (
+          <p className="reviews__error-container">
             posting review error
           </p>
         )}

@@ -2,14 +2,14 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {getActiveOffer, getActiveCity} from "../../store/selectors";
+import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import {MapClasses} from "../../constants";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
   componentDidMount() {
-    const {offers, activeCity} = this.props;
+    const {offers, activeCity, currentOffer} = this.props;
     const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
     const center = city.coordinates;
     const zoom = city.zoom;
@@ -36,22 +36,22 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
 
-    this._addMarkers(offers);
+    this._addMarkers(offers, currentOffer);
     this.map.setView(center, zoom);
   }
 
   componentDidUpdate() {
-    const {offers, activeCity} = this.props;
+    const {offers, activeCity, currentOffer} = this.props;
     const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
     const center = city.coordinates;
     const zoom = city.zoom;
 
     this._removeMarkers();
-    this._addMarkers(offers);
+    this._addMarkers(offers, currentOffer);
     this.map.setView(center, zoom);
   }
 
-  _addMarkers(offers) {
+  _addMarkers(offers, currentOffer) {
     const {activeOffer} = this.props;
     const activeOfferId = activeOffer && activeOffer.offerId;
 
@@ -63,6 +63,14 @@ class Map extends PureComponent {
 
       this.markers.push(marker);
     });
+
+    if (currentOffer) {
+      const marker = leaflet
+        .marker(currentOffer.coordinates, {icon: this.activeIcon, title: currentOffer.title})
+        .addTo(this.map);
+
+      this.markers.push(marker);
+    }
   }
 
   _removeMarkers() {
@@ -82,6 +90,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   mapType: PropTypes.string.isRequired,
   offers: offersPropTypes,
+  currentOffer: offerOrNullPropTypes,
   activeCity: cityPropTypes,
   activeOffer: offerOrNullPropTypes,
 };

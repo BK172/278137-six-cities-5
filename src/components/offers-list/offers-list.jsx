@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
-import {setActiveOffer} from "../../store/action";
-import {getActiveOffer} from "../../store/selectors";
+import {setActiveOffer} from "../../store/reducers/app-process/actions";
+import {getActiveOffer} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 
 class OffersList extends PureComponent {

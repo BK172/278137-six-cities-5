@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Header from "../../header/header";
-import {login} from "../../../store/api-actions";
+import {login as loginAction} from "../../../store/api-actions";
 import {AppRoute} from "../../../constants";
 
 class PageSignIn extends PureComponent {
@@ -20,11 +20,12 @@ class PageSignIn extends PureComponent {
     evt.preventDefault();
 
     const {onSubmitAction} = this.props;
+    const login = this.loginRef.current.value.trim();
+    const password = this.passwordRef.current.value.trim();
 
-    onSubmitAction({
-      login: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
-    });
+    if (login.length && password.length) {
+      onSubmitAction({login, password});
+    }
   }
 
   render() {
@@ -81,8 +82,8 @@ PageSignIn.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmitAction(authData) {
-    dispatch(login(authData));
-  }
+    dispatch(loginAction(authData));
+  },
 });
 
 export {PageSignIn};

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Header from "../../header/header";
-import OffersList from "../../offers-list/offers-list";
+import OfferCard from "../../offer-card/offer-card";
 import {fetchFavoriteOffers} from "../../../store/api-actions";
-import {getFavoriteOffersMapByCity} from "../../../store/selectors";
+import {getFavoriteOffersMapByCity} from "../../../store/reducers/app-data/selectors";
 import {AppRoute, OfferType} from "../../../constants";
 
 const PageFavorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
@@ -33,10 +33,13 @@ const PageFavorites = ({favoriteOffersMapByCity, getFavoriteOffersAction}) => {
                         </div>
                       </div>
                       <div className="favorites__places">
-                        <OffersList
-                          offerType={OfferType.FAVORITE}
-                          offers={favoriteOffersMapByCity.get(cityName)}
-                        />
+                        {favoriteOffersMapByCity.get(cityName).map((offer) => (
+                          <OfferCard
+                            key={offer.offerId}
+                            offer={offer}
+                            offerType={OfferType.FAVORITE}
+                          />
+                        ))}
                       </div>
                     </li>
                   )}

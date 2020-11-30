@@ -1,5 +1,5 @@
-import {ActionType} from "./../action";
-import {extend, updateOfferById, removeOfferById} from "../../utils";
+import {ActionType} from "./actions";
+import {extend, updateOfferById, removeOfferById} from "../../../utils";
 
 const initialState = {
   offers: [],
@@ -7,7 +7,6 @@ const initialState = {
   favoriteOffers: [],
   currentRoomOffer: null,
   cities: [],
-  authInfo: {},
   reviews: [],
 };
 
@@ -32,10 +31,6 @@ const appData = (state = initialState, action) => {
     case ActionType.GET_CITIES:
       return extend(state, {
         cities: action.payload
-      });
-    case ActionType.GET_AUTH_INFO:
-      return extend(state, {
-        authInfo: action.payload
       });
     case ActionType.GET_REVIEWS:
       return extend(state, {
