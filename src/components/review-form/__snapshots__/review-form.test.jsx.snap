@@ -17,6 +17,7 @@ exports[`Should ReviewForm render correctly 1`] = `
     className="reviews__rating-form form__rating"
   >
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="perfect"
       name="rating"
@@ -40,6 +41,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="good"
       name="rating"
@@ -63,6 +65,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="not bad"
       name="rating"
@@ -86,6 +89,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="badly"
       name="rating"
@@ -109,6 +113,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="terribly"
       name="rating"
@@ -138,6 +143,7 @@ exports[`Should ReviewForm render correctly 1`] = `
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
+    value=""
   />
   <div
     className="reviews__button-wrapper"

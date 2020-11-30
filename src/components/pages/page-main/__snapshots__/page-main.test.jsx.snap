@@ -60,6 +60,20 @@ exports[`Should PageMain render correctly Should PageMain render correctly if of
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>
@@ -191,6 +205,20 @@ exports[`Should PageMain render correctly Should PageMain render correctly if of
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>

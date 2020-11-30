@@ -9,13 +9,13 @@ describe(`Should reducer user works correctly`, () => {
   it(`Should reducer user return initial state`, () => {
     expect(user(undefined, {})).toEqual({
       authStatus: AuthStatus.NO_AUTH,
-      authInfo: {},
+      authInfo: null,
     });
   });
 
   it(`Should reducer user update authInfo`, () => {
     expect(user({
-      authInfo: {},
+      authInfo: null,
     }, {
       type: ActionType.GET_AUTH_INFO,
       payload: mockAuthInfo

@@ -8,7 +8,7 @@ import {AuthStatus} from "../../constants";
 configure({adapter: new Adapter()});
 
 describe(`OfferBookmarkBtn e2e tests`, () => {
-  test(`Click on OfferBookmarkBtn AuthStatus.NO_AUTH`, () => {
+  test(`Click on OfferBookmarkBtn if AuthStatus.NO_AUTH`, () => {
     const bookmarkBtnClickAction = jest.fn();
 
     const wrapper = shallow(
@@ -24,7 +24,7 @@ describe(`OfferBookmarkBtn e2e tests`, () => {
     expect(bookmarkBtnClickAction).toHaveBeenCalledTimes(0);
   });
 
-  test(`Click on OfferBookmarkBtn AuthStatus AUTH`, () => {
+  test(`Click on OfferBookmarkBtn if AuthStatus.AUTH`, () => {
     const bookmarkBtnClickAction = jest.fn();
 
     const wrapper = shallow(

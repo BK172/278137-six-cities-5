@@ -28,6 +28,7 @@ it(`Should Map render correctly`, () => {
           <Map
             mapType={`main`}
             offers={mockOffers}
+            currentOffer={mockOffer}
             activeCity={mockCity}
             activeOffer={mockOffer}
           />

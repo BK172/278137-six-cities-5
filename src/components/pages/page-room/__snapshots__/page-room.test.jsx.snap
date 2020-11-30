@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should PageRoom render correctly Should PageRoom render correctly if authStatus={AuthStatus.AUTH} 1`] = `
+exports[`Should PageRoom render correctly Should PageRoom render correctly if AuthStatus.AUTH 1`] = `
 <div
   className="page"
 >
@@ -60,6 +60,20 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>
@@ -343,6 +357,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                 className="reviews__rating-form form__rating"
               >
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   id="perfect"
                   name="rating"
@@ -366,6 +381,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   id="good"
                   name="rating"
@@ -389,6 +405,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   id="not bad"
                   name="rating"
@@ -412,6 +429,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   id="badly"
                   name="rating"
@@ -435,6 +453,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   id="terribly"
                   name="rating"
@@ -464,6 +483,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
                 name="review"
                 onChange={[Function]}
                 placeholder="Tell how was your stay, what you like and what can be improved"
+                value=""
               />
               <div
                 className="reviews__button-wrapper"
@@ -631,7 +651,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
 </div>
 `;
 
-exports[`Should PageRoom render correctly Should PageRoom render correctly if authStatus={AuthStatus.NO_AUTH} 1`] = `
+exports[`Should PageRoom render correctly Should PageRoom render correctly if AuthStatus.NO_AUTH 1`] = `
 <div
   className="page"
 >
@@ -691,6 +711,20 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if au
               </a>
             </li>
           </ul>
+          <div
+            className="header__signout"
+          >
+            <button
+              className="header__signout-button"
+              onClick={[Function]}
+              title="Sign out"
+              type="button"
+            >
+              <span
+                className="header__signout-button-icon"
+              />
+            </button>
+          </div>
         </nav>
       </div>
     </div>

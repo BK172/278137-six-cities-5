@@ -71,7 +71,7 @@ describe(`Should PageRoom render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if authStatus={AuthStatus.NO_AUTH}`, () => {
+  it(`Should PageRoom render correctly if AuthStatus.NO_AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -93,7 +93,7 @@ describe(`Should PageRoom render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if authStatus={AuthStatus.AUTH}`, () => {
+  it(`Should PageRoom render correctly if AuthStatus.AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if authStatus={AuthStatus.AUTH} 1`] = `
+exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if AuthStatus.AUTH 1`] = `
 <button
   className="place-card__bookmark-button button"
   onClick={[Function]}
@@ -24,7 +24,7 @@ exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render
 </button>
 `;
 
-exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if authStatus={AuthStatus.NO_AUTH} 1`] = `
+exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if AuthStatus.NO_AUTH 1`] = `
 <button
   className="place-card__bookmark-button button"
   type="button"
