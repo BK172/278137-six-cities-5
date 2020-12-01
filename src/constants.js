@@ -130,10 +130,12 @@ export const BookmarkBtnClasses = {
   MAIN: {
     btn: `place-card__bookmark-button button`,
     btnActive: `place-card__bookmark-button--active`,
+    icon: `place-card__bookmark-icon`,
   },
   ROOM: {
     btn: `property__bookmark-button button`,
     btnActive: `property__bookmark-button--active`,
+    icon: `property__bookmark-icon`,
   },
 };
 
