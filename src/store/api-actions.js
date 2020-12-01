@@ -118,6 +118,24 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
 );
 
+export const logout = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.LOGOUT)
+    .then((response) => {
+      if (response.status === HttpCode.SUCCESS) {
+        dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+        dispatch(getAuthInfo(null));
+
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
+    .catch((err) => {
+      return err;
+    })
+);
+
 export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.REVIEWS}/${offerId}`)
     .then(({data}) => {

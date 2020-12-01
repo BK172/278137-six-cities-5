@@ -5,6 +5,7 @@ export const ResponseType = {
 
 export const HttpCode = {
   UNAUTHORIZED: 401,
+  SUCCESS: 200,
 };
 
 export const AppRoute = {
@@ -19,6 +20,7 @@ export const AppRoute = {
 export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
+  LOGOUT: `/logout`,
   REVIEWS: `/comments`,
   FAVORITE: `/favorite`,
 };

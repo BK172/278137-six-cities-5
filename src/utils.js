@@ -25,7 +25,7 @@ export const updateOfferById = (offer, offers) => {
 };
 
 export const removeOfferById = (offer, offers) => {
-  const offerIndex = offers.findIndex((item) => item.id === offer.id);
+  const offerIndex = offers.findIndex((item) => item.offerId === offer.offerId);
 
   return offerIndex !== -1
     ? [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)]

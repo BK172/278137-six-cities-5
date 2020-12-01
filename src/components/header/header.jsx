@@ -11,6 +11,7 @@ import {
   getAuthInfo,
 } from "../../store/reducers/user/selectors";
 import {redirectToRoute} from "../../store/middlewares/actions";
+import {logout} from "../../store/api-actions";
 import {authInfoPropTypes} from "../../app-prop-types";
 import {AuthStatus, AppRoute} from "../../constants";
 
@@ -79,9 +80,10 @@ const mapStateToProps = ({USER}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSignOutAction() {
-    dispatch(requireAuthorization(AuthStatus.NO_AUTH));
-    dispatch(getAuthInfoAction(null));
-    dispatch(redirectToRoute(AppRoute.MAIN));
+    dispatch(logout());
+    // dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+    // dispatch(getAuthInfoAction(null));
+    // dispatch(redirectToRoute(AppRoute.MAIN));
   },
 });
 
