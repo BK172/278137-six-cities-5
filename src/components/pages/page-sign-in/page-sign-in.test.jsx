@@ -13,7 +13,11 @@ it(`Should PageSignIn render correctly`, () => {
         <Provider store={store}>
           <BrowserRouter>
             <PageSignIn
-              onSubmitAction={()=>{}}
+              email={``}
+              password={``}
+              isFormValid={true}
+              onFormSubmit={()=>{}}
+              onInputChange={()=>{}}
             />
           </BrowserRouter>
         </Provider>

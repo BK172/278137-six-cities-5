@@ -113,6 +113,7 @@ exports[`Should PageSignIn render correctly 1`] = `
               placeholder="Email"
               required={true}
               type="email"
+              value=""
             />
           </div>
           <div
@@ -130,11 +131,12 @@ exports[`Should PageSignIn render correctly 1`] = `
               placeholder="Password"
               required={true}
               type="password"
+              value=""
             />
           </div>
           <button
             className="login__submit form__submit button"
-            disabled="disabled"
+            disabled=""
             type="submit"
           >
             Sign in

@@ -6,14 +6,20 @@ import {PageSignIn} from "./page-sign-in";
 configure({adapter: new Adapter()});
 
 test(`Click on submit button PageSingIn`, () => {
-  const onSubmitAction = jest.fn();
+  const onFormSubmit = jest.fn();
+  const onInputChange = jest.fn();
 
   const wrapper = shallow(
       <PageSignIn
-        onSubmitAction={onSubmitAction}
+        email={``}
+        password={``}
+        isFormValid={true}
+        onFormSubmit={onFormSubmit}
+        onInputChange={onInputChange}
       />
   );
 
   wrapper.find(`.login__form`).simulate(`click`, {preventDefault() {}});
-  expect(onSubmitAction).toHaveBeenCalledTimes(0);
+  expect(onFormSubmit).toHaveBeenCalledTimes(0);
+  expect(onInputChange).toHaveBeenCalledTimes(0);
 });
