@@ -98,7 +98,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     })
 );
 
-export const login = ({login: email, password}) => (dispatch, _getState, api) => (
+export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
@@ -115,6 +115,15 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
     .catch((err) => {
       return err;
+    })
+);
+
+export const logout = () => (dispatch, _getState, api) => (
+  api.get(`/logout`)
+    .finally(() => {
+      dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+      dispatch(getAuthInfo(null));
+      dispatch(redirectToRoute(AppRoute.MAIN));
     })
 );
 

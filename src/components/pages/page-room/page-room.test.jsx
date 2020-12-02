@@ -12,17 +12,35 @@ import {AuthStatus} from "../../../constants";
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
   map: jest.fn().mockReturnValue({
-    setView: jest.fn(),
-    remove: jest.fn()
+    flyTo: jest.fn(),
+    remove: jest.fn(),
+    on: jest.fn(() => {}),
   }),
   tileLayer: jest.fn().mockReturnValue({
-    addTo: jest.fn()
+    addTo: jest.fn(),
   }),
   marker: jest.fn().mockReturnValue({
+    _offerId: jest.fn(() => `1`),
     addTo: jest.fn(),
-    removeFrom: jest.fn()
+    removeFrom: jest.fn(),
+    on: jest.fn(() => {}),
   }),
 }));
+
+const mockedMethodImpl = jest.fn().mockReturnValue([{
+  _offerId: jest.fn(() => `1`),
+  on: jest.fn(() => {}),
+}]);
+
+jest.mock(`../../map/map`);
+
+beforeAll(() => {
+  jest.fn().mockImplementation(() => {
+    return {
+      markers: mockedMethodImpl
+    };
+  });
+});
 
 describe(`Should PageRoom render correctly`, () => {
   const store = configureStore([thunk.withExtraArgument(createAPI(() => false))])(makeInitialStateMock());

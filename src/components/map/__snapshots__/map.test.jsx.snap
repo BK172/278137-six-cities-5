@@ -1,8 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Map render correctly 1`] = `
-<section
-  className="undefined map"
-  id="map"
-/>
-`;
+exports[`Should Map render correctly 1`] = `null`;

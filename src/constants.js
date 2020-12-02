@@ -5,6 +5,7 @@ export const ResponseType = {
 
 export const HttpCode = {
   UNAUTHORIZED: 401,
+  SUCCESS: 200,
 };
 
 export const AppRoute = {
@@ -19,6 +20,7 @@ export const AppRoute = {
 export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
+  LOGOUT: `/logout`,
   REVIEWS: `/comments`,
   FAVORITE: `/favorite`,
 };
@@ -128,10 +130,12 @@ export const BookmarkBtnClasses = {
   MAIN: {
     btn: `place-card__bookmark-button button`,
     btnActive: `place-card__bookmark-button--active`,
+    icon: `place-card__bookmark-icon`,
   },
   ROOM: {
     btn: `property__bookmark-button button`,
     btnActive: `property__bookmark-button--active`,
+    icon: `property__bookmark-icon`,
   },
 };
 
@@ -145,3 +149,6 @@ export const BookmarkBtnShapes = {
     height: 33,
   },
 };
+
+export const MAP_TILE_LAYER = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
+export const MAP_TILE_LAYER_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;

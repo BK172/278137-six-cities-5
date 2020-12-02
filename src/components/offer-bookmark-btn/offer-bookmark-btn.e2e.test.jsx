@@ -10,6 +10,7 @@ configure({adapter: new Adapter()});
 describe(`OfferBookmarkBtn e2e tests`, () => {
   test(`Click on OfferBookmarkBtn if AuthStatus.NO_AUTH`, () => {
     const bookmarkBtnClickAction = jest.fn();
+    const redirectToRouteAction = jest.fn();
 
     const wrapper = shallow(
         <OfferBookmarkBtn
@@ -17,6 +18,7 @@ describe(`OfferBookmarkBtn e2e tests`, () => {
           bookmarkType={`MAIN`}
           bookmarkBtnClickAction={bookmarkBtnClickAction}
           authStatus={AuthStatus.NO_AUTH}
+          redirectToRouteAction={redirectToRouteAction}
         />
     );
 
@@ -26,6 +28,7 @@ describe(`OfferBookmarkBtn e2e tests`, () => {
 
   test(`Click on OfferBookmarkBtn if AuthStatus.AUTH`, () => {
     const bookmarkBtnClickAction = jest.fn();
+    const redirectToRouteAction = jest.fn();
 
     const wrapper = shallow(
         <OfferBookmarkBtn
@@ -33,6 +36,7 @@ describe(`OfferBookmarkBtn e2e tests`, () => {
           bookmarkType={`MAIN`}
           bookmarkBtnClickAction={bookmarkBtnClickAction}
           authStatus={AuthStatus.AUTH}
+          redirectToRouteAction={redirectToRouteAction}
         />
     );
 

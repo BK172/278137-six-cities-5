@@ -1,4 +1,4 @@
-import React, {PureComponent, createRef} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
@@ -10,22 +10,40 @@ class PageSignIn extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.state = {
+      email: ``,
+      password: ``,
+      isFormValid: false,
+    };
 
     this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleInputChange = this._handleInputChange.bind(this);
+  }
+
+  componentDidUpdate() {
+    const {email, password} = this.state;
+
+    if (email.trim().length && password.trim().length) {
+      this.setState({isFormValid: true});
+    } else {
+      this.setState({isFormValid: false});
+    }
   }
 
   _handleSubmit(evt) {
     evt.preventDefault();
 
     const {onSubmitAction} = this.props;
-    const login = this.loginRef.current.value.trim();
-    const password = this.passwordRef.current.value.trim();
+    const {email, password} = this.state;
 
-    if (login.length && password.length) {
-      onSubmitAction({login, password});
+    if (email.trim().length && password.trim().length) {
+      onSubmitAction({email, password});
     }
+  }
+
+  _handleInputChange({target}) {
+    const {name, value} = target;
+    this.setState({[name]: value});
   }
 
   render() {
@@ -44,7 +62,7 @@ class PageSignIn extends PureComponent {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    ref={this.loginRef}
+                    onChange={this._handleInputChange}
                     required
                   />
                 </div>
@@ -55,11 +73,17 @@ class PageSignIn extends PureComponent {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    ref={this.passwordRef}
+                    onChange={this._handleInputChange}
                     required
                   />
                 </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
+                <button
+                  className="login__submit form__submit button"
+                  disabled={this.state.isFormValid ? `` : `disabled`}
+                  type="submit"
+                >
+                  Sign in
+                </button>
               </form>
             </section>
             <section className="locations locations--login locations--current">
