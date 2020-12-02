@@ -12,7 +12,7 @@ import {AuthStatus} from "../../../constants";
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
   map: jest.fn().mockReturnValue({
-    setView: jest.fn(),
+    flyTo: jest.fn(),
     remove: jest.fn()
   }),
   tileLayer: jest.fn().mockReturnValue({
