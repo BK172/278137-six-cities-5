@@ -3,6 +3,7 @@ import {
   changeSortingType,
   setActiveCity,
   setActiveOffer,
+  setMarkedOffer,
   isLoading,
 } from "./actions";
 import {mockCity, mockOffer} from "../../../utils";
@@ -26,6 +27,13 @@ describe(`Should action creators for reducer app-process work correctly`, () => 
   it(`Should setActiveOffer works correctly`, () => {
     expect(setActiveOffer(mockOffer)).toEqual({
       type: ActionType.SET_ACTIVE_OFFER,
+      payload: mockOffer,
+    });
+  });
+
+  it(`Should setMarkedOffer works correctly`, () => {
+    expect(setMarkedOffer(mockOffer)).toEqual({
+      type: ActionType.SET_MARKED_OFFER,
       payload: mockOffer,
     });
   });

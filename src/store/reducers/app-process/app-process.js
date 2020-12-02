@@ -5,6 +5,7 @@ import {extend} from "../../../utils";
 const initialState = {
   activeOffer: null,
   activeCity: {},
+  markedOffer: null,
   sortingType: INITIAL_SORTING_TYPE,
   isLoadingFlag: false,
 };
@@ -22,6 +23,10 @@ const appProcess = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload
+      });
+    case ActionType.SET_MARKED_OFFER:
+      return extend(state, {
+        markedOffer: action.payload
       });
     case ActionType.IS_LOADING:
       return extend(state, {

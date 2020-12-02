@@ -6,15 +6,23 @@ import {ReviewForm} from "./review-form";
 configure({adapter: new Adapter()});
 
 it(`Click on submit button ReviewForm`, () => {
-  const postReviewAction = jest.fn();
+  const onFormSubmit = jest.fn();
+  const onInputChange = jest.fn();
 
   const wrapper = shallow(
       <ReviewForm
         offerId={`1`}
-        postReviewAction={postReviewAction}
+        rating={``}
+        review={``}
+        isFormValid={true}
+        isFormWaitingResponse={false}
+        reviewPostingError={``}
+        onFormSubmit={onFormSubmit}
+        onInputChange={onInputChange}
       />
   );
 
   wrapper.find(`form`).simulate(`submit`, {preventDefault() {}});
-  expect(postReviewAction).toHaveBeenCalledTimes(1);
+  expect(onFormSubmit).toHaveBeenCalledTimes(1);
+  expect(onInputChange).toHaveBeenCalledTimes(0);
 });

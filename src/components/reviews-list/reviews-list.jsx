@@ -20,7 +20,7 @@ const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
           Reviews · <span className="reviews__amount">{reviews.length}</span>
         </h2>
         <ul className="reviews__list">
-          {reviews.slice(-MAX_REVIEWS_ON_PAGE).map((item) => (
+          {reviews.slice(0, MAX_REVIEWS_ON_PAGE).map((item) => (
             <Review
               key={item.reviewId}
               review={item}
