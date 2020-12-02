@@ -6,8 +6,8 @@ const PrivateRoute = ({
   render,
   path,
   exact,
-  loginStatus,
-  redirectToURL,
+  isAuth,
+  redirectURL,
 }) => {
   return (
     <Route
@@ -15,9 +15,9 @@ const PrivateRoute = ({
       exact={exact}
       render={(routeProps) => {
         return (
-          loginStatus
+          isAuth
             ? render(routeProps)
-            : <Redirect to={redirectToURL} />
+            : <Redirect to={redirectURL} />
         );
       }}
     />
@@ -25,8 +25,8 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
-  loginStatus: PropTypes.bool.isRequired,
-  redirectToURL: PropTypes.string.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  redirectURL: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,

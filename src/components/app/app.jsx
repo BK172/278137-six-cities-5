@@ -26,15 +26,15 @@ const App = ({authStatus}) => {
         <PrivateRoute
           exact
           path={AppRoute.LOGIN}
-          redirectToURL={AppRoute.MAIN}
-          loginStatus={!isLoggedIn}
+          redirectURL={AppRoute.MAIN}
+          isAuth={!isLoggedIn}
           render={() => <PageSignIn />}
         />
         <PrivateRoute
           exact
           path={AppRoute.FAVORITES}
-          redirectToURL={AppRoute.LOGIN}
-          loginStatus={isLoggedIn}
+          redirectURL={AppRoute.LOGIN}
+          isAuth={isLoggedIn}
           render={() => <PageFavorites />}
         />
         <Route
