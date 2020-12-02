@@ -98,7 +98,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     })
 );
 
-export const login = ({login: email, password}) => (dispatch, _getState, api) => (
+export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
