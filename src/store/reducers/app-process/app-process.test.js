@@ -10,6 +10,7 @@ describe(`Should reducer appProcess works correctly`, () => {
     expect(appProcess(undefined, {})).toEqual({
       activeOffer: null,
       activeCity: {},
+      markedOffer: null,
       sortingType: INITIAL_SORTING_TYPE,
       isLoadingFlag: false,
     });
@@ -45,6 +46,17 @@ describe(`Should reducer appProcess works correctly`, () => {
       payload: mockOffer
     })).toEqual({
       activeOffer: mockOffer
+    });
+  });
+
+  it(`Should reducer appProcess update markedOffer`, () => {
+    expect(appProcess({
+      markedOffer: null,
+    }, {
+      type: ActionType.SET_MARKED_OFFER,
+      payload: mockOffer
+    })).toEqual({
+      markedOffer: mockOffer
     });
   });
 

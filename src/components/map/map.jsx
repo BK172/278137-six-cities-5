@@ -2,8 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
-import {setActiveOffer} from "../../store/reducers/app-process/actions";
-import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
+import {setActiveOffer, setMarkedOffer} from "../../store/reducers/app-process/actions";
+import {getActiveOffer, getMarkedOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import {MapClasses, MAP_TILE_LAYER, MAP_TILE_LAYER_ATTRIBUTION} from "../../constants";
 import "leaflet/dist/leaflet.css";
@@ -22,10 +22,6 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     this.map = null;
-
-    this.state = {
-      chosenOfferId: ``,
-    };
   }
 
   componentDidMount() {
@@ -52,7 +48,14 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {offers, activeCity, currentOffer, activeOffer, setActiveOfferAction} = this.props;
+    const {
+      offers,
+      activeCity,
+      currentOffer,
+      activeOffer,
+      setActiveOfferAction,
+      setMarkedOfferAction,
+    } = this.props;
     const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
     const center = city.coordinates;
     const zoom = city.zoom;
@@ -70,16 +73,21 @@ class Map extends PureComponent {
       this.map.flyTo(center, zoom);
 
       if (activeOffer) {
-        this.setState({chosenOfferId: ``});
+        setMarkedOfferAction(null);
         setActiveOfferAction(null);
       }
     });
   }
 
   _addMarkers(offers, currentOffer) {
-    const {activeOffer, setActiveOfferAction} = this.props;
+    const {
+      activeOffer,
+      markedOffer,
+      setActiveOfferAction,
+      setMarkedOfferAction,
+    } = this.props;
     const activeOfferId = activeOffer && activeOffer.offerId;
-    const {chosenOfferId} = this.state;
+    const markedOfferId = markedOffer && markedOffer.offerId;
 
     offers.forEach((offer) => {
       const {offerId, coordinates, title} = offer;
@@ -95,14 +103,14 @@ class Map extends PureComponent {
       });
 
       marker.on(`mouseout`, () => {
-        if (activeOffer && offerId !== activeOffer.offerId || chosenOfferId !== marker._offerId) {
+        if (activeOffer && offerId !== activeOffer.offerId || markedOfferId !== marker._offerId) {
           marker.setIcon(this.icon);
         }
       });
 
       marker.on(`click`, () => {
         marker.setIcon(this.activeIcon);
-        this.setState({chosenOfferId: offer.offerId});
+        setMarkedOfferAction(offer);
         setActiveOfferAction(offer);
       });
 
@@ -141,18 +149,25 @@ Map.propTypes = {
   currentOffer: offerOrNullPropTypes,
   activeCity: cityPropTypes,
   activeOffer: offerOrNullPropTypes,
+  markedOffer: offerOrNullPropTypes,
   setActiveOfferAction: PropTypes.func.isRequired,
+  setMarkedOfferAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({PROCESS}) => ({
   activeCity: getActiveCity({PROCESS}),
   activeOffer: getActiveOffer({PROCESS}),
+  markedOffer: getMarkedOffer({PROCESS}),
   setActiveOfferAction: PROCESS.setActiveOfferAction,
+  setMarkedOfferAction: PROCESS.setActiveOfferAction,
 });
 
 const mapDispatchToProps = ((dispatch) => ({
   setActiveOfferAction(activeOffer) {
     dispatch(setActiveOffer(activeOffer));
+  },
+  setMarkedOfferAction(markedOffer) {
+    dispatch(setMarkedOffer(markedOffer));
   },
 }));
 

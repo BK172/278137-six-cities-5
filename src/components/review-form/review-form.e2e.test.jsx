@@ -11,6 +11,7 @@ it(`Click on submit button ReviewForm`, () => {
 
   const wrapper = shallow(
       <ReviewForm
+        offerId={`1`}
         rating={``}
         review={``}
         isFormValid={true}

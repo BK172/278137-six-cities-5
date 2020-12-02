@@ -13,6 +13,7 @@ it(`Should ReviewForm render correctly`, () => {
         <Provider store={store}>
           <BrowserRouter>
             <ReviewForm
+              offerId={`1`}
               rating={``}
               review={``}
               isFormValid={true}

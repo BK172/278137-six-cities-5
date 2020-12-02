@@ -4,6 +4,7 @@ import withReviewForm from "../../hocs/with-review-form/with-review-form";
 import {ReviewFormRatings, ResponseType} from "../../constants";
 
 const ReviewForm = ({
+  offerId,
   rating,
   review,
   isFormValid,
@@ -13,7 +14,7 @@ const ReviewForm = ({
   onInputChange,
 }) => {
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={onFormSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => onFormSubmit(evt, offerId)}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {ReviewFormRatings.map(({mark, title}) => (
@@ -68,6 +69,7 @@ const ReviewForm = ({
 };
 
 ReviewForm.propTypes = {
+  offerId: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
   isFormValid: PropTypes.bool.isRequired,

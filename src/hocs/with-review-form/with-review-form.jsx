@@ -36,10 +36,10 @@ const withReviewForm = (Component) => {
       }
     }
 
-    _handleFormSubmit(evt) {
+    _handleFormSubmit(evt, offerId) {
       evt.preventDefault();
 
-      const {offerId, postReviewAction} = this.props;
+      const {postReviewAction} = this.props;
       const review = this.state.review.trim();
       const rating = this.state.rating;
       const onClearFormFields = this._handleClearFormFields;
@@ -99,7 +99,6 @@ const withReviewForm = (Component) => {
   }
 
   ReviewForm.propTypes = {
-    offerId: PropTypes.string.isRequired,
     postReviewAction: PropTypes.func.isRequired,
   };
 

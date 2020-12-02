@@ -49,7 +49,9 @@ it(`Should Map render correctly`, () => {
             currentOffer={mockOffer}
             activeCity={mockCity}
             activeOffer={mockOffer}
+            markedOffer={mockOffer}
             setActiveOfferAction={()=>{}}
+            setMarkedOfferAction={()=>{}}
           />
         </Provider>
     )
