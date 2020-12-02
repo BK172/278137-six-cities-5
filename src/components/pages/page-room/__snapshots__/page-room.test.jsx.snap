@@ -128,7 +128,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if Au
               type="button"
             >
               <svg
-                className="place-card__bookmark-icon"
+                className="property__bookmark-icon"
                 height={33}
                 width={31}
               >
@@ -517,10 +517,6 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if Au
           </section>
         </div>
       </div>
-      <section
-        className="property__map map"
-        id="map"
-      />
     </section>
     <div
       className="container"
@@ -779,7 +775,7 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if Au
               type="button"
             >
               <svg
-                className="place-card__bookmark-icon"
+                className="property__bookmark-icon"
                 height={33}
                 width={31}
               >
@@ -995,10 +991,6 @@ exports[`Should PageRoom render correctly Should PageRoom render correctly if Au
           </section>
         </div>
       </div>
-      <section
-        className="property__map map"
-        id="map"
-      />
     </section>
     <div
       className="container"

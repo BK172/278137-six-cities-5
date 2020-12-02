@@ -9,14 +9,14 @@ import {makeInitialStateMock} from "../../utils";
 describe(`Should PrivateRoute render correctly`, () => {
   const store = configureStore()(makeInitialStateMock());
 
-  it(`Should PrivateRoute render correctly if loginStatus true`, () => {
+  it(`Should PrivateRoute render correctly if isAuth true`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <BrowserRouter>
               <PrivateRoute
-                loginStatus={true}
-                redirectToURL={`/`}
+                isAuth={true}
+                redirectURL={`/`}
                 exact={true}
                 path={``}
                 render={()=>{}}
@@ -28,14 +28,14 @@ describe(`Should PrivateRoute render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PrivateRoute render correctly if loginStatus false`, () => {
+  it(`Should PrivateRoute render correctly if isAuth false`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <BrowserRouter>
               <PrivateRoute
-                loginStatus={false}
-                redirectToURL={`/`}
+                isAuth={false}
+                redirectURL={`/`}
                 exact={true}
                 path={``}
                 render={()=>{}}

@@ -452,12 +452,7 @@ exports[`Should PageMain render correctly Should PageMain render correctly if of
         </section>
         <div
           className="cities__right-section"
-        >
-          <section
-            className="cities__map map"
-            id="map"
-          />
-        </div>
+        />
       </div>
     </div>
   </main>

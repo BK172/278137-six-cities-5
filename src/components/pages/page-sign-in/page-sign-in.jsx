@@ -62,7 +62,6 @@ class PageSignIn extends PureComponent {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    // value={this.state.email}
                     onChange={this._handleInputChange}
                     required
                   />
@@ -74,7 +73,6 @@ class PageSignIn extends PureComponent {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    // value={this.state.password}
                     onChange={this._handleInputChange}
                     required
                   />

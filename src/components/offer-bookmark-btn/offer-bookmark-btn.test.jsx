@@ -20,6 +20,7 @@ describe(`Should OfferBookmarkBtn render correctly`, () => {
                 bookmarkType={`MAIN`}
                 bookmarkBtnClickAction={()=>{}}
                 authStatus={AuthStatus.NO_AUTH}
+                redirectToRouteAction={()=>{}}
               />
             </BrowserRouter>
           </Provider>
@@ -38,6 +39,7 @@ describe(`Should OfferBookmarkBtn render correctly`, () => {
                 bookmarkType={`MAIN`}
                 bookmarkBtnClickAction={()=>{}}
                 authStatus={AuthStatus.AUTH}
+                redirectToRouteAction={()=>{}}
               />
             </BrowserRouter>
           </Provider>
