@@ -6,24 +6,6 @@ import configureStore from "redux-mock-store";
 import {PageMain} from "./page-main";
 import {makeInitialStateMock, mockOffers, mockCity} from "../../../utils";
 
-jest.mock(`leaflet`, () => ({
-  icon: jest.fn(),
-  map: jest.fn().mockReturnValue({
-    flyTo: jest.fn(),
-    remove: jest.fn(),
-    on: jest.fn(() => {}),
-  }),
-  tileLayer: jest.fn().mockReturnValue({
-    addTo: jest.fn(),
-  }),
-  marker: jest.fn().mockReturnValue({
-    _offerId: jest.fn(() => `1`),
-    addTo: jest.fn(),
-    removeFrom: jest.fn(),
-    on: jest.fn(() => {}),
-  }),
-}));
-
 const mockedMethodImpl = jest.fn().mockReturnValue([{
   _offerId: jest.fn(() => `1`),
   on: jest.fn(() => {}),
