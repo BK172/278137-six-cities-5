@@ -3,14 +3,9 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {
-  requireAuthorization,
-  getAuthInfo as getAuthInfoAction,
-} from "../../store/reducers/user/actions";
-import {
   getAuthStatus,
   getAuthInfo,
 } from "../../store/reducers/user/selectors";
-import {redirectToRoute} from "../../store/middlewares/actions";
 import {logout} from "../../store/api-actions";
 import {authInfoPropTypes} from "../../app-prop-types";
 import {AuthStatus, AppRoute} from "../../constants";
@@ -81,9 +76,6 @@ const mapStateToProps = ({USER}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onSignOutAction() {
     dispatch(logout());
-    // dispatch(requireAuthorization(AuthStatus.NO_AUTH));
-    // dispatch(getAuthInfoAction(null));
-    // dispatch(redirectToRoute(AppRoute.MAIN));
   },
 });
 

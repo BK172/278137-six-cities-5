@@ -119,20 +119,11 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
 );
 
 export const logout = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.LOGOUT)
-    .then((response) => {
-      if (response.status === HttpCode.SUCCESS) {
-        dispatch(requireAuthorization(AuthStatus.NO_AUTH));
-        dispatch(getAuthInfo(null));
-
-        return ResponseType.SUCCESS;
-      } else {
-        return response;
-      }
-    })
-    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
-    .catch((err) => {
-      return err;
+  api.get(`/logout`)
+    .finally(() => {
+      dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+      dispatch(getAuthInfo(null));
+      dispatch(redirectToRoute(AppRoute.MAIN));
     })
 );
 

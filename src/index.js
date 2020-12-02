@@ -5,10 +5,9 @@ import {store} from "./store/store";
 import App from "./components/app/app";
 import PageError from "./components/pages/page-error/page-error";
 import {fetchOffersList, checkAuth} from "./store/api-actions";
-import {ResponseType} from "./constants";
 
 Promise.all([
-  // store.dispatch(checkAuth()),
+  store.dispatch(checkAuth()),
   store.dispatch(fetchOffersList()),
 ]).then(() => {
   ReactDOM.render(
