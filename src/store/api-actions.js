@@ -67,7 +67,7 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
 };
 
 export const fetchOffersNearBy = (offerId) => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.OFFERS}/${offerId}/nearby`)
+  api.get(`${APIRoute.OFFERS}/${offerId}${APIRoute.NEARBY}`)
     .then(({data}) => {
       const offers = data.map((offer) => offersAdapter(offer));
       dispatch(getOffersNearBy(offers));
@@ -119,7 +119,7 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
 );
 
 export const logout = () => (dispatch, _getState, api) => (
-  api.get(`/logout`)
+  api.get(APIRoute.LOGOUT)
     .finally(() => {
       dispatch(requireAuthorization(AuthStatus.NO_AUTH));
       dispatch(getAuthInfo(null));

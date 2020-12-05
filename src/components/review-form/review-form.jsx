@@ -123,8 +123,7 @@ class ReviewForm extends PureComponent {
           <button
             className="reviews__submit form__submit button"
             type="submit"
-            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse
-              ? `` : `disabled`}
+            disabled={this.state.isFormValid && !this.state.isFormWaitingResponse ? `` : `disabled`}
           >
             Submit
           </button>

@@ -15,11 +15,11 @@ class Map extends PureComponent {
     this.markers = [];
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconSize: [30, 30],
     });
     this.activeIcon = leaflet.icon({
       iconUrl: `img/pin-active.svg`,
-      iconSize: [30, 30]
+      iconSize: [30, 30],
     });
     this.map = null;
 
@@ -38,12 +38,12 @@ class Map extends PureComponent {
       center,
       zoom,
       zoomControl: false,
-      marker: true
+      marker: true,
     });
 
     leaflet
       .tileLayer(MAP_TILE_LAYER, {
-        attribution: MAP_TILE_LAYER_ATTRIBUTION
+        attribution: MAP_TILE_LAYER_ATTRIBUTION,
       })
       .addTo(this.map);
 

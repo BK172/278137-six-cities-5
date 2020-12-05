@@ -9,6 +9,7 @@ import {AuthStatus} from "../../constants";
 
 describe(`Should Header render correctly`, () => {
   const store = configureStore()(makeInitialStateMock());
+
   it(`Should Header render correctly if AuthStatus.NO_AUTH`, () => {
     const tree = renderer
       .create(

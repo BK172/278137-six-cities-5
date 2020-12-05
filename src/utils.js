@@ -3,7 +3,7 @@ import {
   REVIEW_DATE_FORMAT,
   REVIEW_RATING_ELEMENT_WIDTH,
   INITIAL_SORTING_TYPE,
-  AuthStatus
+  AuthStatus,
 } from "./constants";
 import {NameSpace} from "./store/reducers/root-reducer";
 import moment from "moment";
@@ -12,9 +12,7 @@ export const getElementWidthByRating = (rating) => Math.round(rating) * REVIEW_R
 
 export const getReviewDate = (date) => moment(date).format(REVIEW_DATE_FORMAT);
 
-export const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+export const extend = (a, b) => Object.assign({}, a, b);
 
 export const updateOfferById = (offer, offers) => {
   const offerIndex = offers.findIndex((item) => item.offerId === offer.offerId);
@@ -162,11 +160,8 @@ export const mockOffer = {
 
 export const mockOffers = [mockOffer];
 
-const mockOffersMapByCity = new Map();
-const mockOffersMapByCityEmpty = new Map();
-
-mockOffersMapByCity.set(`Paris`, mockOffers);
-export {mockOffersMapByCity, mockOffersMapByCityEmpty};
+export const mockOffersMapByCity = new Map().set(`Paris`, mockOffers);
+export const mockOffersMapByCityEmpty = new Map();
 
 export const mockReview = {
   reviewId: 10,

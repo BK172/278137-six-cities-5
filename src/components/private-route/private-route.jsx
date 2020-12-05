@@ -25,11 +25,11 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
+  render: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
   redirectURL: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
 };
 
 export default PrivateRoute;

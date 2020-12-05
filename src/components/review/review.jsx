@@ -29,9 +29,8 @@ const Review = ({review}) => {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time
-          className="reviews__time"
-          dateTime={review.date}>{getReviewDate(review.date)}
+        <time className="reviews__time" dateTime={review.date}>
+          {getReviewDate(review.date)}
         </time>
       </div>
     </li>

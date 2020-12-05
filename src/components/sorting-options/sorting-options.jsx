@@ -22,11 +22,7 @@ const SortingOptions = ({
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span
-        className="places__sorting-type"
-        tabIndex={0}
-        onClick={onToggleChange}
-      >
+      <span className="places__sorting-type" tabIndex={0} onClick={onToggleChange}>
         &nbsp;{SortingTypes[sortingType]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
@@ -38,8 +34,7 @@ const SortingOptions = ({
           Object.keys(SortingTypes).map((item) => (
             <li
               key={item}
-              className={clsx(`places__option`,
-                  {'places__option--active': sortingType === item})}
+              className={clsx(`places__option`, {'places__option--active': sortingType === item})}
               tabIndex={0}
               onClick={() => onListItemClick(item)}
             >

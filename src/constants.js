@@ -19,6 +19,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   OFFERS: `/hotels`,
+  NEARBY: `/nearby`,
   LOGIN: `/login`,
   LOGOUT: `/logout`,
   REVIEWS: `/comments`,

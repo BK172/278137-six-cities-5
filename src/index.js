@@ -12,7 +12,7 @@ Promise.all([
 ]).then(() => {
   ReactDOM.render(
       <Provider store={store}>
-        <App/>
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );
