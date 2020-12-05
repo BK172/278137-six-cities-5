@@ -1,12 +1,12 @@
 import {
   ActionType,
-  getCities,
-  getOffers,
-  getOffersNearBy,
-  getOfferById,
-  getFavoriteOffers,
+  setCities,
+  setOffers,
+  setOffersNearBy,
+  setOfferById,
+  setFavoriteOffers,
   setOfferAsFavorite,
-  getReviews,
+  setReviews,
 } from "./actions";
 import {
   mockCities,
@@ -16,44 +16,44 @@ import {
 } from "../../../utils";
 
 describe(`Should action creators for reducer app-data work correctly`, () => {
-  it(`Should getCities works correctly`, () => {
-    expect(getCities(mockCities)).toEqual({
-      type: ActionType.GET_CITIES,
+  it(`Should setCities works correctly`, () => {
+    expect(setCities(mockCities)).toEqual({
+      type: ActionType.SET_CITIES,
       payload: mockCities,
     });
   });
 
-  it(`Should getOffers works correctly`, () => {
-    expect(getOffers(mockOffers)).toEqual({
-      type: ActionType.GET_OFFERS,
+  it(`Should setOffers works correctly`, () => {
+    expect(setOffers(mockOffers)).toEqual({
+      type: ActionType.SET_OFFERS,
       payload: mockOffers,
     });
   });
 
-  it(`Should getOffersNearBy works correctly`, () => {
-    expect(getOffersNearBy(mockOffers)).toEqual({
-      type: ActionType.GET_OFFERS_NEARBY,
+  it(`Should setOffersNearBy works correctly`, () => {
+    expect(setOffersNearBy(mockOffers)).toEqual({
+      type: ActionType.SET_OFFERS_NEARBY,
       payload: mockOffers,
     });
   });
 
-  it(`Should getOfferById works correctly`, () => {
-    expect(getOfferById(mockOffer)).toEqual({
-      type: ActionType.GET_OFFER_BY_ID,
+  it(`Should setOfferById works correctly`, () => {
+    expect(setOfferById(mockOffer)).toEqual({
+      type: ActionType.SET_OFFER_BY_ID,
       payload: mockOffer,
     });
   });
 
-  it(`Should getFavoriteOffers works correctly`, () => {
-    expect(getFavoriteOffers(mockOffers)).toEqual({
-      type: ActionType.GET_FAVORITE_OFFERS,
+  it(`Should setFavoriteOffers works correctly`, () => {
+    expect(setFavoriteOffers(mockOffers)).toEqual({
+      type: ActionType.SET_FAVORITE_OFFERS,
       payload: mockOffers,
     });
   });
 
-  it(`Should getReviews works correctly`, () => {
-    expect(getReviews(mockReviews)).toEqual({
-      type: ActionType.GET_REVIEWS,
+  it(`Should setReviews works correctly`, () => {
+    expect(setReviews(mockReviews)).toEqual({
+      type: ActionType.SET_REVIEWS,
       payload: mockReviews,
     });
   });

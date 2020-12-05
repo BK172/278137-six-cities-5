@@ -1,10 +1,10 @@
 import {
-  getOffers,
-  getOfferById,
-  getOffersNearBy,
-  getFavoriteOffers,
-  getCities,
-  getReviews,
+  setOffers,
+  setOfferById,
+  setOffersNearBy,
+  setFavoriteOffers,
+  setCities,
+  setReviews,
   setOfferAsFavorite,
 } from "./reducers/app-data/actions";
 import {
@@ -13,7 +13,7 @@ import {
 } from "./reducers/app-process/actions";
 import {
   requireAuthorization,
-  getAuthInfo,
+  setAuthInfo,
 } from "./reducers/user/actions";
 import {
   redirectToRoute,
@@ -36,10 +36,10 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => {
       const offers = data.map((offer) => offersAdapter(offer));
-      dispatch(getOffers(offers));
+      dispatch(setOffers(offers));
 
       const cities = getCitiesFromOffers(offers);
-      dispatch(getCities(cities));
+      dispatch(setCities(cities));
       dispatch(setActiveCity(cities[0]));
 
       return ResponseType.SUCCESS;
@@ -54,7 +54,7 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
   api.get(`${APIRoute.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = offersAdapter(data);
-      dispatch(getOfferById(offer));
+      dispatch(setOfferById(offer));
 
       return ResponseType.SUCCESS;
     })
@@ -70,7 +70,7 @@ export const fetchOffersNearBy = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${offerId}${APIRoute.NEARBY}`)
     .then(({data}) => {
       const offers = data.map((offer) => offersAdapter(offer));
-      dispatch(getOffersNearBy(offers));
+      dispatch(setOffersNearBy(offers));
 
       return ResponseType.SUCCESS;
     })
@@ -86,7 +86,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
         const authInfo = authInfoAdapter(response.data);
 
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(authInfo));
+        dispatch(setAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {
@@ -105,7 +105,7 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
         const authInfo = authInfoAdapter(response.data);
 
         dispatch(requireAuthorization(AuthStatus.AUTH));
-        dispatch(getAuthInfo(authInfo));
+        dispatch(setAuthInfo(authInfo));
 
         return ResponseType.SUCCESS;
       } else {
@@ -122,7 +122,7 @@ export const logout = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGOUT)
     .finally(() => {
       dispatch(requireAuthorization(AuthStatus.NO_AUTH));
-      dispatch(getAuthInfo(null));
+      dispatch(setAuthInfo(null));
       dispatch(redirectToRoute(AppRoute.MAIN));
     })
 );
@@ -131,7 +131,7 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.REVIEWS}/${offerId}`)
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
-      dispatch(getReviews(reviews));
+      dispatch(setReviews(reviews));
 
       return ResponseType.SUCCESS;
     })
@@ -145,7 +145,7 @@ export const postReview = ({review: comment, rating, offerId,
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = data.map((review) => reviewsAdapter(review));
-      dispatch(getReviews(reviews));
+      dispatch(setReviews(reviews));
 
       onChangeFormWaitingFlag(false);
       onClearFormFields();
@@ -165,7 +165,7 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const offers = response.data.map((offer) => offersAdapter(offer));
-        dispatch(getFavoriteOffers(offers));
+        dispatch(setFavoriteOffers(offers));
 
         return ResponseType.SUCCESS;
       } else {

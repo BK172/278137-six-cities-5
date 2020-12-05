@@ -12,27 +12,27 @@ const initialState = {
 
 const appData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.GET_OFFERS:
+    case ActionType.SET_OFFERS:
       return extend(state, {
         offers: action.payload
       });
-    case ActionType.GET_OFFERS_NEARBY:
+    case ActionType.SET_OFFERS_NEARBY:
       return extend(state, {
         offersNearBy: action.payload
       });
-    case ActionType.GET_OFFER_BY_ID:
+    case ActionType.SET_OFFER_BY_ID:
       return extend(state, {
         currentRoomOffer: action.payload
       });
-    case ActionType.GET_FAVORITE_OFFERS:
+    case ActionType.SET_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: action.payload
       });
-    case ActionType.GET_CITIES:
+    case ActionType.SET_CITIES:
       return extend(state, {
         cities: action.payload
       });
-    case ActionType.GET_REVIEWS:
+    case ActionType.SET_REVIEWS:
       return extend(state, {
         reviews: action.payload
       });

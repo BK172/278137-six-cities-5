@@ -17,7 +17,7 @@ describe(`Should reducer user works correctly`, () => {
     expect(user({
       authInfo: null,
     }, {
-      type: ActionType.GET_AUTH_INFO,
+      type: ActionType.SET_AUTH_INFO,
       payload: mockAuthInfo
     })).toEqual({
       authInfo: mockAuthInfo

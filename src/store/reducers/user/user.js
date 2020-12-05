@@ -13,7 +13,7 @@ const user = (state = initialState, action) => {
       return extend(state, {
         authStatus: action.payload,
       });
-    case ActionType.GET_AUTH_INFO:
+    case ActionType.SET_AUTH_INFO:
       return extend(state, {
         authInfo: action.payload
       });

@@ -10,7 +10,7 @@ import OfferBookmarkBtn from "../../offer-bookmark-btn/offer-bookmark-btn";
 import PageLoading from "../page-loading/page-loading";
 import PageNotFound from "../page-not-found/page-not-found";
 import {fetchOfferById, fetchOffersNearBy} from "../../../store/api-actions";
-import {getOfferById} from "../../../store/reducers/app-data/actions";
+import {setOfferById} from "../../../store/reducers/app-data/actions";
 import {getOffersNearBy, getCurrentRoomOffer} from "../../../store/reducers/app-data/selectors";
 import {getIsLoadingFlag} from "../../../store/reducers/app-process/selectors";
 import {getAuthStatus} from "../../../store/reducers/user/selectors";
@@ -184,7 +184,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOffersNearBy(offerId));
   },
   updateCurrentOfferAction() {
-    dispatch(getOfferById(null));
+    dispatch(setOfferById(null));
   },
 });
 

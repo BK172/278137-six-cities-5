@@ -1,6 +1,6 @@
 export const ActionType = {
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
-  GET_AUTH_INFO: `GET_AUTH_INFO`,
+  SET_AUTH_INFO: `SET_AUTH_INFO`,
 };
 
 export const requireAuthorization = (status) => ({
@@ -8,7 +8,7 @@ export const requireAuthorization = (status) => ({
   payload: status,
 });
 
-export const getAuthInfo = (authInfo) => ({
-  type: ActionType.GET_AUTH_INFO,
+export const setAuthInfo = (authInfo) => ({
+  type: ActionType.SET_AUTH_INFO,
   payload: authInfo,
 });

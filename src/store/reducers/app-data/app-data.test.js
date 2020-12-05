@@ -26,7 +26,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       offers: [],
     }, {
-      type: ActionType.GET_OFFERS,
+      type: ActionType.SET_OFFERS,
       payload: mockOffers
     })).toEqual({
       offers: mockOffers
@@ -37,7 +37,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       offersNearBy: [],
     }, {
-      type: ActionType.GET_OFFERS_NEARBY,
+      type: ActionType.SET_OFFERS_NEARBY,
       payload: mockOffers
     })).toEqual({
       offersNearBy: mockOffers
@@ -48,7 +48,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       currentRoomOffer: null,
     }, {
-      type: ActionType.GET_OFFER_BY_ID,
+      type: ActionType.SET_OFFER_BY_ID,
       payload: mockOffer
     })).toEqual({
       currentRoomOffer: mockOffer
@@ -59,7 +59,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       favoriteOffers: [],
     }, {
-      type: ActionType.GET_FAVORITE_OFFERS,
+      type: ActionType.SET_FAVORITE_OFFERS,
       payload: mockOffers
     })).toEqual({
       favoriteOffers: mockOffers
@@ -70,7 +70,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       cities: [],
     }, {
-      type: ActionType.GET_CITIES,
+      type: ActionType.SET_CITIES,
       payload: mockCities
     })).toEqual({
       cities: mockCities
@@ -81,7 +81,7 @@ describe(`Should reducer appData works correctly`, () => {
     expect(appData({
       reviews: [],
     }, {
-      type: ActionType.GET_REVIEWS,
+      type: ActionType.SET_REVIEWS,
       payload: mockReviews
     })).toEqual({
       reviews: mockReviews
