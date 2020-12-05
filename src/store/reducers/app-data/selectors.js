@@ -9,11 +9,16 @@ export const getOffersNearBy = (({DATA}) => DATA.offersNearBy);
 export const getFavoriteOffers = (({DATA}) => DATA.favoriteOffers);
 export const getCurrentRoomOffer = (({DATA}) => DATA.currentRoomOffer);
 export const getCities = (({DATA}) => DATA.cities);
-export const getReviews = (({DATA}) => {
-  return DATA.reviews.sort((a, b) => {
-    return moment(b.date).format(`x`) - moment(a.date).format(`x`);
-  });
-});
+export const getReviews = (({DATA}) => DATA.reviews);
+
+export const getReviewsSortedByDate = createSelector(
+    getReviews,
+    (reviews) => {
+      return reviews.sort((a, b) => {
+        return moment(b.date).format(`x`) - moment(a.date).format(`x`);
+      });
+    }
+);
 
 export const getFavoriteOffersMapByCity = createSelector(
     getFavoriteOffers,

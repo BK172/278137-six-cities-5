@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Review from "../review/review";
 import {fetchReviews} from "../../store/api-actions";
-import {getReviews} from "../../store/reducers/app-data/selectors";
+import {getReviewsSortedByDate} from "../../store/reducers/app-data/selectors";
 import {MAX_REVIEWS_ON_PAGE} from "../../constants";
 import {reviewsPropTypes} from "../../app-prop-types";
 import _ from "lodash";
@@ -41,7 +41,7 @@ ReviewsList.propTypes = {
 };
 
 const mapStateToProps = ({DATA}) => ({
-  reviews: getReviews({DATA}),
+  reviews: getReviewsSortedByDate({DATA}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
