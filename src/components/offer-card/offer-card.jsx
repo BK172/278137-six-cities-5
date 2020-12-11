@@ -9,14 +9,17 @@ import {offerPropTypes} from "../../app-prop-types";
 const OfferCard = ({
   offer,
   offerType,
+  offerName,
+  additionalClass,
   onOfferCardMouseOver = () => false,
-  onOfferCardMouseOut = () => false
+  onOfferCardMouseOut = () => false,
 }) => {
   return (
     <article
-      className={`${OfferClasses[offerType][`article`]} place-card`}
+      className={`${OfferClasses[offerType][`article`]} place-card ${additionalClass}`}
       onMouseOver={onOfferCardMouseOver}
       onMouseOut={onOfferCardMouseOut}
+      name={offerName}
     >
       {offer.isPremium && (
         <div className="place-card__mark">
@@ -60,6 +63,8 @@ const OfferCard = ({
 OfferCard.propTypes = {
   offer: offerPropTypes,
   offerType: PropTypes.string.isRequired,
+  offerName: PropTypes.string,
+  additionalClass: PropTypes.string,
   onOfferCardMouseOver: PropTypes.func,
   onOfferCardMouseOut: PropTypes.func,
 };

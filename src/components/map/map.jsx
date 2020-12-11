@@ -1,11 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Events, scroller} from "react-scroll";
 import leaflet from "leaflet";
-import {setActiveOffer} from "../../store/reducers/app-process/actions";
 import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import {MapClasses, MAP_TILE_LAYER, MAP_TILE_LAYER_ATTRIBUTION} from "../../constants";
+import {extend} from "../../utils";
 import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
@@ -21,11 +22,21 @@ class Map extends PureComponent {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30],
     });
-    this.map = null;
-
-    this.state = {
-      chosenOfferId: ``,
+    this.selectedIcon = leaflet.icon({
+      iconUrl: `img/pin-selected.svg`,
+      iconSize: [30, 30],
+    });
+    this.tooltipSettings = {
+      direction: `top`,
+      offset: [0, -10],
     };
+    this.scrollSettings = {
+      duration: 450,
+      delay: 0,
+      smooth: `easeOutQuad`,
+    };
+    this.scrollOffset = -10;
+    this.map = null;
   }
 
   componentDidMount() {
@@ -37,7 +48,6 @@ class Map extends PureComponent {
     this.map = leaflet.map(`map`, {
       center,
       zoom,
-      zoomControl: false,
       marker: true,
     });
 
@@ -52,7 +62,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {offers, activeCity, currentOffer, activeOffer, setActiveOfferAction} = this.props;
+    const {offers, activeCity, currentOffer, activeOffer} = this.props;
     const city = activeCity.name !== offers[0].city.name ? offers[0].city : activeCity;
     const center = city.coordinates;
     const zoom = city.zoom;
@@ -68,25 +78,59 @@ class Map extends PureComponent {
 
     this.map.on(`mouseout`, () => {
       this.map.flyTo(center, zoom);
-
-      if (activeOffer) {
-        this.setState({chosenOfferId: ``});
-        setActiveOfferAction(null);
-      }
     });
   }
 
+  componentWillUnmount() {
+    this.map.off(`mouseout`);
+    this.map = null;
+  }
+
+  _scrollToWithContainer(offerId) {
+    const {scrollContainerId} = this.props;
+
+    if (scrollContainerId) {
+      const goToContainer = new Promise((resolve) => {
+        Events.scrollEvent.register(`end`, () => {
+          resolve();
+          Events.scrollEvent.remove(`end`);
+        });
+
+        scroller.scrollTo(scrollContainerId, this.scrollSettings);
+      });
+
+      goToContainer.then(() =>
+        scroller.scrollTo(`offerId=${offerId}`, extend(this.scrollSettings, {
+          containerId: scrollContainerId,
+          offset: this.scrollOffset,
+        }))
+      );
+    }
+  }
+
+  _getOfferIcon(selectedOfferId, activeOfferId, offerId) {
+    if (activeOfferId && activeOfferId === offerId) {
+      return this.activeIcon;
+    } else if (selectedOfferId && selectedOfferId === offerId) {
+      return this.selectedIcon;
+    }
+
+    return this.icon;
+  }
+
   _addMarkers(offers, currentOffer) {
-    const {activeOffer, setActiveOfferAction} = this.props;
+    const {activeOffer, selectedOfferId, onChangeSelectedOfferId = () => false} = this.props;
     const activeOfferId = activeOffer && activeOffer.offerId;
-    const {chosenOfferId} = this.state;
 
     offers.forEach((offer) => {
       const {offerId, coordinates, title} = offer;
-      const offerIcon = (activeOfferId === offerId) ? this.activeIcon : this.icon;
+
       const marker = leaflet
-        .marker(coordinates, {icon: offerIcon, title})
-        .addTo(this.map);
+        .marker(coordinates, {
+          icon: this._getOfferIcon(selectedOfferId, activeOfferId, offerId)
+        })
+        .addTo(this.map)
+        .bindTooltip(title, this.tooltipSettings);
 
       marker._offerId = offerId;
 
@@ -95,27 +139,31 @@ class Map extends PureComponent {
       });
 
       marker.on(`mouseout`, () => {
-        if (activeOffer && offerId !== activeOffer.offerId || chosenOfferId !== marker._offerId) {
+        if (selectedOfferId === marker._offerId) {
+          marker.setIcon(this.selectedIcon);
+        } else {
           marker.setIcon(this.icon);
         }
       });
 
       marker.on(`click`, () => {
-        marker.setIcon(this.activeIcon);
-        this.setState({chosenOfferId: offer.offerId});
-        setActiveOfferAction(offer);
+        if (!currentOffer) {
+          onChangeSelectedOfferId(offer.offerId);
+          marker.setIcon(this.selectedIcon).openTooltip();
+          this._scrollToWithContainer(marker._offerId);
+        }
       });
 
       this.markers.push(marker);
     });
 
     if (currentOffer) {
-      const marker = leaflet
-        .marker(
-            currentOffer.coordinates,
-            {icon: this.activeIcon, title: currentOffer.title}
-        )
-        .addTo(this.map);
+      const marker = leaflet.marker(
+          currentOffer.coordinates,
+          {icon: this.selectedIcon}
+      )
+        .addTo(this.map)
+        .bindTooltip(currentOffer.title, this.tooltipSettings);
 
       this.markers.push(marker);
     }
@@ -123,6 +171,7 @@ class Map extends PureComponent {
 
   _removeMarkers() {
     this.markers.forEach((item) => {
+      item.off(`mouseover`).off(`mouseout`).off(`click`);
       item.removeFrom(this.map);
     });
 
@@ -141,20 +190,15 @@ Map.propTypes = {
   currentOffer: offerOrNullPropTypes,
   activeCity: cityPropTypes,
   activeOffer: offerOrNullPropTypes,
-  setActiveOfferAction: PropTypes.func.isRequired,
+  selectedOfferId: PropTypes.number,
+  scrollContainerId: PropTypes.string,
+  onChangeSelectedOfferId: PropTypes.func,
 };
 
 const mapStateToProps = ({PROCESS}) => ({
   activeCity: getActiveCity({PROCESS}),
   activeOffer: getActiveOffer({PROCESS}),
-  setActiveOfferAction: PROCESS.setActiveOfferAction,
 });
 
-const mapDispatchToProps = ((dispatch) => ({
-  setActiveOfferAction(activeOffer) {
-    dispatch(setActiveOffer(activeOffer));
-  },
-}));
-
 export {Map};
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(mapStateToProps)(Map);

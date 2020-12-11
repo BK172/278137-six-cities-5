@@ -30,12 +30,16 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, offerType} = this.props;
+    const {offers, offerType, selectedOfferId} = this.props;
 
     return (
       offers.map((offer) => (
         <OfferCard
           key={offer.offerId}
+          offerName={`offerId=${offer.offerId}`}
+          additionalClass={
+            offer.offerId === selectedOfferId ? `cities__place-card-focused` : ``
+          }
           offer={offer}
           offerType={offerType}
           onOfferCardMouseOver={() => this._handleOfferCardOver(offer)}
@@ -49,6 +53,7 @@ class OffersList extends PureComponent {
 OffersList.propTypes = {
   offers: offersPropTypes,
   offerType: PropTypes.string.isRequired,
+  selectedOfferId: PropTypes.number,
   activeOffer: offerOrNullPropTypes,
   setActiveOfferAction: PropTypes.func.isRequired,
 };

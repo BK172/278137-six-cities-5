@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../../header/header";
 import Map from "../../map/map";
-import OfferCard from "../../offer-card/offer-card";
+// import OfferCard from "../../offer-card/offer-card";
+import OffersList from "../../offers-list/offers-list";
 import ReviewsList from "../../reviews-list/reviews-list";
 import ReviewForm from "../../review-form/review-form";
 import OfferBookmarkBtn from "../../offer-bookmark-btn/offer-bookmark-btn";
@@ -142,13 +143,18 @@ const PageRoom = ({
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {!_.isEmpty(offersNearBy) && (
-                offersNearBy.map((offerNearBy) => (
-                  <OfferCard
-                    key={offerNearBy.offerId}
-                    offer={offerNearBy}
-                    offerType={OfferType.ROOM}
-                  />
-                ))
+                <OffersList
+                  offerType={OfferType.ROOM}
+                  offers={offersNearBy}
+                  selectedOfferId={-1}
+                />
+                // offersNearBy.map((offerNearBy) => (
+                //   <OfferCard
+                //     key={offerNearBy.offerId}
+                //     offer={offerNearBy}
+                //     offerType={OfferType.ROOM}
+                //   />
+                // ))
               )}
             </div>
           </section>
