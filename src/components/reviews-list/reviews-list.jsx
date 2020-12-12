@@ -13,7 +13,7 @@ const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
     getReviewsAction(offerId);
   }, [offerId]);
 
-  if (!_.isEmpty(reviews)) {
+  if (reviews.length) {
     return (
       <Fragment>
         <h2 className="reviews__title">

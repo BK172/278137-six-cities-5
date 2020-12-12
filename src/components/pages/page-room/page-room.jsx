@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import clsx from "clsx";
+import _ from "lodash";
 import Header from "../../header/header";
 import Map from "../../map/map";
-// import OfferCard from "../../offer-card/offer-card";
 import OffersList from "../../offers-list/offers-list";
 import ReviewsList from "../../reviews-list/reviews-list";
 import ReviewForm from "../../review-form/review-form";
@@ -16,10 +17,8 @@ import {getOffersNearBy, getCurrentRoomOffer} from "../../../store/reducers/app-
 import {getIsLoadingFlag} from "../../../store/reducers/app-process/selectors";
 import {getAuthStatus} from "../../../store/reducers/user/selectors";
 import {offerOrNullPropTypes, offersPropTypes} from "../../../app-prop-types";
-import {getElementWidthByRating} from "../../../utils";
 import {OfferType, MapType, BookmarkBtnType, AuthStatus, MAX_PHOTOS_COUNT} from "../../../constants";
-import clsx from "clsx";
-import _ from "lodash";
+import {getElementWidthByRating} from "../../../utils";
 
 const PageRoom = ({
   offerId,
@@ -148,13 +147,6 @@ const PageRoom = ({
                   offers={offersNearBy}
                   selectedOfferId={-1}
                 />
-                // offersNearBy.map((offerNearBy) => (
-                //   <OfferCard
-                //     key={offerNearBy.offerId}
-                //     offer={offerNearBy}
-                //     offerType={OfferType.ROOM}
-                //   />
-                // ))
               )}
             </div>
           </section>

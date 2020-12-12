@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Events, scroller} from "react-scroll";
 import leaflet from "leaflet";
+import {Events, scroller} from "react-scroll";
 import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
 import {MapClasses, MAP_TILE_LAYER, MAP_TILE_LAYER_ATTRIBUTION} from "../../constants";
@@ -79,11 +79,6 @@ class Map extends PureComponent {
     this.map.on(`mouseout`, () => {
       this.map.flyTo(center, zoom);
     });
-  }
-
-  componentWillUnmount() {
-    this.map.off(`mouseout`);
-    this.map = null;
   }
 
   _scrollToWithContainer(offerId) {
@@ -171,7 +166,6 @@ class Map extends PureComponent {
 
   _removeMarkers() {
     this.markers.forEach((item) => {
-      item.off(`mouseover`).off(`mouseout`).off(`click`);
       item.removeFrom(this.map);
     });
 

@@ -60,7 +60,6 @@ OffersList.propTypes = {
 
 const mapStateToProps = ({PROCESS}) => ({
   activeOffer: getActiveOffer({PROCESS}),
-  setActiveOfferAction: PROCESS.setActiveOfferAction,
 });
 
 const mapDispatchToProps = ((dispatch) => ({

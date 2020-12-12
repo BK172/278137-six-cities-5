@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import clsx from "clsx";
 import {updateOfferFavoriteStatus} from "../../store/api-actions";
 import {redirectToRoute} from "../../store/middlewares/actions";
 import {getAuthStatus} from "../../store/reducers/user/selectors";
 import {offerPropTypes} from "../../app-prop-types";
 import {AppRoute, AuthStatus, BookmarkBtnClasses, BookmarkBtnShapes} from "../../constants";
-import clsx from "clsx";
 
 const OfferBookmarkBtn = ({
   offer,
