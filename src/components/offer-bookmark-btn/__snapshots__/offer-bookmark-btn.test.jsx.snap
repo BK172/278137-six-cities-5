@@ -2,7 +2,7 @@
 
 exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if AuthStatus.AUTH 1`] = `
 <button
-  className="place-card__bookmark-button button"
+  className="button place-card__bookmark-button"
   onClick={[Function]}
   type="button"
 >
@@ -26,7 +26,7 @@ exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render
 
 exports[`Should OfferBookmarkBtn render correctly Should OfferBookmarkBtn render correctly if AuthStatus.NO_AUTH 1`] = `
 <button
-  className="place-card__bookmark-button button"
+  className="button place-card__bookmark-button"
   onClick={[Function]}
   type="button"
 >

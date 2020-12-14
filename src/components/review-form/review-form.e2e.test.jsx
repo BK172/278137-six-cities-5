@@ -5,16 +5,36 @@ import {ReviewForm} from "./review-form";
 
 configure({adapter: new Adapter()});
 
-it(`Click on submit button ReviewForm`, () => {
-  const postReviewAction = jest.fn();
+describe(`ReviewForm e2e tests`, () => {
+  test(`Form submit`, () => {
+    const postReviewAction = jest.fn();
+    const wrapper = shallow(
+        <ReviewForm
+          offerId={`1`}
+          postReviewAction={postReviewAction}
+        />
+    );
 
-  const wrapper = shallow(
-      <ReviewForm
-        offerId={`1`}
-        postReviewAction={postReviewAction}
-      />
-  );
+    wrapper.find(`.reviews__form`).simulate(`submit`, {
+      preventDefault: jest.fn(),
+    });
 
-  wrapper.find(`form`).simulate(`submit`, {preventDefault() {}});
-  expect(postReviewAction).toHaveBeenCalledTimes(1);
+    expect(postReviewAction).toHaveBeenCalledTimes(1);
+  });
+
+  test(`Click on submit button`, () => {
+    const onSubmitButtonClick = jest.fn();
+    const wrapper = shallow(
+        <ReviewForm
+          offerId={`1`}
+          postReviewAction={jest.fn()}
+        />
+    );
+
+    wrapper.find(`.reviews__submit`).simulate(`click`, {
+      preventDefault: jest.fn(),
+    });
+
+    expect(onSubmitButtonClick).toHaveBeenCalledTimes(0);
+  });
 });

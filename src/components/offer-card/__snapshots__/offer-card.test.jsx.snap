@@ -2,7 +2,7 @@
 
 exports[`Should OfferCard render correctly 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="cities__place-card place-card undefined"
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
@@ -30,7 +30,7 @@ exports[`Should OfferCard render correctly 1`] = `
     </a>
   </div>
   <div
-    className="undefined place-card__info"
+    className=" place-card__info"
   >
     <div
       className="place-card__price-wrapper"
@@ -51,7 +51,7 @@ exports[`Should OfferCard render correctly 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="button place-card__bookmark-button"
         onClick={[Function]}
         type="button"
       >

@@ -6,7 +6,6 @@ import {fetchReviews} from "../../store/api-actions";
 import {getReviewsSortedByDate} from "../../store/reducers/app-data/selectors";
 import {MAX_REVIEWS_ON_PAGE} from "../../constants";
 import {reviewsPropTypes} from "../../app-prop-types";
-import _ from "lodash";
 
 const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
   useEffect(() => {

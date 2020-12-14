@@ -30,7 +30,7 @@ const OfferBookmarkBtn = ({
   return (
     <button
       className={
-        clsx(BookmarkBtnClasses[bookmarkType][`btn`],
+        clsx(`button`, BookmarkBtnClasses[bookmarkType][`btn`],
             {[BookmarkBtnClasses[bookmarkType][`btnActive`]]: offer.isFavorite && isLoggedIn})
       }
       type="button"

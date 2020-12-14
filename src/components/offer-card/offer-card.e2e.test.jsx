@@ -9,49 +9,42 @@ configure({adapter: new Adapter()});
 describe(`OfferCard e2e tests`, () => {
   test(`OfferCard mouse over`, () => {
     const onOfferCardMouseOver = jest.fn();
-    const onOfferCardMouseOut = jest.fn();
-
     const wrapper = shallow(
         <OfferCard
           offer={mockOffer}
           offerType={`MAIN`}
           onOfferCardMouseOver={onOfferCardMouseOver}
-          onOfferCardMouseOut={onOfferCardMouseOut}
+          onOfferCardMouseOut={jest.fn()}
         />
     );
 
-    wrapper.find(`article`).simulate(`mouseover`);
+    wrapper.find(`.place-card`).simulate(`mouseover`);
     expect(onOfferCardMouseOver).toHaveBeenCalledTimes(1);
   });
 
   test(`OfferCard mouse out`, () => {
-    const onOfferCardMouseOver = jest.fn();
     const onOfferCardMouseOut = jest.fn();
-
     const wrapper = shallow(
         <OfferCard
           offer={mockOffer}
           offerType={`MAIN`}
-          onOfferCardMouseOver={onOfferCardMouseOver}
+          onOfferCardMouseOver={jest.fn()}
           onOfferCardMouseOut={onOfferCardMouseOut}
         />
     );
 
-    wrapper.find(`article`).simulate(`mouseout`);
+    wrapper.find(`.place-card`).simulate(`mouseout`);
     expect(onOfferCardMouseOut).toHaveBeenCalledTimes(1);
   });
 
   test(`click on OfferCard image`, () => {
-    const onOfferCardMouseOver = jest.fn();
-    const onOfferCardMouseOut = jest.fn();
     const onOfferCardClick = jest.fn();
-
     const wrapper = shallow(
         <OfferCard
           offer={mockOffer}
           offerType={`MAIN`}
-          onOfferCardMouseOver={onOfferCardMouseOver}
-          onOfferCardMouseOut={onOfferCardMouseOut}
+          onOfferCardMouseOver={jest.fn()}
+          onOfferCardMouseOut={jest.fn()}
         />
     );
 
@@ -60,16 +53,13 @@ describe(`OfferCard e2e tests`, () => {
   });
 
   test(`click on OfferCard link`, () => {
-    const onOfferCardMouseOver = jest.fn();
-    const onOfferCardMouseOut = jest.fn();
     const onOfferCardClick = jest.fn();
-
     const wrapper = shallow(
         <OfferCard
           offer={mockOffer}
           offerType={`MAIN`}
-          onOfferCardMouseOver={onOfferCardMouseOver}
-          onOfferCardMouseOut={onOfferCardMouseOut}
+          onOfferCardMouseOver={jest.fn()}
+          onOfferCardMouseOut={jest.fn()}
         />
     );
 

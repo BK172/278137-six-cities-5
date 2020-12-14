@@ -10,9 +10,9 @@ import {SortingTypes} from "../../constants";
 
 const SortingOptions = ({
   sortingType,
-  changeSortingTypeAction,
   isToggleActive,
   onToggleChange,
+  changeSortingTypeAction,
 }) => {
   const onListItemClick = (filter) => {
     onToggleChange(false);
@@ -49,9 +49,9 @@ const SortingOptions = ({
 
 SortingOptions.propTypes = {
   sortingType: PropTypes.string.isRequired,
-  changeSortingTypeAction: PropTypes.func.isRequired,
   isToggleActive: PropTypes.bool.isRequired,
   onToggleChange: PropTypes.func.isRequired,
+  changeSortingTypeAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({PROCESS}) => ({

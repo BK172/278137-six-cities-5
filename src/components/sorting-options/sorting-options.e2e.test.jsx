@@ -2,44 +2,39 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {SortingOptions} from "./sorting-options";
-import {INITIAL_SORTING_TYPE} from "../../constants";
 
 configure({adapter: new Adapter()});
 
 describe(`SortingOptions e2e tests`, () => {
   test(`Click on sort menu item`, () => {
     const changeSortingTypeAction = jest.fn();
-    const onToggleChange = jest.fn();
-
     const wrapper = shallow(
         <SortingOptions
-          sortingType={INITIAL_SORTING_TYPE}
-          changeSortingTypeAction={changeSortingTypeAction}
+          sortingType={`popular`}
           isToggleActive={true}
-          onToggleChange={onToggleChange}
+          onToggleChange={jest.fn()}
+          changeSortingTypeAction={changeSortingTypeAction}
         />
     );
 
-    const sortMenuBtns = wrapper.find(`li`);
+    const sortMenuBtns = wrapper.find(`.places__option`);
 
     sortMenuBtns.forEach((button) => button.simulate(`click`));
     expect(changeSortingTypeAction).toHaveBeenCalledTimes(sortMenuBtns.length);
   });
 
-  test(`Open sort menu`, () => {
-    const changeSortingTypeAction = jest.fn();
+  test(`Opening sort menu`, () => {
     const onToggleChange = jest.fn();
-
     const wrapper = shallow(
         <SortingOptions
-          sortingType={INITIAL_SORTING_TYPE}
-          changeSortingTypeAction={changeSortingTypeAction}
+          sortingType={`popular`}
           isToggleActive={true}
           onToggleChange={onToggleChange}
+          changeSortingTypeAction={jest.fn()}
         />
     );
 
-    wrapper.find(`form`).simulate(`click`);
-    expect(onToggleChange).toHaveBeenCalledTimes(0);
+    wrapper.find(`.places__sorting-type`).simulate(`click`);
+    expect(onToggleChange).toHaveBeenCalledTimes(1);
   });
 });

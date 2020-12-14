@@ -119,7 +119,7 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
               className="favorites__places"
             >
               <article
-                className="favorites__card place-card"
+                className="favorites__card place-card undefined"
                 onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
@@ -168,7 +168,7 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button button"
+                      className="button place-card__bookmark-button"
                       onClick={[Function]}
                       type="button"
                     >
@@ -371,7 +371,7 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
               className="favorites__places"
             >
               <article
-                className="favorites__card place-card"
+                className="favorites__card place-card undefined"
                 onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
@@ -420,7 +420,7 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button button"
+                      className="button place-card__bookmark-button"
                       onClick={[Function]}
                       type="button"
                     >

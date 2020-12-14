@@ -5,15 +5,34 @@ import {PageSignIn} from "./page-sign-in";
 
 configure({adapter: new Adapter()});
 
-test(`Click on submit button PageSingIn`, () => {
-  const onSubmitAction = jest.fn();
+describe(`PageSingIn e2e tests`, () => {
+  test(`Form submit`, () => {
+    const onSubmitAction = jest.fn();
+    const wrapper = shallow(
+        <PageSignIn
+          onSubmitAction={onSubmitAction}
+        />
+    );
 
-  const wrapper = shallow(
-      <PageSignIn
-        onSubmitAction={onSubmitAction}
-      />
-  );
+    wrapper.find(`.login__form`).simulate(`submit`, {
+      preventDefault: jest.fn(),
+    });
 
-  wrapper.find(`.login__form`).simulate(`click`, {preventDefault() {}});
-  expect(onSubmitAction).toHaveBeenCalledTimes(0);
+    expect(onSubmitAction).toHaveBeenCalledTimes(0);
+  });
+
+  test(`Click on submit button`, () => {
+    const onSubmitButtonClick = jest.fn();
+    const wrapper = shallow(
+        <PageSignIn
+          onSubmitAction={jest.fn()}
+        />
+    );
+
+    wrapper.find(`.login__submit`).simulate(`click`, {
+      preventDefault: jest.fn(),
+    });
+
+    expect(onSubmitButtonClick).toHaveBeenCalledTimes(0);
+  });
 });
