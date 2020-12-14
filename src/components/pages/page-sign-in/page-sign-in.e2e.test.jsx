@@ -1,9 +1,6 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 import {PageSignIn} from "./page-sign-in";
-
-configure({adapter: new Adapter()});
 
 describe(`PageSingIn e2e tests`, () => {
   test(`Form submit`, () => {

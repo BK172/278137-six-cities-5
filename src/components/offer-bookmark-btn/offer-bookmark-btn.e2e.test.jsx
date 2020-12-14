@@ -1,10 +1,7 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 import {OfferBookmarkBtn} from "./offer-bookmark-btn";
 import {mockOffer} from "../../utils";
-
-configure({adapter: new Adapter()});
 
 describe(`OfferBookmarkBtn e2e tests`, () => {
   test(`Click on OfferBookmarkBtn if NO_AUTH`, () => {
