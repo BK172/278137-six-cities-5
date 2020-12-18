@@ -5,21 +5,6 @@ import configureStore from "redux-mock-store";
 import Map from "./map";
 import {makeInitialStateMock, mockOffers, mockOffer, mockCity} from "../../utils";
 
-const mockedMethodImpl = jest.fn().mockReturnValue([{
-  _offerId: jest.fn(() => `1`),
-  on: jest.fn(() => {}),
-}]);
-
-jest.mock(`./map`);
-
-beforeAll(() => {
-  jest.fn().mockImplementation(() => {
-    return {
-      markers: mockedMethodImpl
-    };
-  });
-});
-
 it(`Should Map render correctly`, () => {
   const store = configureStore()(makeInitialStateMock());
   const tree = renderer

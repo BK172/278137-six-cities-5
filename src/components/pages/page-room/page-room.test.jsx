@@ -9,21 +9,6 @@ import {PageRoom} from "./page-room";
 import {makeInitialStateMock, mockOffers, mockOffer} from "../../../utils";
 import {AuthStatus} from "../../../constants";
 
-const mockedMethodImpl = jest.fn().mockReturnValue([{
-  _offerId: jest.fn(() => `1`),
-  on: jest.fn(() => {}),
-}]);
-
-jest.mock(`../../map/map`);
-
-beforeAll(() => {
-  jest.fn().mockImplementation(() => {
-    return {
-      markers: mockedMethodImpl
-    };
-  });
-});
-
 describe(`Should PageRoom render correctly`, () => {
   const store = configureStore([thunk.withExtraArgument(createAPI(() => false))])(makeInitialStateMock());
 
