@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should withToggle render correctly Should withToggle render correctly if isToggleActive false 1`] = `<div />`;
+exports[`withToggle component test Should render withToggle correctly if isToggleActive false 1`] = `<div />`;
 
-exports[`Should withToggle render correctly Should withToggle render correctly if isToggleActive true 1`] = `<div />`;
+exports[`withToggle component test Should render withToggle correctly if isToggleActive true 1`] = `<div />`;

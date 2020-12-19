@@ -22,8 +22,8 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withToggle(MockComponent);
 
-describe(`Should withToggle render correctly`, () => {
-  it(`Should withToggle render correctly if isToggleActive true`, () => {
+describe(`withToggle component test`, () => {
+  it(`Should render withToggle correctly if isToggleActive true`, () => {
     const tree = renderer.create(
         <MockComponentWrapped
           isToggleActive={true}
@@ -36,10 +36,10 @@ describe(`Should withToggle render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should withToggle render correctly if isToggleActive false`, () => {
+  it(`Should render withToggle correctly if isToggleActive false`, () => {
     const tree = renderer.create(
         <MockComponentWrapped
-          isToggleActive={true}
+          isToggleActive={false}
           onToggleChange={()=>{}}
         >
           <Fragment />
