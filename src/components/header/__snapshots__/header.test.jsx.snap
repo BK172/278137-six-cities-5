@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Header render correctly Should Header render correctly if AuthStatus.AUTH 1`] = `
+exports[`Header component test Should render Header correctly if AUTH 1`] = `
 <header
   className="header"
 >
@@ -77,7 +77,7 @@ exports[`Should Header render correctly Should Header render correctly if AuthSt
 </header>
 `;
 
-exports[`Should Header render correctly Should Header render correctly if AuthStatus.NO_AUTH 1`] = `
+exports[`Header component test Should render Header correctly if NO_AUTH 1`] = `
 <header
   className="header"
 >
@@ -115,20 +115,39 @@ exports[`Should Header render correctly Should Header render correctly if AuthSt
           >
             <a
               className="header__nav-link header__nav-link--profile"
-              href="/login"
+              href="/favorites"
               onClick={[Function]}
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://assets.htmlacademy.ru/intensives/javascript-3/avatar/1.jpg)",
+                  }
+                }
               />
               <span
                 className="header__user-name user__name"
               >
-                Sign in
+                qwerty@qwerty.ru
               </span>
             </a>
           </li>
         </ul>
+        <div
+          className="header__signout"
+        >
+          <button
+            className="header__signout-button"
+            onClick={[Function]}
+            title="Sign out"
+            type="button"
+          >
+            <span
+              className="header__signout-button-icon"
+            />
+          </button>
+        </div>
       </nav>
     </div>
   </div>

@@ -1,47 +1,46 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {BrowserRouter} from "react-router-dom";
 import {OfferBookmarkBtn} from "./offer-bookmark-btn";
 import {makeInitialStateMock, mockOffer} from "../../utils";
-import {AuthStatus} from "../../constants";
 
-describe(`Should OfferBookmarkBtn render correctly`, () => {
+describe(`OfferBookmarkBtn component test`, () => {
   const store = configureStore()(makeInitialStateMock());
 
-  it(`Should OfferBookmarkBtn render correctly if AuthStatus.NO_AUTH`, () => {
+  it(`Should render OfferBookmarkBtn correctly if NO_AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <OfferBookmarkBtn
                 offer={mockOffer}
                 bookmarkType={`MAIN`}
                 bookmarkBtnClickAction={()=>{}}
-                authStatus={AuthStatus.NO_AUTH}
+                authStatus={`NO_AUTH`}
                 redirectToRouteAction={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should OfferBookmarkBtn render correctly if AuthStatus.AUTH`, () => {
+  it(`Should render OfferBookmarkBtn correctly if AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <OfferBookmarkBtn
                 offer={mockOffer}
                 bookmarkType={`MAIN`}
                 bookmarkBtnClickAction={()=>{}}
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 redirectToRouteAction={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();

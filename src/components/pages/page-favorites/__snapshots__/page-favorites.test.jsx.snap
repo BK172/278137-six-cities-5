@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should PageFavorites render correctly Should PageFavorites render correctly if favoriteOffersMapByCity is empty 1`] = `
+exports[`PageFavorites component test Should render PageFavorites correctly if favoriteOffersMapByCity is empty 1`] = `
 <div
   className="page"
 >
@@ -252,7 +252,7 @@ exports[`Should PageFavorites render correctly Should PageFavorites render corre
 </div>
 `;
 
-exports[`Should PageFavorites render correctly Should PageFavorites render correctly if favoriteOffersMapByCity is not empty 1`] = `
+exports[`PageFavorites component test Should render PageFavorites correctly if favoriteOffersMapByCity is not empty 1`] = `
 <div
   className="page"
 >

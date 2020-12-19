@@ -1,21 +1,23 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import App from "./app";
 import {makeInitialStateMock} from "../../utils";
 
-it(`Should App render correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Provider>
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+describe(`App component test`, () => {
+  it(`Should render App correctly`, () => {
+    const store = configureStore()(makeInitialStateMock());
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <MemoryRouter>
+              <App />
+            </MemoryRouter>
+          </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

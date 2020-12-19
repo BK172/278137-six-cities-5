@@ -1,19 +1,19 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import PrivateRoute from "./private-route";
 import {makeInitialStateMock} from "../../utils";
 
-describe(`Should PrivateRoute render correctly`, () => {
+describe(`PrivateRoute component test`, () => {
   const store = configureStore()(makeInitialStateMock());
 
-  it(`Should PrivateRoute render correctly if isAuth true`, () => {
+  it(`Should render PrivateRoute correctly if isAuth true`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PrivateRoute
                 isAuth={true}
                 redirectURL={`/`}
@@ -21,18 +21,18 @@ describe(`Should PrivateRoute render correctly`, () => {
                 path={``}
                 render={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PrivateRoute render correctly if isAuth false`, () => {
+  it(`Should render PrivateRoute correctly if isAuth false`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PrivateRoute
                 isAuth={false}
                 redirectURL={`/`}
@@ -40,7 +40,7 @@ describe(`Should PrivateRoute render correctly`, () => {
                 path={``}
                 render={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();

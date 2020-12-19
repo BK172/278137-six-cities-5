@@ -1,22 +1,19 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 import {ReviewsList} from "./reviews-list";
-import {makeInitialStateMock, mockReviews} from "../../utils";
+import {mockReviews} from "../../utils";
 
-it(`Should ReviewsList render correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
-  const tree = renderer
-    .create(
-        <Provider store={store}>
+describe(`ReviewsList component test`, () => {
+  it(`Should render ReviewsList correctly`, () => {
+    const tree = renderer
+      .create(
           <ReviewsList
             offerId={`1`}
             reviews={mockReviews}
             getReviewsAction={()=>{}}
           />
-        </Provider>
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

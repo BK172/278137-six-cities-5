@@ -1,43 +1,42 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {BrowserRouter} from "react-router-dom";
-import {Header} from "./header";
+import Header from "./header";
 import {makeInitialStateMock, mockAuthInfo} from "../../utils";
-import {AuthStatus} from "../../constants";
 
-describe(`Should Header render correctly`, () => {
+describe(`Header component test`, () => {
   const store = configureStore()(makeInitialStateMock());
 
-  it(`Should Header render correctly if AuthStatus.NO_AUTH`, () => {
+  it(`Should render Header correctly if NO_AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <Header
-                authStatus={AuthStatus.NO_AUTH}
+                authStatus={`NO_AUTH`}
                 authInfo={mockAuthInfo}
                 onSignOutAction={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should Header render correctly if AuthStatus.AUTH`, () => {
+  it(`Should render Header correctly if AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <Header
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 authInfo={mockAuthInfo}
                 onSignOutAction={()=>{}}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();

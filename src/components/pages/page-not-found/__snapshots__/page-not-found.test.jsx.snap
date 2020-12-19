@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should PageNotFound render correctly 1`] = `
+exports[`PageNotFound component test Should render PageNotFound correctly 1`] = `
 <div
   className="container"
 >

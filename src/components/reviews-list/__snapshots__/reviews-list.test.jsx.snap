@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should ReviewsList render correctly 1`] = `
+exports[`ReviewsList component test Should render ReviewsList correctly 1`] = `
 Array [
   <h2
     className="reviews__title"

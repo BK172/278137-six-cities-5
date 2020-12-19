@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should SortingOptions render correctly Should SortingOptions render correctly if isToggleActive false 1`] = `
+exports[`SortingOptions component test Should render SortingOptions correctly if isToggleActive false 1`] = `
 <form
   action="#"
   className="places__sorting"
@@ -63,7 +63,7 @@ exports[`Should SortingOptions render correctly Should SortingOptions render cor
 </form>
 `;
 
-exports[`Should SortingOptions render correctly Should SortingOptions render correctly if isToggleActive true 1`] = `
+exports[`SortingOptions component test Should render SortingOptions correctly if isToggleActive true 1`] = `
 <form
   action="#"
   className="places__sorting"

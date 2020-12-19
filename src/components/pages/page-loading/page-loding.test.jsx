@@ -2,11 +2,13 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PageLoading from "./page-loading";
 
-it(`Should PageLoading render correctly`, () => {
-  const tree = renderer
-    .create(
-        <PageLoading />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+describe(`PageLoading component test`, () => {
+  it(`Should render PageLoading correctly`, () => {
+    const tree = renderer
+      .create(
+          <PageLoading />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

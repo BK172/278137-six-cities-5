@@ -1,23 +1,25 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import {PageSignIn} from "./page-sign-in";
+import PageSignIn from "./page-sign-in";
 import {makeInitialStateMock} from "../../../utils";
 
-it(`Should PageSignIn render correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <BrowserRouter>
-            <PageSignIn
-              onSubmitAction={()=>{}}
-            />
-          </BrowserRouter>
-        </Provider>
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+describe(`PageSignIn component test`, () => {
+  it(`Should render PageSignIn correctly`, () => {
+    const store = configureStore()(makeInitialStateMock());
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <MemoryRouter>
+              <PageSignIn
+                onSubmitAction={()=>{}}
+              />
+            </MemoryRouter>
+          </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

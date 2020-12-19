@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should PageMainEmpty render correctly 1`] = `
+exports[`PageMainEmpty component test Should render PageMainEmpty correctly 1`] = `
 <div
   className="page page--gray page--main page__main--index-empty"
 >

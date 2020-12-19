@@ -1,22 +1,21 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {createAPI} from "../../../services/api";
 import thunk from "redux-thunk";
-import {PageRoom} from "./page-room";
+import PageRoom from "./page-room";
 import {makeInitialStateMock, mockOffers, mockOffer} from "../../../utils";
-import {AuthStatus} from "../../../constants";
 
-describe(`Should PageRoom render correctly`, () => {
+describe(`PageRoom component test`, () => {
   const store = configureStore([thunk.withExtraArgument(createAPI(() => false))])(makeInitialStateMock());
 
-  it(`Should PageRoom render correctly if offerId is not defined`, () => {
+  it(`Should render PageRoom correctly if offerId is not defined`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PageRoom
                 offerId={``}
                 offersNearBy={mockOffers}
@@ -24,21 +23,21 @@ describe(`Should PageRoom render correctly`, () => {
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 isLoadingFlag={false}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if currentRoomOffer is empty`, () => {
+  it(`Should render PageRoom correctly if currentRoomOffer is empty`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PageRoom
                 offerId={`1`}
                 offersNearBy={mockOffers}
@@ -46,21 +45,21 @@ describe(`Should PageRoom render correctly`, () => {
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 isLoadingFlag={false}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if AuthStatus.NO_AUTH`, () => {
+  it(`Should render PageRoom correctly if NO_AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PageRoom
                 offerId={`1`}
                 offersNearBy={mockOffers}
@@ -68,21 +67,21 @@ describe(`Should PageRoom render correctly`, () => {
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
-                authStatus={AuthStatus.NO_AUTH}
+                authStatus={`NO_AUTH`}
                 isLoadingFlag={false}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if AuthStatus.AUTH`, () => {
+  it(`Should render PageRoom correctly if AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PageRoom
                 offerId={`1`}
                 offersNearBy={mockOffers}
@@ -90,21 +89,21 @@ describe(`Should PageRoom render correctly`, () => {
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 isLoadingFlag={false}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should PageRoom render correctly if isLoadingFlag true`, () => {
+  it(`Should render PageRoom correctly if isLoadingFlag true`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <BrowserRouter>
+            <MemoryRouter>
               <PageRoom
                 offerId={`1`}
                 offersNearBy={mockOffers}
@@ -112,10 +111,10 @@ describe(`Should PageRoom render correctly`, () => {
                 getOfferByIdAction={()=>{}}
                 getOffersNearByAction={()=>{}}
                 updateCurrentOfferAction={()=>{}}
-                authStatus={AuthStatus.AUTH}
+                authStatus={`AUTH`}
                 isLoadingFlag={true}
               />
-            </BrowserRouter>
+            </MemoryRouter>
           </Provider>
       )
       .toJSON();

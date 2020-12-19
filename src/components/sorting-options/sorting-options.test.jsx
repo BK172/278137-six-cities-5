@@ -1,31 +1,30 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {SortingOptions} from "./sorting-options";
-import {INITIAL_SORTING_TYPE} from "../../constants";
 
-describe(`Should SortingOptions render correctly`, () => {
-  it(`Should SortingOptions render correctly if isToggleActive true`, () => {
+describe(`SortingOptions component test`, () => {
+  it(`Should render SortingOptions correctly if isToggleActive true`, () => {
     const tree = renderer
       .create(
           <SortingOptions
-            sortingType={INITIAL_SORTING_TYPE}
-            changeSortingTypeAction={()=>{}}
+            sortingType={`popular`}
             isToggleActive={true}
             onToggleChange={()=>{}}
+            changeSortingTypeAction={()=>{}}
           />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Should SortingOptions render correctly if isToggleActive false`, () => {
+  it(`Should render SortingOptions correctly if isToggleActive false`, () => {
     const tree = renderer
       .create(
           <SortingOptions
-            sortingType={INITIAL_SORTING_TYPE}
-            changeSortingTypeAction={()=>{}}
+            sortingType={`popular`}
             isToggleActive={false}
             onToggleChange={()=>{}}
+            changeSortingTypeAction={()=>{}}
           />
       )
       .toJSON();

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should OffersList render correctly 1`] = `
+exports[`OffersList component test Should render OffersList correctly 1`] = `
 <article
   className="cities__place-card place-card "
   name="offerId=1"

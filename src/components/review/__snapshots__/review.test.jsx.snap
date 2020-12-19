@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Review render correctly 1`] = `
+exports[`Review component test Should render Review correctly 1`] = `
 <li
   className="reviews__item"
 >

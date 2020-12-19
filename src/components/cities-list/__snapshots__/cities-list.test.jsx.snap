@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should CitiesList render correctly 1`] = `
+exports[`CitiesList component test Should render CitiesList correctly 1`] = `
 <ul
   className="locations__list tabs__list"
 >

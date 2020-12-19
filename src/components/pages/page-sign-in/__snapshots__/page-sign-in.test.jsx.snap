@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should PageSignIn render correctly 1`] = `
+exports[`PageSignIn component test Should render PageSignIn correctly 1`] = `
 <div
   className="page page--gray page--login"
 >
