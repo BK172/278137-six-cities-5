@@ -1,6 +1,5 @@
 import {user} from "./user";
 import {ActionType} from "./actions";
-import {AuthStatus} from "../../../constants";
 import {mockAuthInfo} from "../../../utils";
 
 jest.mock(`../root-reducer`);
@@ -8,7 +7,7 @@ jest.mock(`../root-reducer`);
 describe(`Reducer user works correctly`, () => {
   it(`Should return initial state`, () => {
     expect(user(undefined, {})).toEqual({
-      authStatus: AuthStatus.NO_AUTH,
+      authStatus: `NO_AUTH`,
       authInfo: null,
     });
   });
@@ -24,14 +23,14 @@ describe(`Reducer user works correctly`, () => {
     });
   });
 
-  it(`Should update authStatus to AuthStatus.AUTH`, () => {
+  it(`Should update authStatus to AUTH`, () => {
     expect(user({
-      authStatus: AuthStatus.NO_AUTH,
+      authStatus: `NO_AUTH`,
     }, {
       type: ActionType.REQUIRE_AUTHORIZATION,
-      payload: AuthStatus.AUTH
+      payload: `AUTH`
     })).toEqual({
-      authStatus: AuthStatus.AUTH
+      authStatus: `AUTH`
     });
   });
 });

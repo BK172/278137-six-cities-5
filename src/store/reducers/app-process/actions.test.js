@@ -6,13 +6,12 @@ import {
   isLoading,
 } from "./actions";
 import {mockCity, mockOffer} from "../../../utils";
-import {INITIAL_SORTING_TYPE} from "../../../constants";
 
 describe(`Action creators for reducer app-process work correctly`, () => {
   test(`changeSortingType works correctly`, () => {
-    expect(changeSortingType(INITIAL_SORTING_TYPE)).toEqual({
+    expect(changeSortingType(`popular`)).toEqual({
       type: ActionType.CHANGE_SORTING_TYPE,
-      payload: INITIAL_SORTING_TYPE,
+      payload: `popular`,
     });
   });
 

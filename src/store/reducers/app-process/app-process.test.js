@@ -1,6 +1,5 @@
 import {appProcess} from "./app-process";
 import {ActionType} from "./actions";
-import {INITIAL_SORTING_TYPE} from "../../../constants";
 import {mockCity, mockOffer} from "../../../utils";
 
 jest.mock(`../root-reducer`);
@@ -10,14 +9,14 @@ describe(`Reducer appProcess works correctly`, () => {
     expect(appProcess(undefined, {})).toEqual({
       activeOffer: null,
       activeCity: {},
-      sortingType: INITIAL_SORTING_TYPE,
+      sortingType: `popular`,
       isLoadingFlag: false,
     });
   });
 
   it(`Should update sortingType`, () => {
     expect(appProcess({
-      sortingType: INITIAL_SORTING_TYPE,
+      sortingType: `popular`,
     }, {
       type: ActionType.CHANGE_SORTING_TYPE,
       payload: `top-rated`
