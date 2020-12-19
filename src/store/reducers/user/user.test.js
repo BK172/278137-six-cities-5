@@ -5,15 +5,15 @@ import {mockAuthInfo} from "../../../utils";
 
 jest.mock(`../root-reducer`);
 
-describe(`Should reducer user works correctly`, () => {
-  it(`Should reducer user return initial state`, () => {
+describe(`Reducer user works correctly`, () => {
+  it(`Should return initial state`, () => {
     expect(user(undefined, {})).toEqual({
       authStatus: AuthStatus.NO_AUTH,
       authInfo: null,
     });
   });
 
-  it(`Should reducer user update authInfo`, () => {
+  it(`Should update authInfo`, () => {
     expect(user({
       authInfo: null,
     }, {
@@ -24,7 +24,7 @@ describe(`Should reducer user works correctly`, () => {
     });
   });
 
-  it(`Should reducer user update authStatus to AuthStatus.AUTH`, () => {
+  it(`Should update authStatus to AuthStatus.AUTH`, () => {
     expect(user({
       authStatus: AuthStatus.NO_AUTH,
     }, {

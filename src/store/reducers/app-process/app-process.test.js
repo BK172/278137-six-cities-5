@@ -5,8 +5,8 @@ import {mockCity, mockOffer} from "../../../utils";
 
 jest.mock(`../root-reducer`);
 
-describe(`Should reducer appProcess works correctly`, () => {
-  it(`Should reducer appProcess return initial state`, () => {
+describe(`Reducer appProcess works correctly`, () => {
+  it(`Should return initial state`, () => {
     expect(appProcess(undefined, {})).toEqual({
       activeOffer: null,
       activeCity: {},
@@ -15,7 +15,7 @@ describe(`Should reducer appProcess works correctly`, () => {
     });
   });
 
-  it(`Should reducer appProcess update sortingType`, () => {
+  it(`Should update sortingType`, () => {
     expect(appProcess({
       sortingType: INITIAL_SORTING_TYPE,
     }, {
@@ -26,7 +26,7 @@ describe(`Should reducer appProcess works correctly`, () => {
     });
   });
 
-  it(`Should reducer appProcess update activeCity`, () => {
+  it(`Should update activeCity`, () => {
     expect(appProcess({
       activeCity: {},
     }, {
@@ -37,7 +37,7 @@ describe(`Should reducer appProcess works correctly`, () => {
     });
   });
 
-  it(`Should reducer appProcess update activeOffer`, () => {
+  it(`Should update activeOffer`, () => {
     expect(appProcess({
       activeOffer: null,
     }, {
@@ -48,7 +48,7 @@ describe(`Should reducer appProcess works correctly`, () => {
     });
   });
 
-  it(`Should reducer appProcess update isLoadingFlag`, () => {
+  it(`Should update isLoadingFlag`, () => {
     expect(appProcess({
       isLoadingFlag: false,
     }, {

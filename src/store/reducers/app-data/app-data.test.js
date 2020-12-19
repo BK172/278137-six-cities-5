@@ -10,8 +10,8 @@ import {
 
 jest.mock(`../root-reducer`);
 
-describe(`Should reducer appData works correctly`, () => {
-  it(`Should reducer appData return initial state`, () => {
+describe(`Reducer appData works correctly`, () => {
+  it(`Should return initial state`, () => {
     expect(appData(undefined, {})).toEqual({
       offers: [],
       offersNearBy: [],
@@ -22,7 +22,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update offers`, () => {
+  it(`Should update offers`, () => {
     expect(appData({
       offers: [],
     }, {
@@ -33,7 +33,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update offersNearBy`, () => {
+  it(`Should update offersNearBy`, () => {
     expect(appData({
       offersNearBy: [],
     }, {
@@ -44,7 +44,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update currentRoomOffer`, () => {
+  it(`Should update currentRoomOffer`, () => {
     expect(appData({
       currentRoomOffer: null,
     }, {
@@ -55,7 +55,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update favoriteOffers`, () => {
+  it(`Should update favoriteOffers`, () => {
     expect(appData({
       favoriteOffers: [],
     }, {
@@ -66,7 +66,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update cities`, () => {
+  it(`Should update cities`, () => {
     expect(appData({
       cities: [],
     }, {
@@ -77,7 +77,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update reviews`, () => {
+  it(`Should update reviews`, () => {
     expect(appData({
       reviews: [],
     }, {
@@ -88,7 +88,7 @@ describe(`Should reducer appData works correctly`, () => {
     });
   });
 
-  it(`Should reducer appData update offer as favorite`, () => {
+  it(`Should update offer as favorite`, () => {
     const favoriteMockOffer = extend(mockOffer, {isFavorite: !mockOffer.isFavorite});
 
     expect(appData({
