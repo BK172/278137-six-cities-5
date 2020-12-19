@@ -8,7 +8,7 @@ import {makeInitialStateMock, mockCity} from "../../../utils";
 
 describe(`PageMainEmpty component test`, () => {
   it(`Should render PageMainEmpty correctly`, () => {
-  const store = configureStore()(makeInitialStateMock());
+    const store = configureStore()(makeInitialStateMock());
     const tree = renderer
       .create(
           <Provider store={store}>
