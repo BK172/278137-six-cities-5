@@ -16,11 +16,11 @@ class ReviewForm extends PureComponent {
       reviewPostingError: ``,
     };
 
-    this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
-    this._handleClearFormFields = this._handleClearFormFields.bind(this);
-    this._handleChangeFormWaitingFlag = this._handleChangeFormWaitingFlag.bind(this);
-    this._handleChangeReviewPostingError = this._handleChangeReviewPostingError.bind(this);
+    this._handleClearFields = this._handleClearFields.bind(this);
+    this._handleChangeWaitingFlag = this._handleChangeWaitingFlag.bind(this);
+    this._handleChangePostingError = this._handleChangePostingError.bind(this);
   }
 
   componentDidUpdate() {
@@ -35,25 +35,25 @@ class ReviewForm extends PureComponent {
     }
   }
 
-  _handleFormSubmit(evt) {
+  _handleSubmit(evt) {
     evt.preventDefault();
 
     const {offerId, postReviewAction} = this.props;
     const review = this.state.review.trim();
     const rating = this.state.rating;
-    const onClearFormFields = this._handleClearFormFields;
-    const onChangeFormWaitingFlag = this._handleChangeFormWaitingFlag;
-    const onChangeReviewPostingError = this._handleChangeReviewPostingError;
+    const onClearFields = this._handleClearFields;
+    const onChangeWaitingFlag = this._handleChangeWaitingFlag;
+    const onChangePostingError = this._handleChangePostingError;
 
-    this._handleChangeFormWaitingFlag(true);
-    this._handleChangeReviewPostingError(``);
+    this._handleChangeWaitingFlag(true);
+    this._handleChangePostingError(``);
     postReviewAction({
       review,
       rating,
       offerId,
-      onClearFormFields,
-      onChangeFormWaitingFlag,
-      onChangeReviewPostingError,
+      onClearFields,
+      onChangeWaitingFlag,
+      onChangePostingError,
     });
   }
 
@@ -62,20 +62,20 @@ class ReviewForm extends PureComponent {
     this.setState({[name]: value});
   }
 
-  _handleClearFormFields() {
+  _handleClearFields() {
     this.setState({
       rating: ``,
       review: ``,
     });
   }
 
-  _handleChangeFormWaitingFlag(isWaitingFlag) {
+  _handleChangeWaitingFlag(isWaitingFlag) {
     this.setState(() => ({
       isFormWaitingResponse: isWaitingFlag,
     }));
   }
 
-  _handleChangeReviewPostingError(reviewPostingError) {
+  _handleChangePostingError(reviewPostingError) {
     this.setState(() => ({
       reviewPostingError,
     }));
@@ -83,7 +83,7 @@ class ReviewForm extends PureComponent {
 
   render() {
     return (
-      <form className="reviews__form form" action="#" method="post" onSubmit={this._handleFormSubmit}>
+      <form className="reviews__form form" action="#" method="post" onSubmit={this._handleSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {ReviewFormRatings.map(({mark, title}) => (

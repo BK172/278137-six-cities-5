@@ -14,7 +14,7 @@ class ReviewsList extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.offerId !== this.props.offerId) {
-      this.props.getReviewsAction(offerId);
+      this.props.getReviewsAction(this.props.offerId);
     }
   }
 
