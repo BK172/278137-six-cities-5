@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Review from "../review/review";
@@ -7,31 +7,41 @@ import {getReviewsSortedByDate} from "../../store/reducers/app-data/selectors";
 import {MAX_REVIEWS_ON_PAGE} from "../../constants";
 import {reviewsPropTypes} from "../../app-prop-types";
 
-const ReviewsList = ({offerId, reviews, getReviewsAction}) => {
-  useEffect(() => {
-    getReviewsAction(offerId);
-  }, [offerId]);
-
-  if (reviews.length) {
-    return (
-      <Fragment>
-        <h2 className="reviews__title">
-          Reviews · <span className="reviews__amount">{reviews.length}</span>
-        </h2>
-        <ul className="reviews__list">
-          {reviews.slice(0, MAX_REVIEWS_ON_PAGE).map((item) => (
-            <Review
-              key={item.reviewId}
-              review={item}
-            />
-          ))}
-        </ul>
-      </Fragment>
-    );
+class ReviewsList extends PureComponent {
+  componentDidMount() {
+    this.props.getReviewsAction(this.props.offerId);
   }
 
-  return null;
-};
+  componentDidUpdate(prevProps) {
+    if (prevProps.offerId !== this.props.offerId) {
+      this.props.getReviewsAction(offerId);
+    }
+  }
+
+  render() {
+    const {reviews} = this.props;
+
+    if (reviews.length) {
+      return (
+        <Fragment>
+          <h2 className="reviews__title">
+            Reviews · <span className="reviews__amount">{reviews.length}</span>
+          </h2>
+          <ul className="reviews__list">
+            {reviews.slice(0, MAX_REVIEWS_ON_PAGE).map((item) => (
+              <Review
+                key={item.reviewId}
+                review={item}
+              />
+            ))}
+          </ul>
+        </Fragment>
+      );
+    }
+
+    return null;
+  }
+}
 
 ReviewsList.propTypes = {
   offerId: PropTypes.string.isRequired,

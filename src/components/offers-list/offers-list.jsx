@@ -15,18 +15,15 @@ class OffersList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const {setActiveOfferAction} = this.props;
-    setActiveOfferAction(null);
+    this.props.setActiveOfferAction(null);
   }
 
   _handleOfferCardOver(hoveredOffer) {
-    const {setActiveOfferAction} = this.props;
-    setActiveOfferAction(hoveredOffer);
+    this.props.setActiveOfferAction(hoveredOffer);
   }
 
   _handleOfferCardOut() {
-    const {setActiveOfferAction} = this.props;
-    setActiveOfferAction(null);
+    this.props.setActiveOfferAction(null);
   }
 
   render() {
