@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
+import _ from "lodash";
 import Map from "../../map/map";
 import Header from "../../header/header";
 import PageError from "../page-error/page-error";
@@ -30,9 +31,9 @@ class PageMain extends PureComponent {
   render() {
     const {offers, activeCity} = this.props;
 
-    if (!offers.length && !activeCity) {
+    if (!offers.length && _.isEmpty(activeCity)) {
       return <PageError />;
-    } else if (!offers.length && activeCity) {
+    } else if (!offers.length && !_.isEmpty(activeCity)) {
       return <PageMainEmpty activeCity={activeCity} />;
     }
 

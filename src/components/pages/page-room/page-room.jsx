@@ -146,7 +146,7 @@ class PageRoom extends PureComponent {
                 </section>
               </div>
             </div>
-            {!_.isEmpty(offersNearBy) && (
+            {offersNearBy.length && (
               <Map mapType={MapType.ROOM} offers={offersNearBy} currentOffer={offer} />
             )}
           </section>
@@ -154,7 +154,7 @@ class PageRoom extends PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {!_.isEmpty(offersNearBy) && (
+                {offersNearBy.length && (
                   <OffersList
                     offerType={OfferType.ROOM}
                     offers={offersNearBy}
