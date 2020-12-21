@@ -18,6 +18,10 @@ describe(`Map component test`, () => {
               activeCity={mockCity}
               activeOffer={mockOffer}
               setActiveOfferAction={()=>{}}
+              selectedOfferId={`1`}
+              scrollContainerId={`scroll-container`}
+              scrollContainerName={`scroll-container`}
+              onChangeSelectedOfferId={()=>{}}
             />
           </Provider>
       )

@@ -48,7 +48,7 @@ describe(`Reducer appData works correctly`, () => {
     expect(appData({
       currentRoomOffer: null,
     }, {
-      type: ActionType.SET_OFFER_BY_ID,
+      type: ActionType.SET_CURRENT_ROOM_OFFER,
       payload: mockOffer
     })).toEqual({
       currentRoomOffer: mockOffer

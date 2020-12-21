@@ -10,6 +10,9 @@ describe(`CitiesList component test`, () => {
           <CitiesList
             cities={mockCities}
             activeCity={mockCity}
+            scrollContainerId={`scroll-container`}
+            scrollContainerName={`scroll-container`}
+            onChangeSelectedOfferId={()=>{}}
             setActiveCityAction={()=>{}}
           />
       )

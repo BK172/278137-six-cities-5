@@ -20,7 +20,7 @@ const appData = (state = initialState, action) => {
       return extend(state, {
         offersNearBy: action.payload
       });
-    case ActionType.SET_OFFER_BY_ID:
+    case ActionType.SET_CURRENT_ROOM_OFFER:
       return extend(state, {
         currentRoomOffer: action.payload
       });

@@ -10,6 +10,9 @@ describe(`CitiesList e2e tests`, () => {
         <CitiesList
           cities={mockCities}
           activeCity={mockCity}
+          scrollContainerId={`scroll-container`}
+          scrollContainerName={`scroll-container`}
+          onChangeSelectedOfferId={jest.fn()}
           setActiveCityAction={setActiveCityAction}
         />
     );
