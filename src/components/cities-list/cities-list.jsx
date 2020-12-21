@@ -22,11 +22,14 @@ const CitiesList = ({
     evt.preventDefault();
 
     setActiveCityAction(city);
-    onChangeSelectedOfferId(-1);
-    scroller.scrollTo(scrollContainerName, extend(scrollSettings, {
-      containerId: scrollContainerId,
-      offset: SCROLL_OFFSET,
-    }));
+
+    if (scrollContainerId && scrollContainerName && onChangeSelectedOfferId) {
+      onChangeSelectedOfferId(-1);
+      scroller.scrollTo(scrollContainerName, extend(scrollSettings, {
+        containerId: scrollContainerId,
+        offset: SCROLL_OFFSET,
+      }));
+    }
   };
 
   return (
@@ -50,8 +53,8 @@ const CitiesList = ({
 CitiesList.propTypes = {
   cities: citiesPropTypes,
   activeCity: cityPropTypes,
-  scrollContainerId: PropTypes.string.isRequired,
-  scrollContainerName: PropTypes.string.isRequired,
+  scrollContainerId: PropTypes.string,
+  scrollContainerName: PropTypes.string,
   onChangeSelectedOfferId: PropTypes.func,
   setActiveCityAction: PropTypes.func.isRequired,
 };
