@@ -130,7 +130,7 @@ exports[`PageMain  component test Should render PageMain correctly if offers is 
             className="places__found"
           >
             1
-             places to stay in 
+             places to stay in
             Paris
           </b>
           <form
@@ -436,6 +436,7 @@ exports[`PageMain  component test Should render PageMain correctly if offers is 
         <section
           className="cities__places places"
           id="scroll-container"
+          name="scroll-container"
         >
           <h2
             className="visually-hidden"
@@ -446,7 +447,7 @@ exports[`PageMain  component test Should render PageMain correctly if offers is 
             className="places__found"
           >
             1
-             places to stay in 
+             places to stay in
             Paris
           </b>
           <form

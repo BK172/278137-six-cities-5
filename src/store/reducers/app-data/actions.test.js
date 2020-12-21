@@ -3,7 +3,7 @@ import {
   setCities,
   setOffers,
   setOffersNearBy,
-  setOfferById,
+  setCurrentRoomOffer,
   setFavoriteOffers,
   setOfferAsFavorite,
   setReviews,
@@ -37,9 +37,9 @@ describe(`Action creators for reducer app-data work correctly`, () => {
     });
   });
 
-  test(`setOfferById works correctly`, () => {
-    expect(setOfferById(mockOffer)).toEqual({
-      type: ActionType.SET_OFFER_BY_ID,
+  test(`setCurrentRoomOffer works correctly`, () => {
+    expect(setCurrentRoomOffer(mockOffer)).toEqual({
+      type: ActionType.SET_CURRENT_ROOM_OFFER,
       payload: mockOffer,
     });
   });

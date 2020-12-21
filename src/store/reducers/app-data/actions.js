@@ -2,7 +2,7 @@ export const ActionType = {
   SET_CITIES: `SET_CITIES`,
   SET_OFFERS: `SET_OFFERS`,
   SET_OFFERS_NEARBY: `SET_OFFERS_NEARBY`,
-  SET_OFFER_BY_ID: `SET_OFFER_BY_ID`,
+  SET_CURRENT_ROOM_OFFER: `SET_CURRENT_ROOM_OFFER`,
   SET_FAVORITE_OFFERS: `SET_FAVORITE_OFFERS`,
   SET_REVIEWS: `SET_REVIEWS`,
   SET_OFFER_AS_FAVORITE: `SET_OFFER_AS_FAVORITE`,
@@ -23,8 +23,8 @@ export const setOffersNearBy = (offers) => ({
   payload: offers,
 });
 
-export const setOfferById = (currentRoomOffer) => ({
-  type: ActionType.SET_OFFER_BY_ID,
+export const setCurrentRoomOffer = (currentRoomOffer) => ({
+  type: ActionType.SET_CURRENT_ROOM_OFFER,
   payload: currentRoomOffer,
 });
 

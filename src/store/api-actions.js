@@ -1,11 +1,11 @@
 import {
   setOffers,
-  setOfferById,
   setOffersNearBy,
   setFavoriteOffers,
+  setCurrentRoomOffer,
+  setOfferAsFavorite,
   setCities,
   setReviews,
-  setOfferAsFavorite,
 } from "./reducers/app-data/actions";
 import {
   setActiveCity,
@@ -54,7 +54,7 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => {
   api.get(`${APIRoute.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = offersAdapter(data);
-      dispatch(setOfferById(offer));
+      dispatch(setCurrentRoomOffer(offer));
 
       return ResponseType.SUCCESS;
     })

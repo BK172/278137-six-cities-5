@@ -130,7 +130,7 @@ exports[`App component test Should render App correctly 1`] = `
             className="places__found"
           >
             1
-             places to stay in 
+             places to stay in
             Paris
           </b>
           <form
