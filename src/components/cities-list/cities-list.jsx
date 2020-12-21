@@ -1,16 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {scroller} from "react-scroll";
 import clsx from "clsx";
 import {setActiveCity} from "../../store/reducers/app-process/actions";
 import {getCities} from "../../store/reducers/app-data/selectors";
 import {getActiveCity} from "../../store/reducers/app-process/selectors";
 import {cityPropTypes, citiesPropTypes} from "../../app-prop-types";
+import {scrollSettings, SCROLL_OFFSET} from "../../constants";
+import {extend} from "../../utils";
 
-const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
+const CitiesList = ({
+  cities,
+  activeCity,
+  scrollContainerId,
+  scrollContainerName,
+  onChangeSelectedOfferId,
+  setActiveCityAction,
+}) => {
   const onLocationClick = (evt, city) => {
     evt.preventDefault();
+
     setActiveCityAction(city);
+    onChangeSelectedOfferId(-1);
+    scroller.scrollTo(scrollContainerName, extend(scrollSettings, {
+      containerId: scrollContainerId,
+      offset: SCROLL_OFFSET,
+    }));
   };
 
   return (
@@ -34,6 +50,9 @@ const CitiesList = ({cities, activeCity, setActiveCityAction}) => {
 CitiesList.propTypes = {
   cities: citiesPropTypes,
   activeCity: cityPropTypes,
+  scrollContainerId: PropTypes.string.isRequired,
+  scrollContainerName: PropTypes.string.isRequired,
+  onChangeSelectedOfferId: PropTypes.func,
   setActiveCityAction: PropTypes.func.isRequired,
 };
 

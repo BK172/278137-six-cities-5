@@ -5,7 +5,13 @@ import leaflet from "leaflet";
 import {Events, scroller} from "react-scroll";
 import {getActiveOffer, getActiveCity} from "../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes, offerOrNullPropTypes} from "../../app-prop-types";
-import {MapClasses, MAP_TILE_LAYER, MAP_TILE_LAYER_ATTRIBUTION} from "../../constants";
+import {
+  MapClasses,
+  MAP_TILE_LAYER,
+  MAP_TILE_LAYER_ATTRIBUTION,
+  scrollSettings,
+  SCROLL_OFFSET,
+} from "../../constants";
 import {extend} from "../../utils";
 import "leaflet/dist/leaflet.css";
 
@@ -30,12 +36,6 @@ class Map extends PureComponent {
       direction: `top`,
       offset: [0, -10],
     };
-    this.scrollSettings = {
-      duration: 450,
-      delay: 0,
-      smooth: `easeOutQuad`,
-    };
-    this.scrollOffset = -10;
     this.map = null;
   }
 
@@ -82,7 +82,7 @@ class Map extends PureComponent {
   }
 
   _scrollToWithContainer(offerId) {
-    const {scrollContainerId} = this.props;
+    const {scrollContainerId, scrollContainerName} = this.props;
 
     if (scrollContainerId) {
       const goToContainer = new Promise((resolve) => {
@@ -91,13 +91,13 @@ class Map extends PureComponent {
           Events.scrollEvent.remove(`end`);
         });
 
-        scroller.scrollTo(scrollContainerId, this.scrollSettings);
+        scroller.scrollTo(scrollContainerName, scrollSettings);
       });
 
       goToContainer.then(() =>
-        scroller.scrollTo(`offerId=${offerId}`, extend(this.scrollSettings, {
+        scroller.scrollTo(`offerId=${offerId}`, extend(scrollSettings, {
           containerId: scrollContainerId,
-          offset: this.scrollOffset,
+          offset: SCROLL_OFFSET,
         }))
       );
     }
@@ -186,6 +186,7 @@ Map.propTypes = {
   activeOffer: offerOrNullPropTypes,
   selectedOfferId: PropTypes.number,
   scrollContainerId: PropTypes.string,
+  scrollContainerName: PropTypes.string,
   onChangeSelectedOfferId: PropTypes.func,
 };
 

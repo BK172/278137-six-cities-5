@@ -155,4 +155,12 @@ export const BookmarkBtnShapes = {
 
 export const MAP_TILE_LAYER = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
 export const MAP_TILE_LAYER_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;
+
 export const SCROLL_CONTAINER_ID = `scroll-container`;
+export const SCROLL_CONTAINER_NAME = `scroll-container`;
+export const scrollSettings = {
+  duration: 450,
+  delay: 0,
+  smooth: `easeOutQuad`,
+};
+export const SCROLL_OFFSET = -10;

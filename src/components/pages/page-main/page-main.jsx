@@ -11,7 +11,7 @@ import SortingOptions from "../../sorting-options/sorting-options";
 import {getSortedOffersByPrice} from "../../../store/reducers/app-data/selectors";
 import {getActiveCity} from "../../../store/reducers/app-process/selectors";
 import {offersPropTypes, cityPropTypes} from "../../../app-prop-types";
-import {OfferType, MapType, SCROLL_CONTAINER_ID} from "../../../constants";
+import {OfferType, MapType, SCROLL_CONTAINER_ID, SCROLL_CONTAINER_NAME} from "../../../constants";
 
 class PageMain extends PureComponent {
   constructor(props) {
@@ -44,12 +44,20 @@ class PageMain extends PureComponent {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <CitiesList />
+              <CitiesList
+                scrollContainerId={SCROLL_CONTAINER_ID}
+                scrollContainerName={SCROLL_CONTAINER_NAME}
+                onChangeSelectedOfferId={this._handleChangeSelectedOfferId}
+              />
             </section>
           </div>
           <div className="cities">
             <div className="cities__places-container container">
-              <section className="cities__places places" id={SCROLL_CONTAINER_ID}>
+              <section
+                className="cities__places places"
+                id={SCROLL_CONTAINER_ID}
+                name={SCROLL_CONTAINER_NAME}
+              >
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
                 <SortingOptions />
@@ -67,6 +75,7 @@ class PageMain extends PureComponent {
                   offers={offers}
                   selectedOfferId={this.state.selectedOfferId}
                   scrollContainerId={SCROLL_CONTAINER_ID}
+                  scrollContainerName={SCROLL_CONTAINER_NAME}
                   onChangeSelectedOfferId={this._handleChangeSelectedOfferId}
                 />
               </div>
